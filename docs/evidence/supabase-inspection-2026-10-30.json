@@ -1,0 +1,16 @@
+{
+  "project": "taevxcuqsanfyywkuygl",
+  "mode": "read-only administrative inspection",
+  "schemaModified": false,
+  "catalogItems": 25,
+  "requiredRpcPresent": ["game_state", "game_command", "city_visit", "ensure_player"],
+  "profilesMatchesLifeCityColumns": true,
+  "publicTablesWithoutRls": 0,
+  "advisors": {
+    "rlsEnabledNoPolicy": "account_deletion_audit intentionally has no client access policy",
+    "anonDefiner": "city_visit is the intentional capability-token exterior-only public read boundary",
+    "authenticatedDefiners": ["game_state", "game_command", "city_visit"],
+    "remediation": "https://supabase.com/docs/guides/database/database-linter"
+  },
+  "limits": "Presence/RLS inspection only. No hosted signup, mail delivery, cross-device authentication, build-variable or live RPC functional verification. No tables dropped or fresh migrations rerun."
+}

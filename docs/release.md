@@ -116,3 +116,12 @@ commands after substantive changes. New schema upgrades must be forward
 migrations. After GitHub access is granted, push this preserved main branch;
 after GitHub Pages and Supabase setup exist, deploy and run the
 hosted acceptance test before changing this gate to deployed/production-ready.
+
+
+## Game interface continuation — 2026-10-30
+
+See [game-interface-review.md](game-interface-review.md) for the continued game
+HUD/windows, focused test runs, current screenshots, read-only Supabase
+inspection and deployment limits. Earlier counts and screenshots above describe
+previous versions. This change preserves the existing app, command contracts
+and data; hosted account activation is not claimed.

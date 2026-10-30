@@ -1,5 +1,18 @@
 # Changelog
 
+## Gameplay interface continuation — 2026-10-30
+
+- Preserve the existing game and public entrance; enter directly into the3D city.
+- Add a game HUD, dock and accessible menu/windows in Arabic and English.
+- Compact missions, on-demand construction/inventory/object/visit trays, separate
+  shop items and building projects, with the same existing command boundaries.
+- Keep one city canvas/camera mounted through ordinary menu navigation and
+  reconcile active study sessions independently of the timer screen.
+- Add heartbeat lifecycle tests and browser coverage for keyboard navigation,
+  persistent canvas, mobile layouts and WCAG scans.
+- Inspect existing hosted Supabase schema read-only; preserve every table.
+  Production Auth activation and hosted multi-device tests remain outstanding.
+
 ## 0.2.0 preview — 2026-10-30
 
 - Added the owner-provided starter as an optional pinned Git reference, preserving

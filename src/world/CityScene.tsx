@@ -89,6 +89,7 @@ function RendererDiagnostics({ interior }: { interior: boolean }) {
         metrics.frameGapsMs.push(now - metrics.lastRenderedAtMs)
       }
       metrics.renderedFrames += frame - previousRendererFrame.current
+      gl.domElement.dataset.renderedFrames = String(metrics.renderedFrames)
       previousRendererFrame.current = frame
       metrics.lastRenderedAtMs = now
       metrics.rendererFrame = frame

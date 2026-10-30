@@ -5,7 +5,7 @@ const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['-
 const context=await browser.newContext({viewport:{width:1280,height:900}});const page=await context.newPage();
 const base=process.env.REVIEW_BASE||'http://127.0.0.1:5175';
 const results=[];
-await page.goto(base);await page.getByRole('button',{name:'جرّبها أولًا',exact:true}).click();await page.waitForURL('**/dashboard');await page.waitForSelector('[data-testid="wallet-balance"]');
+await page.goto(base);await page.getByRole('button',{name:'جرّبها أولًا',exact:true}).click();await page.waitForURL('**/city');await page.waitForSelector('[data-testid="wallet-balance"]');
 for(const theme of ['light','dark']){
  await page.evaluate(async(theme)=>{const db=await new Promise<IDBDatabase>((resolve,reject)=>{const r=indexedDB.open('lifecity-private-cache');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});await new Promise<void>((resolve,reject)=>{const tx=db.transaction('records','readwrite');const store=tx.objectStore('records');const r=store.get('guest-world-v1');r.onsuccess=()=>{const value=r.result;value.state.profile.theme=theme;store.put(value,'guest-world-v1');};tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});},theme);
  for(const route of ['dashboard','city','tasks','timer','shop','prayers','yuyi','stats','settings','interior']){
