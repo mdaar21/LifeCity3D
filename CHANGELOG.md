@@ -1,5 +1,20 @@
 # Changelog
 
+## Ultimate V6 foundation slice — 2026-10-31
+
+- Preserve baseline and the complete owner-approved V6 specification/audit.
+- Add one-scene adjacent empty cities, a zero independent exact MAD wallet,
+  owner-reported instructions, linked-partner MAD actions and immutable reversals.
+- Add genuine dated server FX/cache, source attribution, selected display
+  currency and expiring MAD purchase quotes; cross-wallet transfers stay disabled.
+- Add verified cost components and atomic50% demolition with furniture choices,
+  exact half-cent accounting, land retention and retired-inventory protection.
+- Apply forward migration20261030225914 and deploy authenticated refresh-fx v1.
+  Run rollback-only hosted SQL/RLS checks and a disposable real Auth/two-browser
+  cloud-save test, then remove diagnostic identities and their records.
+- Keep the V6 frontend in review and the public client activation flagfalse until
+  Auth URL/email setup.16-task/V4 systems and all20 V6 expansions remain pending.
+
 ## Gameplay interface continuation — 2026-10-30
 
 - Preserve the existing game and public entrance; enter directly into the3D city.

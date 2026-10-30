@@ -25,6 +25,11 @@ interface SceneProps {
   onHoverTile?: (x: number, z: number) => void
   onSelect?: (placement: Placement) => void
   readOnly?: boolean
+  bare?: boolean
+  originX?: number
+  neighbor?: {placements:Placement[];size:number}
+  realm?: 'main'|'yuyi'
+  onRealm?: (realm:'main'|'yuyi')=>void
 }
 
 export interface LifeCityRenderMetrics {
@@ -168,29 +173,20 @@ function CameraRig({ size, perspective, resetKey, interior }: { size: number; pe
   </>
 }
 
-function SceneContents({ placements = [], catalog = CATALOG, size = 16, selectedId, draft, valid = true, gridVisible = false, perspective = false, resetKey = 0, interior = false, onTile, onHoverTile, onSelect, readOnly = false }: SceneProps) {
-  const tileEvent = (event: ThreeEvent<PointerEvent | MouseEvent>, hover = false) => {
-    event.stopPropagation()
-    const x = Math.floor(event.point.x + size / 2), z = Math.floor(event.point.z + size / 2)
-    if (x < 0 || z < 0 || x >= size || z >= size) return
-    if (hover) onHoverTile?.(x, z)
-    else onTile?.(x, z)
-  }
-  return <>
-    <RendererDiagnostics interior={interior} />
-    <primitive object={SCENE_BACKGROUND} attach="background" />
-    <fog attach="fog" args={['#dce9e1', 55, 120]} />
-    <ambientLight intensity={1.5} />
-    <hemisphereLight args={['#f3f7eb', '#6c8876', 1.5]} />
-    <directionalLight position={[12, 22, 8]} intensity={2.5} castShadow shadow-mapSize={[1024, 1024]} shadow-camera-left={-25} shadow-camera-right={25} shadow-camera-top={25} shadow-camera-bottom={-25} shadow-bias={-0.0008} shadow-normalBias={0.04} />
-    <CameraRig size={size} perspective={perspective} resetKey={resetKey} interior={interior} />
+function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,valid=true,gridVisible=false,interior=false,onTile,onHoverTile,onSelect,readOnly=false,bare=false,originX=0}:SceneProps){
+ const tileEvent=(event:ThreeEvent<PointerEvent|MouseEvent>,hover=false)=>{
+  event.stopPropagation();const x=Math.floor(event.point.x-originX+size/2),z=Math.floor(event.point.z+size/2);
+  if(x<0||z<0||x>=size||z>=size)return;
+  if(hover)onHoverTile?.(x,z);else onTile?.(x,z);
+ };
+ return <>
     {interior ? <>
       <mesh position={[0, -0.09, 0]} receiveShadow><boxGeometry args={[size, 0.18, size]} /><meshStandardMaterial color="#d8bea0" roughness={0.95} /></mesh>
       <mesh position={[0, 0.9, -size / 2]} receiveShadow><boxGeometry args={[size + 0.18, 1.8, 0.18]} /><meshStandardMaterial color="#ebe4d3" /></mesh>
       <mesh position={[-size / 2, 0.9, 0]} receiveShadow><boxGeometry args={[0.18, 1.8, size]} /><meshStandardMaterial color="#d6ded0" /></mesh>
       <mesh position={[1, 1.08, -size / 2 + 0.102]}><boxGeometry args={[2.2, 1.05, 0.025]} /><meshStandardMaterial color="#a6d7df" emissive="#a6d7df" emissiveIntensity={0.2} /></mesh>
       <mesh position={[1, 1.08, -size / 2 + 0.125]}><boxGeometry args={[0.055, 1.05, 0.025]} /><meshStandardMaterial color="#fff4de" /></mesh>
-    </> : <Landscape size={size} />}
+    </> : bare ? <mesh position={[0,-0.12,0]} receiveShadow><boxGeometry args={[size,.24,size]}/><meshStandardMaterial color="#a4b78c" roughness={1}/></mesh> : <Landscape size={size} />}
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.008, 0]} onClick={readOnly ? undefined : event => tileEvent(event)} onPointerMove={draft && !readOnly ? event => tileEvent(event, true) : undefined} receiveShadow>
       <planeGeometry args={[size, size]} /><meshStandardMaterial color={interior ? '#d9c3a4' : '#a3b88c'} transparent opacity={interior ? 1 : 0.025} depthWrite={false} />
     </mesh>
@@ -213,7 +209,23 @@ function SceneContents({ placements = [], catalog = CATALOG, size = 16, selected
         <group rotation={[0, draft.rotation * Math.PI / 180, 0]}><ProceduralModel item={draft.item} ghost valid={valid} /></group>
       </group>
     })()}
-  </>
+ </>;
+}
+function SceneContents(props:SceneProps){
+ const {size=16,perspective=false,resetKey=0,interior=false,neighbor,realm='main',onRealm}=props;
+ const origin=neighbor?(realm==='main'?-size/2-1:size/2+1):0;
+ const otherOrigin=neighbor?(realm==='main'?neighbor.size/2+1:-neighbor.size/2-1):0;
+ return <>
+  <RendererDiagnostics interior={interior}/>
+  <primitive object={SCENE_BACKGROUND} attach="background"/>
+  <fog attach="fog" args={['#dce9e1',75,180]}/>
+  <ambientLight intensity={1.5}/><hemisphereLight args={['#f3f7eb','#6c8876',1.5]}/>
+  <directionalLight position={[12,22,8]} intensity={2.5} castShadow shadow-mapSize={[1024,1024]} shadow-camera-left={-45} shadow-camera-right={45} shadow-camera-top={45} shadow-camera-bottom={-45} shadow-bias={-.0008} shadow-normalBias={.04}/>
+  <CameraRig size={neighbor?Math.max(size,neighbor.size)*1.85:size} perspective={perspective} resetKey={resetKey} interior={interior}/>
+  {neighbor&&<mesh rotation={[-Math.PI/2,0,0]} position={[0,-.4,0]} receiveShadow><planeGeometry args={[180,180]}/><meshStandardMaterial color="#a5d4d6" roughness={.7}/></mesh>}
+  <group key={realm} position={[origin,0,0]}><PlotContents {...props} bare={!!neighbor} originX={origin}/></group>
+  {neighbor&&<group key={realm==='main'?'yuyi':'main'} position={[otherOrigin,0,0]}><PlotContents placements={neighbor.placements} catalog={props.catalog} size={neighbor.size} bare originX={otherOrigin} readOnly={props.readOnly} onTile={()=>onRealm?.(realm==='main'?'yuyi':'main')} onSelect={()=>onRealm?.(realm==='main'?'yuyi':'main')}/></group>}
+ </>;
 }
 
 export function WorldCanvas(props: SceneProps) {

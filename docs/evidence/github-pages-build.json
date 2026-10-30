@@ -1,6 +1,7 @@
 {
   "ok": true,
   "base": "/LifeCity3D/",
+  "backend": "demo",
   "router": "browser",
   "spaFallback": "404.html copies the built app; hash guest previews keep routes in the directory URL",
   "manifestScope": "/LifeCity3D/",

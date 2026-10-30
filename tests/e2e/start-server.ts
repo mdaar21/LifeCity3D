@@ -21,6 +21,9 @@ for (const [email, name, balance] of [[E2E_OWNER, 'Browser owner', 2000], [E2E_O
     if (balance) await tx.query('SELECT public.apply_coins($1,$2,$3,$4)', [id, balance, 'test_fixture', `fixture:${randomUUID()}`]);
   });
 }
+// Deterministic FX fixture in the disposable test database ONLY. Hosted rates
+// are imported separately from the actual provider and are never seeded here.
+await database.owner(tx=>tx.query('select public.fx_store_snapshot($1::jsonb)',[JSON.stringify({result:'success',base_code:'SAR',provider:'https://www.exchangerate-api.com',time_last_update_unix:Math.floor(Date.now()/1000),time_next_update_unix:Math.floor(Date.now()/1000)+86400,rates:{SAR:1,MAD:2.625,USD:0.2666666667,EUR:0.25,KWD:0.0812}})]));
 const local = await createLocalServer({database, allowedOrigins: ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:4174', 'http://127.0.0.1:4174']});
 console.info(`Disposable LifeCity E2E reference API: ${await local.listen()}`);
 let closing = false;

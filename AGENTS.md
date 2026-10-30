@@ -42,3 +42,12 @@ jobs, commits, publishing, or other agents' files. Communicate contract conflict
 Expected checks: npm run lint; npm run typecheck; npm test; npm run test:e2e;
 npm run build. Keep README/.env.example/CHANGELOG/release evidence accurate.
 See docs/architecture.md for exact module ownership and RPC contracts.
+
+## Owner-approved Ultimate V6 continuation
+Read docs/specs/LifeCity-Ultimate-V6.txt and docs/v6/AUDIT.md. All20 expansions
+are approved, executed in tested slices. Do not claim preserved V5 systems exist
+unless their code and tests are present. New V6 resident/driving features are
+approved despite the older cancellation above; no free assets in either plot.
+New Yuyi grants/debits belong ONLY to a separate exact MAD wallet. Never rewrite
+legacy main-wallet history. Genuine dated FX and50% verified paid-cost demolition
+are mandatory. Use additive migrations, exact DB money and truthful status.

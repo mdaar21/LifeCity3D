@@ -6,16 +6,24 @@ import { useLocale } from '../lib/locale'
 import { CATALOG } from '../lib/catalog'
 import { levelFromXp } from '../lib/rules'
 import type { Placement } from '../lib/types'
+import {useTerritory} from '../lib/useTerritory'
 import { WorldCanvas } from '../world/CityScene'
 import { footprint, isHouse, placementIssue } from '../world/building'
 import { useBuilder } from '../world/useBuilder'
 import { worldError } from '../world/messages'
+import {Modal,Button} from '../components/Common'
+import {useMoney} from '../lib/useMoney'
+import type {DemolitionQuote} from '../lib/v6-types'
 import FirstCityGuide from '../components/FirstCityGuide'
 import CitySharing from '../components/CitySharing'
 import '../world.css'
 
 export default function City({active=true}:{active?:boolean}) {
   const { state, loading, error, mutate, refresh, online } = useGame()
+  const {realm,select:selectRealm}=useTerritory()
+  const {format}=useMoney()
+  const [demolition,setDemolition]=useState<DemolitionQuote|null>(null)
+  const [destroyFurniture,setDestroyFurniture]=useState(false)
   const { t, number } = useLocale()
   const [params]=useSearchParams()
   const guided=useRef(false)
@@ -32,24 +40,29 @@ export default function City({active=true}:{active?:boolean}) {
   useEffect(() => () => {clear();guided.current=false}, [clear])
   useEffect(()=>{if(active&&params.get('panel')==='inventory')setPanel('inventory')},[active,params])
   useEffect(()=>{
-    if(guided.current||params.get('guide')!=='tree'||!state)return
+    if(realm==='yuyi'||guided.current||params.get('guide')!=='tree'||!state)return
     const item=state.catalog.find(v=>v.id==='tree')
     const inventory=state.inventory.find(v=>v.catalog_id==='tree'&&!state.placements.some(p=>p.inventory_id===v.id))
     if(item&&inventory){guided.current=true;setPanel('inventory');begin({inventoryId:inventory.id,item,x:0,z:0,rotation:0})}
-  },[params,state,begin])
+  },[params,state,begin,realm])
   if (loading || !state) return <div className="page"><div className="panel world-loading" role="status">{error ? worldError(error, t) : t('نجهّز مدينتك…', 'Preparing your city…')}</div></div>
+  const yuyi=realm==='yuyi'&&!!state.v6
+  const world=yuyi?state.v6!.yuyi_world:state.world
+  const placements=yuyi?state.v6!.yuyi_placements:state.placements
+  const inventory=yuyi?state.v6!.yuyi_inventory:state.inventory
+  const furniture=yuyi?[]:state.furniture
   const catalog = state.catalog.length ? state.catalog : CATALOG
-  const available = state.inventory.filter(inv => !state.placements.some(p => p.inventory_id === inv.id) && !state.furniture.some(p => p.inventory_id === inv.id) && !catalog.find(item => item.id === inv.catalog_id)?.is_furniture)
-  const selected = state.placements.find(p => p.id === selectedId)
+  const available = inventory.filter(inv => !placements.some(p => p.inventory_id === inv.id) && !furniture.some(p => p.inventory_id === inv.id) && !catalog.find(item => item.id === inv.catalog_id)?.is_furniture)
+  const selected = placements.find(p => p.id === selectedId)
   const selectedItem = selected && catalog.find(item => item.id === selected.catalog_id)
-  const issue = draft ? placementIssue(draft, state.placements, catalog, state.world.size) : null
+  const issue = draft ? placementIssue(draft, placements, catalog, world.size) : null
   const selectPlacement = (placement: Placement) => { if (busy) return; clear(); setSelectedId(placement.id); setPanel('inventory'); setNotice('') }
   const commit = async () => {
     if (!draft || issue || busy) return
     setBusy(true); setNotice('')
     try {
-      const existing = state.placements.find(p => p.id === draft.placementId)
-      await mutate(draft.placementId ? 'move' : 'place', draft.placementId ? { placement_id: draft.placementId, x: draft.x, z: draft.z, rotation: draft.rotation, expected_version: draft.expectedVersion ?? existing?.version ?? 0 } : { inventory_id: draft.inventoryId, x: draft.x, z: draft.z, rotation: draft.rotation })
+      const existing = placements.find(p => p.id === draft.placementId)
+      await mutate(draft.placementId ? (yuyi?'yuyi_move':'move') : (yuyi?'yuyi_place':'place'), draft.placementId ? { placement_id: draft.placementId, x: draft.x, z: draft.z, rotation: draft.rotation, expected_version: draft.expectedVersion ?? existing?.version ?? 0 } : { inventory_id: draft.inventoryId, x: draft.x, z: draft.z, rotation: draft.rotation })
       clear(); setSelectedId(null); setSuccess(true); setNotice(t('حُفظ المكان في مدينتك.', 'Your city placement was saved.'))
     } catch (cause) { setSuccess(false); setNotice(worldError(cause, t)) }
     finally { setBusy(false) }
@@ -57,9 +70,17 @@ export default function City({active=true}:{active?:boolean}) {
   const remove = async () => {
     if (!selected || busy) return
     setBusy(true); setNotice('')
-    try { await mutate('remove', { placement_id: selected.id, expected_version: selected.version }); setSelectedId(null); setSuccess(true); setNotice(t('عاد العنصر إلى مخزونك دون استرداد عملات.', 'The item returned to your inventory without a coin refund.')) }
+    try { await mutate(yuyi?'yuyi_remove':'remove', { placement_id: selected.id, expected_version: selected.version }); setSelectedId(null); setSuccess(true); setNotice(t('عاد العنصر إلى مخزونك دون استرداد عملات.', 'The item returned to your inventory without a coin refund.')) }
     catch (cause) { setSuccess(false); setNotice(worldError(cause, t)) }
     finally { setBusy(false) }
+  }
+  const quoteDemolition=async(destroy=false)=>{
+    if(!selected||busy)return;setBusy(true);setNotice('');
+    try{const response=await mutate('demolition_quote',{realm:yuyi?'yuyi':'main',placement_id:selected.id,expected_version:selected.version,destroy_furniture_ids:destroy?furniture.filter(f=>f.house_id===selected.id).map(f=>f.inventory_id):[]});setDestroyFurniture(destroy);setDemolition(response.result as unknown as DemolitionQuote)}catch(e){setSuccess(false);setNotice(worldError(e,t))}finally{setBusy(false)}
+  }
+  const demolish=async()=>{
+    if(!demolition||busy)return;setBusy(true);
+    try{await mutate('demolish',{realm:demolition.realm,placement_id:demolition.placement_id,expected_version:demolition.expected_version,quoted_basis:demolition.paid_basis,destroy_furniture_ids:destroyFurniture?furniture.filter(f=>f.house_id===demolition.placement_id).map(f=>f.inventory_id):[],confirmed:true});setDemolition(null);setSelectedId(null);setSuccess(true);setNotice(t('تم الهدم واسترداد ٥٠٪ من التكلفة المثبتة. الأرض محفوظة.','Demolished with 50% of verified paid cost refunded. Land retained.'))}catch(e){setSuccess(false);setNotice(worldError(e,t))}finally{setBusy(false)}
   }
   const expand = async () => {
     if (busy) return
@@ -70,23 +91,24 @@ export default function City({active=true}:{active?:boolean}) {
   }
   return <div className={`city-page immersive-city ${active ? 'is-playing' : ''}`}>
     {active && <>
-      <div className="game-city-label"><span className="world-eyebrow">{t('عالمك الخاص', 'YOUR OWN WORLD')}</span><h1 aria-label={t('مدينتي','My city')}>{t('مدينتي', 'My city')}<span>{t('المستوى', 'LEVEL')} {number(levelFromXp(state.wallet.city_xp))}</span></h1></div>
-      <div className="game-city-guide"><FirstCityGuide compact/></div>
+      <div className="game-city-label"><span className="world-eyebrow">{t('عالمك الخاص', 'YOUR OWN WORLD')}</span><h1 aria-label={yuyi?t('مدينة ويوي','Yuyi City'):t('مدينتي','My city')}>{yuyi?t('مدينة ويوي','Yuyi City'):t('مدينتي', 'My city')}<span>{t('المستوى', 'LEVEL')} {number(levelFromXp(yuyi?state.v6!.yuyi_world.city_xp:state.wallet.city_xp))}</span></h1></div>
+      <div className="game-city-guide">{!yuyi&&<FirstCityGuide compact/>}</div>
+      {state.v6&&<div className="territory-switch" role="group" aria-label={t('المدينة النشطة','Active city')}><button aria-pressed={!yuyi} onClick={()=>{selectRealm('main');setSelectedId(null);setPanel(null)}}>{t('مدينتي','My City')}</button><button aria-pressed={yuyi} onClick={()=>{selectRealm('yuyi');setSelectedId(null);setPanel(null)}}>{t('مدينة ويوي · MAD','Yuyi City · MAD')}</button></div>}
       <nav className="game-build-tools" aria-label={t('أدوات المدينة', 'City tools')}>
         {([{id:'inventory',icon:Package,label:t('البناء والمخزون','Build & inventory')},{id:'objects',icon:List,label:t('عناصر مدينتك','City objects')},{id:'share',icon:Share2,label:t('زيارات المدينة','City visits')}] as const).map(({id,icon:Icon,label})=><button key={id} aria-label={label} title={label} data-testid={`city-tool-${id}`} className={panel===id?'active':''} aria-expanded={panel===id} aria-controls="city-tool-panel" onClick={()=>setPanel(panel===id?null:id)}><Icon size={22}/><span>{label}</span>{id==='inventory'&&available.length>0&&<b>{number(available.length)}</b>}</button>)}
       </nav>
     </>}
     <div className="world-layout">
       <div className="city-stage panel">
-        <div className="world-stage-top" hidden><span className="world-badge"><span />{t('حيّك الأول', 'Your first neighborhood')}</span><span className="world-badge">{t('المستوى', 'Level')} {number(levelFromXp(state.wallet.city_xp))} · <b dir="ltr">{number(state.world.size)} × {number(state.world.size)}</b></span></div>
-        <WorldCanvas placements={state.placements} catalog={catalog} size={state.world.size} draft={draft} valid={!issue} selectedId={selectedId} gridVisible={grid} perspective={perspective} resetKey={resetKey} onSelect={selectPlacement} onTile={(x, z) => { if (draft && !busy) edit({ x, z }) }} />
+        <div className="world-stage-top" hidden><span className="world-badge"><span />{t('حيّك الأول', 'Your first neighborhood')}</span><span className="world-badge">{t('المستوى', 'Level')} {number(levelFromXp(yuyi?state.v6!.yuyi_world.city_xp:state.wallet.city_xp))} · <b dir="ltr">{number(world.size)} × {number(world.size)}</b></span></div>
+        <WorldCanvas neighbor={state.v6?{placements:yuyi?state.placements:state.v6.yuyi_placements,size:yuyi?state.world.size:state.v6.yuyi_world.size}:undefined} realm={yuyi?'yuyi':'main'} onRealm={selectRealm} placements={placements} catalog={catalog} size={world.size} draft={draft} valid={!issue} selectedId={selectedId} gridVisible={grid} perspective={perspective} resetKey={resetKey} onSelect={selectPlacement} onTile={(x, z) => { if (draft && !busy) edit({ x, z }) }} />
         {active && <div className="world-camera-tools"><button className={grid ? 'active' : ''} aria-label={t('إظهار أو إخفاء الشبكة', 'Toggle grid')} aria-pressed={grid} onClick={() => setGrid(!grid)}><Grid2X2 size={19} /></button><button aria-label={t('إعادة ضبط الكاميرا', 'Reset camera')} onClick={() => setResetKey(value => value + 1)}><Home size={19} /></button><button aria-label={t('تبديل منظور الكاميرا', 'Switch camera projection')} aria-pressed={perspective} onClick={() => setPerspective(!perspective)}><Maximize2 size={19} /></button></div>}
         <div className="world-stage-bottom"><span>{draft ? t('اختر بلاطة، عدّل الاتجاه، ثم ثبّت.', 'Choose a tile, rotate, then confirm.') : t('اسحب للدوران · قرّب بإصبعين · اختر عنصرًا لتعديله', 'Drag to orbit · Pinch to zoom · Select an object to edit')}</span><span className="world-compass" dir="ltr">{t('ش ↑', 'N ↑')}</span></div>
-        {active && !state.placements.length && !draft && !panel && <div className="world-empty-callout"><span>✦</span><strong>{t('هنا تبدأ حكاية مدينتك', 'Your city story begins here')}</strong><p>{available.length ? t('اختر عنصرًا من المخزون وامنحه مكانًا.', 'Choose an inventory item and give it a home.') : t('أكمل مهمة، اجمع عملات، وازرع أول شجرة.', 'Complete an activity, earn coins, and plant your first tree.')}</p></div>}
+        {active && !placements.length && !draft && !panel && <div className="world-empty-callout"><span>✦</span><strong>{t('هنا تبدأ حكاية مدينتك', 'Your city story begins here')}</strong><p>{available.length ? t('اختر عنصرًا من المخزون وامنحه مكانًا.', 'Choose an inventory item and give it a home.') : t('أكمل مهمة، اجمع عملات، وازرع أول شجرة.', 'Complete an activity, earn coins, and plant your first tree.')}</p></div>}
       </div>
       {active && (panel || draft || selected) && <aside className="builder-sidebar game-build-panel" id="city-tool-panel" aria-label={t('لوحة أدوات المدينة','City tools panel')}>
         <div className="game-build-panel-heading"><strong>{panel==='share'?t('زيارات المدينة','City visits'):panel==='objects'?t('عناصر مدينتك','City objects'):t('ورشة البناء','Build workshop')}</strong><button className="game-close" aria-label={t('إغلاق أدوات البناء','Close building tools')} onClick={()=>{setPanel(null);clear();setSelectedId(null)}}><X size={19}/></button></div>
-        {panel==='share' && <CitySharing/>}
+        {panel==='share' && (yuyi?<p>{t('روابط الزيارة الحالية لمدينتك الرئيسية فقط؛ مدينة ويوي تبقى خاصة.','Current visit links cover My City only; Yuyi City stays private.')}</p>:<CitySharing/>)}
         {(panel==='inventory'||draft||selected) && <>
         <section className="panel builder-panel"><div className="world-panel-heading"><div><span className="world-eyebrow">{t('أفكارك أصبحت أماكن', 'MAKE ROOM FOR IDEAS')}</span><h2><Package size={19} /> {t('المخزون', 'Inventory')}</h2></div><span className="world-count" data-testid="inventory-count">{number(available.length)}</span></div>
           <p className="muted small">{t('العناصر المملوكة الجاهزة للبناء. الأثاث في وضع المنزل.', 'Owned items ready to place. Furniture belongs in home interiors.')}</p>
@@ -97,18 +119,22 @@ export default function City({active=true}:{active?:boolean}) {
           }) : <div className="inventory-empty"><Package size={29} /><strong>{t('مساحة لإلهام جديد', 'Room for fresh inspiration')}</strong><p>{t('مشترياتك تظهر هنا، جاهزة لتشكيل مدينتك.', 'Your purchases appear here, ready to shape your city.')}</p><Link to="/shop" className="button button-secondary">{t('تصفّح العناصر', 'Explore the collection')}</Link></div>}</div>
         </section>
         {draft && <section className="panel builder-panel draft-panel" data-testid="placement-controls"><div className="world-panel-heading"><h2>{t('موضع جديد', 'Placement preview')}</h2><button className="world-icon-button" aria-label={t('إلغاء المعاينة', 'Cancel preview')} onClick={clear}><X size={18} /></button></div><strong>{t(draft.item.name_ar, draft.item.name_en)}</strong><p className={`placement-status ${issue ? 'invalid' : 'valid'}`} data-testid="placement-validity">{issue === 'collision' ? t('المساحة مشغولة', 'Space occupied') : issue === 'bounds' ? t('خارج حدود الأرض', 'Outside owned land') : t('مساحة مناسبة للبناء', 'Ready to place')}</p>
-          <div className="coordinate-fields" dir="ltr"><label>X<input aria-label={t('إحداثي X', 'X coordinate')} data-testid="placement-x" type="number" min={0} max={state.world.size - footprint(draft.item, draft.rotation)[0]} value={draft.x} onChange={event => edit({ x: Math.trunc(Number(event.target.value)) })} /></label><label>Z<input aria-label={t('إحداثي Z', 'Z coordinate')} data-testid="placement-z" type="number" min={0} max={state.world.size - footprint(draft.item, draft.rotation)[1]} value={draft.z} onChange={event => edit({ z: Math.trunc(Number(event.target.value)) })} /></label><button aria-label={t('تدوير ٩٠ درجة', 'Rotate 90 degrees')} onClick={() => edit({ rotation: (draft.rotation + 90) % 360 })}><RotateCw size={18} />{draft.rotation}°</button></div>
-          <div className="world-move-pad" dir="ltr"><button aria-label={t('نقل شمالًا', 'Move north')} onClick={() => edit({ z: Math.max(0, draft.z - 1) })}><ArrowUp size={17} /></button><button aria-label={t('نقل غربًا', 'Move west')} onClick={() => edit({ x: Math.max(0, draft.x - 1) })}><ArrowLeft size={17} /></button><button aria-label={t('نقل جنوبًا', 'Move south')} onClick={() => edit({ z: Math.min(state.world.size - 1, draft.z + 1) })}><ArrowDown size={17} /></button><button aria-label={t('نقل شرقًا', 'Move east')} onClick={() => edit({ x: Math.min(state.world.size - 1, draft.x + 1) })}><ArrowRight size={17} /></button></div>
+          <div className="coordinate-fields" dir="ltr"><label>X<input aria-label={t('إحداثي X', 'X coordinate')} data-testid="placement-x" type="number" min={0} max={world.size - footprint(draft.item, draft.rotation)[0]} value={draft.x} onChange={event => edit({ x: Math.trunc(Number(event.target.value)) })} /></label><label>Z<input aria-label={t('إحداثي Z', 'Z coordinate')} data-testid="placement-z" type="number" min={0} max={world.size - footprint(draft.item, draft.rotation)[1]} value={draft.z} onChange={event => edit({ z: Math.trunc(Number(event.target.value)) })} /></label><button aria-label={t('تدوير ٩٠ درجة', 'Rotate 90 degrees')} onClick={() => edit({ rotation: (draft.rotation + 90) % 360 })}><RotateCw size={18} />{draft.rotation}°</button></div>
+          <div className="world-move-pad" dir="ltr"><button aria-label={t('نقل شمالًا', 'Move north')} onClick={() => edit({ z: Math.max(0, draft.z - 1) })}><ArrowUp size={17} /></button><button aria-label={t('نقل غربًا', 'Move west')} onClick={() => edit({ x: Math.max(0, draft.x - 1) })}><ArrowLeft size={17} /></button><button aria-label={t('نقل جنوبًا', 'Move south')} onClick={() => edit({ z: Math.min(world.size - 1, draft.z + 1) })}><ArrowDown size={17} /></button><button aria-label={t('نقل شرقًا', 'Move east')} onClick={() => edit({ x: Math.min(world.size - 1, draft.x + 1) })}><ArrowRight size={17} /></button></div>
           <div className="world-edit-actions"><button className="button button-secondary" disabled={!past.length} aria-label={t('تراجع عن تعديل المعاينة', 'Undo preview edit')} onClick={undo}><Undo2 size={17} /></button><button className="button button-secondary" disabled={!future.length} aria-label={t('إعادة تعديل المعاينة', 'Redo preview edit')} onClick={redo}><Redo2 size={17} /></button><button className="button button-primary" data-testid="commit-placement" disabled={!!issue || busy || !online} onClick={commit}><Check size={18} />{busy ? t('جارٍ الحفظ…', 'Saving…') : t('تثبيت', 'Confirm')}</button></div><p className="muted small">{t('التراجع والإعادة يخصّان المعاينة قبل الحفظ.', 'Undo and redo apply to the unsaved preview.')}</p>
         </section>}
-        {selected && selectedItem && !draft && <section className="panel builder-panel"><div className="world-panel-heading"><h2>{t(selectedItem.name_ar, selectedItem.name_en)}</h2><button className="world-icon-button" aria-label={t('إلغاء التحديد', 'Deselect')} onClick={() => setSelectedId(null)}><X size={18} /></button></div><p className="muted" dir="ltr">X {number(selected.x)} · Z {number(selected.z)} · {selected.rotation}°</p><div className="world-selection-actions"><button className="button button-primary" onClick={() => begin({ inventoryId: selected.inventory_id, placementId: selected.id, expectedVersion: selected.version, item: selectedItem, x: selected.x, z: selected.z, rotation: selected.rotation })}><Move size={17} />{t('نقل / تدوير', 'Move / rotate')}</button>{isHouse(selectedItem) && <Link className="button button-secondary" to={`/interior/${selected.id}`}><Home size={17} />{t('دخول المنزل', 'Enter home')}</Link>}<button className="button button-ghost" disabled={busy || !online} onClick={remove}><Trash2 size={17} />{t('إعادة إلى المخزون', 'Return to inventory')}</button></div><p className="muted small">{t('الإزالة تعيد العنصر دون استرداد قيمته. أثاث المنزل يعود أيضًا إلى المخزون.', 'Removal recovers the item without a refund. Interior furniture also returns to inventory.')}</p></section>}
-        <section className="panel world-land-card"><span className="world-land-icon"><Grid2X2 size={22} /></span><div><h3>{t('مساحة لأحلام أكبر', 'Space for bigger dreams')}</h3><p>{t('أضف ٤ بلاطات لكل جانب.', 'Add 4 tiles to each side.')}</p></div><button className="button button-secondary" onClick={() => setExpanding(!expanding)} disabled={state.world.size >= 32}>{state.world.size >= 32 ? t('أكبر مساحة', 'Maximum size') : t('توسعة', 'Expand')}</button>{expanding && <div className="world-expand-confirm"><p>{t('تكلفة التوسعة ١٬٠٠٠ عملة. ستزيد الأرض ٤ بلاطات في كل بُعد.', 'Expansion costs 1,000 coins and adds 4 tiles to each dimension.')}</p><button className="button button-primary" disabled={busy || !online || state.wallet.balance < 1000} onClick={expand}>{t('تأكيد التوسعة', 'Confirm expansion')}</button><button className="button button-ghost" onClick={() => setExpanding(false)}>{t('إلغاء', 'Cancel')}</button></div>}</section>
+        {selected && selectedItem && !draft && <section className="panel builder-panel"><div className="world-panel-heading"><h2>{t(selectedItem.name_ar, selectedItem.name_en)}</h2><button className="world-icon-button" aria-label={t('إلغاء التحديد', 'Deselect')} onClick={() => setSelectedId(null)}><X size={18} /></button></div><p className="muted" dir="ltr">X {number(selected.x)} · Z {number(selected.z)} · {selected.rotation}°</p><div className="world-selection-actions"><button className="button button-primary" onClick={() => begin({ inventoryId: selected.inventory_id, placementId: selected.id, expectedVersion: selected.version, item: selectedItem, x: selected.x, z: selected.z, rotation: selected.rotation })}><Move size={17} />{t('نقل / تدوير', 'Move / rotate')}</button>{!yuyi&&isHouse(selectedItem) && <Link className="button button-secondary" to={`/interior/${selected.id}`}><Home size={17} />{t('دخول المنزل', 'Enter home')}</Link>}<button className="button button-ghost" disabled={busy || !online} onClick={remove}><Trash2 size={17} />{t('إعادة إلى المخزون', 'Return to inventory')}</button><button className="button button-danger" disabled={busy||!online} onClick={()=>void quoteDemolition()}>{t('هدم واسترداد ٥٠٪','Demolish & refund 50%')}</button></div><p className="muted small">{t('الإزالة تعيد العنصر دون استرداد قيمته. أثاث المنزل يعود أيضًا إلى المخزون.', 'Removal recovers the item without a refund. Interior furniture also returns to inventory.')}</p></section>}
+        {!yuyi&&<section className="panel world-land-card"><span className="world-land-icon"><Grid2X2 size={22} /></span><div><h3>{t('مساحة لأحلام أكبر', 'Space for bigger dreams')}</h3><p>{t('أضف ٤ بلاطات لكل جانب.', 'Add 4 tiles to each side.')}</p></div><button className="button button-secondary" onClick={() => setExpanding(!expanding)} disabled={yuyi||world.size >= 32}>{world.size >= 32 ? t('أكبر مساحة', 'Maximum size') : t('توسعة', 'Expand')}</button>{expanding && <div className="world-expand-confirm"><p>{t('تكلفة التوسعة ١٬٠٠٠ عملة. ستزيد الأرض ٤ بلاطات في كل بُعد.', 'Expansion costs 1,000 coins and adds 4 tiles to each dimension.')}</p><button className="button button-primary" disabled={busy || !online || state.wallet.balance < 1000} onClick={expand}>{t('تأكيد التوسعة', 'Confirm expansion')}</button><button className="button button-ghost" onClick={() => setExpanding(false)}>{t('إلغاء', 'Cancel')}</button></div>}</section>}
       </>}
-      {panel==='objects' && <>    <div className="world-owned-summary"><h2>{t('عناصر مدينتك', 'City objects')} <span>{number(state.placements.length)}</span></h2>{state.placements.length > 0 ? <div className="world-object-list">{state.placements.map(placed => { const item = catalog.find(entry => entry.id === placed.catalog_id); return <button className={selectedId === placed.id ? 'active' : ''} key={placed.id} data-testid={`placement-${placed.id}`} onClick={() => selectPlacement(placed)} aria-label={`${item ? t(item.name_ar, item.name_en) : placed.catalog_id} X ${placed.x} Z ${placed.z}`}><span>{item ? t(item.name_ar, item.name_en) : placed.catalog_id}</span><small dir="ltr">{placed.x}, {placed.z} · {placed.rotation}°</small></button> })}</div> : <p className="muted">{t('أرضك تبدأ خالية. كل ما تبنيه هنا هو من إنجازك.', 'Your plot begins empty. Everything you build here comes from your progress.')}</p>}</div></>}
+      {panel==='objects' && <>    <div className="world-owned-summary"><h2>{t('عناصر مدينتك', 'City objects')} <span>{number(placements.length)}</span></h2>{placements.length > 0 ? <div className="world-object-list">{placements.map(placed => { const item = catalog.find(entry => entry.id === placed.catalog_id); return <button className={selectedId === placed.id ? 'active' : ''} key={placed.id} data-testid={`placement-${placed.id}`} onClick={() => selectPlacement(placed)} aria-label={`${item ? t(item.name_ar, item.name_en) : placed.catalog_id} X ${placed.x} Z ${placed.z}`}><span>{item ? t(item.name_ar, item.name_en) : placed.catalog_id}</span><small dir="ltr">{placed.x}, {placed.z} · {placed.rotation}°</small></button> })}</div> : <p className="muted">{t('أرضك تبدأ خالية. كل ما تبنيه هنا هو من إنجازك.', 'Your plot begins empty. Everything you build here comes from your progress.')}</p>}</div></>}
       </aside>}
     </div>
     {active && !online && <div className="world-notice" role="status">{t('غير متصل — يمكنك استكشاف المدينة وتعديل المعاينة. يتطلب الحفظ اتصالًا.', 'Offline — explore your city and adjust a preview. Saving requires a connection.')}</div>}
     {active && notice && <div className={`world-notice ${success ? 'success' : 'danger'}`} role="status">{notice}{!success && <button className="button button-ghost" onClick={() => void refresh()}>{t('تحديث', 'Refresh')}</button>}</div>}
+
+    <Modal open={!!demolition} onClose={()=>{if(!busy)setDemolition(null)}} title={t('تأكيد الهدم واسترجاع ٥٠٪','Confirm demolition and 50% refund')}>
+      {demolition&&<><p>{t('التكلفة الأصلية المثبتة:','Verified original paid cost:')} <b>{format(demolition.paid_basis,demolition.realm,demolition.realm==='yuyi')}</b></p><p>{t('الاسترداد إلى المحفظة التي دفعت:','Refund to original funding wallet:')} <b data-testid="demolition-refund">{format(demolition.refund,demolition.realm,demolition.realm==='yuyi')}</b></p><p>{t('تبقى الأرض ملكك. لا تُسترد قيمة الأثاث المعاد للمخزون. الهدم نهائي.','Land remains yours. Furniture returned to inventory is excluded from the refund. Demolition is permanent.')}</p><ul>{demolition.components.map(c=><li key={c.id}>{c.component} · <bdi>{c.paid} {c.currency}</bdi></li>)}</ul>{!yuyi&&furniture.some(f=>f.house_id===demolition.placement_id)&&<label className="row"><input type="checkbox" checked={destroyFurniture} disabled={busy} onChange={e=>void quoteDemolition(e.target.checked)}/>{t('تدمير الأثاث مع المبنى واسترداد نصف تكلفته المثبتة بدل إعادته للمخزون','Destroy furniture with the building and refund half its verified cost instead of recovering it')}</label>}<div className="row"><Button data-testid="demolition-confirm" variant="danger" disabled={busy||!online} onClick={()=>void demolish()}>{t('تأكيد الهدم واسترجاع ٥٠٪','Confirm demolition and 50% refund')}</Button><Button variant="secondary" disabled={busy} onClick={()=>setDemolition(null)}>{t('إلغاء','Cancel')}</Button></div></>}
+    </Modal>
 
   </div>
 }

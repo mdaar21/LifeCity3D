@@ -6,6 +6,7 @@ import { useLocale } from '../lib/locale';
 import { levelFromXp } from '../lib/rules';
 import { Button, LoadingState, Modal, Notice } from './Common';
 import City from '../pages/City';
+import {useMoney} from '../lib/useMoney';
 import { useStudyHeartbeat } from '../lib/useStudyHeartbeat';
 import '../game-shell.css';
 
@@ -13,6 +14,7 @@ export default function AppLayout() {
   useStudyHeartbeat();
   const { state, mode, saveStatus, online, error, refresh } = useGame();
   const { t, number, language, setLanguage } = useLocale();
+  const {format,currency}=useMoney();
   const location = useLocation();
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
@@ -27,6 +29,7 @@ export default function AppLayout() {
     { path: '/shop', icon: ShoppingBag, label: t('المتجر', 'Shop'), hint: t('ابنِ أكثر', 'BUILD MORE') },
   ];
   const extra = [
+    {path:'/economy',icon:Coins,label:t('المحفظتان والعملات','Wallets & currencies'),hint:t('رصيد مدينتي ودرهم ويوي','My City & Yuyi MAD')},
     { path: '/dashboard', icon: LayoutDashboard, label: t('سجل الرحلة', 'Journey log'), hint: t('يومك ومشروعك القادم', 'Your day & next project') },
     { path: '/prayers', icon: MoonStar, label: t('الصلوات', 'Prayers'), hint: t('سجلّك اليومي', 'Your daily journal') },
     { path: '/yuyi', icon: Heart, label: t('حديقة ويوي', 'Yuyi garden'), hint: t('مساحة مشتركة باختيارك', 'An optional shared space') },
@@ -65,12 +68,13 @@ export default function AppLayout() {
         <span className="game-player-copy"><strong>{state?.profile.display_name || t('صانع المدينة', 'City maker')}</strong><span>{t('مستوى اللاعب', 'PLAYER LEVEL')} {number(level)}</span><span className="game-xp" role="progressbar" aria-label={t('التقدم للمستوى التالي', 'Progress to next level')} aria-valuenow={xp} aria-valuemin={0} aria-valuemax={levelGoal}><i style={{width:`${xp / levelGoal * 100}%`}} /></span></span>
       </Link>
       <div className="game-wordmark"><Building2 size={19}/><span>LifeCity <b>3D</b></span></div>
-      <div className="game-resources">
-        <Link className={`game-wallet ${(state?.wallet.balance ?? 0) < 0 ? 'negative' : ''}`} to="/stats"><span className="game-coin"><Coins size={23}/></span><span><small>{state?.profile.currency_label === 'points' ? t('نقاطك', 'POINTS') : t('عملاتك', 'COINS')}</small><b dir="ltr" data-testid="wallet-balance">{number(state?.wallet.balance ?? 0)}</b></span></Link>
+      <div className="game-resources"><div className="game-wallet-pair">
+        <Link className={`game-wallet ${(state?.wallet.balance ?? 0) < 0 ? 'negative' : ''}`} to="/stats"><span className="game-coin"><Coins size={23}/></span><span><small>{state?.v6?t('محفظتي','MY CITY')+' · '+currency:state?.profile.currency_label === 'points' ? t('نقاطك', 'POINTS') : t('عملاتك', 'COINS')}</small><b dir="ltr" data-testid="wallet-balance">{currency==='SAR'?number(state?.wallet.balance ?? 0):format(state?.wallet.balance??0)}</b></span></Link>
+        {state?.v6&&<Link className="game-wallet game-yuyi-wallet" to="/economy"><Heart size={18}/><span><small>{t('رصيد ويوي','YUYI')} · MAD</small><b data-testid="yuyi-hud">{format(state.v6.yuyi_wallet.balance,'yuyi',true)}</b></span></Link>}</div>
         <button className="game-menu-button" aria-label={t('قائمة اللعبة', 'Game menu')} aria-haspopup="dialog" onClick={() => setMenu(true)}><Menu size={23}/></button>
       </div>
     </header>
-    <div className="game-save-line"><span className={!online || conflict ? 'game-save attention' : 'game-save'}>{!online ? <CloudOff size={13}/> : <CheckCheck size={13}/>}<span role="status">{statusLabel}</span></span>{mode === 'demo' && <span className="game-mode">{t('تجربة ضيف · هذا المتصفح فقط', 'GUEST DEMO · THIS BROWSER ONLY')}</span>}{mode === 'local' && <span className="game-mode">{t('خادم تطوير محلي', 'LOCAL DEVELOPMENT SERVER')}</span>}</div>
+    <div className="game-save-line"><span className={!online || conflict ? 'game-save attention' : 'game-save'}>{!online ? <CloudOff size={13}/> : <CheckCheck size={13}/>}<span role="status">{statusLabel}</span></span>{mode === 'demo' && <span className="game-mode">{t('تجربة ضيف · هذا المتصفح فقط', 'GUEST DEMO · THIS BROWSER ONLY')}</span>}{state?.v6?.fx&&<a className="game-mode" href="https://www.exchangerate-api.com" target="_blank" rel="noreferrer">Rates By Exchange Rate API</a>}{mode === 'local' && <span className="game-mode">{t('خادم تطوير محلي', 'LOCAL DEVELOPMENT SERVER')}</span>}</div>
     <div className="game-alerts">
       {!online && <Notice tone="warning">{t('أنت غير متصل. يمكنك استعراض آخر حفظ؛ الإجراءات التي تغيّر رصيدك متوقفة إلى أن يعود الاتصال.', 'You are offline. Browse your last saved state; actions that change your balance are paused until connection returns.')}</Notice>}
       {(error || conflict) && <Notice tone="danger"><span>{error || t('تعذّرت مزامنة التقدّم.', 'Progress could not sync.')}</span><Button variant="ghost" onClick={() => void refresh()}>{t('إعادة المحاولة', 'Try again')}</Button></Notice>}

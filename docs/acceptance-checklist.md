@@ -1,4 +1,7 @@
-# Master prompt acceptance — 2026-10-30
+# Historical0.2 acceptance — 2026-10-30
+
+For the owner-approved Ultimate V6 scope and honest incomplete status, use
+[v6/STATUS.md](v6/STATUS.md). The table below describes the earlier0.2 scope.
 
 Continue from this project and its existing data. This checklist distinguishes
 implemented code and actually executed local checks from unfinished external

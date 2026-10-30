@@ -1,3 +1,4 @@
+import {fetchFx} from '../supabase/functions/_shared/fx.ts';
 import { randomUUID } from 'node:crypto';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { z } from 'zod';
@@ -172,6 +173,13 @@ export async function createLocalServer(options: LocalServerOptions = {}) {
         if (route === '/api/export') response.setHeader('Content-Disposition', 'attachment; filename="lifecity-export.json"');
         json(response, 200, route === '/api/export' ? {format_version: 1, exported_at: new Date().toISOString(), mode: 'local', state} : state);
         return;
+      }
+      if(method==='POST'&&route==='/api/fx/refresh'){
+        const user=await requireUser(request);
+        if(!commandLimiter.allow(user.id))throw new HttpError(429,'RATE_LIMIT');
+        const cached=await database.owner(tx=>tx.query<{rate_time:string}>('select rate_time from public.fx_rate_snapshots order by rate_time desc limit 1'));
+        if(!cached.rows[0]||Date.now()-Date.parse(cached.rows[0].rate_time)>=24*3600_000){const rates=await fetchFx();await database.owner(tx=>tx.query('select public.fx_store_snapshot($1::jsonb)',[JSON.stringify(rates)]));}
+        json(response,200,{ok:true});return;
       }
       if (method === 'POST' && (route === '/api/command' || route === '/api/auth/delete')) {
         const user = await requireUser(request);

@@ -1,0 +1,59 @@
+{
+  "project": "taevxcuqsanfyywkuygl",
+  "migration": "v6_wallets_territory_fx",
+  "applied": true,
+  "preservedBaseline": {
+    "profiles": 0,
+    "wallets": 0,
+    "ledger": 0,
+    "inventory": 0,
+    "placements": 0
+  },
+  "privateBackup": "work/v6/hosted-pre-migration-backup.json (ignored; not public)",
+  "liveDatabaseAssertions": {
+    "twoEmptyPlots": true,
+    "twoZeroWallets": true,
+    "ownerMadCreditsAndDebits": true,
+    "mainWalletUnchanged": true,
+    "madPurchaseFromRealDatedFx": true,
+    "placementAndHistoricalHalfRefund": true,
+    "crossOwnerRls": true,
+    "directMoneyWriteDenied": true,
+    "authenticatedFxImportDenied": true,
+    "rolledBack": true,
+    "remainingDiagnosticUsers": 0,
+    "remainingDiagnosticLedgerEntries": 0
+  },
+  "fx": {
+    "provider": "ExchangeRate-API",
+    "source": "https://www.exchangerate-api.com",
+    "referenceUpdated": "2026-10-30T00:02:31Z",
+    "supportedGameCurrencies": 24,
+    "storedActualProviderReference": true,
+    "attributionRequired": true,
+    "refreshPolicy": "daily; block new MAD quotes after 48h stale"
+  },
+  "edgeFunction": {
+    "name": "refresh-fx",
+    "deployed": true,
+    "version": 1,
+    "auth": "Auth.getUser validates session in handler",
+    "unauthenticatedHttpStatus": 401,
+    "authenticatedHttpStatus": 200
+  },
+  "advisors": {
+    "expectedNoClientReadPolicy": [
+      "account_deletion_audit",
+      "fx_rate_snapshots"
+    ],
+    "intendedRpcDefiners": [
+      "game_state",
+      "game_command",
+      "city_visit"
+    ],
+    "reference": "https://supabase.com/docs/guides/database/database-linter"
+  },
+  "limits": "Live SQL/RLS rollback diagnostics and actual password-JWT login/cloud-save comparison passed using a disposable pre-confirmed Auth fixture. Public email signup/confirmation/recovery remain unverified; Auth URLs are not configured per owner. Diagnostic fixtures were removed. No V6 frontend deployment or all20-feature completion claim.",
+  "migrationVersion": "20261030225914",
+  "sourceSha256": "672de2ec053073a463fae5c68537c1482e7445dc4452760770aef7232639c2a9"
+}

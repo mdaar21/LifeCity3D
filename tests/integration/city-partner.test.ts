@@ -108,7 +108,8 @@ describe('Yuyi explicit consent and privacy', () => {
     await expect(runCommand(database, partner.id, 'partner_adjust', {owner_id: owner.id, amount: -100})).rejects.toThrow(/confirmation_required/i);
     await runCommand(database, partner.id, 'partner_adjust', {owner_id: owner.id, amount: -100, confirmed: true, reason: 'Chosen deduction'});
     const saved = await state(database, owner.id);
-    expect(saved.wallet.balance).toBe(-33);
+    expect(saved.wallet.balance).toBe(30);
+    expect(saved.v6?.yuyi_wallet.balance).toBe('-63.0000');
     expect(saved.wallet.player_xp).toBe(30);
     expect(saved.yuyi_memories).toHaveLength(1);
     expect(saved.yuyi_memories[0]!.growth).toBe(37);
