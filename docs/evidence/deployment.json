@@ -1,0 +1,13 @@
+{
+  "owner_policy": "GitHub only",
+  "requested_repository": "mdaar21/LifeCity3D",
+  "repository_created": false,
+  "source_pushed": false,
+  "published": false,
+  "local_pages_artifact_prepared": true,
+  "creation_error": "Resource not accessible by integration (createRepository)",
+  "hosted_supabase_configured": false,
+  "automatic_purchase_performed": false,
+  "mdaar_modified": false,
+  "historical_host_evidence": "deployment-netlify-history.json"
+}

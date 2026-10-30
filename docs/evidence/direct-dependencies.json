@@ -1,0 +1,82 @@
+[
+  {
+    "name": "@electric-sql/pglite",
+    "version": "0.3.16",
+    "license": "Apache-2.0"
+  },
+  {
+    "name": "@react-three/drei",
+    "version": "10.7.9",
+    "license": "MIT"
+  },
+  {
+    "name": "@react-three/fiber",
+    "version": "9.8.2",
+    "license": "MIT"
+  },
+  {
+    "name": "@supabase/supabase-js",
+    "version": "2.118.0",
+    "license": "MIT"
+  },
+  {
+    "name": "@tanstack/react-query",
+    "version": "5.105.0",
+    "license": "MIT"
+  },
+  {
+    "name": "date-fns",
+    "version": "4.4.0",
+    "license": "MIT"
+  },
+  {
+    "name": "framer-motion",
+    "version": "12.43.0",
+    "license": "MIT"
+  },
+  {
+    "name": "i18next",
+    "version": "25.10.10",
+    "license": "MIT"
+  },
+  {
+    "name": "lucide-react",
+    "version": "0.552.0",
+    "license": "ISC"
+  },
+  {
+    "name": "react",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "name": "react-dom",
+    "version": "19.3.1",
+    "license": "MIT"
+  },
+  {
+    "name": "react-i18next",
+    "version": "16.6.6",
+    "license": "MIT"
+  },
+  {
+    "name": "react-router-dom",
+    "version": "7.18.5",
+    "license": "MIT"
+  },
+  {
+    "name": "three",
+    "version": "0.181.2",
+    "license": "MIT"
+  },
+  {
+    "name": "zod",
+    "version": "4.6.7",
+    "license": "MIT"
+  },
+  {
+    "name": "zustand",
+    "version": "5.0.16",
+    "license": "MIT"
+  }
+]

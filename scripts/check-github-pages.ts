@@ -1,0 +1,13 @@
+import {chromium,expect} from '@playwright/test';
+import {readFile,writeFile} from 'node:fs/promises';
+import {existsSync} from 'node:fs';
+const base=process.env.REVIEW_BASE||'http://127.0.0.1:4176/LifeCity3D';
+const artifact=JSON.parse(await readFile('docs/evidence/github-pages-build.json','utf8')) as {router:string};const hash=artifact.router==='hash';const route=(path:string)=>hash?base+'/#/'+path:base+'/'+path;
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH??(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox','--enable-unsafe-swiftshader']});const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});const page=await context.newPage();const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+const loginRequests:string[]=[];const track=(request:{url():string})=>loginRequests.push(request.url());page.on('request',track);await page.goto(route('login'),{waitUntil:'networkidle'});await expect(page.getByTestId('auth-email')).toBeVisible();page.off('request',track);expect(loginRequests.some(url=>/\/assets\/three-[^/]+\.js/.test(url))).toBe(false);
+const root=await page.goto(base+'/',{waitUntil:'networkidle'});expect(root?.status()).toBe(200);expect(await page.locator('meta[http-equiv="Content-Security-Policy"]').count()).toBe(1);
+await page.getByRole('button',{name:'جرّبها أولًا',exact:true}).click();await expect(page).toHaveURL(route('dashboard'));await expect(page.getByTestId('wallet-balance')).toHaveText('0');
+const cold=await context.newPage();const deep=await cold.goto(route('city'));expect(deep?.status()).toBe(hash?200:404);await expect(cold.getByRole('heading',{name:'مدينتي',exact:true})).toBeVisible();await cold.close();
+const font=await page.request.get(base+'/fonts/Tajawal-Regular.ttf');expect(font.ok()).toBe(true);const icon=await page.request.get(base+'/icons/icon.svg');expect(icon.ok()).toBe(true);
+await page.goto(route('pricing'));await expect(page.getByRole('heading',{name:'ابدأ بما يناسبك.',exact:true})).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(errors).toEqual([]);
+const result={ok:true,base,router:artifact.router,published:false,scope:'Local simulation of GitHub Pages path and routing behavior, not a remote deployment.',rootStatus:200,coldDeepLinkStatus:deep?.status(),spaCityRendered:true,fontsAndIconsUnderRepoBase:true,pricingRendered:true,productionCspMeta:true,loginAvoidsThreeEngineDownload:true,pageErrors:errors};await writeFile('docs/evidence/github-pages-browser.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));await browser.close();

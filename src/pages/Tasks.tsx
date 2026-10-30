@@ -1,0 +1,63 @@
+import { useState, type FormEvent } from 'react';
+import { Archive, Check, Coins, Dumbbell, Flower2, ListChecks, PencilLine, Plus, Save, Sparkles } from 'lucide-react';
+import { useGame } from '../lib/game';
+import { useLocale } from '../lib/locale';
+import type { Task } from '../lib/types';
+import { Button, EmptyState, LoadingState, Modal, Notice, SectionTitle } from '../components/Common';
+
+type Frequency = 'daily' | 'weekly' | 'once';
+const frequencyOf = (task: Task): Frequency => (task as Task & {frequency?: Frequency}).frequency || 'daily';
+
+export default function Tasks() {
+  const { state, loading, mutate, online } = useGame();
+  const { t, number, language } = useLocale();
+  const [filter, setFilter] = useState('all');
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [reward, setReward] = useState(20);
+  const [limit, setLimit] = useState(1);
+  const [category, setCategory] = useState('personal');
+  const [frequency, setFrequency] = useState<Frequency>('daily');
+  const [editing, setEditing] = useState<Task | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [message, setMessage] = useState<{text: string; error: boolean} | null>(null);
+  if (loading || !state) return <LoadingState />;
+  const active = state.tasks.filter(task => !task.archived);
+  const today = state.completions.filter(entry => entry.day === state.local_day);
+  const monday = new Date(`${state.local_day}T12:00:00Z`);
+  monday.setUTCDate(monday.getUTCDate() - (monday.getUTCDay() + 6) % 7);
+  const weekStart = monday.toISOString().slice(0, 10);
+  const sunday = new Date(monday);
+  sunday.setUTCDate(sunday.getUTCDate() + 6);
+  const weekEnd = sunday.toISOString().slice(0, 10);
+  const countFor = (task: Task) => state.completions.filter(entry => entry.task_id === task.id && (frequencyOf(task) === 'once' || (frequencyOf(task) === 'weekly' ? entry.day >= weekStart && entry.day <= weekEnd : entry.day === state.local_day))).length;
+  const limitFor = (task: Task) => frequencyOf(task) === 'once' ? 1 : Math.min(task.daily_limit, state.preferences.task_daily_limit);
+  const periodName = (value: Frequency) => value === 'weekly' ? t('هذا الأسبوع', 'this week') : value === 'once' ? t('إجمالًا', 'in total') : t('اليوم', 'today');
+  const frequencyName = (value: Frequency) => value === 'weekly' ? t('أسبوعية', 'Weekly') : value === 'once' ? t('لمرة واحدة', 'One-time') : t('يومية', 'Daily');
+  const visible = active.filter(task => filter === 'all' || (filter === 'available' ? countFor(task) < limitFor(task) : countFor(task) > 0));
+  const builtin = editing?.key != null;
+  function openEditor(task?: Task) {
+    setEditing(task || null); setTitle(task ? task.key && language === 'ar-SA' && task.title_ar ? task.title_ar : task.key && language === 'en' && task.title_en ? task.title_en : task.title : ''); setReward(task?.reward ?? 20); setLimit(task ? limitFor(task) : 1); setCategory(task?.category || 'personal'); setFrequency(task ? frequencyOf(task) : 'daily'); setMessage(null); setOpen(true);
+  }
+  async function run(action: string, payload: Record<string, unknown>, id: string) {
+    if (busy) return false;
+    setBusy(id); setMessage(null);
+    try { await mutate(action, payload); setMessage({ text: action === 'task_complete' ? t('إنجاز جميل! أُضيفت المكافأة إلى رصيدك.', 'Well done! Your reward was added to your balance.') : action === 'task_create' ? t('مهمتك الجديدة جاهزة.', 'Your new task is ready.') : action === 'task_update' ? t('حُفظت إعدادات المهمة. بقي سجل الإنجازات السابقة محفوظًا.', 'Task settings saved. Past completion records were preserved.') : t('نُقلت المهمة إلى الأرشيف.', 'The task was archived.'), error: false }); return true; }
+    catch { setMessage({text: t('تعذّر حفظ الإجراء. لم نغيّر رصيدك محليًا؛ راجع الاتصال أو حدود المهمة ثم حاول مجددًا.', 'The action could not be saved. No local balance was changed; check your connection or task limits and try again.'), error: true}); return false; }
+    finally { setBusy(null); }
+  }
+  async function saveTask(event: FormEvent) {
+    event.preventDefault();
+    const fields = {title: title.trim(), reward, category, frequency, daily_limit: frequency === 'once' ? 1 : limit};
+    const payload = editing ? builtin ? {task_id:editing.id,daily_limit:limit} : {task_id:editing.id,...fields} : fields;
+    if (await run(editing ? 'task_update' : 'task_create', payload, 'editor')) { setOpen(false); setEditing(null); setTitle(''); }
+  }
+  return <div className="page tasks-page"><SectionTitle eyebrow={t('من حياتك إلى مدينتك', 'FROM YOUR LIFE TO YOUR CITY')} title={t('إنجازات صغيرة، أثر كبير.', 'Small actions. Lasting progress.')} description={t('اختر ما يناسب يومك. مكافأة كل مهمة تُحفظ عند تأكيد إنجازها.', 'Choose what fits your day. Each reward is saved when you confirm completion.')} action={<Button onClick={() => openEditor()}><Plus size={19} />{t('مهمة جديدة', 'New task')}</Button>} />
+    <div className="task-summary"><div><span className="stat-icon moss"><Check size={24} /></span><span><b>{number(today.length)}</b><small>{t('إنجاز اليوم', 'completed today')}</small></span></div><div><span className="stat-icon gold"><Coins size={24} /></span><span><b>+{number(today.reduce((sum, entry) => sum + entry.reward, 0))}</b><small>{t('عملة من المهام اليوم', 'task coins earned today')}</small></span></div><div className="task-summary-note"><Sparkles size={20} /><p>{t('عاداتك هي البذور. مدينتك هي الثمرة.', 'Your habits are the seeds. Your city is what grows.')}</p></div></div>
+    {message && <Notice tone={message.error ? 'danger' : 'success'}>{message.text}</Notice>}
+    <div className="tab-row" role="group" aria-label={t('تصفية المهام', 'Filter tasks')}>{[['all', t('كل المهام', 'All tasks')], ['available', t('متاحة الآن', 'Available now')], ['done', t('أنجزتها', 'Completed')]].map(([key, label]) => <button className={`tab ${filter === key ? 'active' : ''}`} onClick={() => setFilter(key)} key={key} aria-pressed={filter === key}>{label}{key === 'all' && <span>{number(active.length)}</span>}</button>)}</div>
+    {visible.length === 0 ? <div className="panel"><EmptyState icon={<ListChecks size={29} />} title={filter === 'done' ? t('صفحة جديدة ليومك', 'A fresh page for your day') : t('أفسح المجال لخطوة جديدة', 'Make room for a new step')} description={t('أضف مهمة شخصية، أو غيّر التصفية لمشاهدة مهامك.', 'Add a personal task or change the filter to see your tasks.')} action={<Button variant="secondary" onClick={() => openEditor()}><Plus size={17} />{t('أضف مهمة', 'Add a task')}</Button>} /></div> : <div className="tasks-grid">{visible.map(task => { const count = countFor(task); const effectiveLimit = limitFor(task); const done = count >= effectiveLimit; const Icon = task.category === 'exercise' ? Dumbbell : task.category === 'cleaning' ? Flower2 : ListChecks; return <article className={`panel task-card ${done ? 'task-done' : ''}`} key={task.id}><div className="task-card-top"><span className={`task-art task-art-${task.category}`}><Icon size={28} strokeWidth={1.5} /></span><div className="row"><button className="icon-button muted" disabled={!!busy || !online} onClick={() => openEditor(task)} aria-label={t('تعديل المهمة: ', 'Edit task: ') + task.title}><PencilLine size={18} /></button><button className="icon-button muted" disabled={!!busy || !online} onClick={() => void run('task_archive', {task_id: task.id}, task.id)} aria-label={t('أرشفة المهمة: ', 'Archive task: ') + task.title}><Archive size={18} /></button></div></div><span className="task-category">{task.category === 'exercise' ? t('الحركة والعافية', 'Movement & wellness') : task.category === 'cleaning' ? t('مساحتك', 'Your space') : t('مهمتك الشخصية', 'Your personal task')} · {frequencyName(frequencyOf(task))}</span><h2>{language === 'ar-SA' && task.title_ar ? task.title_ar : language === 'en' && task.title_en ? task.title_en : task.title}</h2><div className="task-card-reward"><Coins size={19} /><strong>+{number(task.reward)}</strong><span>{t('عملة لكل إنجاز', 'coins per completion')}</span></div><div className="task-card-bottom"><span className="muted">{number(count)} / {number(effectiveLimit)} {periodName(frequencyOf(task))}</span><Button variant={done ? 'secondary' : 'primary'} disabled={done || !!busy || !online} loading={busy === task.id} onClick={() => void run('task_complete', {task_id: task.id}, task.id)}><Check size={17} />{done ? t('اكتملت لهذه الفترة', 'Complete for this period') : t('أنجزت المهمة', 'Mark complete')}</Button></div></article>; })}</div>}
+    <p className="page-footnote">{t('سجّل الإنجاز الفعلي فقط. حدود التكرار والمكافآت يتحقق منها الخادم.', 'Record actual completions. The server checks repetition limits and rewards.')}</p>
+    <Modal open={open} onClose={() => { if (!busy) setOpen(false); }} title={editing ? t('إعدادات المهمة', 'Task settings') : t('خطوة جديدة ليومك', 'A new step for your day')}><form onSubmit={event => void saveTask(event)} className="form-stack"><p className="muted">{builtin ? t('مكافأة المهمة الأساسية وجدولها ثابتان. يمكنك ضبط حدّ الإنجاز في اليوم.', 'This standard task has a fixed reward and schedule. You can adjust its daily completion limit.') : t('اختر مهمة واضحة ومكافأة مناسبة. كررها يوميًا أو أسبوعيًا، أو اختر إنجازًا لمرة واحدة فقط.', 'Choose a clear task and a fitting reward. Repeat it daily or weekly, or choose a one-time achievement.')}</p><label className="field"><span>{t('اسم المهمة', 'Task name')}</span><input className="input" value={title} onChange={event => setTitle(event.target.value)} disabled={builtin} required minLength={2} maxLength={120} placeholder={t('مثلًا: المشي في الحديقة', 'For example: a walk in the park')} /></label><div className="form-grid"><label className="field"><span>{t('المكافأة', 'Reward')}</span><input type="number" className="input" required min={1} max={builtin ? undefined : state.preferences.custom_reward_limit} disabled={builtin} value={reward} onChange={event => setReward(Number(event.target.value))} /><small>{builtin ? t('مكافأة ثابتة', 'Fixed reward') : t('الحد الأقصى', 'Maximum') + ': ' + number(state.preferences.custom_reward_limit)}</small></label><label className="field"><span>{t('التكرار', 'Schedule')}</span><select className="select" value={frequency} disabled={builtin} onChange={event => { const next = event.target.value as Frequency; setFrequency(next); if (next === 'once') setLimit(1); }}><option value="daily">{t('يوميًا', 'Daily')}</option><option value="weekly">{t('أسبوعيًا', 'Weekly')}</option><option value="once">{t('مرة واحدة فقط', 'Once only')}</option></select></label></div><label className="field"><span>{frequency === 'weekly' ? t('حدّ الإنجاز في الأسبوع', 'Weekly completion limit') : frequency === 'once' ? t('إنجاز واحد خلال عمر المهمة', 'One lifetime completion') : t('حدّ الإنجاز في اليوم', 'Daily completion limit')}</span><input type="number" className="input" required min={1} max={frequency === 'once' ? 1 : state.preferences.task_daily_limit} disabled={frequency === 'once'} step={1} value={limit} onChange={event => setLimit(Number(event.target.value))} /><small>{frequency === 'weekly' ? t('يبدأ الأسبوع يوم الاثنين حسب منطقتك الزمنية.', 'The week starts on Monday in your timezone.') : frequency === 'once' ? t('يمكن إنجازها مرة واحدة فقط؛ تبقى الإنجازات السابقة محسوبة.', 'This task can be completed once only; past completions still count.') : t('تبدأ الفترة الجديدة عند منتصف الليل في منطقتك الزمنية.', 'A new period starts at midnight in your timezone.')} {t('حدّ الحساب:', 'Account cap:')} {number(state.preferences.task_daily_limit)}</small></label><label className="field"><span>{t('الفئة', 'Category')}</span><select className="select" value={category} disabled={builtin} onChange={event => setCategory(event.target.value)}><option value="personal">{t('شخصية', 'Personal')}</option><option value="cleaning">{t('تنظيم ونظافة', 'Tidying & cleaning')}</option><option value="exercise">{t('رياضة وعافية', 'Exercise & wellness')}</option></select></label>{editing && !builtin && <Notice>{t('تغيير الجدول لا يمحو الإنجازات السابقة؛ تُحسب ضمن الفترة الجديدة عند انطباقها. المكافأة الجديدة تخص الإنجازات المقبلة فقط.', 'Changing the schedule preserves past completions; they count toward the new period when applicable. The new reward applies only to future completions.')}</Notice>}{message?.error && <Notice tone="danger">{message.text}</Notice>}<Button type="submit" disabled={!online || !!busy || !title.trim()} loading={busy === 'editor'}>{editing ? <Save size={18} /> : <Plus size={18} />}{editing ? t('حفظ الإعدادات', 'Save settings') : t('إضافة المهمة', 'Create task')}</Button></form></Modal>
+  </div>;
+}

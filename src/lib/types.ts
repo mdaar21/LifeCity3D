@@ -8,7 +8,7 @@ export type Category='roads'|'nature'|'homes'|'landmarks'|'furniture'|'water'|'v
 export interface CatalogItem {id:string;name_ar:string;name_en:string;description_ar:string;description_en:string;price:number;category:Category;footprint_x:number;footprint_z:number;unlock_level:number;model:string;is_furniture:boolean}
 export interface InventoryItem {id:string;user_id?:string;catalog_id:string;created_at:string}
 export interface Placement {id:string;inventory_id:string;catalog_id:string;x:number;y:number;z:number;rotation:number;version:number;world_id?:string;house_id?:string;variant?:string}
-export interface Task {id:string;user_id?:string;key:string|null;title:string;title_ar?:string;title_en?:string;reward:number;category:string;daily_limit:number;archived:boolean}
+export interface Task {id:string;user_id?:string;key:string|null;title:string;title_ar?:string;title_en?:string;reward:number;category:string;daily_limit:number;frequency?:'daily'|'weekly'|'once';archived:boolean}
 export interface Completion {id:string;task_id:string;day:string;reward:number;created_at:string}
 export type Prayer='fajr'|'dhuhr'|'asr'|'maghrib'|'isha';
 export type PrayerStatus='pending'|'completed'|'missed'|'excused';

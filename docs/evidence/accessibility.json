@@ -1,0 +1,102 @@
+[
+  {
+    "route": "dashboard",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "city",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "tasks",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "timer",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "shop",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "prayers",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "yuyi",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "stats",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "settings",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "interior",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "dashboard",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "city",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "tasks",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "timer",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "shop",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "prayers",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "yuyi",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "stats",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "settings",
+    "theme": "dark",
+    "violations": []
+  },
+  {
+    "route": "interior",
+    "theme": "dark",
+    "violations": []
+  }
+]

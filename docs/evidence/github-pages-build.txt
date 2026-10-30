@@ -1,0 +1,82 @@
+
+> lifecity-3d@0.1.0 build:github
+> node scripts/build-github-pages.mjs
+
+
+> lifecity-3d@0.1.0 build
+> tsc -b && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 2463 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/registerSW.js                      0.16 kB
+dist/manifest.webmanifest               0.59 kB
+dist/index.html                         1.44 kB │ gzip:   0.74 kB
+dist/assets/index-BrCICC1X.css        116.57 kB │ gzip:  23.56 kB
+dist/assets/chevron-down-CRiWqbWk.js    0.13 kB │ gzip:   0.14 kB
+dist/assets/plus-m436LjXX.js            0.15 kB │ gzip:   0.15 kB
+dist/assets/arrow-left-LHjcMt1a.js      0.17 kB │ gzip:   0.16 kB
+dist/assets/arrow-right-DOR6HaqE.js     0.17 kB │ gzip:   0.16 kB
+dist/assets/clock-3-CNHK0dlX.js         0.17 kB │ gzip:   0.17 kB
+dist/assets/search-Bq4vXgw0.js          0.18 kB │ gzip:   0.17 kB
+dist/assets/play-Dwr8gosZ.js            0.19 kB │ gzip:   0.18 kB
+dist/assets/grid-2x2-B8CzZ6Lt.js        0.22 kB │ gzip:   0.19 kB
+dist/assets/history-JQM6fQt0.js         0.24 kB │ gzip:   0.20 kB
+dist/assets/eye-DkPdTc_P.js             0.26 kB │ gzip:   0.20 kB
+dist/assets/leaf-B1wt8Nlk.js            0.27 kB │ gzip:   0.23 kB
+dist/assets/pencil-line-DEOMlode.js     0.32 kB │ gzip:   0.24 kB
+dist/assets/shield-check-B60najba.js    0.32 kB │ gzip:   0.25 kB
+dist/assets/trash-2-Cx81Mbut.js         0.33 kB │ gzip:   0.22 kB
+dist/assets/armchair-Cusv_UIn.js        0.37 kB │ gzip:   0.24 kB
+dist/assets/flower-2-BOOnNw77.js        0.44 kB │ gzip:   0.28 kB
+dist/assets/trophy-CrgrP1_U.js          0.48 kB │ gzip:   0.28 kB
+dist/assets/sun-fo6-upWE.js             0.64 kB │ gzip:   0.35 kB
+dist/assets/useBuilder-XosJMyAK.js      1.13 kB │ gzip:   0.56 kB
+dist/assets/messages-BFXdnneM.js        1.98 kB │ gzip:   1.13 kB
+dist/assets/Pricing-BH3ICGlR.js         3.46 kB │ gzip:   1.74 kB
+dist/assets/Legal-NyIidc0h.js           6.74 kB │ gzip:   3.09 kB
+dist/assets/Prayers-BZBeHCtb.js         8.34 kB │ gzip:   3.48 kB
+dist/assets/Timer-DVt9RN3k.js           9.10 kB │ gzip:   3.84 kB
+dist/assets/Dashboard-Dy5bJOyC.js       9.70 kB │ gzip:   3.72 kB
+dist/assets/Auth-Dcc2HfKy.js           10.50 kB │ gzip:   4.31 kB
+dist/assets/Shop-B8sh8ns1.js           10.54 kB │ gzip:   4.28 kB
+dist/assets/Interior-cXcAJbQs.js       11.74 kB │ gzip:   4.28 kB
+dist/assets/Tasks-BmFnZtwu.js          12.62 kB │ gzip:   4.94 kB
+dist/assets/City-Dy8Ap4yy.js           14.54 kB │ gzip:   5.23 kB
+dist/assets/Landing-KqGRFyub.js        14.59 kB │ gzip:   5.61 kB
+dist/assets/CityScene-BVwYmWo9.js      17.10 kB │ gzip:   6.51 kB
+dist/assets/Stats-B2jONMMS.js          20.42 kB │ gzip:   7.07 kB
+dist/assets/Settings-DFGvPGgB.js       24.71 kB │ gzip:   8.78 kB
+dist/assets/Yuyi-QdjzO3OM.js           33.23 kB │ gzip:  11.01 kB
+dist/assets/index-DxY1iIXN.js         175.19 kB │ gzip:  54.33 kB
+dist/assets/cloud-CB7MGzWB.js         223.73 kB │ gzip:  58.62 kB
+dist/assets/vendor-DrfuuW3C.js        261.81 kB │ gzip:  83.34 kB
+dist/assets/three-DlHAoGyL.js         915.47 kB │ gzip: 250.52 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 6.78s
+
+PWA v1.3.0
+mode      generateSW
+precache  52 entries (2010.53 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-2fbc6a65.js
+GitHub Pages artifact prepared for /LifeCity3D/; not yet published.

@@ -1,0 +1,12 @@
+{
+  "site_id": "737b05ce-e06f-4e34-95d1-3269ce6ce46c",
+  "site_name": "lifecity-3d-mdaar21",
+  "site_url": "https://lifecity-3d-mdaar21.netlify.app",
+  "state": "provisioned_not_deployed",
+  "published": false,
+  "error_status": 403,
+  "error": "Account credit usage exceeded - new deploys are blocked until credits are added",
+  "automatic_purchase_performed": false,
+  "mode": "compiled browser-only guest preview; no hosted Supabase",
+  "note": "This provisioned URL is not a working application link. Do not advertise it as deployed."
+}

@@ -17,7 +17,7 @@ Snapshot and payload fields are snake_case and defined in src/lib/types.ts.
 RPC game_state() returns GameSnapshot. RPC game_command(p_action text,p_payload
 jsonb,p_key uuid) returns {state:GameSnapshot|null,result:Record<string,unknown>}.
 API calls retry with SAME key, including deliberate retry after a lost response.
-Offline writes are blocked, not queued. Poll30s + realtime invalidation reconcile.
+Offline writes are blocked, not queued. Poll10s + realtime invalidation reconcile.
 Errors are stable machine codes from SQL, localized by client (never raw SQL).
 
 ## Module ownership

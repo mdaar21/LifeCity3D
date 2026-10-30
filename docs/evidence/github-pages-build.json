@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "base": "/LifeCity3D/",
+  "router": "browser",
+  "spaFallback": "404.html copies the built app; hash guest previews keep routes in the directory URL",
+  "manifestScope": "/LifeCity3D/",
+  "startUrl": "/LifeCity3D/",
+  "productionCsp": true,
+  "published": false
+}

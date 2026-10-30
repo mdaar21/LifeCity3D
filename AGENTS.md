@@ -2,6 +2,9 @@
 
 This is a separate application and repository. Never modify Mdaar21 while working
 here. Read docs/architecture.md and src/lib/types.ts before implementing a module.
+Owner's latest publication policy: **GitHub only**. Do not deploy to Netlify or
+another host. Keep the existing compatibility files as history, not active
+publication instructions. Never make a private repository public without consent.
 Arabic (ar-SA) is default; English must be available. Do not mirror 3D coordinates.
 Use original procedural geometry, forest/moss/ivory/gold/sky/charcoal palette and
 commercially permitted fonts. No default read10pages / learn30min / personalproject tasks.

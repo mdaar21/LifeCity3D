@@ -1,0 +1,11 @@
+import {spawnSync} from 'node:child_process';
+import {readFile,writeFile,copyFile} from 'node:fs/promises';
+const repo=process.env.GITHUB_REPOSITORY?.split('/')[1]||'LifeCity3D';
+const base=process.env.VITE_BASE_PATH||`/${repo}/`;
+const result=spawnSync(process.platform==='win32'?'npm.cmd':'npm',['run','build'],{stdio:'inherit',shell:process.platform==='win32',env:{...process.env,VITE_BASE_PATH:base}});
+if(result.status!==0)process.exit(result.status||1);
+const html=await readFile('dist/index.html','utf8');const manifest=JSON.parse(await readFile('dist/manifest.webmanifest','utf8'));
+if(!html.includes(`src="${base}assets/`)||manifest.scope!==base||manifest.start_url!==base)throw new Error('GitHub Pages asset or PWA base path mismatch.');
+await copyFile('dist/index.html','dist/404.html');await writeFile('dist/.nojekyll','');
+await writeFile('docs/evidence/github-pages-build.json',JSON.stringify({ok:true,base,router:process.env.VITE_ROUTER_MODE||'browser',spaFallback:'404.html copies the built app; hash guest previews keep routes in the directory URL',manifestScope:manifest.scope,startUrl:manifest.start_url,productionCsp:html.includes('Content-Security-Policy'),published:false},null,2)+'\n');
+console.log(`GitHub Pages artifact prepared for ${base}; not yet published.`);
