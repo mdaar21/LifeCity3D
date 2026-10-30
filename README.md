@@ -5,12 +5,12 @@ game, built independently from Mdaar. React19/strict TypeScript/Vite, original
 R3F/Three procedural world, Zustand editor, TanStack Query, Supabase Auth/Postgres,
 transactional RPCs, RLS and a real installable PWA.
 
-This is an implementation with locally executed checks, **not a claim of a fully
-launched commercial cloud service**. Supabase production credentials have not
-been supplied. GitHub's connected integration currently denies creation of the
-requested new repository (`createRepository`); local Git history is preserved.
-The owner's publication policy is **GitHub only**. A verified Pages artifact and
-deployment workflow are ready, but no app URL has been published.
+The frontend is published at https://mdaar21.github.io/LifeCity3D/ through GitHub
+Pages. Guest entry has been verified in the real public app. Hosted Supabase
+accounts are not active: the selected project's existing profiles table needs
+inspection before a data-preserving setup. This is not a fully launched
+commercial cloud service. Read [the current handoff](docs/HANDOFF.md) before
+continuing; older local release records describe earlier deployment blockers.
 
 The owner-provided [starter template](docs/starter-template-integration.md) is
 pinned as an optional Git submodule under `references/`. LifeCity keeps its

@@ -25,17 +25,16 @@ no automatic residents/cars or auto-placed city buildings were added. A pinned
 optional starter Git reference and original build-configuration validation were
 added while preserving the existing app. See starter-template-integration.md.
 
-Owner's current policy: GitHub publication only; publication is currently deferred. Do not use another host. Never
-replace Mdaar or silently make a private repository public. A possible preview
-inside an existing repository was proposed, not approved or published.
+Current publication: the owner created mdaar21/LifeCity3D; the preserved main
+history was pushed. The owner enabled Pages with GitHub Actions. The fresh run
+41112429755 succeeded and the public app at https://mdaar21.github.io/LifeCity3D/
+returned HTTP200 and opened the guest dashboard in a real browser. See
+evidence/live-pages.json. GitHub-only policy remains; Mdaar is unchanged.
 
-Blocked external actions: GitHub refuses createRepository; new repo not pushed.
-The most recent real create attempt still returned `Resource not accessible by
-integration (createRepository)`. Supabase project/config absent, so hosted cloud
-accounts cannot be advertised as active. No purchases or billing changes made.
-
-Next: when creation/access is actually available, create the selected LifeCity3D
-repository and push existing history. Enable GitHub Pages with the correct plan
-and existing privacy setting. Set up real Supabase vars/migrations/Auth; verify hosted
-two-device flow. See docs/deployment.md and docs/release.md. Do not replace the
-project or describe local reference tests as successful hosted deployment.
+Remaining: hosted accounts are not active. The selected Supabase project is
+taevxcuqsanfyywkuygl; its existing profiles table conflicted with fresh setup.
+Inspect its schema and RLS before any migration, preserving existing data.
+Do not retry blind creation or delete tables. Supabase administrative tools were
+not available in the previous conversation. See HANDOFF.md for current facts,
+configuration names and the next acceptance test. Earlier creation/Pages failures
+are historical, not current blockers to the already published frontend.

@@ -1,5 +1,9 @@
 # Local release evidence — 0.2.0 preview, 2026-10-30
 
+This document retains the pre-publication local validation record. The frontend
+was subsequently published successfully; read HANDOFF.md and
+evidence/live-pages.json for current status. Hosted accounts still need setup.
+
 **Gate: locally verified, publication deferred; external setup incomplete.** This is working code,
 not a production launch claim. Mdaar's repository and published app were not
 changed. LifeCity sources and milestones are in a separate local Git repository.

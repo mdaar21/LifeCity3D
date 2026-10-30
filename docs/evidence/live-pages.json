@@ -1,0 +1,10 @@
+{
+  "verified_at_utc": "2026-10-30T19:15:05.886Z",
+  "url": "https://mdaar21.github.io/LifeCity3D/",
+  "http_status": 200,
+  "guest_demo_opens_dashboard": true,
+  "initial_wallet": 0,
+  "page_errors": [],
+  "hosted_supabase_active": false,
+  "scope": "Actual public GitHub Pages frontend and browser-only guest entry; no cloud account verification."
+}

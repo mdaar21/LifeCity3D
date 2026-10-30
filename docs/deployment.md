@@ -6,21 +6,14 @@ private repository's visibility or buy a hosting plan automatically.
 
 ## GitHub Pages frontend
 
-The connected GitHub identity is `mdaar21`. Both GraphQL createRepository and
-REST repository creation were denied by the integration. The latest attempted
-`gh repo create mdaar21/LifeCity3D --private` returned the same permission error.
-This is a repository-creation authorization failure, not a missing build command.
-Do not invent repository access or a live URL. See `evidence/github-create.txt`.
+The repository now exists at https://github.com/mdaar21/LifeCity3D and its main
+branch is pushed. Pages is enabled with source **GitHub Actions**. The successful
+run41112429755 published https://mdaar21.github.io/LifeCity3D/; live HTTP and guest
+entry were verified. See HANDOFF.md and evidence/live-pages.json. Earlier creation
+and Pages permission errors are historical; do not create a replacement repo or
+overwrite origin. Normal code updates are committed and pushed to existing main.
 
-After the selected empty repository exists and the connection has access:
-
-```sh
-git remote add origin https://github.com/mdaar21/LifeCity3D.git
-git push -u origin main
-```
-
-If an origin already exists, inspect it instead of overwriting it. Enable Pages
-with source **GitHub Actions**. `.github/workflows/pages.yml` runs lint, strict
+`.github/workflows/pages.yml` runs lint, strict
 typecheck,41 unit/integration/configuration tests,6 browser tests, the production Pages build,
 and the compiled guest route/PWA checks before publishing the artifact.
 Private repository Pages eligibility depends on the actual GitHub plan. Keep its
@@ -46,15 +39,18 @@ was suggested but has not been approved, copied or published. All full source
 remains in this repository. No source files, database or secrets belong in a
 compiled Pages upload. Pages serves static frontend assets, not the Node API.
 
-## Supabase (not yet provisioned)
+## Supabase (project exists; schema integration pending)
 
-1. Create a dedicated Supabase project in the desired region. Do not apply these
-   migrations to another application's database. Keep database/admin secrets out
-   of the browser and repository.
-2. Apply in order: `supabase/migrations/001_core.sql`, `002_city_partner.sql`,
+1. The selected project is https://taevxcuqsanfyywkuygl.supabase.co. Fresh setup
+   encountered `profiles already exists`; inspect existing schema/functions/RLS
+   and establish table ownership before choosing forward migrations. Do not delete
+   data, silently skip required definitions or re-run the full fresh script.
+   Keep database/admin secrets out of the browser and repository.
+2. For an empty dedicated project the order is `supabase/migrations/001_core.sql`, `002_city_partner.sql`,
    `003_realtime.sql`, `004_schedule_avatar_upgrade.sql`, `005_signup_locale.sql`,
    `006_projects_visits.sql`, then `supabase/seed.sql`. SQL editor runs with privileged
-   project administration, not the anonymous browser key. With the Supabase CLI,
+   project administration, not the anonymous browser key. Existing installations
+   need a compatible forward upgrade after schema inspection. With the Supabase CLI,
    link the project then `supabase db push --include-seed` after reviewing the diff.
 3. Under Authentication enable email/password, choose email confirmation policy,
    configure production SMTP and the bilingual templates in `supabase/templates/`,
