@@ -1,0 +1,5 @@
+
+> lifecity-3d@0.2.0 check:config
+> node --import tsx scripts/check-config.ts
+
+[configuration] demo build configuration checked. Values are not displayed; provider connectivity is not verified.

@@ -1,6 +1,6 @@
-# Local release evidence — 0.1.0 preview, 2026-10-30
+# Local release evidence — 0.2.0 preview, 2026-10-30
 
-**Gate: locally verified, external release blocked.** This is working code,
+**Gate: locally verified, publication deferred; external setup incomplete.** This is working code,
 not a production launch claim. Mdaar's repository and published app were not
 changed. LifeCity sources and milestones are in a separate local Git repository.
 
@@ -10,12 +10,13 @@ changed. LifeCity sources and milestones are in a separate local Git repository.
 |---|---|---|
 | npm install / lockfile | Installed compatible dependencies, committed lockfile | package-lock.json |
 | npm run lint | Pass, zero warnings under configured TypeScript and hooks rules | evidence/lint.txt |
+| npm run check:config | Pass; public build settings and private-key exclusion, no values printed | evidence/config.txt |
 | npm run typecheck | Strict app/server/test TypeScript pass | evidence/typecheck.txt |
-| npm test | **29 passed**,8 files: domain/localization/hosting paths + real PostgreSQL/auth/RLS/integration/upgrade | evidence/tests.txt |
-| npm run test:e2e | **4 passed**, actual Chromium browser journeys | evidence/e2e.txt |
+| npm test | **41 passed**,11 files: domain/localization/configuration/hosting/focus + real PostgreSQL/auth/RLS/projects/visits/integration/upgrade | evidence/tests.txt |
+| npm run test:e2e | **6 passed**, actual Chromium browser journeys | evidence/e2e.txt |
 | npm run build | Pass, production app + generated service worker/manifest | evidence/build.txt |
 | npm audit --omit=dev | Zero reported production advisories at check time | evidence/npm-audit.json |
-| WCAG2 A/AA automated scan | **20 states, zero detected violations**, ten key screens in both themes | evidence/accessibility.json |
+| WCAG2 A/AA automated scan | **22 states, zero detected violations**, ten key screens plus a public visit, in both themes | evidence/accessibility.json; evidence/visits-accessibility.json |
 | Responsive/native UI | **20 viewport/route combinations, zero horizontal overflow or page exceptions**; ten English LTR screens; offline notice | evidence/ui-review.json |
 | Compiled PWA | Active SW; genuine192/512/maskable PNG icons; offline reload preserved40 coins; writes blocked; reconnect did not add rewards | evidence/pwa.json |
 | npm run build:github | Pass; `/LifeCity3D/` assets, manifest, security policy and404 fallback prepared | evidence/github-pages-build.json |
@@ -46,6 +47,28 @@ account cannot place the other account's item or see its private city. The signu
 preview tests complete tasks, buy/place a tree, retain English and state after
 refresh and prevent offline balance changes.
 
+The new guide journey completes a real test task, buys a20-coin tree and requires
+manual placement. It then records test-only self-reported custom activities,
+funds the800-coin house through40+760 contributions, reloads and recovers the
+exact project and inventory in a second authenticated browser. The house is not
+automatically placed. A later10-coin reservation is refunded once on cancellation
+without changing XP. The focus scene stays at seed stage before any minute is
+credited. Unit tests separately prove projected time cannot grow a plant or
+claim a verified hour bonus.
+
+Visit tests create an explicit link, read it without a session, verify exact
+projection keys and no owner identity, sign a distinct visitor in, send a single
+like/preset greeting, then revoke the link and verify subsequent reads fail. SQL
+checks cover rotation/expiry/delete and rejected writes, quoted prices, hostile
+amounts, direct grants and concurrent inventory completion. Compiled guest PWA
+checks reserve20, reload, cancel/refund to40, then verify offline reload retains40
+and cannot credit extra rewards.
+
+The owner-provided starter is a pinned optional Git submodule; its packages and
+server callbacks are not installed into LifeCity. Original configuration tests
+validate public-key format, private-key exclusion and Vite/Next variable mapping.
+See starter-template-integration.md for provenance and scope.
+
 This is not a test of a hosted Supabase project, real phone hardware or a literal
 PC shutdown. SQL timer fixtures adjust privileged timestamps instead of claiming
 a human really studied for60minutes. Test funding is not an application API.
@@ -58,8 +81,9 @@ JSON report includes calls, triangles, buffer size, DPR and frame counters from
 software WebGL2 Chromium in this cloud environment. Frame gaps can include idle
 demand-render time, and scripted input/CDP overhead is present. **No guarantee
 of30–60FPS on a phone** and no claim of a real-device performance certification.
-Inspect `evidence/ui/` for actual app screenshots. Advanced NPCs/seasons/weather
-and multiple room layouts remain optional later features.
+Inspect `evidence/ui/` for actual app screenshots. Automatic residents/moving cars were expressly cancelled by the owner.
+The owned plot starts empty and all buildings are placed manually. Weather/season
+visuals and multiple room layouts remain outside this release.
 
 ## External blockers — do not invent a URL
 

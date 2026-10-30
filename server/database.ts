@@ -84,7 +84,7 @@ export async function createLocalDatabase(options: DatabaseOptions = {}): Promis
         );
         CREATE INDEX IF NOT EXISTS local_auth_sessions_expiry ON local_auth.sessions(expires_at);
       `);
-      for (const name of ['migrations/001_core.sql', 'migrations/002_city_partner.sql', 'migrations/003_realtime.sql', 'migrations/004_schedule_avatar_upgrade.sql', 'migrations/005_signup_locale.sql', 'seed.sql']) {
+      for (const name of ['migrations/001_core.sql', 'migrations/002_city_partner.sql', 'migrations/003_realtime.sql', 'migrations/004_schedule_avatar_upgrade.sql', 'migrations/005_signup_locale.sql', 'migrations/006_projects_visits.sql', 'seed.sql']) {
         const applied = await tx.query('SELECT name FROM local_auth.migrations WHERE name=$1', [name]);
         if (applied.rows.length) continue;
         const sql = await readFile(`${projectRoot}/supabase/${name}`, 'utf8');

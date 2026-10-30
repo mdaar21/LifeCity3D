@@ -24,6 +24,7 @@ with sync_playwright() as p:
  page.set_viewport_size({'width':1440,'height':1000});page.goto(BASE+'/city',wait_until='networkidle');page.wait_for_timeout(800)
  before=page.evaluate('window.__LIFECITY_RENDER_METRICS__||null');canvas=page.locator('canvas').last
  if canvas.count():
+  canvas.scroll_into_view_if_needed()
   box=canvas.bounding_box();start=time.monotonic();page.mouse.move(box['x']+box['width']*.45,box['y']+box['height']*.45);page.mouse.down()
   for i in range(60):page.mouse.move(box['x']+box['width']*(.45+i/400),box['y']+box['height']*(.45+i/800));page.wait_for_timeout(12)
   page.mouse.up();elapsed=time.monotonic()-start;after=page.evaluate('window.__LIFECITY_RENDER_METRICS__||null')

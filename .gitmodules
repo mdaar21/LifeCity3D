@@ -1,0 +1,3 @@
+[submodule "references/starter-web-app-template"]
+	path = references/starter-web-app-template
+	url = https://github.com/billynoodle/starter-web-app-template.git

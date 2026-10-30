@@ -12,6 +12,12 @@ requested new repository (`createRepository`); local Git history is preserved.
 The owner's publication policy is **GitHub only**. A verified Pages artifact and
 deployment workflow are ready, but no app URL has been published.
 
+The owner-provided [starter template](docs/starter-template-integration.md) is
+pinned as an optional Git submodule under `references/`. LifeCity keeps its
+existing React/Vite build. No Next.js migration or root package replacement was
+performed. `npm run check:config` now validates public build configuration before
+bundling and keeps credential values out of its output.
+
 ## Run
 
 Node22.12+ (verified here with Node24), npm and the committed lockfile:
@@ -44,6 +50,16 @@ put a service-role/secret key in a `VITE_` variable or commit `.env`/`.data`.
 
 ## Implemented journeys
 
+- Guided first task, first20-coin tree purchase and manual placement, with saved
+  milestones and an optional account-scoped hide/reopen preference.
+- Building saving projects: server-quoted price, partial coin contributions,
+  staged illustration, exact cancellation refund and one inventory item on
+  completion. Buildings are never placed automatically.
+- Focus-session plant grows from credited minutes only; the estimated clock
+  cannot award growth, coins or the60-minute bonus.
+- Optional7-day revocable city visit links. Anonymous viewers see only exterior
+  geometry; signed-in visitors may send one like and preset greeting. No owner
+  identity, wallet, tasks, prayers, partner notes or interiors are shared.
 - Real configured email/password auth + recovery in Supabase adapter; local
   reference auth; secure logout; profile language/theme/digits/timezone/avatar.
 - Account-isolated server-authoritative wallet with negative balances, immutable
@@ -70,6 +86,7 @@ put a service-role/secret key in a `VITE_` variable or commit `.env`/`.data`.
 
 ```sh
 npm run lint
+npm run check:config
 npm run typecheck
 npm test
 npm run test:e2e

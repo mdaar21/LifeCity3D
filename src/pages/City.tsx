@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link,useSearchParams } from 'react-router-dom'
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, Grid2X2, Home, Maximize2, Move, Package, Plus, Redo2, RotateCw, ShoppingBag, Trash2, Undo2, X } from 'lucide-react'
 import { useGame } from '../lib/game'
 import { useLocale } from '../lib/locale'
@@ -10,11 +10,15 @@ import { WorldCanvas } from '../world/CityScene'
 import { footprint, isHouse, placementIssue } from '../world/building'
 import { useBuilder } from '../world/useBuilder'
 import { worldError } from '../world/messages'
+import FirstCityGuide from '../components/FirstCityGuide'
+import CitySharing from '../components/CitySharing'
 import '../world.css'
 
 export default function City() {
   const { state, loading, error, mutate, refresh, online } = useGame()
   const { t, number } = useLocale()
+  const [params]=useSearchParams()
+  const guided=useRef(false)
   const { draft, past, future, begin, edit, undo, redo, clear } = useBuilder()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [grid, setGrid] = useState(true)
@@ -24,7 +28,13 @@ export default function City() {
   const [notice, setNotice] = useState('')
   const [success, setSuccess] = useState(false)
   const [expanding, setExpanding] = useState(false)
-  useEffect(() => () => clear(), [clear])
+  useEffect(() => () => {clear();guided.current=false}, [clear])
+  useEffect(()=>{
+    if(guided.current||params.get('guide')!=='tree'||!state)return
+    const item=state.catalog.find(v=>v.id==='tree')
+    const inventory=state.inventory.find(v=>v.catalog_id==='tree'&&!state.placements.some(p=>p.inventory_id===v.id))
+    if(item&&inventory){guided.current=true;begin({inventoryId:inventory.id,item,x:0,z:0,rotation:0})}
+  },[params,state,begin])
   if (loading || !state) return <div className="page"><div className="panel world-loading" role="status">{error ? worldError(error, t) : t('نجهّز مدينتك…', 'Preparing your city…')}</div></div>
   const catalog = state.catalog.length ? state.catalog : CATALOG
   const available = state.inventory.filter(inv => !state.placements.some(p => p.inventory_id === inv.id) && !state.furniture.some(p => p.inventory_id === inv.id) && !catalog.find(item => item.id === inv.catalog_id)?.is_furniture)
@@ -58,6 +68,7 @@ export default function City() {
   }
   return <div className="page city-page">
     <div className="world-page-heading"><div><p className="world-eyebrow">{t('مساحتك، على مهل', 'YOUR WORLD, AT YOUR PACE')}</p><h1>{t('مدينتي', 'My city')} <span className="world-title-dot" /></h1><p className="muted">{t('كل إنجاز صغير، مكان جديد في عالمك.', 'Every small achievement makes room for something new.')}</p></div><Link to="/shop" className="button button-primary"><ShoppingBag size={18} />{t('زيارة المتجر', 'Visit shop')}</Link></div>
+    <FirstCityGuide compact/>
     <div className="world-layout">
       <div className="city-stage panel">
         <div className="world-stage-top"><span className="world-badge"><span />{t('حيّك الأول', 'Your first neighborhood')}</span><span className="world-badge">{t('المستوى', 'Level')} {number(levelFromXp(state.wallet.city_xp))} · <b dir="ltr">{number(state.world.size)} × {number(state.world.size)}</b></span></div>
@@ -84,6 +95,7 @@ export default function City() {
         <section className="panel world-land-card"><span className="world-land-icon"><Grid2X2 size={22} /></span><div><h3>{t('مساحة لأحلام أكبر', 'Space for bigger dreams')}</h3><p>{t('أضف ٤ بلاطات لكل جانب.', 'Add 4 tiles to each side.')}</p></div><button className="button button-secondary" onClick={() => setExpanding(!expanding)} disabled={state.world.size >= 32}>{state.world.size >= 32 ? t('أكبر مساحة', 'Maximum size') : t('توسعة', 'Expand')}</button>{expanding && <div className="world-expand-confirm"><p>{t('تكلفة التوسعة ١٬٠٠٠ عملة. ستزيد الأرض ٤ بلاطات في كل بُعد.', 'Expansion costs 1,000 coins and adds 4 tiles to each dimension.')}</p><button className="button button-primary" disabled={busy || !online || state.wallet.balance < 1000} onClick={expand}>{t('تأكيد التوسعة', 'Confirm expansion')}</button><button className="button button-ghost" onClick={() => setExpanding(false)}>{t('إلغاء', 'Cancel')}</button></div>}</section>
       </aside>
     </div>
+    <CitySharing/>
     {!online && <div className="world-notice" role="status">{t('غير متصل — يمكنك استكشاف المدينة وتعديل المعاينة. يتطلب الحفظ اتصالًا.', 'Offline — explore your city and adjust a preview. Saving requires a connection.')}</div>}
     {notice && <div className={`world-notice ${success ? 'success' : 'danger'}`} role="status">{notice}{!success && <button className="button button-ghost" onClick={() => void refresh()}>{t('تحديث', 'Refresh')}</button>}</div>}
     <div className="world-owned-summary"><h2>{t('عناصر مدينتك', 'City objects')} <span>{number(state.placements.length)}</span></h2>{state.placements.length > 0 ? <div className="world-object-list">{state.placements.map(placed => { const item = catalog.find(entry => entry.id === placed.catalog_id); return <button className={selectedId === placed.id ? 'active' : ''} key={placed.id} data-testid={`placement-${placed.id}`} onClick={() => selectPlacement(placed)} aria-label={`${item ? t(item.name_ar, item.name_en) : placed.catalog_id} X ${placed.x} Z ${placed.z}`}><span>{item ? t(item.name_ar, item.name_en) : placed.catalog_id}</span><small dir="ltr">{placed.x}, {placed.z} · {placed.rotation}°</small></button> })}</div> : <p className="muted">{t('أرضك تبدأ خالية. كل ما تبنيه هنا هو من إنجازك.', 'Your plot begins empty. Everything you build here comes from your progress.')}</p>}</div>

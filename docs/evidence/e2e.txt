@@ -1,23 +1,25 @@
 
-> lifecity-3d@0.1.0 test:e2e
+> lifecity-3d@0.2.0 test:e2e
 > playwright test
 
-[WebServer] (node:310179) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (node:324014) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
-[WebServer] (node:310268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (node:324041) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
-[WebServer] (node:310305) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (node:324052) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
-[WebServer] (node:310347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (node:324080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
 
-Running 4 tests using 1 worker
+Running 6 tests using 1 worker
 
-(node:310365) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:324099) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-  ✓  1 [chromium] › tests/e2e/demo.spec.ts:4:1 › guest demo remains local, preserves language and placements, and blocks offline writes (9.7s)
-  ✓  2 [chromium] › tests/e2e/persistence.spec.ts:24:1 › two browser contexts recover the exact purchased home, inventory, balance and rotation (10.5s)
-  ✓  3 [chromium] › tests/e2e/persistence.spec.ts:66:1 › an independent account has an empty city and cannot mutate another account inventory (5.4s)
-  ✓  4 [chromium] › tests/e2e/signup.spec.ts:3:1 › new local account keeps the language chosen before signup across reload (2.9s)
+  ✓  1 [chromium] › tests/e2e/additions.spec.ts:15:1 › first-city guide leads to manual planting; saved building project funds, completes and refunds honestly (15.9s)
+  ✓  2 [chromium] › tests/e2e/additions.spec.ts:32:1 › owner grants a city-only link; anonymous visitor reads, signed-in visitor reacts, owner revokes (9.4s)
+  ✓  3 [chromium] › tests/e2e/demo.spec.ts:4:1 › guest demo remains local, preserves language and placements, and blocks offline writes (8.7s)
+  ✓  4 [chromium] › tests/e2e/persistence.spec.ts:24:1 › two browser contexts recover the exact purchased home, inventory, balance and rotation (9.4s)
+  ✓  5 [chromium] › tests/e2e/persistence.spec.ts:66:1 › an independent account has an empty city and cannot mutate another account inventory (4.9s)
+  ✓  6 [chromium] › tests/e2e/signup.spec.ts:3:1 › new local account keeps the language chosen before signup across reload (2.4s)
 
-  4 passed (33.2s)
+  6 passed (55.8s)

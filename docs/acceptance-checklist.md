@@ -12,11 +12,14 @@ configuration. It is not a production launch or a claim of fifty expert votes.
 | Activities | Study1/minute and one20 bonus at60; persisted pause/resume,90s idle cap; room40/bed10/workout50; daily/weekly/once custom schedules | Optional push provider remains disabled |
 | Prayers | Five independent statuses; Fajr30, others20; explicit missed−100, pending/excused0, audited correction and timezone day | Logs are self-report, not objective verification |
 | Yuyi | Separate account, one-use expiring invite, scopes/caps/revocation, chosen signed amount, confirmations, messages/challenges and persistent garden memories | Requires configured accounts; guest preview cannot link partners |
-| Real3D | R3F island, original25-item procedural catalog, camera/picking/grid ghost, collision, rotate/move/remove, inventory, expansion, water and persisted8×8 interiors | Optional NPC/weather/seasons/multiple room layouts deferred; no mobile FPS guarantee |
+| Real3D | R3F island, original25-item procedural catalog, camera/picking/grid ghost, collision, rotate/move/remove, inventory, expansion, water and persisted8×8 interiors | Automatic NPCs/moving cars cancelled; weather/seasons/multiple rooms deferred; no mobile FPS guarantee |
+| First-city guide and saving projects | Saved task/tree/manual-placement milestones; server-priced partial funding, audited refund and one inventory completion | No automatic placement; cloud configuration still required for cross-device hosting |
+| Focus and city visits | Credited-time plant; optional7-day exterior-only link, anonymous viewing, account reactions and revocation; no private data projection | Guest mode cannot create public links; hosted provider unconfigured |
+| Linked starter | Optional pinned Git reference, current build preserved, original configuration validation and tests | Third-party source is not redistributed in the app |
 | Progress and screens | Player/city XP, achievements, dashboard, searchable shop, stats/calendar/ledger, privacy/data controls, landing/FAQ/pricing | No functioning real-money payment claim |
 | Offline PWA | Actual install icons, scoped SW, saved read-only state, disabled financial actions, no automatic offline awards | Cross-device continuity needs successful cloud saves |
 | Safety and tenancy | SQL RLS, protected RPC helpers, cookie auth/CSRF in local reference, account isolation, export/delete, forward migrations preserving data | Provider backups/restore drill, production operational review |
-| QA |29 tests across8 files,4 browser journeys, strict TS/lint/build,20 accessibility states and20 responsive cases; actual compiled Pages route/PWA checks | Automated checks do not replace real phone or hosted acceptance |
+| QA |41 tests across11 files,6 browser journeys, strict TS/lint/build,22 accessibility states and20 responsive cases; actual compiled Pages route/PWA checks | Automated checks do not replace real phone or hosted acceptance |
 | Delivery | Independent local Git history, setup docs, migration/seed, CI and GitHub Pages workflow, reproducible source/Pages artifacts | GitHub integration denies creating the selected new repository; no push or published app |
 
 See [release.md](release.md) for actual evidence and limitations and

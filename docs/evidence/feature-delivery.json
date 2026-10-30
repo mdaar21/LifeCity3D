@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0-preview",
+  "approved_additions": [
+    1,
+    2,
+    4,
+    5
+  ],
+  "cancelled_additions": [
+    3
+  ],
+  "manual_city_building_preserved": true,
+  "template": {
+    "url": "https://github.com/billynoodle/starter-web-app-template.git",
+    "commit": "2454e04ff92ef7d394bd69e7451dd16b67a125ab",
+    "integration": "optional pinned Git submodule; original configuration checks",
+    "framework_replaced": false,
+    "template_packages_installed": false
+  },
+  "checks": {
+    "unit_integration_configuration_tests": 41,
+    "test_files": 11,
+    "browser_journeys": 6,
+    "automated_accessibility_states": 22,
+    "detected_accessibility_violations": 0,
+    "responsive_cases": 20,
+    "horizontal_overflow_cases": 0,
+    "compiled_github_routes_and_pwa": true
+  },
+  "hosted_supabase_configured": false,
+  "published": false,
+  "publication_policy": "GitHub only; currently deferred by owner",
+  "mdaar_modified": false
+}

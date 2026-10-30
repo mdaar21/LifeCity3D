@@ -56,6 +56,11 @@ city_worlds, city_land_tiles, catalog_items, inventory_items, city_placements,
 furniture_placements, achievements, command_receipts, partner_links,
 partner_permissions, partner_actions, partner_messages, partner_challenges,
 yuyi_memories, sync_events. All exposed tables RLS enabled.
+Migration006 adds city_projects, city_shares and city_visit_reactions. Authenticated
+state includes projects[] and safe city_share metadata; it never includes a share
+token. getApi(mode).visit(code) calls the anonymous-safe city_visit RPC (local GET
+/api/visit). The public view uses an explicit allowlist, not GameSnapshot. Read
+docs/projects-visits-security.md for grants, projections and private retry receipts.
 
 ## Commands (all payloads validated server-side)
 task_complete {task_id}; task_create {title,reward,category,daily_limit};
@@ -73,6 +78,11 @@ daily_deduction_limit}; partner_adjust {owner_id,amount,reason?,note?,confirmed?
 partner_unlink {link_id}; partner_message {owner_id,message};
 partner_challenge {owner_id,title,reward}; partner_inspect {owner_id};
 delete_account {confirmation:'DELETE'}.
+Additional006 commands: project_start {catalog_id}; project_contribute
+{project_id,amount}; project_cancel {project_id}; share_enable {}; share_disable
+{}; visit_react {code,kind:'like'|'greeting',message?:preset}. All use the same
+authenticated game_command transaction/locks/idempotency boundary. Anonymous
+users can read city_visit by capability only, never issue a write command.
 
 All furniture inventory rows are separate owned items (not quantities). Place
 in city only non-furniture; interiors use furniture inside owned house/villa/

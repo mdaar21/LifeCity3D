@@ -24,3 +24,8 @@ with zero reported advisories is not a promise that software has no bugs.
 Supabase, GitHub and Netlify service use remains subject to the account holder's
 actual provider terms. No paid provider plan, domain registration or service
 subscription has been purchased in this implementation.
+
+The optional starter submodule remains attributed to its upstream and is not
+part of LifeCity's compiled or copied source distribution. The inspected commit
+has no explicit license file. See starter-template-integration.md for its URL,
+pin and scope; no third-party source relicensing is claimed.

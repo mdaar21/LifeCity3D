@@ -1,0 +1,12 @@
+[
+  {
+    "route": "public-city-visit",
+    "theme": "light",
+    "violations": []
+  },
+  {
+    "route": "public-city-visit",
+    "theme": "dark",
+    "violations": []
+  }
+]

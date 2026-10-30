@@ -5,6 +5,9 @@ here. Read docs/architecture.md and src/lib/types.ts before implementing a modul
 Owner's latest publication policy: **GitHub only**. Do not deploy to Netlify or
 another host. Keep the existing compatibility files as history, not active
 publication instructions. Never make a private repository public without consent.
+The linked starter under references/ is review-only, pinned and optional. Preserve
+the React/Vite application; do not execute that starter's cloning scripts or adopt
+its package/lockfile. See docs/starter-template-integration.md before changing it.
 Arabic (ar-SA) is default; English must be available. Do not mirror 3D coordinates.
 Use original procedural geometry, forest/moss/ivory/gold/sky/charcoal palette and
 commercially permitted fonts. No default read10pages / learn30min / personalproject tasks.
@@ -23,6 +26,13 @@ commercially permitted fonts. No default read10pages / learn30min / personalproj
 - Local reference server is development/testing only; no real email delivery claim.
 - Never commit secrets, service-role keys, passwords, auth tokens or .data.
 - No invented tests, cloud deployment, payment, notifications or backup claims.
+- Owner cancelled automatic city population (addition3): do not add autonomous
+  residents, moving cars or auto-placed buildings. All owned objects are placed
+  manually. First-city guide and project art are illustrations outside the world.
+- Projects reserve coins through the ledger; cancel refunds exactly once and
+  completion grants one inventory item, never automatic placement or early XP.
+- Public visits use city_visit's exterior-only allowlist. Never serialize a full
+  GameSnapshot, private profile/interiors or visitor identities into a shared view.
 
 ## Commands / coordination
 Root owns package installation, local services, test/build runs, Git and release.

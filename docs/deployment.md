@@ -21,7 +21,7 @@ git push -u origin main
 
 If an origin already exists, inspect it instead of overwriting it. Enable Pages
 with source **GitHub Actions**. `.github/workflows/pages.yml` runs lint, strict
-typecheck,29 unit/integration tests,4 browser tests, the production Pages build,
+typecheck,41 unit/integration/configuration tests,6 browser tests, the production Pages build,
 and the compiled guest route/PWA checks before publishing the artifact.
 Private repository Pages eligibility depends on the actual GitHub plan. Keep its
 visibility; do not purchase a plan or make it public as an automatic workaround.
@@ -52,7 +52,8 @@ compiled Pages upload. Pages serves static frontend assets, not the Node API.
    migrations to another application's database. Keep database/admin secrets out
    of the browser and repository.
 2. Apply in order: `supabase/migrations/001_core.sql`, `002_city_partner.sql`,
-   `003_realtime.sql`, `004_schedule_avatar_upgrade.sql`, `005_signup_locale.sql`, then `supabase/seed.sql`. SQL editor runs with privileged
+   `003_realtime.sql`, `004_schedule_avatar_upgrade.sql`, `005_signup_locale.sql`,
+   `006_projects_visits.sql`, then `supabase/seed.sql`. SQL editor runs with privileged
    project administration, not the anonymous browser key. With the Supabase CLI,
    link the project then `supabase db push --include-seed` after reviewing the diff.
 3. Under Authentication enable email/password, choose email confirmation policy,

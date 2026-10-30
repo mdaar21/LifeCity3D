@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { z } from 'zod';
-import type { CommandResponse, GameSnapshot, SessionUser } from '../src/lib/types.js';
+import type { CityVisit, CommandResponse, GameSnapshot, SessionUser } from '../src/lib/types.js';
 import { createLocalDatabase, type LocalDatabase } from './database.js';
 import { digestToken, hashPassword, randomToken, RateLimiter, readSessionCookie, sessionCookie, verifyPassword } from './security.js';
 
@@ -70,6 +70,7 @@ export async function createLocalServer(options: LocalServerOptions = {}) {
   ]));
   const authLimiter = new RateLimiter(options.authRateLimit ?? 25, 60_000);
   const commandLimiter = new RateLimiter(options.commandRateLimit ?? 180, 60_000);
+  const visitLimiter = new RateLimiter(60, 60_000);
 
   async function currentUser(request: IncomingMessage): Promise<SessionUser | null> {
     const token = readSessionCookie(request);
@@ -117,6 +118,13 @@ export async function createLocalServer(options: LocalServerOptions = {}) {
       }
       if (method === 'GET' && route === '/api/auth/user') {
         json(response, 200, {user: await currentUser(request)});
+        return;
+      }
+      if (method === 'GET' && route === '/api/visit') {
+        if (!visitLimiter.allow(request.socket.remoteAddress ?? 'unknown')) throw new HttpError(429, 'RATE_LIMIT');
+        const code=z.string().regex(/^[0-9a-f]{64}$/).parse(url.searchParams.get('code'));
+        const view=await database.asAnonymous(async tx=>(await tx.query<{view:CityVisit}>('SELECT public.city_visit($1) AS view',[code])).rows[0]?.view);
+        json(response,200,view);
         return;
       }
       if (method === 'POST' && (route === '/api/auth/register' || route === '/api/auth/login')) {
