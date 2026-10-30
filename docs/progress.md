@@ -31,10 +31,13 @@ history was pushed. The owner enabled Pages with GitHub Actions. The fresh run
 returned HTTP200 and opened the guest dashboard in a real browser. See
 evidence/live-pages.json. GitHub-only policy remains; Mdaar is unchanged.
 
-Remaining: hosted accounts are not active. The selected Supabase project is
-taevxcuqsanfyywkuygl; its existing profiles table conflicted with fresh setup.
-Inspect its schema and RLS before any migration, preserving existing data.
-Do not retry blind creation or delete tables. Supabase administrative tools were
-not available in the previous conversation. See HANDOFF.md for current facts,
-configuration names and the next acceptance test. Earlier creation/Pages failures
-are historical, not current blockers to the already published frontend.
+Continuation: gameplay now opens on a full-viewport city with persistent HUD,
+compact mission list, game-window menus, a build/inventory tray and separate
+shop/project tabs. One shell-owned heartbeat keeps study reconciliation active
+while navigating menus. See game-interface-review.md for current verification.
+
+Remaining: hosted accounts are not activated in the published frontend.
+Read-only Supabase inspection now confirms the selected project's LifeCity
+schema, required RPCs,25 catalog items and RLS on every public table. No reset
+or schema change was needed. Auth redirects, production build variables, email
+and actual hosted two-browser acceptance remain unverified; see HANDOFF.md.

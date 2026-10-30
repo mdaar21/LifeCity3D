@@ -10,7 +10,7 @@ async function login(page: Page, email: string): Promise<void> {
   await page.locator('input[type="email"]').fill(email);
   await page.locator('input[autocomplete="current-password"]').fill(E2E_PASSWORD);
   await page.getByRole('button', {name: 'Enter my city', exact: true}).click();
-  await expect(page).toHaveURL(/\/dashboard/);
+  await expect(page).toHaveURL(/\/city/);
 }
 
 async function snapshot(page: Page): Promise<GameSnapshot> {
@@ -36,6 +36,7 @@ test('two browser contexts recover the exact purchased home, inventory, balance 
     await pageA.getByTestId('purchase-house').click();
     await expect.poll(async () => (await snapshot(pageA)).wallet.balance).toBe(1200);
     await pageA.goto('/city');
+    await pageA.getByTestId('city-tool-inventory').click();
     await pageA.getByTestId('inventory-house').click();
     await pageA.getByTestId('placement-x').fill('4');
     await pageA.getByTestId('placement-z').fill('6');
@@ -46,15 +47,19 @@ test('two browser contexts recover the exact purchased home, inventory, balance 
     const home = saved.placements[0]!;
     expect(home).toMatchObject({catalog_id: 'house', x: 4, z: 6, rotation: 90, version: 1});
     expect(saved.inventory).toHaveLength(1);
+    await pageA.getByTestId('city-tool-objects').click();
     await expect(pageA.getByTestId(`placement-${home.id}`)).toContainText('4, 6 · 90°');
     await login(pageB, E2E_OWNER);
     await pageB.goto('/city');
+    await pageB.getByTestId('city-tool-objects').click();
     await expect(pageB.getByTestId(`placement-${home.id}`)).toContainText('4, 6 · 90°');
     expect((await snapshot(pageB)).wallet).toEqual(saved.wallet);
     expect((await snapshot(pageB)).inventory).toEqual(saved.inventory);
     expect((await snapshot(pageB)).placements).toEqual(saved.placements);
     await pageA.reload();
     await pageB.reload();
+    await pageA.getByTestId('city-tool-objects').click();
+    await pageB.getByTestId('city-tool-objects').click();
     await expect(pageA.getByTestId(`placement-${home.id}`)).toBeVisible();
     await expect(pageB.getByTestId(`placement-${home.id}`)).toBeVisible();
     expect((await snapshot(pageA)).wallet.balance).toBe(1200);

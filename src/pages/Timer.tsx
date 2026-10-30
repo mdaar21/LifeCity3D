@@ -16,22 +16,9 @@ export default function Timer() {
   const [summary, setSummary] = useState<StudySession | null>(null);
   const busyRef = useRef(false);
   const offset = useRef(0);
-  const mutateRef = useRef(mutate);
-  mutateRef.current = mutate;
   const session = state?.study_sessions.find(item => item.status !== 'finished');
-  const sessionId = session?.id;
-  const sessionStatus = session?.status;
   useEffect(() => { if (state?.server_now) offset.current = new Date(state.server_now).getTime() - Date.now(); }, [state?.server_now]);
   useEffect(() => { const id = window.setInterval(() => setNow(Date.now()), 1000); return () => window.clearInterval(id); }, []);
-  useEffect(() => {
-    if (!sessionId || sessionStatus !== 'running' || !online) return;
-    const id = window.setInterval(() => {
-      if (busyRef.current) return;
-      busyRef.current = true;
-      void mutateRef.current('study_heartbeat', {session_id: sessionId}).then(() => setError(false)).catch(() => setError(true)).finally(() => {busyRef.current = false;});
-    }, 30000);
-    return () => window.clearInterval(id);
-  }, [sessionId, sessionStatus, online]);
   async function command(action: string) {
     if (busyRef.current) return;
     busyRef.current = true; setBusy(true); setError(false);

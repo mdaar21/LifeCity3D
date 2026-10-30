@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link,useSearchParams } from 'react-router-dom'
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, Grid2X2, Home, Maximize2, Move, Package, Plus, Redo2, RotateCw, ShoppingBag, Trash2, Undo2, X } from 'lucide-react'
+import { ArrowDown, List, Share2, ArrowLeft, ArrowRight, ArrowUp, Check, Grid2X2, Home, Maximize2, Move, Package, Plus, Redo2, RotateCw, Trash2, Undo2, X } from 'lucide-react'
 import { useGame } from '../lib/game'
 import { useLocale } from '../lib/locale'
 import { CATALOG } from '../lib/catalog'
@@ -14,14 +14,15 @@ import FirstCityGuide from '../components/FirstCityGuide'
 import CitySharing from '../components/CitySharing'
 import '../world.css'
 
-export default function City() {
+export default function City({active=true}:{active?:boolean}) {
   const { state, loading, error, mutate, refresh, online } = useGame()
   const { t, number } = useLocale()
   const [params]=useSearchParams()
   const guided=useRef(false)
   const { draft, past, future, begin, edit, undo, redo, clear } = useBuilder()
   const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [grid, setGrid] = useState(true)
+  const [panel, setPanel] = useState<'inventory'|'objects'|'share'|null>(()=>params.get('panel')==='inventory'?'inventory':null)
+  const [grid, setGrid] = useState(false)
   const [perspective, setPerspective] = useState(false)
   const [resetKey, setResetKey] = useState(0)
   const [busy, setBusy] = useState(false)
@@ -29,11 +30,12 @@ export default function City() {
   const [success, setSuccess] = useState(false)
   const [expanding, setExpanding] = useState(false)
   useEffect(() => () => {clear();guided.current=false}, [clear])
+  useEffect(()=>{if(active&&params.get('panel')==='inventory')setPanel('inventory')},[active,params])
   useEffect(()=>{
     if(guided.current||params.get('guide')!=='tree'||!state)return
     const item=state.catalog.find(v=>v.id==='tree')
     const inventory=state.inventory.find(v=>v.catalog_id==='tree'&&!state.placements.some(p=>p.inventory_id===v.id))
-    if(item&&inventory){guided.current=true;begin({inventoryId:inventory.id,item,x:0,z:0,rotation:0})}
+    if(item&&inventory){guided.current=true;setPanel('inventory');begin({inventoryId:inventory.id,item,x:0,z:0,rotation:0})}
   },[params,state,begin])
   if (loading || !state) return <div className="page"><div className="panel world-loading" role="status">{error ? worldError(error, t) : t('نجهّز مدينتك…', 'Preparing your city…')}</div></div>
   const catalog = state.catalog.length ? state.catalog : CATALOG
@@ -41,7 +43,7 @@ export default function City() {
   const selected = state.placements.find(p => p.id === selectedId)
   const selectedItem = selected && catalog.find(item => item.id === selected.catalog_id)
   const issue = draft ? placementIssue(draft, state.placements, catalog, state.world.size) : null
-  const selectPlacement = (placement: Placement) => { if (busy) return; clear(); setSelectedId(placement.id); setNotice('') }
+  const selectPlacement = (placement: Placement) => { if (busy) return; clear(); setSelectedId(placement.id); setPanel('inventory'); setNotice('') }
   const commit = async () => {
     if (!draft || issue || busy) return
     setBusy(true); setNotice('')
@@ -66,18 +68,26 @@ export default function City() {
     catch (cause) { setSuccess(false); setNotice(worldError(cause, t)) }
     finally { setBusy(false) }
   }
-  return <div className="page city-page">
-    <div className="world-page-heading"><div><p className="world-eyebrow">{t('مساحتك، على مهل', 'YOUR WORLD, AT YOUR PACE')}</p><h1>{t('مدينتي', 'My city')} <span className="world-title-dot" /></h1><p className="muted">{t('كل إنجاز صغير، مكان جديد في عالمك.', 'Every small achievement makes room for something new.')}</p></div><Link to="/shop" className="button button-primary"><ShoppingBag size={18} />{t('زيارة المتجر', 'Visit shop')}</Link></div>
-    <FirstCityGuide compact/>
+  return <div className={`city-page immersive-city ${active ? 'is-playing' : ''}`}>
+    {active && <>
+      <div className="game-city-label"><span className="world-eyebrow">{t('عالمك الخاص', 'YOUR OWN WORLD')}</span><h1 aria-label={t('مدينتي','My city')}>{t('مدينتي', 'My city')}<span>{t('المستوى', 'LEVEL')} {number(levelFromXp(state.wallet.city_xp))}</span></h1></div>
+      <div className="game-city-guide"><FirstCityGuide compact/></div>
+      <nav className="game-build-tools" aria-label={t('أدوات المدينة', 'City tools')}>
+        {([{id:'inventory',icon:Package,label:t('البناء والمخزون','Build & inventory')},{id:'objects',icon:List,label:t('عناصر مدينتك','City objects')},{id:'share',icon:Share2,label:t('زيارات المدينة','City visits')}] as const).map(({id,icon:Icon,label})=><button key={id} aria-label={label} title={label} data-testid={`city-tool-${id}`} className={panel===id?'active':''} aria-expanded={panel===id} aria-controls="city-tool-panel" onClick={()=>setPanel(panel===id?null:id)}><Icon size={22}/><span>{label}</span>{id==='inventory'&&available.length>0&&<b>{number(available.length)}</b>}</button>)}
+      </nav>
+    </>}
     <div className="world-layout">
       <div className="city-stage panel">
-        <div className="world-stage-top"><span className="world-badge"><span />{t('حيّك الأول', 'Your first neighborhood')}</span><span className="world-badge">{t('المستوى', 'Level')} {number(levelFromXp(state.wallet.city_xp))} · <b dir="ltr">{number(state.world.size)} × {number(state.world.size)}</b></span></div>
+        <div className="world-stage-top" hidden><span className="world-badge"><span />{t('حيّك الأول', 'Your first neighborhood')}</span><span className="world-badge">{t('المستوى', 'Level')} {number(levelFromXp(state.wallet.city_xp))} · <b dir="ltr">{number(state.world.size)} × {number(state.world.size)}</b></span></div>
         <WorldCanvas placements={state.placements} catalog={catalog} size={state.world.size} draft={draft} valid={!issue} selectedId={selectedId} gridVisible={grid} perspective={perspective} resetKey={resetKey} onSelect={selectPlacement} onTile={(x, z) => { if (draft && !busy) edit({ x, z }) }} />
-        <div className="world-camera-tools"><button className={grid ? 'active' : ''} aria-label={t('إظهار أو إخفاء الشبكة', 'Toggle grid')} aria-pressed={grid} onClick={() => setGrid(!grid)}><Grid2X2 size={19} /></button><button aria-label={t('إعادة ضبط الكاميرا', 'Reset camera')} onClick={() => setResetKey(value => value + 1)}><Home size={19} /></button><button aria-label={t('تبديل منظور الكاميرا', 'Switch camera projection')} aria-pressed={perspective} onClick={() => setPerspective(!perspective)}><Maximize2 size={19} /></button></div>
+        {active && <div className="world-camera-tools"><button className={grid ? 'active' : ''} aria-label={t('إظهار أو إخفاء الشبكة', 'Toggle grid')} aria-pressed={grid} onClick={() => setGrid(!grid)}><Grid2X2 size={19} /></button><button aria-label={t('إعادة ضبط الكاميرا', 'Reset camera')} onClick={() => setResetKey(value => value + 1)}><Home size={19} /></button><button aria-label={t('تبديل منظور الكاميرا', 'Switch camera projection')} aria-pressed={perspective} onClick={() => setPerspective(!perspective)}><Maximize2 size={19} /></button></div>}
         <div className="world-stage-bottom"><span>{draft ? t('اختر بلاطة، عدّل الاتجاه، ثم ثبّت.', 'Choose a tile, rotate, then confirm.') : t('اسحب للدوران · قرّب بإصبعين · اختر عنصرًا لتعديله', 'Drag to orbit · Pinch to zoom · Select an object to edit')}</span><span className="world-compass" dir="ltr">{t('ش ↑', 'N ↑')}</span></div>
-        {!state.placements.length && !draft && <div className="world-empty-callout"><span>✦</span><strong>{t('هنا تبدأ حكاية مدينتك', 'Your city story begins here')}</strong><p>{available.length ? t('اختر عنصرًا من المخزون وامنحه مكانًا.', 'Choose an inventory item and give it a home.') : t('أكمل مهمة، اجمع عملات، وازرع أول شجرة.', 'Complete an activity, earn coins, and plant your first tree.')}</p></div>}
+        {active && !state.placements.length && !draft && !panel && <div className="world-empty-callout"><span>✦</span><strong>{t('هنا تبدأ حكاية مدينتك', 'Your city story begins here')}</strong><p>{available.length ? t('اختر عنصرًا من المخزون وامنحه مكانًا.', 'Choose an inventory item and give it a home.') : t('أكمل مهمة، اجمع عملات، وازرع أول شجرة.', 'Complete an activity, earn coins, and plant your first tree.')}</p></div>}
       </div>
-      <aside className="builder-sidebar">
+      {active && (panel || draft || selected) && <aside className="builder-sidebar game-build-panel" id="city-tool-panel" aria-label={t('لوحة أدوات المدينة','City tools panel')}>
+        <div className="game-build-panel-heading"><strong>{panel==='share'?t('زيارات المدينة','City visits'):panel==='objects'?t('عناصر مدينتك','City objects'):t('ورشة البناء','Build workshop')}</strong><button className="game-close" aria-label={t('إغلاق أدوات البناء','Close building tools')} onClick={()=>{setPanel(null);clear();setSelectedId(null)}}><X size={19}/></button></div>
+        {panel==='share' && <CitySharing/>}
+        {(panel==='inventory'||draft||selected) && <>
         <section className="panel builder-panel"><div className="world-panel-heading"><div><span className="world-eyebrow">{t('أفكارك أصبحت أماكن', 'MAKE ROOM FOR IDEAS')}</span><h2><Package size={19} /> {t('المخزون', 'Inventory')}</h2></div><span className="world-count" data-testid="inventory-count">{number(available.length)}</span></div>
           <p className="muted small">{t('العناصر المملوكة الجاهزة للبناء. الأثاث في وضع المنزل.', 'Owned items ready to place. Furniture belongs in home interiors.')}</p>
           <div className="world-inventory-list">{available.length ? available.map(inv => {
@@ -93,11 +103,12 @@ export default function City() {
         </section>}
         {selected && selectedItem && !draft && <section className="panel builder-panel"><div className="world-panel-heading"><h2>{t(selectedItem.name_ar, selectedItem.name_en)}</h2><button className="world-icon-button" aria-label={t('إلغاء التحديد', 'Deselect')} onClick={() => setSelectedId(null)}><X size={18} /></button></div><p className="muted" dir="ltr">X {number(selected.x)} · Z {number(selected.z)} · {selected.rotation}°</p><div className="world-selection-actions"><button className="button button-primary" onClick={() => begin({ inventoryId: selected.inventory_id, placementId: selected.id, expectedVersion: selected.version, item: selectedItem, x: selected.x, z: selected.z, rotation: selected.rotation })}><Move size={17} />{t('نقل / تدوير', 'Move / rotate')}</button>{isHouse(selectedItem) && <Link className="button button-secondary" to={`/interior/${selected.id}`}><Home size={17} />{t('دخول المنزل', 'Enter home')}</Link>}<button className="button button-ghost" disabled={busy || !online} onClick={remove}><Trash2 size={17} />{t('إعادة إلى المخزون', 'Return to inventory')}</button></div><p className="muted small">{t('الإزالة تعيد العنصر دون استرداد قيمته. أثاث المنزل يعود أيضًا إلى المخزون.', 'Removal recovers the item without a refund. Interior furniture also returns to inventory.')}</p></section>}
         <section className="panel world-land-card"><span className="world-land-icon"><Grid2X2 size={22} /></span><div><h3>{t('مساحة لأحلام أكبر', 'Space for bigger dreams')}</h3><p>{t('أضف ٤ بلاطات لكل جانب.', 'Add 4 tiles to each side.')}</p></div><button className="button button-secondary" onClick={() => setExpanding(!expanding)} disabled={state.world.size >= 32}>{state.world.size >= 32 ? t('أكبر مساحة', 'Maximum size') : t('توسعة', 'Expand')}</button>{expanding && <div className="world-expand-confirm"><p>{t('تكلفة التوسعة ١٬٠٠٠ عملة. ستزيد الأرض ٤ بلاطات في كل بُعد.', 'Expansion costs 1,000 coins and adds 4 tiles to each dimension.')}</p><button className="button button-primary" disabled={busy || !online || state.wallet.balance < 1000} onClick={expand}>{t('تأكيد التوسعة', 'Confirm expansion')}</button><button className="button button-ghost" onClick={() => setExpanding(false)}>{t('إلغاء', 'Cancel')}</button></div>}</section>
-      </aside>
+      </>}
+      {panel==='objects' && <>    <div className="world-owned-summary"><h2>{t('عناصر مدينتك', 'City objects')} <span>{number(state.placements.length)}</span></h2>{state.placements.length > 0 ? <div className="world-object-list">{state.placements.map(placed => { const item = catalog.find(entry => entry.id === placed.catalog_id); return <button className={selectedId === placed.id ? 'active' : ''} key={placed.id} data-testid={`placement-${placed.id}`} onClick={() => selectPlacement(placed)} aria-label={`${item ? t(item.name_ar, item.name_en) : placed.catalog_id} X ${placed.x} Z ${placed.z}`}><span>{item ? t(item.name_ar, item.name_en) : placed.catalog_id}</span><small dir="ltr">{placed.x}, {placed.z} · {placed.rotation}°</small></button> })}</div> : <p className="muted">{t('أرضك تبدأ خالية. كل ما تبنيه هنا هو من إنجازك.', 'Your plot begins empty. Everything you build here comes from your progress.')}</p>}</div></>}
+      </aside>}
     </div>
-    <CitySharing/>
-    {!online && <div className="world-notice" role="status">{t('غير متصل — يمكنك استكشاف المدينة وتعديل المعاينة. يتطلب الحفظ اتصالًا.', 'Offline — explore your city and adjust a preview. Saving requires a connection.')}</div>}
-    {notice && <div className={`world-notice ${success ? 'success' : 'danger'}`} role="status">{notice}{!success && <button className="button button-ghost" onClick={() => void refresh()}>{t('تحديث', 'Refresh')}</button>}</div>}
-    <div className="world-owned-summary"><h2>{t('عناصر مدينتك', 'City objects')} <span>{number(state.placements.length)}</span></h2>{state.placements.length > 0 ? <div className="world-object-list">{state.placements.map(placed => { const item = catalog.find(entry => entry.id === placed.catalog_id); return <button className={selectedId === placed.id ? 'active' : ''} key={placed.id} data-testid={`placement-${placed.id}`} onClick={() => selectPlacement(placed)} aria-label={`${item ? t(item.name_ar, item.name_en) : placed.catalog_id} X ${placed.x} Z ${placed.z}`}><span>{item ? t(item.name_ar, item.name_en) : placed.catalog_id}</span><small dir="ltr">{placed.x}, {placed.z} · {placed.rotation}°</small></button> })}</div> : <p className="muted">{t('أرضك تبدأ خالية. كل ما تبنيه هنا هو من إنجازك.', 'Your plot begins empty. Everything you build here comes from your progress.')}</p>}</div>
+    {active && !online && <div className="world-notice" role="status">{t('غير متصل — يمكنك استكشاف المدينة وتعديل المعاينة. يتطلب الحفظ اتصالًا.', 'Offline — explore your city and adjust a preview. Saving requires a connection.')}</div>}
+    {active && notice && <div className={`world-notice ${success ? 'success' : 'danger'}`} role="status">{notice}{!success && <button className="button button-ghost" onClick={() => void refresh()}>{t('تحديث', 'Refresh')}</button>}</div>}
+
   </div>
 }

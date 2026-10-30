@@ -13,7 +13,7 @@ export default function Auth() {
   const location = useLocation();
   const updating = location.pathname === '/reset-password';
   const from = (location.state as {from?: unknown} | null)?.from;
-  const returnPath = typeof from === 'string' && from.startsWith('/') && !from.startsWith('//') && !from.startsWith('/\\') ? from : '/dashboard';
+  const returnPath = typeof from === 'string' && from.startsWith('/') && !from.startsWith('//') && !from.startsWith('/\\') ? from : '/city';
   const [view, setView] = useState<'signin' | 'signup' | 'reset'>('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

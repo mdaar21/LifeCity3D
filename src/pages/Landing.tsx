@@ -26,7 +26,7 @@ export default function Landing() {
   const demo = async () => {
     if (demoBusy) return;
     setDemoBusy(true); setDemoError(false);
-    try { await auth.enterDemo(); void navigate('/dashboard'); }
+    try { await auth.enterDemo(); void navigate('/city'); }
     catch { setDemoError(true); }
     finally { setDemoBusy(false); }
   };

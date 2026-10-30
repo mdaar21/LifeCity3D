@@ -7,8 +7,9 @@ transactional RPCs, RLS and a real installable PWA.
 
 The frontend is published at https://mdaar21.github.io/LifeCity3D/ through GitHub
 Pages. Guest entry has been verified in the real public app. Hosted Supabase
-accounts are not active: the selected project's existing profiles table needs
-inspection before a data-preserving setup. This is not a fully launched
+accounts are not activated in the published build. Read-only inspection now
+confirms the LifeCity schema/RPCs and RLS; live Auth/build configuration and
+hosted multi-device acceptance still need verification. This is not a fully launched
 commercial cloud service. Read [the current handoff](docs/HANDOFF.md) before
 continuing; older local release records describe earlier deployment blockers.
 
@@ -17,6 +18,18 @@ pinned as an optional Git submodule under `references/`. LifeCity keeps its
 existing React/Vite build. No Next.js migration or root package replacement was
 performed. `npm run check:config` now validates public build configuration before
 bundling and keeps credential values out of its output.
+
+## Game interface continuation
+
+Play opens directly in the3D city. The HUD keeps coins, player level and save
+status visible; the dock opens Missions, Focus and Shop in game windows over
+the same city. More contains prayers, Yuyi, achievements, journey/projects,
+interiors and settings. Build/inventory, placed objects and visits have compact
+city tool trays. The shop separates purchasable items from saving projects.
+Escape closes a game window; the game menu traps keyboard focus and returns it
+on close. Study reconciliation continues while changing game menus.
+See [the interface review](docs/game-interface-review.md) for screenshots,
+validation and remaining hosted-account limitations.
 
 ## Run
 

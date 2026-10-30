@@ -11,3 +11,5 @@ coverage/
 .netlify/
 *.log
 .DS_Store
+
+work/

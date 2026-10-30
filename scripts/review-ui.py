@@ -10,7 +10,7 @@ with sync_playwright() as p:
  context=b.new_context(viewport={'width':1440,'height':1000},device_scale_factor=1)
  page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(BASE+'/',wait_until='networkidle');page.wait_for_timeout(1000);page.screenshot(path=str(OUT/'landing-desktop.png'))
- page.get_by_role('button',name='جرّبها أولًا',exact=True).click();page.wait_for_url('**/dashboard');page.wait_for_selector('[data-testid="wallet-balance"]');page.wait_for_timeout(800)
+ page.get_by_role('button',name='جرّبها أولًا',exact=True).click();page.wait_for_url('**/city');page.wait_for_selector('[data-testid="wallet-balance"]');page.wait_for_timeout(800)
  for width in [1440,390]:
   page.set_viewport_size({'width':width,'height':1000 if width>500 else 844})
   for route in ['dashboard','city','tasks','timer','shop','prayers','yuyi','stats','settings','interior']:
@@ -31,13 +31,13 @@ with sync_playwright() as p:
   performance={'before':before,'after':after,'interactionSeconds':elapsed,'renderedFramesDuringInteraction':(after['renderedFrames']-before['renderedFrames']) if before and after else None,'limits':'Software WebGL Chromium in cloud, synthetic drag; not real-mobile FPS.'}
  else:performance={'noCanvas':True}
  # Every key screen must switch to English and keep the world grid orientation.
- page.locator('.language-switch').click();page.wait_for_function('()=>document.documentElement.lang==="en"');page.wait_for_timeout(1200)
+ page.get_by_role('button',name='قائمة اللعبة',exact=True).last.click();page.locator('.language-switch').click();page.keyboard.press('Escape');page.wait_for_function('()=>document.documentElement.lang==="en"');page.wait_for_timeout(1200)
  english=[]
  for route in ['dashboard','city','tasks','timer','shop','prayers','yuyi','stats','settings','interior']:
   page.goto(BASE+'/'+route,wait_until='networkidle');page.wait_for_selector('#main-content');page.wait_for_timeout(180);english.append({'route':route,'direction':page.locator('html').get_attribute('dir'),'heading':page.locator('h1').first.inner_text()})
  page.goto(BASE+'/tasks');page.wait_for_selector('#main-content');page.screenshot(path=str(OUT/'tasks-english.png'))
  # Offline blocks writes; no queued financial request is silently submitted.
- context.set_offline(True);page.wait_for_function('()=>document.querySelector(".save-state")?.textContent.includes("Offline")');offlineText=page.locator('body').inner_text();offline='You are offline' in offlineText or 'Offline' in offlineText
+ context.set_offline(True);page.wait_for_function('()=>document.querySelector(".game-save")?.textContent.includes("Offline")');offlineText=page.locator('body').inner_text();offline='You are offline' in offlineText or 'Offline' in offlineText
  context.set_offline(False)
  b.close()
 report={'checks':checks,'english':english,'offlineNotice':offline,'pageErrors':errors,'renderer':performance}
