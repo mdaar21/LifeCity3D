@@ -1,0 +1,25 @@
+{
+  "published": true,
+  "revision": "a9b47997bfef657fe66d382fb3e8b6da2ec58cfc",
+  "pullRequest": 6,
+  "pagesRun": 41231861062,
+  "edgeFunction": "world-command",
+  "edgeVersion": 2,
+  "testsPassed": 116,
+  "browserCasesPassed": 20,
+  "visualStagesPublished": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "paidSpecies": 14,
+  "cropRecipes": 8,
+  "migrationRequired": false,
+  "remaining": [
+    "complete paid recoloring",
+    "additional paid road, lighting and architecture variants"
+  ]
+}

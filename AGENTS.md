@@ -104,3 +104,11 @@ codex/stylized-visual-overhaul and is not included in that publication.
 Supabase public client enabled=true. Hosted password login/cloud persistence and
 allowed confirmation/recovery destinations were verified; actual email delivery
 has not been proved. Preserve email confirmation and separate guest saves.
+
+## Latest owner — publish the completed batches
+The owner explicitly approved publication. PR6/main a9b4799 and Pages41231861062
+succeeded. Both visual batches and paid vegetation/agriculture are now live;
+world-command v2 is compatible.116 tests and20 browser cases passed, followed by
+real public catalog/farm verification. Evidence: docs/evidence/content-publication.
+Earlier no-publication notes are historical for this released increment. Future
+paid recoloring and additional variants remain unfinished. Preserve all saves.

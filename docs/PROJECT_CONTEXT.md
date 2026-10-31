@@ -1,5 +1,16 @@
 # LifeCity3D — focused implementation context
 
+## Latest owner — content publication complete
+- Owner explicitly approved publishing both visual batches and horticulture.
+- PR6/main a9b4799 published successfully in Pages41231861062.116 tests and20
+  browser cases passed. All six visual stages,14 species and8 crop recipes live.
+- Compatible world-command v2 deployed first. Real hosted trusted purchases,
+  idempotency, paid planting/watering and growth guard passed. Public mobile
+  catalog and saved paid farm restoration passed. Temporary fixture removed.
+- Evidence: docs/evidence/content-publication. No data reset or new migration.
+- Paid recoloring and additional road/light/architecture variants remain next.
+  Earlier unpublished/deferred statements below describe historical checkpoints.
+
 ## Latest owner — activate login only
 - Owner requested live login activation. Narrow Auth PR5 merged into main22c1098;
   Pages run41230810738 succeeded (96 tests/14 browser cases). The REAL public
