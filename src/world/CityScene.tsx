@@ -7,6 +7,8 @@ import { CATALOG } from '../lib/catalog'
 import { useLocale } from '../lib/locale'
 import { footprint, type DraftPlacement } from './building'
 import { ProceduralModel, SCENE_BACKGROUND } from './ProceduralModel'
+import {CoastalBackdrop} from './CoastalBackdrop'
+import {roadConnections} from './road-visuals'
 import {WorldRealms} from './WorldRealms'
 import '../world.css'
 
@@ -177,6 +179,7 @@ function CameraRig({ size, perspective, resetKey, interior }: { size: number; pe
 }
 
 function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,valid=true,gridVisible=false,interior=false,onTile,onHoverTile,onSelect,readOnly=false,bare=false,originX=0}:SceneProps){
+ const roads=useMemo(()=>roadConnections(placements,catalog),[placements,catalog]);
  const tileEvent=(event:ThreeEvent<PointerEvent|MouseEvent>,hover=false)=>{
   event.stopPropagation();const x=Math.floor(event.point.x-originX+size/2),z=Math.floor(event.point.z+size/2);
   if(x<0||z<0||x>=size||z>=size)return;
@@ -202,7 +205,7 @@ function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,va
       const [w, d] = footprint(item, placement.rotation)
       return <group key={placement.id} position={[placement.x + w / 2 - size / 2, 0.04, placement.z + d / 2 - size / 2]} onClick={readOnly ? undefined : event => { event.stopPropagation(); if (draft) tileEvent(event); else onSelect?.(placement) }}>
         {selectedId === placement.id && <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.007, 0]}><planeGeometry args={[w + 0.12, d + 0.12]} /><meshBasicMaterial color="#f5cd77" transparent opacity={0.72} depthWrite={false} /></mesh>}
-        <group rotation={[0, placement.rotation * Math.PI / 180, 0]}><ProceduralModel item={item} ghost={draft?.placementId === placement.id} valid /></group>
+        <group rotation={[0, placement.rotation * Math.PI / 180, 0]}><ProceduralModel item={item} variation={placement.id} connections={roads.get(placement.id)} ghost={draft?.placementId === placement.id} valid /></group>
       </group>
     })}
     {draft && (() => {
@@ -226,7 +229,7 @@ function SceneContents(props:SceneProps){
   <ambientLight intensity={1.5}/><hemisphereLight args={['#f3f7eb','#6c8876',1.5]}/>
   <directionalLight position={[12,22,8]} intensity={2.5} castShadow shadow-mapSize={[1024,1024]} shadow-camera-left={-45} shadow-camera-right={45} shadow-camera-top={45} shadow-camera-bottom={-45} shadow-bias={-.0008} shadow-normalBias={.04}/>
   <CameraRig size={neighbor?Math.max(size,neighbor.size)*1.85:size} perspective={perspective} resetKey={resetKey} interior={interior}/>
-  {neighbor&&<mesh rotation={[-Math.PI/2,0,0]} position={[0,-.4,0]} receiveShadow><planeGeometry args={[180,180]}/><meshStandardMaterial color="#a5d4d6" roughness={.7}/></mesh>}
+  {neighbor&&<CoastalBackdrop/>}
   <group key={realm} position={[origin,0,0]}><PlotContents {...props} bare={!!neighbor} originX={origin}/></group>
   {neighbor&&<group key={realm==='main'?'yuyi':'main'} position={[otherOrigin,0,0]}><PlotContents placements={neighbor.placements} catalog={props.catalog} size={neighbor.size} bare originX={otherOrigin} readOnly={props.readOnly} onTile={()=>onRealm?.(realm==='main'?'yuyi':'main')} onSelect={()=>onRealm?.(realm==='main'?'yuyi':'main')}/></group>}
  </>;

@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { Building2, CheckCheck, CloudOff, Coins, Focus, Heart, House, LayoutDashboard, ListChecks, Menu, MoonStar, Settings, ShoppingBag, TrendingUp, X } from 'lucide-react';
+import { Building2, Hammer, Route as RoadIcon, Trees, CheckCheck, CloudOff, Coins, Focus, Heart, House, LayoutDashboard, ListChecks, Menu, MoonStar, Settings, ShoppingBag, TrendingUp, X } from 'lucide-react';
 import { useGame } from '../lib/game';
 import { useLocale } from '../lib/locale';
 import { levelFromXp } from '../lib/rules';
@@ -10,12 +10,15 @@ import {appPath} from '../lib/paths';
 import {useMoney} from '../lib/useMoney';
 import { useStudyHeartbeat } from '../lib/useStudyHeartbeat';
 import '../game-shell.css';
+import '../stylized-game.css';
+import {useWorldUI} from '../world/useWorldUI';
 
 export default function AppLayout() {
   useStudyHeartbeat();
   const { state, mode, saveStatus, online, error, refresh } = useGame();
   const { t, number, language, setLanguage } = useLocale();
   const {format,currency}=useMoney();
+  const studioOpen=useWorldUI(s=>s.open),studioTab=useWorldUI(s=>s.tab);
   const location = useLocation();
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
@@ -86,6 +89,7 @@ export default function AppLayout() {
     {activeStudy && location.pathname !== '/timer' && <Link to="/timer" className="game-focus-pill" data-testid="active-focus"><Focus size={17}/><span>{activeStudy.status === 'running' ? t('جلسة تركيز مستمرة', 'Focus session running') : t('جلسة تركيز متوقفة', 'Focus session paused')}</span><b>{number(activeStudy.credited_minutes)} {t('د', 'min')}</b></Link>}
     <nav className="game-dock" aria-label={t('التنقل الرئيسي', 'Main navigation')}>
       {primary.map(({path,icon:Icon,label,hint}) => <NavLink ref={path === '/city' ? cityLink : undefined} key={path} to={path} className={({isActive}) => `game-dock-item ${isActive ? 'active' : ''}`}><span className="game-dock-icon"><Icon size={23}/>{path==='/tasks'&&state?.approved_tasks&&<b className="game-mission-count" aria-label={t('١٦ مهمة وتحدّي','16 tasks and milestones')}>{number(state.approved_tasks.catalog.length)}</b>}{path === '/timer' && activeStudy?.status === 'running' && <i/>}</span><strong>{label}</strong><small>{hint}</small></NavLink>)}
+      {([{tab:'build',icon:Hammer,ar:'البناء',en:'Build'},{tab:'networks',icon:RoadIcon,ar:'الطرق',en:'Roads'},{tab:'residents',icon:Trees,ar:'الطبيعة',en:'Greenery'}] as const).map(({tab,icon:Icon,ar,en})=><button key={tab} className="game-dock-item is-tool" aria-label={t(ar,en)} aria-pressed={isCity&&studioOpen&&studioTab===tab} onClick={()=>{navigate('/city');useWorldUI.getState().set({open:true,tab,replay:null,...(tab==='networks'?{overlay:'road'}:{})});}}><span className="game-dock-icon"><Icon size={22}/></span><strong>{t(ar,en)}</strong><small>{t('أدوات العالم','WORLD TOOLS')}</small></button>)}
       <button className={`game-dock-item ${menu ? 'active' : ''}`} aria-label={t('قائمة اللعبة', 'Game menu')} aria-haspopup="dialog" onClick={() => setMenu(true)}><span className="game-dock-icon"><Menu size={23}/></span><strong>{t('المزيد', 'More')}</strong><small>{t('مساحاتك', 'YOUR SPACES')}</small></button>
     </nav>
     <Modal open={menu} onClose={() => setMenu(false)} title={t('قائمة اللعبة', 'Game menu')}>

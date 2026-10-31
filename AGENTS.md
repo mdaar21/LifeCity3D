@@ -74,3 +74,11 @@ master prompt and all20 expansions. Fix stale PWA update delivery/discoverabilit
 first without deleting guest saves, then continue all remaining approved systems.
 The paused-scope paragraphs above are historical. Do not claim20-feature completion
 until real operations and tests exist. Keep Auth as the later feature stage.
+
+## Latest owner — visual batches supersede the brief publication request
+Implement the uploaded visual design book in two batches. Current task is BATCH1:
+stages1–3 (HUD/city, asset families/roads/nature/coast, paid construction/interiors).
+No publishing. Prior Pages run finished before cancellation; do not roll it back.
+Read docs/PROJECT_CONTEXT.md and only relevant sources. Preserve all features,
+financial authority, existing data and applied migrations. No new dependencies or
+backend changes for visual work. Keep reports short; never claim all V6 complete.

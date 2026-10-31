@@ -1,5 +1,16 @@
 # Changelog
 
+## Visual BATCH1 — local review, unpublished — 2026-10-31
+
+- Preserve the existing game; add navy/cream HUD, working build/roads/greenery
+  shortcuts and 44px dock targets.
+- Upgrade original paid architectural assets, merged plants, connected roads,
+  coastline and construction equipment derived from actual paid stages.
+- Add saved-stage timeline, explicit building/floor focus and camera-aware
+  cutaway walls while retaining furniture, footprints and paid material choices.
+- No dependencies, financial/backend changes or Supabase migrations.
+  See docs/evidence/visual-batch1/README.md for checks and remaining BATCH2.
+
 ## PWA delivery repair — 2026-10-31
 
 - Reproduce the old cached3-task client with actual compiled releases.

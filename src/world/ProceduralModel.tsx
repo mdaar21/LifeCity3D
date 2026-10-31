@@ -1,12 +1,15 @@
 import type { ReactNode } from 'react'
 import { Color } from 'three'
+import {ArchitectureAsset,StylizedPlant} from './StylizedAssets'
+import {ConnectedRoad} from './ConnectedRoad'
+import type {RoadConnections} from './road-visuals'
 import type { CatalogItem } from '../lib/types'
 
-interface ModelProps { item: CatalogItem; ghost?: boolean; valid?: boolean }
+interface ModelProps { item: CatalogItem; ghost?: boolean; valid?: boolean; variation?:string; connections?:RoadConnections }
 const palette = { forest: '#315e49', moss: '#73945c', ivory: '#f6f0d9', gold: '#e1b45c', roof: '#567a72', dark: '#263e3a', glass: '#a6d7df', wood: '#a77850' }
 
 /** Original procedural assets: all dimensions are expressed in owned grid tiles. */
-export function ProceduralModel({ item, ghost = false, valid = true }: ModelProps) {
+export function ProceduralModel({ item, ghost = false, valid = true, variation=item.id, connections }: ModelProps) {
   const color = (value: string) => ghost ? (valid ? '#75d9a0' : '#ed7880') : value
   const material = (value: string, extra: object = {}) => <meshStandardMaterial color={color(value)} roughness={0.83} transparent={ghost} opacity={ghost ? 0.58 : 1} {...extra} />
   const box = (position: [number, number, number], scale: [number, number, number], shade: string, key?: string) => <mesh key={key} position={position} castShadow receiveShadow><boxGeometry args={scale} />{material(shade)}</mesh>
@@ -29,6 +32,9 @@ export function ProceduralModel({ item, ghost = false, valid = true }: ModelProp
     {[-0.27, 0.27].map(v => box([v, 0.14, 0], [0.055, 0.28, 0.24], palette.dark, `leg${v}`))}
   </group>
   const model = item.model.toLowerCase()
+  if(['house','villa','apartment','skyscraper','palace'].includes(model)){const family=model==='house'?'home':model==='skyscraper'?'tower':model as 'villa'|'apartment'|'palace';return <ArchitectureAsset family={family} width={Math.max(.7,item.footprint_x*.8)} depth={Math.max(.7,item.footprint_z*.78)} height={model==='skyscraper'?5.4:model==='palace'?2.35:model==='apartment'?2.65:model==='villa'?1.65:1.2} ghost={ghost} valid={valid}/>;}
+  if(model==='tree')return <StylizedPlant seed={variation} ghost={ghost} valid={valid}/>;
+  if(model.includes('road')||model.includes('path'))return <ConnectedRoad connections={connections} path={model.includes('path')} ghost={ghost} valid={valid}/>;
   let content: ReactNode
   if (model.includes('road') || model.includes('path')) {
     content = <>{box([0, 0.035, 0], [0.98, 0.07, 0.98], model.includes('path') ? '#d4c3a3' : '#61716d')}{[-0.35, 0, 0.35].map(z => box([0, 0.075, z], [0.035, 0.006, 0.16], '#f4e8b7', `line${z}`))}{[-0.45, 0.45].map(x => box([x, 0.065, 0], [0.055, 0.065, 0.98], '#a9b3a7', `curb${x}`))}</>
@@ -51,7 +57,7 @@ export function ProceduralModel({ item, ghost = false, valid = true }: ModelProp
     content = lamp()
   } else if (model.includes('park') || model.includes('garden') || model.includes('plaza')) {
     const w = item.footprint_x, d = item.footprint_z
-    content = <>{box([0, 0.035, 0], [w * 0.96, 0.07, d * 0.96], '#89a871')}{box([0, 0.079, 0], [w * 0.95, 0.025, 0.38], '#d2c6aa')}{tree(-w * 0.28, -d * 0.25, 0.9)}{tree(w * 0.28, d * 0.25, 0.7, model.includes('garden'))}<group position={[0, 0, d * 0.29]}>{bench()}</group>{lamp(w * 0.3, -d * 0.3)}</>
+    content = <>{box([0, 0.035, 0], [w * 0.96, 0.07, d * 0.96], '#89a871')}{box([0, 0.079, 0], [w * 0.95, 0.025, 0.38], '#d2c6aa')}<group position={[-w*.28,0,-d*.25]} scale={.65}><StylizedPlant kind="palm" seed={variation} ghost={ghost} valid={valid}/></group><group position={[w*.28,0,d*.25]} scale={.7}><StylizedPlant kind={model.includes('garden')?'flowering':'shade'} seed={variation+'park'} ghost={ghost} valid={valid}/></group><group position={[0, 0, d * 0.29]}>{bench()}</group>{lamp(w * 0.3, -d * 0.3)}</>
   } else if (model.includes('sofa')) {
     content = <>{box([0, 0.25, 0], [1.72, 0.37, 0.75], '#cd9c86')}{box([0, 0.52, -0.27], [1.72, 0.45, 0.2], '#c3917d')}{[-0.78, 0.78].map(x => box([x, 0.43, 0.02], [0.19, 0.36, 0.78], '#bd8977', `arm${x}`))}{[-0.4, 0.4].map(x => box([x, 0.46, 0.06], [0.63, 0.11, 0.5], '#e2b8a0', `cushion${x}`))}</>
   } else if (model.includes('bed')) {
@@ -82,4 +88,4 @@ export function ProceduralModel({ item, ghost = false, valid = true }: ModelProp
 }
 
 // Reuse one calm background color for all scenes and previews.
-export const SCENE_BACKGROUND = new Color('#dce9e1')
+export const SCENE_BACKGROUND = new Color('#c7e1e4')

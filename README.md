@@ -20,6 +20,15 @@ existing React/Vite build. No Next.js migration or root package replacement was
 performed. `npm run check:config` now validates public build configuration before
 bundling and keeps credential values out of its output.
 
+## Visual upgrade checkpoint — unpublished
+
+BATCH1 stages1–3 build on the existing world release: compact game HUD, original
+procedural assets/road joins, paid construction and camera-aware cutaway interiors.
+See [batch evidence](docs/evidence/visual-batch1/README.md). BATCH2 stages4–6
+remain; this branch has not been deployed. Wallets, purchases and saved transforms
+retain their existing authority. Full V6 status remains partial in
+[the world-systems register](docs/v6/WORLD-SYSTEMS.md).
+
 ## Ultimate V6 continuation — foundation and exact16 tasks
 
 The owner-approved complete spec is preserved under docs/specs. The current
@@ -31,8 +40,8 @@ Actual password-JWT login/cloud saving was checked with a disposable confirmed
 fixture in two independent browsers; real email confirmation/recovery remains
 unverified and the production client flag stays disabled pending Auth URL setup.
 
-**The exact16 tasks are implemented and tested.** All20 expansion features remain
-pending and have been resumed by the owner. This increment is published and
+**The exact16 tasks are implemented and tested.** The20 expansion cores are partially implemented; their remaining acceptance
+and other master-prompt gaps are tracked in docs/v6/WORLD-SYSTEMS.md. This increment is published and
 [verified in the real guest game](docs/evidence/live-tasks-publication.json). Auth work
 is explicitly deferred. See [task release evidence](docs/v6/RELEASE-tasks.md).
 **V6 is incomplete.** See [the complete status register](docs/v6/STATUS.md),
