@@ -2,14 +2,17 @@ import { Component, Suspense, useEffect, useMemo, useRef, useState, type Compone
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import { OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
 import { InstancedMesh, Object3D, PCFSoftShadowMap } from 'three'
-import type { CatalogItem, Placement } from '../lib/types'
+import type { CatalogItem, Placement, GameSnapshot } from '../lib/types'
 import { CATALOG } from '../lib/catalog'
 import { useLocale } from '../lib/locale'
 import { footprint, type DraftPlacement } from './building'
 import { ProceduralModel, SCENE_BACKGROUND } from './ProceduralModel'
+import {WorldRealms} from './WorldRealms'
 import '../world.css'
 
 interface SceneProps {
+  worldGame?:GameSnapshot
+  active?:boolean
   placements?: Placement[]
   catalog?: CatalogItem[]
   size?: number
@@ -213,6 +216,7 @@ function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,va
 }
 function SceneContents(props:SceneProps){
  const {size=16,perspective=false,resetKey=0,interior=false,neighbor,realm='main',onRealm}=props;
+ if(props.worldGame?.world_systems?.initialized)return <><RendererDiagnostics interior={false}/><WorldRealms game={props.worldGame} realm={realm} active={props.active??true} perspective={perspective} resetKey={resetKey} draft={props.draft} selectedId={props.selectedId} valid={props.valid} gridVisible={props.gridVisible} onRealm={onRealm} onSelect={props.onSelect} onTile={props.onTile}/></>;
  const origin=neighbor?(realm==='main'?-size/2-1:size/2+1):0;
  const otherOrigin=neighbor?(realm==='main'?neighbor.size/2+1:-neighbor.size/2-1):0;
  return <>

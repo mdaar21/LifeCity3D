@@ -47,7 +47,15 @@ this slice does not pretend those systems exist.
 |FX display/history throughout every legacy screen | PARTIAL: HUD, wallets and shop integrated; older task/ledger wording and historical FX receipts need completion |
 |Cloud registration/confirmation/recovery URLs and real email acceptance | DEFERRED by owner; do not resume until requested |
 
-## All twenty approved V6 expansions
+## Active world implementation checkpoint
+
+The owner continuation is underway in `codex/lifecity-world-systems`. See
+[the source/evidence matrix](WORLD-SYSTEMS.md). The old NOT STARTED cells below
+record the prior published release; they are not the current working-tree audit.
+The PWA delivery fix is published at61347fd3, Pages41167947258, and the real
+recovery link passed. New world code is not published at this checkpoint.
+
+## All twenty approved V6 expansions — previous published boundary
 
 The shared foundation/task engine above is complete. The owner has RESUMED all expansion work after reporting an outdated cached
 client. Delivery repair is in progress; implementation of all20 must continue. None of the rows below is claimed

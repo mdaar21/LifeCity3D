@@ -1,0 +1,6 @@
+import {create} from 'zustand';
+import type {Point,Pose,WorldQuote,WorldHistoryView} from '../../supabase/functions/_shared/world-types';
+export type StudioTab='build'|'land'|'terrain'|'networks'|'residents'|'avatar'|'cars'|'surprises'|'history'|'settings';
+export const useWorldUI=create<{open:boolean;tab:StudioTab;selected:string|null;point:Point;overlay:string;floor:number|null;ghost:WorldQuote|null;input:{forward:number;turn:number;run:boolean};photo:boolean;replay:(WorldHistoryView&{title:string})|null;celebration:{id:string;title:string;started_at:number}|null;set:(patch:Partial<Omit<ReturnType<typeof initial>,'set'>>)=>void}>(set=>({...initial(),set:patch=>set(patch)}));
+function initial(){return {open:false,tab:'build' as StudioTab,selected:null as string|null,point:{x:1,z:1},overlay:'none',floor:null as number|null,ghost:null as WorldQuote|null,input:{forward:0,turn:0,run:false},photo:false,replay:null as (WorldHistoryView&{title:string})|null,celebration:null as {id:string;title:string;started_at:number}|null};}
+export const worldRuntime:{pose:Pose|null;target:Point|null;realm:string;moving:boolean;capture:(()=>void)|null}={pose:null,target:null,realm:'',moving:false,capture:null};

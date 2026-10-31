@@ -1,3 +1,5 @@
 project_id = "LifeCity3D"
 [functions.refresh-fx]
 verify_jwt = false
+[functions.world-command]
+verify_jwt = false

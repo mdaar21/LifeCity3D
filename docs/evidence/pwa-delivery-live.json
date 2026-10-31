@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "published": true,
+  "checkedAt": "2026-10-31T04:30:44.482Z",
+  "commit": "61347fd3eceb5b97daab803be36b0d51eb8b59f8",
+  "workflowRun": 41167947258,
+  "recoveryUrl": "https://mdaar21.github.io/LifeCity3D/api/update.html",
+  "recoveryHttpStatus": 200,
+  "firstSectionApprovedTasks": true,
+  "catalogCount": 16,
+  "regularCards": 12,
+  "savedBalance": 20,
+  "existingClaimAndLedgerPreserved": true,
+  "pageErrors": [],
+  "scope": "Actual public guest recovery navigation; the stale older worker itself is reproduced by the separate local two-release test."
+}
