@@ -18,13 +18,15 @@
       "id": 41246740296,
       "passed": 26,
       "failed": 2,
-      "reason": "Cold-render tap before the camera was ready; screenshot helper wrongly required an empty interior to exceed500 triangles."
+      "reason": "Cold-render tap before the camera was ready; screenshot helper wrongly required an empty interior to exceed500 triangles.",
+      "url": "https://github.com/mdaar21/LifeCity3D/actions/runs/41246740296"
     },
     "focusedCorrectionRun": {
       "id": 41247729824,
       "passed": 2,
       "failed": 0,
-      "conclusion": "success"
+      "conclusion": "success",
+      "url": "https://github.com/mdaar21/LifeCity3D/actions/runs/41247729824"
     },
     "scope": "26 passing cases from the full suite plus both corrected cases passing on the same game code; not a claim that the first run passed all28."
   },
