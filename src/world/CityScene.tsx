@@ -261,5 +261,5 @@ export function CityPreview({ placements = [], catalog = CATALOG, size = 16, cla
 export function ItemPreview({ item, className }: { item: CatalogItem; className?: string }) {
   const size = Math.max(item.footprint_x, item.footprint_z, item.model === 'skyscraper' ? 4 : 2) + 1
   const preview: Placement = { id: 'preview', inventory_id: 'preview', catalog_id: item.id, x: (size - item.footprint_x) / 2, y: 0, z: (size - item.footprint_z) / 2, rotation: 0, version: 1 }
-  return <WorldCanvas placements={[preview]} catalog={[item]} size={size} className={className} previewElevation={item.model==='skyscraper'?2:0} bare interior={item.is_furniture} readOnly />
+  return <WorldCanvas placements={[preview]} catalog={[item]} size={size} className={className} previewElevation={item.model==='skyscraper'?2:item.model.startsWith('botanical:')?1:0} bare interior={item.is_furniture} readOnly />
 }

@@ -1,3 +1,4 @@
+import {BotanicalPlant} from './BotanicalAssets'
 import type { ReactNode } from 'react'
 import { Color } from 'three'
 import {ArchitectureAsset,StylizedPlant} from './StylizedAssets'
@@ -32,6 +33,7 @@ export function ProceduralModel({ item, ghost = false, valid = true, variation=i
     {[-0.27, 0.27].map(v => box([v, 0.14, 0], [0.055, 0.28, 0.24], palette.dark, `leg${v}`))}
   </group>
   const model = item.model.toLowerCase()
+  if(model.startsWith('botanical:'))return <BotanicalPlant species={model.slice(10)}/>;
   if(['house','villa','apartment','skyscraper','palace'].includes(model)){const family=model==='house'?'home':model==='skyscraper'?'tower':model as 'villa'|'apartment'|'palace';return <ArchitectureAsset family={family} width={Math.max(.7,item.footprint_x*.8)} depth={Math.max(.7,item.footprint_z*.78)} height={model==='skyscraper'?5.4:model==='palace'?2.35:model==='apartment'?2.65:model==='villa'?1.65:1.2} ghost={ghost} valid={valid} night={night}/>;}
   if(model==='tree')return <StylizedPlant seed={variation} ghost={ghost} valid={valid}/>;
   if(model.includes('road')||model.includes('path'))return <ConnectedRoad connections={connections} path={model.includes('path')} ghost={ghost} valid={valid}/>;

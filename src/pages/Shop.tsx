@@ -1,3 +1,4 @@
+import {HorticulturePanel} from '../components/HorticulturePanel'
 import {appPath} from '../lib/paths'
 import { useMemo, useRef, useState } from 'react'
 import { Link,useSearchParams } from 'react-router-dom'
@@ -35,7 +36,7 @@ export default function Shop() {
   const {format,fx}=useMoney()
   const [quote,setQuote]=useState<YuyiQuote|null>(null)
   const [params]=useSearchParams()
-  const [shelf,setShelf] = useState<'items'|'projects'>('items')
+  const [shelf,setShelf] = useState<'items'|'projects'|'plants'>('items')
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<Category | 'all'>('all')
   const [previewExpanded,setPreviewExpanded]=useState(()=>!!params.get('item'))
@@ -67,8 +68,8 @@ export default function Shop() {
   const purchaseLabel = (item: CatalogItem) => item.unlock_level > level ? t(`يتاح في المستوى ${number(item.unlock_level)}`, `Unlocks at level ${number(item.unlock_level)}`) : yuyi&&(!fx||fx.stale)?t('مرجع FX صالح مطلوب','Valid FX reference required'):yuyi&&item.is_furniture?t('الأثاث في مدينتي حاليًا','Furniture currently in My City'):!affordable(item) ? t('رصيد غير كافٍ', 'Insufficient coins') : buyingId === item.id ? t('جارٍ الشراء…', 'Purchasing…') : t('إضافة إلى مخزوني', 'Add to inventory')
   return <div className="page shop-page">
     {state.v6&&<div className="shop-territory" role="group" aria-label={t('مدينة الشراء','Purchase territory')}><button aria-pressed={!yuyi} onClick={()=>{selectRealm('main');setQuote(null)}}>{t('مدينتي','My City')}</button><button aria-pressed={yuyi} onClick={()=>{selectRealm('yuyi');setQuote(null);setShelf('items')}}>{t('مدينة ويوي · MAD','Yuyi City · MAD')}</button></div>}
-    <div className="game-shop-toolbar"><div className="game-shop-tabs" role="group" aria-label={t('أقسام المتجر','Shop sections')}><button aria-pressed={shelf==='items'} className={shelf==='items'?'active':''} onClick={()=>setShelf('items')}><ShoppingBag size={17}/>{t('العناصر','Items')}</button><button disabled={yuyi} aria-pressed={shelf==='projects'} className={shelf==='projects'?'active':''} onClick={()=>setShelf('projects')}><Building2 size={17}/>{t('مشاريع البناء','Building projects')}</button></div><Link className="button button-secondary" to="/city?panel=inventory"><Package size={17}/>{t('المخزون','Inventory')}</Link></div>
-    {shelf==='projects'?<DreamProject/>:<>
+    <div className="game-shop-toolbar"><div className="game-shop-tabs" role="group" aria-label={t('أقسام المتجر','Shop sections')}><button aria-pressed={shelf==='items'} className={shelf==='items'?'active':''} onClick={()=>setShelf('items')}><ShoppingBag size={17}/>{t('العناصر','Items')}</button><button disabled={yuyi} aria-pressed={shelf==='projects'} className={shelf==='projects'?'active':''} onClick={()=>setShelf('projects')}><Building2 size={17}/>{t('مشاريع البناء','Building projects')}</button><button className={shelf==='plants'?'active':''} data-testid="shop-plants" aria-pressed={shelf==='plants'} onClick={()=>setShelf('plants')}><Trees size={17}/>{t('النباتات والزراعة','Plants & farming')}</button></div><Link className="button button-secondary" to="/city?panel=inventory"><Package size={17}/>{t('المخزون','Inventory')}</Link></div>
+    {shelf==='plants'?<HorticulturePanel key={realm}/>:shelf==='projects'?<DreamProject/>:<>
     <div className="shop-browse-bar"><label className="shop-search"><Search size={19} /><input type="search" aria-label={t('البحث في المتجر', 'Search the shop')} placeholder={t('عن ماذا تحلم مدينتك؟', 'What does your city dream of?')} value={query} onChange={event => setQuery(event.target.value)} /></label><span className="shop-level"><Flower2 size={17} />{t('مستوى المدينة', 'City level')} {number(level)}</span></div>
     <div className="shop-category-tabs" role="group" aria-label={t('فئات المتجر', 'Shop categories')}>{categories.map(({ id, ar, en, icon: Icon }) => <button key={id} className={category === id ? 'active' : ''} aria-pressed={category === id} onClick={() => setCategory(id)}><Icon size={17} />{t(ar, en)}</button>)}</div>
     {notice && <div className={`world-notice ${success ? 'success' : 'danger'}`} role="status">{success && <Check size={18} />}{notice}{success && <Link to="/city?panel=inventory" className="button button-ghost">{t('إلى المدينة', 'Go to city')}<ChevronRight size={16} /></Link>}</div>}

@@ -1,5 +1,17 @@
 export class ApiError extends Error {constructor(public code:string){super(code);this.name='ApiError';}}
 const messages:Record<string,[string,string]>={
+ PLANT_NOT_FOUND:["اختر نباتًا من القائمة المتاحة.", "Choose an available plant."],
+ CROP_NOT_COMPATIBLE:["هذا المحصول لا يناسب نوع القطعة؛ اختر حوضًا أو بستانًا مناسبًا.", "This crop needs a compatible bed or orchard."],
+ CROP_ALREADY_PLANTED:["المحصول قائم. احصده أو أخلِه قبل بذر دورة جديدة.", "Harvest or clear the current crop before a new paid planting."],
+ CROP_NOT_PLANTED:["لا يوجد محصول قائم في هذه القطعة.", "There is no standing crop in this plot."],
+ CROP_NOT_READY:["لم يكتمل الوقت الفعلي أو الري المطلوب. ساعة اللعبة لا تسرّع الزراعة.", "Real growth time or paid irrigation is incomplete. The game clock does not accelerate crops."],
+ WATER_NOT_NEEDED:["اكتمل الري المطلوب لهذه الدورة؛ لن يُخصم مبلغ إضافي.", "This cycle is fully watered; no additional charge is needed."],
+ ALREADY_HARVESTED:["تم حصاد هذه الدورة. ازرع دورة جديدة إن رغبت.", "This cycle was already harvested. A new cycle needs new paid planting."],
+ PRODUCE_UNAVAILABLE:["المحصول المخزن أقل من كمية البيع المطلوبة.", "Stored produce is below the requested sale quantity."],
+ FARM_PLOT_REQUIRED:["اختر حوض زراعة أو قطعة بستان تملكها.", "Choose a planting bed or orchard you own."],
+ YUYI_GRANT_ONLY:["رصيد ويوي يمول بالتوجيهات فقط؛ يبقى المحصول محفوظًا دون بيع أو تحويل.", "Yuyi is grant-funded only. Produce stays stored without sales or transfers."],
+ FARM_CONTENTS_CONFIRMATION:["الإزالة تتلف محصولًا قائمًا أو مخزنًا. استخدم معاينة الإزالة التي توضح الإتلاف.", "Removal discards standing or stored produce. Use the explicit discard preview."],
+ FARM_TERRAIN_CONFLICT:["الفرشاة تمس أرض زراعة مدفوعة؛ انقلها قبل تعديل التضاريس.", "This brush affects a paid farm plot. Relocate it before altering terrain."],
  WORLD_CONFLICT:['تغيّرت المدينة منذ فتح المعاينة. حدّثها واطلب عرضًا جديدًا.','The city changed since this preview. Refresh and request a new quote.'],
  PLAN_EXCEEDS_PARCEL:['المخطط أكبر من القطعة بعد حرم متر حول المبنى. قلّل العرض أو العمق أو اختر أرضًا أكبر.','The plan exceeds the parcel with a 1m setback. Reduce its size or choose a larger parcel.'],
  PLAN_EXCEEDS_BUDGET:['الميزانية أقل من تكلفة البناء المتوقعة. صغّر المخطط أو ارفع ميزانيته.','The budget is below estimated construction cost. Reduce the plan or increase its budget.'],

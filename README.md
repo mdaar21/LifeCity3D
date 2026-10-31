@@ -20,6 +20,14 @@ existing React/Vite build. No Next.js migration or root package replacement was
 performed. `npm run check:config` now validates public build configuration before
 bundling and keeps credential values out of its output.
 
+## Paid vegetation and agriculture — unpublished
+
+Shop → Plants & farming and the Greenery studio now offer14 distinct paid plants,
+planting beds/orchards and8 crop recipes. Quotes, real-time growth, irrigation,
+harvesting, stored produce, capped sales and50% source-wallet refunds use the
+existing trusted world engine/SQL persistence. See [implementation and evidence](docs/evidence/horticulture/README.md).
+No backend or frontend deployment has been performed for this increment.
+
 ## Visual upgrade checkpoint — unpublished
 
 Both visual batches (stages1–6) build on the existing world release: game HUD,

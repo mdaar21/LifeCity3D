@@ -1,5 +1,23 @@
 # LifeCity3D — focused implementation context
 
+## Current owner priority — paid content, not another visual batch
+- Continue this branch; both visual batches are complete. Do not repeat them.
+- Vegetation/agriculture group implemented:14 paid species,8 crops/orchards,2 paid
+  plot sizes. Real-time growth, paid water/harvest/relocation, stored crop-specific
+  produce and capped MAIN sales. MAD harvests are collection-only (grant rule).
+- Next mandatory groups: paid recoloring/customization across applicable objects,
+  then paid road/lighting/architectural variants. These are NOT complete yet.
+- No publishing, deployment or merging without owner permission.
+- world-horticulture.ts plugs into the existing trusted quote/commit engine.
+  Uses optional Decoration.species/farm JSONB fields, existing RLS/receipts/cost
+  components and shared20%/60 passive-income cap. No schema migration is needed.
+- New UI: HorticulturePanel in Shop → Plants & farming and Greenery studio tab.
+  BotanicalAssets shares cached geometry. Existing catalogs/prices stay intact.
+- 111 tests/22 files and focused finance/persistence/browser checks passed.
+  Evidence: docs/evidence/horticulture. Supabase schema/privileges checked read-only.
+  New operations are not deployed to the live Edge function yet.
+
+
 - Repo: mdaar21/LifeCity3D only. React/Vite/R3F/Three, existing stack and lockfile.
 - Current branch: codex/stylized-visual-overhaul, based on main5d567ae.
 - Visual BATCH1 and BATCH2 (stages1–6) implemented and locally verified.

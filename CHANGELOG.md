@@ -1,5 +1,16 @@
 # Changelog
 
+## Paid vegetation/agriculture — unpublished
+
+- 14 species,2 plot types and8 crops/orchards, each with trusted positive prices.
+- Paid manual planting, watering, harvesting, replanting and relocation; real-time
+  growth, crop-specific stock and MAIN sales within the existing shared income cap.
+- Preserve independent grant-funded MAD, source cost components and50% refunds.
+  Separate gross guest income from sales fees to preserve the same cap.
+- Reuse RLS-protected world JSONB and atomic settlement; no schema changes.
+- 111 tests/22 files passed; actual browser purchase/harvest/sale and independent
+  restore passed. Paid recoloring and road/light/architecture variants remain next.
+
 ## Visual BATCH2 — local review, unpublished — 2026-10-31
 
 - Complete game panels for shop, missions, focus, prayers, wallets and settings;
