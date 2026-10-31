@@ -36,3 +36,7 @@ focused compatibility/rooftop/district checks, full lint/typecheck/regressions a
 browser checks; then safe Supabase apply/Edge verification and GitHub-only
 publication. Continue remaining legacy master-prompt packs afterward without
 asking the owner to re-authorize. Auth setup remains later.
+
+Latest owner steering: publish the latest tested world increment immediately and
+pause further expansion implementation. Do not add new features during publication.
+Auth remains deferred. Finish CI/Pages and verify the public update link.

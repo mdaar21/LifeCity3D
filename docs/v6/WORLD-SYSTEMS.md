@@ -71,8 +71,8 @@ complete. Code presence and domain tests alone are not full acceptance.
 
 ## Supabase migration and recovery plan
 
-`20261031035728_world_systems_core.sql` was scaffolded with Supabase CLI and is
-UNAPPLIED at this checkpoint. It remains editable until the first hosted apply.
+`20261031055923_world_systems_core.sql` was scaffolded with Supabase CLI and is
+APPLIED to the linked Supabase project at20261031055923. It is now immutable.
 It adds tables/functions/triggers and wraps the old snapshot function under
 `game_state_for_before_world`; it does not reset balances, remove old records,
 place free assets or replay rewards. Initialization is explicit and zero-cost.
@@ -83,9 +83,9 @@ Preflight on the linked project returned zero profiles, wallet ledger entries an
 placements, and no world tables. Only the two prior V6 migrations were registered.
 Security advisors reported the existing intentionally exposed command/state and
 capability visit functions plus private RLS tables with no client policies.
-The new migration and Edge function have NOT yet been deployed. Save a final
-preflight and function-definition backup immediately before applying. After apply,
-do not edit this migration: create a new CLI migration for any correction.
+The world migration is applied and world-command v1 is ACTIVE. The preflight
+and function-definition backup is saved privately in work/v6/pre-world-hosted-backup.json.
+Create a new CLI migration for any further schema correction.
 
 Rollback is a code/service rollback, not table deletion: keep all new records and
 paid components, restore the previous frontend/disable new operations, and use the
