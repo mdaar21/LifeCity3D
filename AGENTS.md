@@ -67,3 +67,10 @@ before implementing expansions. Do not continue new feature work during publicat
 Publication is now COMPLETE: PR2 merged at e6adb873, Pages41148905443 succeeded,
 and the real public16-task guest flow passed. All20 expansions and Auth remain
 paused; wait for a new user instruction. See docs/evidence/live-tasks-publication.json.
+
+## Latest owner continuation — supersedes the publication pause
+The owner reports seeing only three old tasks, then explicitly resumed the ENTIRE
+master prompt and all20 expansions. Fix stale PWA update delivery/discoverability
+first without deleting guest saves, then continue all remaining approved systems.
+The paused-scope paragraphs above are historical. Do not claim20-feature completion
+until real operations and tests exist. Keep Auth as the later feature stage.

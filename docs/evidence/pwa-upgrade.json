@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "checkedAt": "2026-10-31T03:54:35.162Z",
+  "otherWorkerFetchesPreserved": true,
+  "oldRelease": "e32bf7e",
+  "oldCacheReproduced": true,
+  "oldCachedTaskCards": 3,
+  "newRegularCards": 12,
+  "newCatalogCount": 16,
+  "firstContentIsApproved": true,
+  "savedWalletInventoryPlacementsLedgerPreserved": true,
+  "noRetroactiveClaims": true,
+  "separateMadStartsZero": true,
+  "recoveryTouchedOtherApps": false,
+  "subsequentUpdatePrompt": true,
+  "activeStudyPausedBeforeReload": true,
+  "pageErrors": [],
+  "scope": "Local compiled production builds and real service workers; not a hosted deployment claim."
+}

@@ -32,7 +32,7 @@ fixture in two independent browsers; real email confirmation/recovery remains
 unverified and the production client flag stays disabled pending Auth URL setup.
 
 **The exact16 tasks are implemented and tested.** All20 expansion features remain
-pending and are paused by the owner. This increment is now published and
+pending and have been resumed by the owner. This increment is published and
 [verified in the real guest game](docs/evidence/live-tasks-publication.json). Auth work
 is explicitly deferred. See [task release evidence](docs/v6/RELEASE-tasks.md).
 **V6 is incomplete.** See [the complete status register](docs/v6/STATUS.md),

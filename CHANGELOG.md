@@ -1,5 +1,13 @@
 # Changelog
 
+## PWA delivery repair — 2026-10-31
+
+- Reproduce the old cached3-task client with actual compiled releases.
+- Add a same-app update recovery page and a visible future-update prompt without
+  deleting saves; pause active focus before prompted reload.
+- Put the approved16 tasks first and label the release in the game dock/menu.
+- Owner has resumed all20 expansions and the rest of the master specification.
+
 ## Exact16 approved tasks — 2026-10-31
 
 - Implement exact daily/weekly/load/manual qualification and four automatic
