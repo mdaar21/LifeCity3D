@@ -1,5 +1,19 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — Stage A mobile controls, unpublished
+- Continue codex/stylized-visual-overhaul. No merge, deployment or publication.
+- Default beginner tools: contextual selection/hold/drag/rotation, preview history,
+  visual owned/plant/build/furniture catalogs, touch road strokes, garage guidance.
+  Advanced numeric controls remain available through a device-only preference.
+- TouchWorld owns pointer gestures; useTouchTools owns drafts/history; TouchTools
+  reviews trusted quotes and confirms through existing idempotent settlement.
+- road_draw and building rotation extend the shared world engine without a schema
+  change. Road crossings preserve old paid entities/components via graph splitting.
+- Checks/evidence: docs/evidence/stage-a. Compatible world-command must be deployed
+  BEFORE the frontend in a future explicitly authorized release. Neither is live.
+- Whole-object paid recoloring and extra road/light/architecture variants remain
+  separate unfinished groups. Do not repeat the released visual/horticulture work.
+
 ## Latest owner — content publication complete
 - Owner explicitly approved publishing both visual batches and horticulture.
 - PR6/main a9b4799 published successfully in Pages41231861062.116 tests and20

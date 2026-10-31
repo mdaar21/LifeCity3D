@@ -53,7 +53,7 @@ export function MeasuredBuilding({building:b,context,ghost=false,visualHour}:{bu
    {state.finished&&!cutaway&&<FacadeDetails width={b.width} depth={b.depth} floor={f.index} archetype={b.archetype} glass={night&&powered?'#e9ca8f':VISUAL.glass}/>}
    {showInterior&&f.stairs&&Array.from({length:10},(_,i)=><Box key={i} at={[f.stairs!.x+f.stairs!.width/2,(i+1)*.15,f.stairs!.z+(i+.5)*f.stairs!.depth/10]} size={[f.stairs!.width,.3*(i+1),f.stairs!.depth/10]} color={surface('stairs',f.index).color}/>)}
    {showInterior&&f.elevator&&<group><Box at={[f.elevator.x+f.elevator.width/2,1.35,f.elevator.z+f.elevator.depth/2]} size={[f.elevator.width,2.7,f.elevator.depth]} color="#89adb3" opacity={.28}/><Box at={[f.elevator.x+f.elevator.width,1.1,f.elevator.z+f.elevator.depth/2]} size={[.06,1.8,1]} color="#8c9b97"/></group>}
-   {showInterior&&context.world.entities.filter((e):e is Furniture=>e.kind==='furniture'&&e.status==='active'&&e.building_id===b.id&&e.floor===f.index).map(e=><FurnitureMesh key={e.id} item={e}/>)}
+   {showInterior&&context.world.entities.filter((e):e is Furniture=>e.kind==='furniture'&&e.status==='active'&&e.building_id===b.id&&e.floor===f.index).map(e=><group key={e.id} userData={{touchTarget:{source:'world',id:e.id,realm:b.realm}}}><FurnitureMesh item={e}/></group>)}
   </group>)}
   {chosenFloor===null&&state.roof&&<Box at={[b.width/2,(Math.max(...b.floors.map(f=>f.index))+1)*3,b.depth/2]} size={[b.width+.2,.2,b.depth+.2]} color={roof.color} roughness={roof.roughness} metalness={roof.metalness}/>}
   {b.opened_at&&<><Box at={[b.width/2,2.25,-.5]} size={[1.8,.14,1]} color={roof.color}/><Box at={[b.width/2-.65,1.1,-.1]} size={[.12,2.2,.15]} color="#8d744c"/><Box at={[b.width/2+.65,1.1,-.1]} size={[.12,2.2,.15]} color="#8d744c"/></>}

@@ -112,3 +112,12 @@ world-command v2 is compatible.116 tests and20 browser cases passed, followed by
 real public catalog/farm verification. Evidence: docs/evidence/content-publication.
 Earlier no-publication notes are historical for this released increment. Future
 paid recoloring and additional variants remain unfinished. Preserve all saves.
+
+## Latest owner — Stage A touch interaction (unpublished)
+Continue codex/stylized-visual-overhaul. Beginner touch tools are now the default;
+advanced numeric/studio tools remain selectable on the device. Preserve existing
+visual batches/content. No merge, deployment or publication is authorized.
+New road_draw and measured foundation rotation use the shared trusted engine;
+keep canonical pricing, receipts, independent MAD and historical50% cost bases.
+No migration/dependency change. Test-only funded accounts stay under tests/.
+See docs/evidence/stage-a/README.md for verification and release dependencies.

@@ -1,11 +1,11 @@
 import type {Building,DistrictMetrics,Network,NetworkEdge,NetworkNode,Point,Realm,TransitLine,WorldContext} from './world-types.ts';
 import {worldHour} from './world-environment.ts';
-import {amount,buildingRect,contains,distance,pointOnOwnedLand} from './world-math.ts';
+import {amount,buildingRect,contains,distance,pointOnOwnedLand,pointSegmentDistance} from './world-math.ts';
 
 export interface Graph {nodes:Map<string,NetworkNode>;edges:Map<string,{to:string;edge:NetworkEdge;cost:number}[]>}
 export function graph(c:WorldContext,realm:Realm,network:Network):Graph{
  const nodes=new Map(c.world.entities.filter((e):e is NetworkNode=>e.kind==='node'&&e.status==='active'&&e.realm===realm&&e.network===network).map(n=>[n.id,n]));const edges=new Map<string,{to:string;edge:NetworkEdge;cost:number}[]>();
- for(const e of c.world.entities){if(e.kind!=='edge'||e.status!=='active'||e.realm!==realm||e.network!==network||e.blocked||!nodes.has(e.from)||!nodes.has(e.to))continue;const length=distance(nodes.get(e.from)!,nodes.get(e.to)!);edges.set(e.from,[...(edges.get(e.from)??[]),{to:e.to,edge:e,cost:length/Math.max(1,e.speed)}]);if(!e.directed)edges.set(e.to,[...(edges.get(e.to)??[]),{to:e.from,edge:e,cost:length/Math.max(1,e.speed)}]);}
+ for(const e of c.world.entities){if(e.kind!=='edge'||e.status!=='active'||e.realm!==realm||e.network!==network||e.blocked||!nodes.has(e.from)||!nodes.has(e.to))continue;const a=nodes.get(e.from)!,b=nodes.get(e.to)!;const chain=network==='road'?[...nodes.values()].filter(n=>pointSegmentDistance(n,a,b)<.01).sort((u,v)=>distance(a,u)-distance(a,v)):[a,b];for(let i=1;i<chain.length;i++){const from=chain[i-1].id,to=chain[i].id,cost=distance(chain[i-1],chain[i])/Math.max(1,e.speed);edges.set(from,[...(edges.get(from)??[]),{to,edge:e,cost}]);if(!e.directed)edges.set(to,[...(edges.get(to)??[]),{to:from,edge:e,cost}]);}}
  return {nodes,edges};
 }
 export function shortestPath(g:Graph,from:string,to:string):{nodes:string[];cost:number}|null{

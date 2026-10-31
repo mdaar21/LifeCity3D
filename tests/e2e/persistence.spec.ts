@@ -30,6 +30,8 @@ test('two browser contexts recover the exact purchased home, inventory, balance 
   pageA.on('pageerror', (error) => errors.push(error.message));
   pageB.on('pageerror', (error) => errors.push(error.message));
   try {
+    await deviceA.addInitScript(()=>localStorage.setItem('lifecity-tools-mode','advanced'));
+    await deviceB.addInitScript(()=>localStorage.setItem('lifecity-tools-mode','advanced'));
     await login(pageA, E2E_OWNER);
     expect((await snapshot(pageA)).wallet.balance).toBe(2000);
     await pageA.goto('/shop');
