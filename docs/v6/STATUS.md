@@ -49,8 +49,8 @@ this slice does not pretend those systems exist.
 
 ## All twenty approved V6 expansions
 
-The shared foundation/task engine above is complete. Expansion work is PAUSED
-by the owner pending publication of the current increment. None of the rows below is claimed
+The shared foundation/task engine above is complete. The owner has RESUMED all expansion work after reporting an outdated cached
+client. Delivery repair is in progress; implementation of all20 must continue. None of the rows below is claimed
 complete, and no nonfunctional expansion buttons have been added.
 
 | ID | Feature | Status | Remaining implementation / evidence boundary |

@@ -6,6 +6,7 @@ import { useLocale } from '../lib/locale';
 import { levelFromXp } from '../lib/rules';
 import { Button, LoadingState, Modal, Notice } from './Common';
 import City from '../pages/City';
+import {appPath} from '../lib/paths';
 import {useMoney} from '../lib/useMoney';
 import { useStudyHeartbeat } from '../lib/useStudyHeartbeat';
 import '../game-shell.css';
@@ -84,12 +85,12 @@ export default function AppLayout() {
     </main>
     {activeStudy && location.pathname !== '/timer' && <Link to="/timer" className="game-focus-pill" data-testid="active-focus"><Focus size={17}/><span>{activeStudy.status === 'running' ? t('جلسة تركيز مستمرة', 'Focus session running') : t('جلسة تركيز متوقفة', 'Focus session paused')}</span><b>{number(activeStudy.credited_minutes)} {t('د', 'min')}</b></Link>}
     <nav className="game-dock" aria-label={t('التنقل الرئيسي', 'Main navigation')}>
-      {primary.map(({path,icon:Icon,label,hint}) => <NavLink ref={path === '/city' ? cityLink : undefined} key={path} to={path} className={({isActive}) => `game-dock-item ${isActive ? 'active' : ''}`}><span className="game-dock-icon"><Icon size={23}/>{path === '/timer' && activeStudy?.status === 'running' && <i/>}</span><strong>{label}</strong><small>{hint}</small></NavLink>)}
+      {primary.map(({path,icon:Icon,label,hint}) => <NavLink ref={path === '/city' ? cityLink : undefined} key={path} to={path} className={({isActive}) => `game-dock-item ${isActive ? 'active' : ''}`}><span className="game-dock-icon"><Icon size={23}/>{path==='/tasks'&&state?.approved_tasks&&<b className="game-mission-count" aria-label={t('١٦ مهمة وتحدّي','16 tasks and milestones')}>{number(state.approved_tasks.catalog.length)}</b>}{path === '/timer' && activeStudy?.status === 'running' && <i/>}</span><strong>{label}</strong><small>{hint}</small></NavLink>)}
       <button className={`game-dock-item ${menu ? 'active' : ''}`} aria-label={t('قائمة اللعبة', 'Game menu')} aria-haspopup="dialog" onClick={() => setMenu(true)}><span className="game-dock-icon"><Menu size={23}/></span><strong>{t('المزيد', 'More')}</strong><small>{t('مساحاتك', 'YOUR SPACES')}</small></button>
     </nav>
     <Modal open={menu} onClose={() => setMenu(false)} title={t('قائمة اللعبة', 'Game menu')}>
       <div className="game-menu-grid">{extra.map(({path,icon:Icon,label,hint}) => <Link key={path} to={path} onClick={() => setMenu(false)}><span><Icon size={25}/></span><strong>{label}</strong><small>{hint}</small></Link>)}</div>
-      <div className="game-menu-footer"><button className="language-switch button button-secondary" onClick={() => setLanguage(language === 'ar-SA' ? 'en' : 'ar-SA')}>{language === 'ar-SA' ? 'English' : 'العربية'}</button><Link to="/" onClick={() => setMenu(false)}>{t('الشاشة الرئيسية', 'Title screen')}</Link><span>{mode === 'demo' ? t('تجربة محلية', 'Local demo') : t('LifeCity 3D', 'LifeCity 3D')}</span></div>
+      <div className="game-menu-footer"><span data-testid="game-release">{t('تحديث مهام الحياة · ١٦','Life tasks update · 16')}</span>{import.meta.env.PROD&&<a href={appPath('api/update.html')}>{t('تحميل أحدث نسخة مع حفظ التقدّم','Load latest version & keep progress')}</a>}<button className="language-switch button button-secondary" onClick={() => setLanguage(language === 'ar-SA' ? 'en' : 'ar-SA')}>{language === 'ar-SA' ? 'English' : 'العربية'}</button><Link to="/" onClick={() => setMenu(false)}>{t('الشاشة الرئيسية', 'Title screen')}</Link><span>{mode === 'demo' ? t('تجربة محلية', 'Local demo') : t('LifeCity 3D', 'LifeCity 3D')}</span></div>
     </Modal>
   </div>;
 }

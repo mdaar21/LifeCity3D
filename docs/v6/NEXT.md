@@ -1,25 +1,28 @@
-# Next work — owner paused expansions for publication
+# Continue the entire master prompt — latest owner instruction
 
-The exact16-task engine is implemented, tested and its Supabase migration applied.
-Read RELEASE-tasks.md before changing it. Existing main/MAD history remains intact.
+The owner superseded the publication pause and explicitly requested ALL20
+expansions and the rest of the attached prompt. The16-task engine exists and is
+tested; older cached PWA clients can still show3 tasks. Finish the delivery repair
+(UPDATE-DELIVERY.md), publish it, verify the recovery link on the real public site,
+then continue implementation without asking the owner again. Do not stop after
+the delivery repair or silently leave20 rows pending.
 
-The latest owner instruction was STOP new feature work and publish the current
-foundation +16-task increment. Publication is complete (run41148905443), with
-real public guest verification recorded in live-tasks-publication.json. Do not start expansions or Auth configuration until
-the owner explicitly asks again. All20 expansions remain mandatory future scope,
-tracked NOT STARTED in STATUS.md. No nonfunctional expansion menus were added.
+Next: a shared typed world-meter/entity model and server-authoritative quote and
+settlement boundary, measured construction/parcels, then avatar/walk-through/cars,
+terrain/underground, utility/transport/traffic graphs, residents/services/malls/
+hotels, contractors/installments/materials, private surprises/planner/celebrations.
+Implement each as functioning operations, connected3D visuals, persistence and
+meaningful tests before marking its row implemented. Preserve exact16 tasks and
+old tasks, real FX, independent MAD, source-wallet historical50% refunds, data,
+original engine/framework and Github-only publication.
 
-When continuation is requested, begin the V6 shared world-meter/entity schema,
-server-authoritative quotes/settlement and measured parcels/construction, then
-avatar/walk-through/driving, terrain/underground, infrastructure, living services,
-contractors/installments/materials and private surprises/planner/celebrations in
-the original specification order. Preserve the exact task engine, genuine FX,
-independent MAD wallet and paid-basis50% demolition throughout.
+Suggested service integration: pure typed engine shared by the reference server
+and a Supabase Edge Function. Only a restricted service-role settlement RPC may
+commit its computed changes, with actual Auth.getUser validation at the Edge,
+owner locks, expected revision, receipt idempotency, exact wallet values, paid
+components and50% SQL-checked refunds. Client-provided costs/state are never
+trusted. Exposed per-user entity/component/event tables require owner RLS.
 
-Suggested new modules: src/expansion/types.ts and simulation/planning modules,
-a NEW CLI-generated migration (never edit either already-applied20261030/31 SQL),
-server-authoritative command adapter, accessible in-game controls and R3F world
-integration. Implement real operations before exposing each menu. Test ownership,
-RLS, conflicts/idempotency, original source-wallet costs, exact half refunds,
-network disconnects, debt, passive-income cap, real traversal and saved reloads.
-No arbitrary client balance/eligibility/quote authority. No Auth/email work now.
+Keep Auth setup as the later stage; do not ask for Auth URLs while implementing
+the game. No new promises of completed features or successful deploys without
+evidence. Read STATUS.md and the original full specification.

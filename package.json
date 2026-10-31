@@ -20,7 +20,8 @@
     "test:e2e": "playwright test",
     "build:github": "node scripts/build-github-pages.mjs",
     "preview:github": "node scripts/preview-github-pages.mjs",
-    "verify:github": "node scripts/verify-github-pages.mjs"
+    "verify:github": "node scripts/verify-github-pages.mjs",
+    "verify:pwa-upgrade": "node scripts/check-pwa-upgrade.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.3.14",

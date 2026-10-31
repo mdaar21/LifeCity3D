@@ -1,0 +1,2 @@
+.pwa-update-prompt{position:fixed;z-index:80;inset-inline:16px;top:calc(100px + env(safe-area-inset-top));margin-inline:auto;max-width:600px;display:flex;align-items:center;gap:1rem;padding:1rem;border:1px solid var(--moss);border-radius:16px;background:var(--surface);color:var(--text);box-shadow:0 12px 36px #0003}.pwa-update-prompt p{margin:.3rem 0;line-height:1.5;font-size:.85rem}.pwa-update-prompt button{flex-shrink:0}
+@media(max-width:440px){.pwa-update-prompt{align-items:stretch;flex-direction:column}}

@@ -16,7 +16,7 @@ export default defineConfig(({mode})=>{
   plugins:[react(),tailwind(),{name:'lifecity-production-csp',apply:'build',transformIndexHtml(html){return html.replace('<head>',`<head><meta http-equiv="Content-Security-Policy" content="${csp}">`);}},VitePWA({
    registerType:'prompt',includeAssets:['icons/icon.svg','fonts/*.ttf'],
    manifest:{name:'LifeCity 3D | لايف سيتي',short_name:'لايف سيتي',description:'ابنِ مدينتك بإنجازاتك',lang:'ar-SA',dir:'rtl',theme_color:'#173B32',background_color:'#F6F3E9',display:'standalone',start_url:base,scope:base,icons:[{src:base+'icons/icon-192.png',sizes:'192x192',type:'image/png',purpose:'any'},{src:base+'icons/icon-512.png',sizes:'512x512',type:'image/png',purpose:'any'},{src:base+'icons/maskable-512.png',sizes:'512x512',type:'image/png',purpose:'maskable'}]},
-   workbox:{globPatterns:['**/*.{js,css,html,png,svg,ttf}'],maximumFileSizeToCacheInBytes:5*1024*1024,navigateFallback:base+'index.html',navigateFallbackDenylist:[/\/api\//],runtimeCaching:[]},devOptions:{enabled:false}
+   workbox:{globPatterns:['**/*.{js,css,html,png,svg,ttf}'],globIgnores:['**/api/**'],maximumFileSizeToCacheInBytes:5*1024*1024,navigateFallback:base+'index.html',navigateFallbackDenylist:[/\/api\//],runtimeCaching:[]},devOptions:{enabled:false}
   })],
   server:{port:5173,proxy:{'/api':{target:'http://127.0.0.1:4174',changeOrigin:false}}},
   build:{target:'es2022',rollupOptions:{output:{manualChunks(id){
