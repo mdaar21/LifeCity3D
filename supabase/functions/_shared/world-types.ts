@@ -1,3 +1,4 @@
+import type {FarmState} from './world-horticulture.ts';
 /** Persistent world coordinates are meters in a territory; appearance never changes ownership. */
 export type Realm='main'|'yuyi';
 export type WalletId='MAIN'|'YUYI_MAD';
@@ -31,7 +32,7 @@ export interface Avatar extends BaseEntity {kind:'avatar';appearance:Appearance;
 export interface Car extends BaseEntity {kind:'car';model:'cedar'|'dune'|'atlas';pose:Pose;garage_id:string|null;slot:number|null;paint:string;rims:'standard'|'sport'|'classic';tint:number;plate:string;trim:'standard'|'wood'|'metal';components:Record<string,string>}
 export interface Blueprint extends BaseEntity {kind:'blueprint';archetype:Archetype;width:number;depth:number;floors:FloorPlan[];style:'forest'|'desert'|'coastal';accessible:boolean;estimated_cost:string;planner:'deterministic';room_requests:{name:string;use:RoomUse;area:number}[]}
 export interface Surprise extends BaseEntity {kind:'surprise';note:string;props:{id:string;type:'flowers'|'present'|'memory';x:number;z:number;text:string}[];reveal:{mode:'manual'|'date'|'milestone';at:string|null;slug:string|null;revealed_at:string|null;consented:boolean};share_enabled:boolean}
-export interface Decoration extends BaseEntity,Point {kind:'decoration';type:'park'|'tree'|'bench'|'lamp'|'fountain'|'pet_habitat';width:number;depth:number;material:string}
+export interface Decoration extends BaseEntity,Point {kind:'decoration';species?:string;farm?:FarmState;type:'park'|'tree'|'bench'|'lamp'|'fountain'|'pet_habitat'|'vegetation'|'farm_plot';width:number;depth:number;material:string}
 export interface Furniture extends BaseEntity,Point {kind:'furniture';type:'bed'|'chair'|'table'|'sofa'|'counter'|'plant'|'shelf';building_id:string|null;floor:number;room_id:string|null;rotation:number;material:string;width:number;depth:number}
 export interface District extends BaseEntity {kind:'district';parcel_ids:string[];color:string;policy:'mixed'|'residential'|'commercial'|'park'}
 export type WorldEntity=Parcel|Terrain|Building|NetworkNode|NetworkEdge|TransitLine|Avatar|Car|Blueprint|Surprise|Decoration|Furniture|District;

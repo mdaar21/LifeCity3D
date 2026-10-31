@@ -1,0 +1,30 @@
+{
+  "branch": "codex/stylized-visual-overhaul",
+  "baseCommit": "676316e24e0cdbc62459b194569fae1c5385a750",
+  "paidSpecies": 14,
+  "paidCropRecipes": 8,
+  "paidPlotTypes": 2,
+  "unitIntegrationTests": { "passed": 111, "files": 22 },
+  "focusedBrowserCasesPassed": 5,
+  "lint": true,
+  "typecheck": true,
+  "githubPagesBuild": true,
+  "compiledPagesChecks": "../github-pages-browser.json",
+  "compiledPwaChecks": "../pwa.json",
+  "browserEvidence": "browser.json",
+  "hostedCompatibility": {
+    "readOnly": true,
+    "worldEntityDataJsonb": true,
+    "ownerRlsEnabled": true,
+    "authenticatedDirectInsert": false,
+    "authenticatedSettlementExecute": false,
+    "serviceRoleSettlementExecute": true
+  },
+  "newMigrationRequired": false,
+  "cloudWritePerformed": false,
+  "edgeFunctionDeployed": false,
+  "websitePublished": false,
+  "merged": false,
+  "remainingGroups": ["paid recoloring and customization", "paid road, lighting and architectural variants"],
+  "scope": "Functional finance and persistence tests used the disposable reference SQL backend. New hosted agriculture operations and hosted cross-device acceptance are not claimed. Existing financial authority and JSONB storage are reused."
+}

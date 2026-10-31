@@ -1,3 +1,4 @@
+import {useGraphicsProfile} from './useGraphics'
 import { Component, Suspense, useEffect, useMemo, useRef, useState, type ComponentRef, type ReactNode } from 'react'
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import { OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
@@ -7,10 +8,13 @@ import { CATALOG } from '../lib/catalog'
 import { useLocale } from '../lib/locale'
 import { footprint, type DraftPlacement } from './building'
 import { ProceduralModel, SCENE_BACKGROUND } from './ProceduralModel'
+import {CoastalBackdrop} from './CoastalBackdrop'
+import {roadConnections} from './road-visuals'
 import {WorldRealms} from './WorldRealms'
 import '../world.css'
 
 interface SceneProps {
+  previewElevation?:number
   worldGame?:GameSnapshot
   active?:boolean
   placements?: Placement[]
@@ -56,7 +60,7 @@ declare global {
 }
 
 /** Samples completed Three renders, without another render loop or React updates. */
-function RendererDiagnostics({ interior }: { interior: boolean }) {
+function RendererDiagnostics({ interior,publish=true }: { interior: boolean;publish?:boolean }) {
   const gl = useThree(state => state.gl)
   const metricsRef = useRef<LifeCityRenderMetrics | null>(null)
   const previousRendererFrame = useRef(gl.info.render.frame)
@@ -78,12 +82,12 @@ function RendererDiagnostics({ interior }: { interior: boolean }) {
     }
     previousRendererFrame.current = gl.info.render.frame
     metricsRef.current = metrics
-    window.__LIFECITY_RENDER_METRICS__ = metrics
+    if(publish)window.__LIFECITY_RENDER_METRICS__ = metrics
     return () => {
       metricsRef.current = null
       if (window.__LIFECITY_RENDER_METRICS__ === metrics) delete window.__LIFECITY_RENDER_METRICS__
     }
-  }, [gl, interior])
+  }, [gl, interior,publish])
   useFrame(() => {
     // Fiber renders synchronously after its useFrame callbacks. Read info in a
     // microtask so these counters describe that finished render, not a RAF tick.
@@ -159,24 +163,25 @@ function Landscape({ size }: { size: number }) {
   </>
 }
 
-function CameraRig({ size, perspective, resetKey, interior }: { size: number; perspective: boolean; resetKey: number; interior: boolean }) {
-  const target = useMemo(() => [0, 0, 0] as [number, number, number], [])
+function CameraRig({ size, perspective, resetKey, interior, targetY=0 }: { size: number; perspective: boolean; resetKey: number; interior: boolean; targetY?:number }) {
+  const target = useMemo(() => [0, targetY, 0] as [number, number, number], [targetY])
   const controls = useRef<ComponentRef<typeof OrbitControls>>(null)
   const { camera, size: viewport } = useThree()
   useEffect(() => {
-    camera.position.set(size * 1.04, size * 0.95, size * 1.04)
-    camera.lookAt(0, 0, 0)
-    controls.current?.target.set(0, 0, 0)
+    camera.position.set(size * 1.04, size * 0.95+targetY, size * 1.04)
+    camera.lookAt(0, targetY, 0)
+    controls.current?.target.set(0, targetY, 0)
     controls.current?.update()
-  }, [camera, resetKey, size, perspective])
+  }, [camera, resetKey, size, perspective,targetY])
   const zoom = Math.min(viewport.width, viewport.height) / (size * (interior ? 1.5 : 1.72))
   return <>
     {perspective ? <PerspectiveCamera makeDefault fov={43} position={[size, size, size]} near={0.1} far={220} /> : <OrthographicCamera makeDefault position={[size, size, size]} zoom={zoom} near={0.1} far={220} />}
-    <OrbitControls ref={controls} target={target} makeDefault enableDamping dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = 0 } }} />
+    <OrbitControls ref={controls} target={target} makeDefault enableDamping dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = targetY } }} />
   </>
 }
 
 function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,valid=true,gridVisible=false,interior=false,onTile,onHoverTile,onSelect,readOnly=false,bare=false,originX=0}:SceneProps){
+ const roads=useMemo(()=>roadConnections(placements,catalog),[placements,catalog]);
  const tileEvent=(event:ThreeEvent<PointerEvent|MouseEvent>,hover=false)=>{
   event.stopPropagation();const x=Math.floor(event.point.x-originX+size/2),z=Math.floor(event.point.z+size/2);
   if(x<0||z<0||x>=size||z>=size)return;
@@ -202,7 +207,7 @@ function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,va
       const [w, d] = footprint(item, placement.rotation)
       return <group key={placement.id} position={[placement.x + w / 2 - size / 2, 0.04, placement.z + d / 2 - size / 2]} onClick={readOnly ? undefined : event => { event.stopPropagation(); if (draft) tileEvent(event); else onSelect?.(placement) }}>
         {selectedId === placement.id && <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.007, 0]}><planeGeometry args={[w + 0.12, d + 0.12]} /><meshBasicMaterial color="#f5cd77" transparent opacity={0.72} depthWrite={false} /></mesh>}
-        <group rotation={[0, placement.rotation * Math.PI / 180, 0]}><ProceduralModel item={item} ghost={draft?.placementId === placement.id} valid /></group>
+        <group rotation={[0, placement.rotation * Math.PI / 180, 0]}><ProceduralModel item={item} variation={placement.id} connections={roads.get(placement.id)} ghost={draft?.placementId === placement.id} valid /></group>
       </group>
     })}
     {draft && (() => {
@@ -216,24 +221,25 @@ function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,va
 }
 function SceneContents(props:SceneProps){
  const {size=16,perspective=false,resetKey=0,interior=false,neighbor,realm='main',onRealm}=props;
- if(props.worldGame?.world_systems?.initialized)return <><RendererDiagnostics interior={false}/><WorldRealms game={props.worldGame} realm={realm} active={props.active??true} perspective={perspective} resetKey={resetKey} draft={props.draft} selectedId={props.selectedId} valid={props.valid} gridVisible={props.gridVisible} onRealm={onRealm} onSelect={props.onSelect} onTile={props.onTile}/></>;
+ if(props.worldGame?.world_systems?.initialized)return <><RendererDiagnostics interior={false} publish={!props.readOnly}/><WorldRealms game={props.worldGame} realm={realm} active={props.active??true} perspective={perspective} resetKey={resetKey} draft={props.draft} selectedId={props.selectedId} valid={props.valid} gridVisible={props.gridVisible} onRealm={onRealm} onSelect={props.onSelect} onTile={props.onTile}/></>;
  const origin=neighbor?(realm==='main'?-size/2-1:size/2+1):0;
  const otherOrigin=neighbor?(realm==='main'?neighbor.size/2+1:-neighbor.size/2-1):0;
  return <>
-  <RendererDiagnostics interior={interior}/>
+  <RendererDiagnostics interior={interior} publish={!props.readOnly}/>
   <primitive object={SCENE_BACKGROUND} attach="background"/>
   <fog attach="fog" args={['#dce9e1',75,180]}/>
   <ambientLight intensity={1.5}/><hemisphereLight args={['#f3f7eb','#6c8876',1.5]}/>
   <directionalLight position={[12,22,8]} intensity={2.5} castShadow shadow-mapSize={[1024,1024]} shadow-camera-left={-45} shadow-camera-right={45} shadow-camera-top={45} shadow-camera-bottom={-45} shadow-bias={-.0008} shadow-normalBias={.04}/>
-  <CameraRig size={neighbor?Math.max(size,neighbor.size)*1.85:size} perspective={perspective} resetKey={resetKey} interior={interior}/>
-  {neighbor&&<mesh rotation={[-Math.PI/2,0,0]} position={[0,-.4,0]} receiveShadow><planeGeometry args={[180,180]}/><meshStandardMaterial color="#a5d4d6" roughness={.7}/></mesh>}
-  <group key={realm} position={[origin,0,0]}><PlotContents {...props} bare={!!neighbor} originX={origin}/></group>
+  <CameraRig size={neighbor?Math.max(size,neighbor.size)*1.85:size} perspective={perspective} resetKey={resetKey} interior={interior} targetY={props.previewElevation}/>
+  {neighbor&&<CoastalBackdrop/>}
+  <group key={realm} position={[origin,0,0]}><PlotContents {...props} bare={props.bare||!!neighbor} originX={origin}/></group>
   {neighbor&&<group key={realm==='main'?'yuyi':'main'} position={[otherOrigin,0,0]}><PlotContents placements={neighbor.placements} catalog={props.catalog} size={neighbor.size} bare originX={otherOrigin} readOnly={props.readOnly} onTile={()=>onRealm?.(realm==='main'?'yuyi':'main')} onSelect={()=>onRealm?.(realm==='main'?'yuyi':'main')}/></group>}
  </>;
 }
 
 export function WorldCanvas(props: SceneProps) {
   const { t } = useLocale()
+  const graphics=useGraphicsProfile(props.worldGame?.world_systems?.settings.quality)
   const [supported, setSupported] = useState<boolean | null>(null)
   useEffect(() => {
     try {
@@ -244,7 +250,7 @@ export function WorldCanvas(props: SceneProps) {
     } catch { setSupported(false) }
   }, [])
   return <div className={`world-canvas ${props.className || ''}`} data-testid="city-canvas" role="region" aria-label={props.interior ? t('غرفة ثلاثية الأبعاد قابلة للتأثيث', 'Interactive 3D room') : t('مدينة ثلاثية الأبعاد قابلة للبناء', 'Interactive 3D city')}>
-    {supported === null ? <div className="world-loading">{t('نجهّز عالمك…', 'Preparing your world…')}</div> : supported ? <CanvasErrorBoundary fallback={<WebGLFallback />}><Canvas shadows frameloop="demand" dpr={[1, 1.5]} gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }} fallback={<WebGLFallback />} onCreated={({ gl }) => { gl.setClearColor(SCENE_BACKGROUND); gl.shadowMap.type = PCFSoftShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setSupported(false) }, { once: true }) }}><Suspense fallback={null}><SceneContents {...props} /></Suspense></Canvas></CanvasErrorBoundary> : <WebGLFallback />}
+    {supported === null ? <div className="world-loading">{t('نجهّز عالمك…', 'Preparing your world…')}</div> : supported ? <CanvasErrorBoundary fallback={<WebGLFallback />}><Canvas shadows={graphics.shadows} frameloop="demand" dpr={graphics.dpr} gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }} fallback={<WebGLFallback />} onCreated={({ gl }) => { gl.setClearColor(SCENE_BACKGROUND); gl.shadowMap.type = PCFSoftShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setSupported(false) }, { once: true }) }}><Suspense fallback={null}><SceneContents {...props} /></Suspense></Canvas></CanvasErrorBoundary> : <WebGLFallback />}
   </div>
 }
 
@@ -255,5 +261,5 @@ export function CityPreview({ placements = [], catalog = CATALOG, size = 16, cla
 export function ItemPreview({ item, className }: { item: CatalogItem; className?: string }) {
   const size = Math.max(item.footprint_x, item.footprint_z, item.model === 'skyscraper' ? 4 : 2) + 1
   const preview: Placement = { id: 'preview', inventory_id: 'preview', catalog_id: item.id, x: (size - item.footprint_x) / 2, y: 0, z: (size - item.footprint_z) / 2, rotation: 0, version: 1 }
-  return <WorldCanvas placements={[preview]} catalog={[item]} size={size} className={className} interior={item.is_furniture} readOnly />
+  return <WorldCanvas placements={[preview]} catalog={[item]} size={size} className={className} previewElevation={item.model==='skyscraper'?2:item.model.startsWith('botanical:')?1:0} bare interior={item.is_furniture} readOnly />
 }

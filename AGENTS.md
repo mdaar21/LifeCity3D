@@ -75,6 +75,28 @@ first without deleting guest saves, then continue all remaining approved systems
 The paused-scope paragraphs above are historical. Do not claim20-feature completion
 until real operations and tests exist. Keep Auth as the later feature stage.
 
+## Latest owner — visual batches supersede the brief publication request
+Implement the uploaded visual design book in two batches. Current task is BATCH1:
+stages1–3 (HUD/city, asset families/roads/nature/coast, paid construction/interiors).
+No publishing. Prior Pages run finished before cancellation; do not roll it back.
+Read docs/PROJECT_CONTEXT.md and only relevant sources. Preserve all features,
+financial authority, existing data and applied migrations. No new dependencies or
+backend changes for visual work. Keep reports short; never claim all V6 complete.
+
+## Current checkpoint
+Owner requested completion of BATCH2. All six VISUAL stages are now implemented;
+checks/evidence are in docs/evidence/visual-batch2. Publication remains prohibited.
+Continue on the same branch. Full V6 expansion acceptance/Auth are separate and
+must not be called complete because the visual upgrade passed.
+
+## Latest owner — missing paid content
+Visual BATCH1/BATCH2 are complete. Do not redo them. Current group implements
+vegetation and agriculture with server pricing, atomic quotes, receipts, real
+growth/paid operations and preserved50% historical refunds. Reuse existing JSONB
+world storage; no new migration needed for optional decoration metadata.
+Next groups are complete paid recoloring and paid road/light/architecture variants.
+Do not deploy, publish or merge without explicit owner permission.
+
 ## Latest owner — activate account login
 The owner explicitly requested activating login on the live website. This
 authorizes the narrow Auth release from main; visual/paid-content work stays on

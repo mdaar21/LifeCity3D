@@ -1,0 +1,16 @@
+import {describe,expect,it} from 'vitest';
+import type {Building} from '../../supabase/functions/_shared/world-types';
+import {constructionVisualState} from '../../src/world/construction-visual-state';
+import {visualSeed} from '../../src/world/visual-style';
+import {roadConnections} from '../../src/world/road-visuals';
+import {CATALOG} from '../../src/lib/catalog';
+import type {Placement} from '../../src/lib/types';
+import {shorelineVertices} from '../../src/world/parcel-shoreline';
+import type {Terrain} from '../../supabase/functions/_shared/world-types';
+describe('visuals follow persisted paid construction, never planned assets',()=>{
+ it('shows no floor or roof for a paid foundation alone; frame payment is independent of slabs',()=>{const b={floors:[{index:0},{index:1}],stages:[{type:'foundation',paid:true},{type:'frame',paid:false},{type:'floor',floor:0,paid:false},{type:'floor',floor:1,paid:false},{type:'roof',paid:false}],opened_at:null} as unknown as Building;const before=structuredClone(b);expect(constructionVisualState(b)).toMatchObject({paidFloors:[],frame:false,roof:false,active:true});b.stages[1].paid=true;expect(constructionVisualState(b)).toMatchObject({paidFloors:[],frame:true,roof:false});expect(before.stages[1].paid).toBe(false);});
+ it('selects exact paid floors and removes temporary site equipment only on real opening',()=>{const b={floors:[{index:0},{index:1},{index:2}],stages:[{type:'floor',floor:0,paid:true},{type:'floor',floor:1,paid:true},{type:'floor',floor:2,paid:false},{type:'roof',paid:false}],opened_at:null} as unknown as Building;expect(constructionVisualState(b).paidFloors.map(f=>f.index)).toEqual([0,1]);b.opened_at='2026-10-31T12:00:00Z';expect(constructionVisualState(b).active).toBe(false);});
+ it('keeps plant variation stable through save/restore without using clocks or wallet values',()=>{const seed=visualSeed('owned-plant-123');expect(visualSeed(JSON.parse(JSON.stringify('owned-plant-123')))).toBe(seed);expect(visualSeed('owned-plant-124')).not.toBe(seed);});
+ it('joins only actual adjacent purchased roads, respects rotation and never alters saved transforms',()=>{const p=(id:string,x:number,z:number,rotation=0,catalog_id='road')=>({id,x,z,rotation,catalog_id}) as Placement;const saved=[p('center',3,3),p('north',3,2),p('east',4,3,90),p('south',3,4),p('unrelated-path',2,3,0,'path')],before=structuredClone(saved),links=roadConnections(saved,CATALOG);expect(links.get('center')).toEqual([true,true,true,false]);expect(links.get('east')).toEqual([true,false,false,false]);expect(saved).toEqual(before);expect(roadConnections(saved.filter(p=>p.id!=='north'),CATALOG).get('center')).toEqual([false,true,true,false]);});
+ it('keeps the decorative shore out of excavations, follows negative terrain and preserves stored heights',()=>{const terrain={side:4,heights_cm:Array(25).fill(-150)} as Terrain,before=structuredClone(terrain),v=shorelineVertices([{x:0,z:0},{x:4,z:0},{x:4,z:4},{x:0,z:4}],terrain);expect(v.length).toBeGreaterThan(0);for(let i=0;i<v.length;i+=3){expect(v[i]===0||v[i]===4||v[i+2]===0||v[i+2]===4).toBe(true);expect(v[i+1]).toBeLessThanOrEqual(-1.5);}for(let i=0;i<v.length;i+=9){const x=[v[i],v[i+3],v[i+6]],z=[v[i+2],v[i+5],v[i+8]];expect(new Set(x).size===1||new Set(z).size===1).toBe(true);}expect(terrain).toEqual(before);});
+});

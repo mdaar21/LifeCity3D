@@ -9,6 +9,38 @@
   restoration passed. Public email delivery remains a separate unverified limit.
 - This release excludes the unpublished visual and horticulture branches.
 
+## Paid vegetation/agriculture — unpublished
+
+- 14 species,2 plot types and8 crops/orchards, each with trusted positive prices.
+- Paid manual planting, watering, harvesting, replanting and relocation; real-time
+  growth, crop-specific stock and MAIN sales within the existing shared income cap.
+- Preserve independent grant-funded MAD, source cost components and50% refunds.
+  Separate gross guest income from sales fees to preserve the same cap.
+- Reuse RLS-protected world JSONB and atomic settlement; no schema changes.
+- 111 tests/22 files passed; actual browser purchase/harvest/sale and independent
+  restore passed. Paid recoloring and road/light/architecture variants remain next.
+
+## Visual BATCH2 — local review, unpublished — 2026-10-31
+
+- Complete game panels for shop, missions, focus, prayers, wallets and settings;
+  25 cached original asset images and on-demand mobile3D previews.
+- Add neutral Yuyi MAD summary while preserving the optional memory garden.
+- Add device-only graphics presets and bounded day/sunset/night/rain/fog effects,
+  paid night lights and reduced-motion/hidden-panel rendering safeguards.
+- 100 regression tests and all19 browser cases pass. Backend, prices, wallets,
+  purchase authority, migrations and existing saves are unchanged. No publication.
+
+## Visual BATCH1 — local review, unpublished — 2026-10-31
+
+- Preserve the existing game; add navy/cream HUD, working build/roads/greenery
+  shortcuts and 44px dock targets.
+- Upgrade original paid architectural assets, merged plants, connected roads,
+  coastline and construction equipment derived from actual paid stages.
+- Add saved-stage timeline, explicit building/floor focus and camera-aware
+  cutaway walls while retaining furniture, footprints and paid material choices.
+- No dependencies, financial/backend changes or Supabase migrations.
+  See docs/evidence/visual-batch1/README.md for checks and remaining BATCH2.
+
 ## PWA delivery repair — 2026-10-31
 
 - Reproduce the old cached3-task client with actual compiled releases.

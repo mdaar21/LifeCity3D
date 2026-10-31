@@ -1,0 +1,16 @@
+{
+  "paidSpecies": [
+    "date_palm",
+    "fan_palm"
+  ],
+  "manualRelocation": true,
+  "cancelDidNotChargeOrPlace": true,
+  "paidHarvest": true,
+  "grossSaleIncome": 5,
+  "exactPostWallet": true,
+  "independentMadUnchanged": true,
+  "secondBrowserRestored": true,
+  "axeViolations": 0,
+  "errors": [],
+  "scope": "Disposable reference SQL backend and two real browser contexts. Mature fixture timestamp set only in tests; no production changes or hosted-feature deployment."
+}
