@@ -2,9 +2,9 @@
 
 - Repo: mdaar21/LifeCity3D only. React/Vite/R3F/Three, existing stack and lockfile.
 - Current branch: codex/stylized-visual-overhaul, based on main5d567ae.
-- BATCH1 implemented and locally verified; BATCH2 has not started.
+- Visual BATCH1 and BATCH2 (stages1–6) implemented and locally verified.
 - Latest owner: visual BATCH1 = stages1 HUD/city,2 assets/roads/nature/coast,
-  3 real paid construction/cutaway interiors. BATCH2 = stages4–6 later.
+  3 paid construction/interiors; BATCH2 =4 game panels,5 atmosphere/graphics,6 acceptance.
 - Do not publish these visual batches. Prior release5d567ae finished before the
   owner's cancellation; Pages41174825103 succeeded. Do not undo data or releases.
 - Reference: uploaded LifeCity3D_Complete_Visual_Design_And_10_References.pdf,
@@ -37,8 +37,21 @@
   cutaway sofa, accessibility, stable saved entities/components and both wallets.
 - Original baseline captured before renderer edits in work/visual-before; the
   preserved before-* captures are under docs/evidence/visual-batch1.
-- Current checks:96 tests/19 files,15 browser cases across focused runs, lint and
+- Current checks:100 tests/20 files,19 browser cases across focused runs, lint and
   typecheck, Pages build and compiled Pages/PWA checks passed. See batch evidence
   README for actual limits.
 - Output: docs/evidence/visual-batch1. Use focused checks during implementation;
   full economy/security/regressions and build at the batch milestone.
+
+## BATCH2
+- src/game-panels.css scopes shared light/dark game surfaces; all forms/commands
+  retained. Shop uses25 original cached PNG renders, one live preview on demand.
+- src/world/graphics-profile.ts + useGraphics.ts: device-only auto/low/medium/high,
+  DPR1–1.5; separate local key lifecity-render-preferences-v1, no finance or saves.
+- WorldAtmosphere/WorldWeather: visual-only server-clock prediction, day/sunset/
+  night, readable fog, instanced rain/clouds; stop loops when inactive/hidden or
+  reduced motion. Paid windows/lamps light at night; no free assets or energy.
+- Yuyi's separate MAD panel is neutral; original memory garden remains in a drawer.
+- New evidence: docs/evidence/visual-batch2.100 regression tests and all19 browser
+  cases passed; no schema/server/dependency changes and no publication.
+- Broader V6 gaps and hosted Auth/world acceptance remain as documented earlier.

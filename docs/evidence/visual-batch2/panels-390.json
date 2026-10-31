@@ -1,0 +1,78 @@
+{
+  "scans": [
+    {
+      "route": "shop",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "tasks",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "timer",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "prayers",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "economy",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "yuyi",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "settings",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "shop",
+      "theme": "dark-en",
+      "violations": []
+    },
+    {
+      "route": "tasks",
+      "theme": "dark-en",
+      "violations": []
+    },
+    {
+      "route": "timer",
+      "theme": "dark-en",
+      "violations": []
+    },
+    {
+      "route": "prayers",
+      "theme": "dark-en",
+      "violations": []
+    },
+    {
+      "route": "economy",
+      "theme": "dark-en",
+      "violations": []
+    },
+    {
+      "route": "yuyi",
+      "theme": "dark-en",
+      "violations": []
+    },
+    {
+      "route": "settings",
+      "theme": "dark-en",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "bodyAndPanelsFit": true,
+  "devicePreferenceRestored": true,
+  "walletUnchanged": true
+}

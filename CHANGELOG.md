@@ -1,5 +1,15 @@
 # Changelog
 
+## Visual BATCH2 — local review, unpublished — 2026-10-31
+
+- Complete game panels for shop, missions, focus, prayers, wallets and settings;
+  25 cached original asset images and on-demand mobile3D previews.
+- Add neutral Yuyi MAD summary while preserving the optional memory garden.
+- Add device-only graphics presets and bounded day/sunset/night/rain/fog effects,
+  paid night lights and reduced-motion/hidden-panel rendering safeguards.
+- 100 regression tests and all19 browser cases pass. Backend, prices, wallets,
+  purchase authority, migrations and existing saves are unchanged. No publication.
+
 ## Visual BATCH1 — local review, unpublished — 2026-10-31
 
 - Preserve the existing game; add navy/cream HUD, working build/roads/greenery

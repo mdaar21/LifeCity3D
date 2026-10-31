@@ -1,0 +1,43 @@
+{
+  "scans": [
+    {
+      "route": "shop",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "tasks",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "timer",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "prayers",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "economy",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "yuyi",
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "route": "settings",
+      "theme": "light",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "bodyAndPanelsFit": true,
+  "devicePreferenceRestored": true,
+  "walletUnchanged": true
+}

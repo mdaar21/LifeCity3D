@@ -12,13 +12,13 @@ import { E2E_OTHER, E2E_OWNER, E2E_PASSWORD } from './accounts.js';
 const directory = await mkdtemp(join(tmpdir(), 'lifecity-browser-'));
 const database = await createLocalDatabase({path: join(directory, 'db')});
 const derived = await hashPassword(E2E_PASSWORD);
-for (const [email, name, balance] of [[E2E_OWNER, 'Browser owner', 2000], [E2E_OTHER, 'Separate account', 0], ['visual-builder@example.test','Visual fixture',50000]] as const) {
+for (const [email, name, balance] of [[E2E_OWNER, 'Browser owner', 2000], [E2E_OTHER, 'Separate account', 0], ['visual-builder@example.test','Visual fixture',50000], ['visual-weather@example.test','Weather fixture',50000]] as const) {
   const id = randomUUID();
   await database.owner(async (tx) => {
     await tx.query('INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES($1,$2,$3::jsonb)', [id, email, JSON.stringify({display_name: name})]);
     await tx.query('INSERT INTO local_auth.credentials(user_id,password_hash,password_salt) VALUES($1,$2,$3)', [id, derived.hash, derived.salt]);
     await tx.query("UPDATE public.profiles SET language='en',digits='latin' WHERE id=$1", [id]);
-    if(email==='visual-builder@example.test'){await tx.query('update public.wallets set city_xp=5000 where user_id=$1',[id]);await tx.query("insert into public.study_sessions(user_id,status,started_at,last_tick_at,active_seconds,credited_minutes,bonus_awarded) values($1,'finished',clock_timestamp()-interval '2 days',clock_timestamp()-interval '2 days',72000,1200,true)",[id]);}
+    if(email.startsWith('visual-')){await tx.query('update public.wallets set city_xp=5000 where user_id=$1',[id]);await tx.query("insert into public.study_sessions(user_id,status,started_at,last_tick_at,active_seconds,credited_minutes,bonus_awarded) values($1,'finished',clock_timestamp()-interval '2 days',clock_timestamp()-interval '2 days',72000,1200,true)",[id]);}
     if (balance) await tx.query('SELECT public.apply_coins($1,$2,$3,$4)', [id, balance, 'test_fixture', `fixture:${randomUUID()}`]);
   });
 }

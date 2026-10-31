@@ -11,6 +11,7 @@ import {useMoney} from '../lib/useMoney';
 import { useStudyHeartbeat } from '../lib/useStudyHeartbeat';
 import '../game-shell.css';
 import '../stylized-game.css';
+import '../game-panels.css';
 import {useWorldUI} from '../world/useWorldUI';
 
 export default function AppLayout() {
@@ -36,7 +37,7 @@ export default function AppLayout() {
     {path:'/economy',icon:Coins,label:t('المحفظتان والعملات','Wallets & currencies'),hint:t('رصيد مدينتي ودرهم ويوي','My City & Yuyi MAD')},
     { path: '/dashboard', icon: LayoutDashboard, label: t('سجل الرحلة', 'Journey log'), hint: t('يومك ومشروعك القادم', 'Your day & next project') },
     { path: '/prayers', icon: MoonStar, label: t('الصلوات', 'Prayers'), hint: t('سجلّك اليومي', 'Your daily journal') },
-    { path: '/yuyi', icon: Heart, label: t('حديقة ويوي', 'Yuyi garden'), hint: t('مساحة مشتركة باختيارك', 'An optional shared space') },
+    { path: '/yuyi', icon: Heart, label: t('ويوي · MAD', 'Yuyi · MAD'), hint: t('مساحة مشتركة باختيارك', 'An optional shared space') },
     { path: '/interior', icon: House, label: t('داخل المنزل', 'Home interior'), hint: t('رتّب مساحتك', 'Make it your own') },
     { path: '/stats', icon: TrendingUp, label: t('إنجازاتي', 'Achievements'), hint: t('الإحصاءات ودفتر العملات', 'Progress & coin ledger') },
     { path: '/settings', icon: Settings, label: t('الإعدادات', 'Settings'), hint: t('حسابك وتفضيلاتك', 'Account & preferences') },

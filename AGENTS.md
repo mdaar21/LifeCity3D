@@ -82,3 +82,9 @@ No publishing. Prior Pages run finished before cancellation; do not roll it back
 Read docs/PROJECT_CONTEXT.md and only relevant sources. Preserve all features,
 financial authority, existing data and applied migrations. No new dependencies or
 backend changes for visual work. Keep reports short; never claim all V6 complete.
+
+## Current checkpoint
+Owner requested completion of BATCH2. All six VISUAL stages are now implemented;
+checks/evidence are in docs/evidence/visual-batch2. Publication remains prohibited.
+Continue on the same branch. Full V6 expansion acceptance/Auth are separate and
+must not be called complete because the visual upgrade passed.

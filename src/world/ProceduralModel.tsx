@@ -5,11 +5,11 @@ import {ConnectedRoad} from './ConnectedRoad'
 import type {RoadConnections} from './road-visuals'
 import type { CatalogItem } from '../lib/types'
 
-interface ModelProps { item: CatalogItem; ghost?: boolean; valid?: boolean; variation?:string; connections?:RoadConnections }
+interface ModelProps { item: CatalogItem; ghost?: boolean; valid?: boolean; variation?:string; connections?:RoadConnections; night?:boolean }
 const palette = { forest: '#315e49', moss: '#73945c', ivory: '#f6f0d9', gold: '#e1b45c', roof: '#567a72', dark: '#263e3a', glass: '#a6d7df', wood: '#a77850' }
 
 /** Original procedural assets: all dimensions are expressed in owned grid tiles. */
-export function ProceduralModel({ item, ghost = false, valid = true, variation=item.id, connections }: ModelProps) {
+export function ProceduralModel({ item, ghost = false, valid = true, variation=item.id, connections, night=false }: ModelProps) {
   const color = (value: string) => ghost ? (valid ? '#75d9a0' : '#ed7880') : value
   const material = (value: string, extra: object = {}) => <meshStandardMaterial color={color(value)} roughness={0.83} transparent={ghost} opacity={ghost ? 0.58 : 1} {...extra} />
   const box = (position: [number, number, number], scale: [number, number, number], shade: string, key?: string) => <mesh key={key} position={position} castShadow receiveShadow><boxGeometry args={scale} />{material(shade)}</mesh>
@@ -22,7 +22,7 @@ export function ProceduralModel({ item, ghost = false, valid = true, variation=i
   </group>
   const lamp = (x = 0, z = 0) => <group position={[x, 0, z]}>
     <mesh position={[0, 0.55, 0]} castShadow><cylinderGeometry args={[0.027, 0.04, 1.1, 6]} />{material(palette.dark)}</mesh>
-    {box([0, 1.14, 0], [0.2, 0.24, 0.2], '#f6db9d')}
+    <mesh position={[0,1.14,0]}><boxGeometry args={[.2,.24,.2]}/>{material('#f6db9d',{emissive:night?'#f6db9d':'#000000',emissiveIntensity:night?.8:0})}</mesh>{night&&<mesh rotation={[-Math.PI/2,0,0]} position={[0,.08,0]}><circleGeometry args={[.55,16]}/><meshBasicMaterial color="#f6d59b" transparent opacity={.14} depthWrite={false}/></mesh>}
     {box([0, 1.28, 0], [0.27, 0.05, 0.27], palette.dark)}
     {box([0, 0.035, 0], [0.18, 0.07, 0.18], palette.dark)}
   </group>
@@ -32,7 +32,7 @@ export function ProceduralModel({ item, ghost = false, valid = true, variation=i
     {[-0.27, 0.27].map(v => box([v, 0.14, 0], [0.055, 0.28, 0.24], palette.dark, `leg${v}`))}
   </group>
   const model = item.model.toLowerCase()
-  if(['house','villa','apartment','skyscraper','palace'].includes(model)){const family=model==='house'?'home':model==='skyscraper'?'tower':model as 'villa'|'apartment'|'palace';return <ArchitectureAsset family={family} width={Math.max(.7,item.footprint_x*.8)} depth={Math.max(.7,item.footprint_z*.78)} height={model==='skyscraper'?5.4:model==='palace'?2.35:model==='apartment'?2.65:model==='villa'?1.65:1.2} ghost={ghost} valid={valid}/>;}
+  if(['house','villa','apartment','skyscraper','palace'].includes(model)){const family=model==='house'?'home':model==='skyscraper'?'tower':model as 'villa'|'apartment'|'palace';return <ArchitectureAsset family={family} width={Math.max(.7,item.footprint_x*.8)} depth={Math.max(.7,item.footprint_z*.78)} height={model==='skyscraper'?5.4:model==='palace'?2.35:model==='apartment'?2.65:model==='villa'?1.65:1.2} ghost={ghost} valid={valid} night={night}/>;}
   if(model==='tree')return <StylizedPlant seed={variation} ghost={ghost} valid={valid}/>;
   if(model.includes('road')||model.includes('path'))return <ConnectedRoad connections={connections} path={model.includes('path')} ghost={ghost} valid={valid}/>;
   let content: ReactNode

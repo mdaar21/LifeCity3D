@@ -1,5 +1,9 @@
 # Visual BATCH1 — stages1–3, unpublished
 
+BATCH2 is subsequently complete: ../visual-batch2/README.md. Current raw captures
+were rerun with its lighting and shared game surfaces; this report preserves the
+original BATCH1 milestone measurements.
+
 2026-10-31 · `codex/stylized-visual-overhaul` · base `5d567ae`.
 Reference: owner-uploaded visual design book, especially pages34–43.
 

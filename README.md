@@ -22,10 +22,10 @@ bundling and keeps credential values out of its output.
 
 ## Visual upgrade checkpoint — unpublished
 
-BATCH1 stages1–3 build on the existing world release: compact game HUD, original
-procedural assets/road joins, paid construction and camera-aware cutaway interiors.
-See [batch evidence](docs/evidence/visual-batch1/README.md). BATCH2 stages4–6
-remain; this branch has not been deployed. Wallets, purchases and saved transforms
+Both visual batches (stages1–6) build on the existing world release: game HUD,
+procedural assets, paid construction/interiors, shared game panels and device
+graphics/day/night/weather. See [BATCH1](docs/evidence/visual-batch1/README.md) and
+[BATCH2 evidence](docs/evidence/visual-batch2/README.md). This branch has not been deployed. Wallets, purchases and saved transforms
 retain their existing authority. Full V6 status remains partial in
 [the world-systems register](docs/v6/WORLD-SYSTEMS.md).
 

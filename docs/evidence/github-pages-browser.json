@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "base": "http://127.0.0.1:37405/LifeCity3D",
+  "base": "http://127.0.0.1:36707/LifeCity3D",
   "router": "browser",
   "published": false,
   "scope": "Local simulation of GitHub Pages path and routing behavior, not a remote deployment.",

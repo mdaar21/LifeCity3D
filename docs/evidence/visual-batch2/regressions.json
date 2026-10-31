@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-31",
+  "unitIntegration": {
+    "files": 20,
+    "tests": 100,
+    "passed": true,
+    "seconds": 39.52
+  },
+  "browserCases": 19,
+  "newVisualCases": 4,
+  "regressionGroups": [
+    {
+      "label": "canvas and focus",
+      "exit": 0,
+      "summary": "  ✓  1 [chromium] › tests/e2e/game-shell.spec.ts:5:1 › game windows preserve the city canvas, menu keyboard access and a running focus session (10.1s)\n  ✓  2 [chromium] › tests/e2e/game-shell.spec.ts:24:1 › game HUD and panels fit desktop and phone in Arabic, English and dark mode (16.5s)\n  2 passed (34.4s)"
+    },
+    {
+      "label": "approved tasks and wallet forms",
+      "exit": 0,
+      "summary": "  ✓  1 [chromium] › tests/e2e/approved-tasks.spec.ts:8:1 › mobile approved tasks settle an immutable weekly plan and restore exact rewards in a second browser (11.3s)\n  ✓  2 [chromium] › tests/e2e/approved-tasks.spec.ts:15:1 › guest tasks require confirmation, pay distinct laundry loads and count five different definitions once (14.2s)\n  ✓  3 [chromium] › tests/e2e/v6-foundation.spec.ts:20:1 › paired wallets and owner-instruction forms stay accessible on mobile (9.1s)\n  3 passed (40.6s)"
+    },
+    {
+      "label": "MAD purchases refunds and two-browser saves",
+      "exit": 0,
+      "summary": "  ✓  1 [chromium] › tests/e2e/persistence.spec.ts:24:1 › two browser contexts recover the exact purchased home, inventory, balance and rotation (18.6s)\n  ✓  2 [chromium] › tests/e2e/persistence.spec.ts:71:1 › an independent account has an empty city and cannot mutate another account inventory (7.9s)\n  ✓  3 [chromium] › tests/e2e/v6-foundation.spec.ts:8:1 › two-city owner uses an exact independent MAD wallet, buys, places and demolishes with saved half refund (14.3s)\n  3 passed (46.7s)"
+    },
+    {
+      "label": "manual city projects",
+      "exit": 0,
+      "summary": "  ✓  1 [chromium] › tests/e2e/additions.spec.ts:15:1 › first-city guide leads to manual planting; saved building project funds, completes and refunds honestly (25.9s)\n  1 passed (31.8s)"
+    },
+    {
+      "label": "visits signup and offline guest",
+      "exit": 0,
+      "summary": "  ✓  1 [chromium] › tests/e2e/additions.spec.ts:32:1 › owner grants a city-only link; anonymous visitor reads, signed-in visitor reacts, owner revokes (16.2s)\n  ✓  2 [chromium] › tests/e2e/demo.spec.ts:4:1 › guest demo remains local, preserves language and placements, and blocks offline writes (16.4s)\n  ✓  3 [chromium] › tests/e2e/signup.spec.ts:3:1 › new local account keeps the language chosen before signup across reload (3.7s)\n  3 passed (42.4s)"
+    },
+    {
+      "label": "studio and orbit",
+      "exit": 0,
+      "summary": "  ✓  1 [chromium] › tests/e2e/v6-foundation.spec.ts:25:1 › mobile viewport two-plot renderer responds to orbit with bounded baseline draw calls (11.3s)\n  ✓  2 [chromium] › tests/e2e/world-studio.spec.ts:10:1 › measured studio builds through real quotes and restores nested objects on an independent phone browser (24.0s)\n  2 passed (41.7s)"
+    },
+    {
+      "label": "paid construction and interiors",
+      "exit": 0,
+      "summary": "  ✓  1 [chromium] › tests/e2e/visual-batch1.spec.ts:12:1 › visual batch 1: paid construction, assets and cutaway preserve actual saves and accessible HUD (46.3s)\n  1 passed (52.8s)"
+    }
+  ],
+  "lint": true,
+  "typecheck": true,
+  "pagesBuild": true,
+  "compiledPagesAndPwa": true,
+  "published": false,
+  "backendChanged": false,
+  "productionDataChanged": false
+}

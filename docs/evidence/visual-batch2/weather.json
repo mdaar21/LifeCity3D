@@ -1,0 +1,98 @@
+{
+  "captures": [
+    {
+      "name": "day",
+      "render": {
+        "scene": "city",
+        "startedAtMs": 1217.6999999955297,
+        "lastRenderedAtMs": 1467.8999999985099,
+        "renderedFrames": 1,
+        "rendererFrame": 1,
+        "calls": 47,
+        "triangles": 3376,
+        "dpr": 1,
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "frameGapsMs": []
+      },
+      "hash": "47d30ed4e648ce7de1e23334b5ca0ea9c4eeb1e6576dec04781886a875a6ed59"
+    },
+    {
+      "name": "sunset",
+      "render": {
+        "scene": "city",
+        "startedAtMs": 1113.3999999985099,
+        "lastRenderedAtMs": 1299.5999999940395,
+        "renderedFrames": 1,
+        "rendererFrame": 1,
+        "calls": 47,
+        "triangles": 3376,
+        "dpr": 1,
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "frameGapsMs": []
+      },
+      "hash": "c145b8f554fe98298dd3eb77c1c277354e0d3c6769a27fe7ed41ace294e47d70"
+    },
+    {
+      "name": "night",
+      "render": {
+        "scene": "city",
+        "startedAtMs": 1230.1999999955297,
+        "lastRenderedAtMs": 1425.5999999940395,
+        "renderedFrames": 1,
+        "rendererFrame": 1,
+        "calls": 49,
+        "triangles": 3408,
+        "dpr": 1,
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "frameGapsMs": []
+      },
+      "hash": "2b8f19b4952807853c13afeced84240178287191196282322c530ab8b70345ac"
+    },
+    {
+      "name": "rain",
+      "render": {
+        "scene": "city",
+        "startedAtMs": 1016.3999999985099,
+        "lastRenderedAtMs": 1236.1000000014901,
+        "renderedFrames": 1,
+        "rendererFrame": 1,
+        "calls": 49,
+        "triangles": 4192,
+        "dpr": 1,
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "frameGapsMs": []
+      },
+      "hash": "7f2b653c8fdc9809a42a25c3566307a6f5ec685dcdf42fc24da73c43a43bd892"
+    },
+    {
+      "name": "fog",
+      "render": {
+        "scene": "city",
+        "startedAtMs": 1098.8999999985099,
+        "lastRenderedAtMs": 1277.5,
+        "renderedFrames": 1,
+        "rendererFrame": 1,
+        "calls": 47,
+        "triangles": 3376,
+        "dpr": 1,
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "drawingBufferWidth": 1440,
+        "drawingBufferHeight": 900,
+        "frameGapsMs": []
+      },
+      "hash": "ed9d0dd28a0f4fba7b55cee26c08598f5348dd909290d284446c9eadc3c24ea7"
+    }
+  ],
+  "errors": [],
+  "paidAssetsAndWalletsUnchanged": true,
+  "reducedMotionIdleFrames": 0,
+  "scope": "Synthetic Chromium WebGL render counts and demand-render idle checks, not real-device FPS or hosted cloud acceptance."
+}
