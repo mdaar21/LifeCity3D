@@ -16,6 +16,7 @@ import {useMoney} from '../lib/useMoney'
 import type {DemolitionQuote} from '../lib/v6-types'
 import FirstCityGuide from '../components/FirstCityGuide'
 import CitySharing from '../components/CitySharing'
+import WorldStudio from '../world/WorldStudio'
 import '../world.css'
 
 export default function City({active=true}:{active?:boolean}) {
@@ -89,10 +90,11 @@ export default function City({active=true}:{active?:boolean}) {
     catch (cause) { setSuccess(false); setNotice(worldError(cause, t)) }
     finally { setBusy(false) }
   }
-  return <div className={`city-page immersive-city ${active ? 'is-playing' : ''}`}>
+  return <div className={`city-page immersive-city ${active ? 'is-playing' : ''} ${state.world_systems?.entities.some(e=>e.kind==='avatar'&&e.realm===realm&&e.mode!=='aerial')?'is-exploring':''}`}>
+    {active && <WorldStudio/>}
     {active && <>
       <div className="game-city-label"><span className="world-eyebrow">{t('عالمك الخاص', 'YOUR OWN WORLD')}</span><h1 aria-label={yuyi?t('مدينة ويوي','Yuyi City'):t('مدينتي','My city')}>{yuyi?t('مدينة ويوي','Yuyi City'):t('مدينتي', 'My city')}<span>{t('المستوى', 'LEVEL')} {number(levelFromXp(yuyi?state.v6!.yuyi_world.city_xp:state.wallet.city_xp))}</span></h1></div>
-      <div className="game-city-guide">{!yuyi&&<FirstCityGuide compact/>}</div>
+      <div className="game-city-guide">{!yuyi&&!state.world_systems?.entities.some(e=>e.kind==='building'&&e.realm===realm&&e.status==='active')&&<FirstCityGuide compact/>}</div>
       {state.v6&&<div className="territory-switch" role="group" aria-label={t('المدينة النشطة','Active city')}><button aria-pressed={!yuyi} onClick={()=>{selectRealm('main');setSelectedId(null);setPanel(null)}}>{t('مدينتي','My City')}</button><button aria-pressed={yuyi} onClick={()=>{selectRealm('yuyi');setSelectedId(null);setPanel(null)}}>{t('مدينة ويوي · MAD','Yuyi City · MAD')}</button></div>}
       <nav className="game-build-tools" aria-label={t('أدوات المدينة', 'City tools')}>
         {([{id:'inventory',icon:Package,label:t('البناء والمخزون','Build & inventory')},{id:'objects',icon:List,label:t('عناصر مدينتك','City objects')},{id:'share',icon:Share2,label:t('زيارات المدينة','City visits')}] as const).map(({id,icon:Icon,label})=><button key={id} aria-label={label} title={label} data-testid={`city-tool-${id}`} className={panel===id?'active':''} aria-expanded={panel===id} aria-controls="city-tool-panel" onClick={()=>setPanel(panel===id?null:id)}><Icon size={22}/><span>{label}</span>{id==='inventory'&&available.length>0&&<b>{number(available.length)}</b>}</button>)}
@@ -101,10 +103,10 @@ export default function City({active=true}:{active?:boolean}) {
     <div className="world-layout">
       <div className="city-stage panel">
         <div className="world-stage-top" hidden><span className="world-badge"><span />{t('حيّك الأول', 'Your first neighborhood')}</span><span className="world-badge">{t('المستوى', 'Level')} {number(levelFromXp(yuyi?state.v6!.yuyi_world.city_xp:state.wallet.city_xp))} · <b dir="ltr">{number(world.size)} × {number(world.size)}</b></span></div>
-        <WorldCanvas neighbor={state.v6?{placements:yuyi?state.placements:state.v6.yuyi_placements,size:yuyi?state.world.size:state.v6.yuyi_world.size}:undefined} realm={yuyi?'yuyi':'main'} onRealm={selectRealm} placements={placements} catalog={catalog} size={world.size} draft={draft} valid={!issue} selectedId={selectedId} gridVisible={grid} perspective={perspective} resetKey={resetKey} onSelect={selectPlacement} onTile={(x, z) => { if (draft && !busy) edit({ x, z }) }} />
+        <WorldCanvas worldGame={state} active={active} neighbor={state.v6?{placements:yuyi?state.placements:state.v6.yuyi_placements,size:yuyi?state.world.size:state.v6.yuyi_world.size}:undefined} realm={yuyi?'yuyi':'main'} onRealm={selectRealm} placements={placements} catalog={catalog} size={world.size} draft={draft} valid={!issue} selectedId={selectedId} gridVisible={grid} perspective={perspective} resetKey={resetKey} onSelect={selectPlacement} onTile={(x, z) => { if (draft && !busy) edit({ x, z }) }} />
         {active && <div className="world-camera-tools"><button className={grid ? 'active' : ''} aria-label={t('إظهار أو إخفاء الشبكة', 'Toggle grid')} aria-pressed={grid} onClick={() => setGrid(!grid)}><Grid2X2 size={19} /></button><button aria-label={t('إعادة ضبط الكاميرا', 'Reset camera')} onClick={() => setResetKey(value => value + 1)}><Home size={19} /></button><button aria-label={t('تبديل منظور الكاميرا', 'Switch camera projection')} aria-pressed={perspective} onClick={() => setPerspective(!perspective)}><Maximize2 size={19} /></button></div>}
         <div className="world-stage-bottom"><span>{draft ? t('اختر بلاطة، عدّل الاتجاه، ثم ثبّت.', 'Choose a tile, rotate, then confirm.') : t('اسحب للدوران · قرّب بإصبعين · اختر عنصرًا لتعديله', 'Drag to orbit · Pinch to zoom · Select an object to edit')}</span><span className="world-compass" dir="ltr">{t('ش ↑', 'N ↑')}</span></div>
-        {active && !placements.length && !draft && !panel && <div className="world-empty-callout"><span>✦</span><strong>{t('هنا تبدأ حكاية مدينتك', 'Your city story begins here')}</strong><p>{available.length ? t('اختر عنصرًا من المخزون وامنحه مكانًا.', 'Choose an inventory item and give it a home.') : t('أكمل مهمة، اجمع عملات، وازرع أول شجرة.', 'Complete an activity, earn coins, and plant your first tree.')}</p></div>}
+        {active && !state.world_systems?.initialized && !placements.length && !draft && !panel && <div className="world-empty-callout"><span>✦</span><strong>{t('هنا تبدأ حكاية مدينتك', 'Your city story begins here')}</strong><p>{available.length ? t('اختر عنصرًا من المخزون وامنحه مكانًا.', 'Choose an inventory item and give it a home.') : t('أكمل مهمة، اجمع عملات، وازرع أول شجرة.', 'Complete an activity, earn coins, and plant your first tree.')}</p></div>}
       </div>
       {active && (panel || draft || selected) && <aside className="builder-sidebar game-build-panel" id="city-tool-panel" aria-label={t('لوحة أدوات المدينة','City tools panel')}>
         <div className="game-build-panel-heading"><strong>{panel==='share'?t('زيارات المدينة','City visits'):panel==='objects'?t('عناصر مدينتك','City objects'):t('ورشة البناء','Build workshop')}</strong><button className="game-close" aria-label={t('إغلاق أدوات البناء','Close building tools')} onClick={()=>{setPanel(null);clear();setSelectedId(null)}}><X size={19}/></button></div>

@@ -26,3 +26,17 @@ trusted. Exposed per-user entity/component/event tables require owner RLS.
 Keep Auth setup as the later stage; do not ask for Auth URLs while implementing
 the game. No new promises of completed features or successful deploys without
 evidence. Read STATUS.md and the original full specification.
+
+## Current worktree checkpoint
+
+PWA repair is published and verified. Branch `codex/lifecity-world-systems` now
+contains shared engine, service SQL/Edge adapter, real R3F geometry/movement and
+Arabic/English studio. See WORLD-SYSTEMS.md for honest20-feature status. Finish
+focused compatibility/rooftop/district checks, full lint/typecheck/regressions and
+browser checks; then safe Supabase apply/Edge verification and GitHub-only
+publication. Continue remaining legacy master-prompt packs afterward without
+asking the owner to re-authorize. Auth setup remains later.
+
+Latest owner steering: publish the latest tested world increment immediately and
+pause further expansion implementation. Do not add new features during publication.
+Auth remains deferred. Finish CI/Pages and verify the public update link.

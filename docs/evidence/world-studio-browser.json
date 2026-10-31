@@ -1,0 +1,14 @@
+{
+  "referenceBackend": true,
+  "measuredMeters": [
+    8,
+    12
+  ],
+  "floors": 2,
+  "paidComponents": 22,
+  "secondFloorFurniture": true,
+  "independentPhoneRestore": true,
+  "realMovementSaved": true,
+  "consoleErrors": [],
+  "hostedSupabase": false
+}

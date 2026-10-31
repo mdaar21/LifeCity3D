@@ -1,4 +1,5 @@
 import {fetchFx} from '../supabase/functions/_shared/fx.ts';
+import {runWorldCommand} from './world.ts';
 import { randomUUID } from 'node:crypto';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { z } from 'zod';
@@ -121,6 +122,7 @@ export async function createLocalServer(options: LocalServerOptions = {}) {
         json(response, 200, {user: await currentUser(request)});
         return;
       }
+      if(method==='GET'&&route==='/api/surprise'){if(!visitLimiter.allow(request.socket.remoteAddress??'unknown'))throw new HttpError(429,'RATE_LIMIT');const token=z.string().regex(/^[a-f0-9]{64}$/).parse(url.searchParams.get('token'));const view=await database.asAnonymous(async tx=>(await tx.query<{view:unknown}>('select public.world_surprise_visit($1) view',[token])).rows[0]?.view);json(response,200,view);return;}
       if (method === 'GET' && route === '/api/visit') {
         if (!visitLimiter.allow(request.socket.remoteAddress ?? 'unknown')) throw new HttpError(429, 'RATE_LIMIT');
         const code=z.string().regex(/^[0-9a-f]{64}$/).parse(url.searchParams.get('code'));
@@ -167,6 +169,7 @@ export async function createLocalServer(options: LocalServerOptions = {}) {
       if (method === 'POST' && ['/api/auth/reset', '/api/auth/update-password', '/api/auth/reset/update-password'].includes(route)) {
         throw new HttpError(501, 'LOCAL_RECOVERY_NOT_CONFIGURED');
       }
+      if(method==='GET'&&route==='/api/world-history'){const user=await requireUser(request),id=z.string().uuid().parse(url.searchParams.get('id'));const view=await database.asUser(user.id,async tx=>(await tx.query<{view:unknown}>('select public.world_read_history($1) view',[id])).rows[0]?.view);json(response,200,view);return;}
       if (method === 'GET' && (route === '/api/state' || route === '/api/export')) {
         const user = await requireUser(request);
         const state = await database.asUser(user.id, async (tx) => (await tx.query<{state: GameSnapshot}>('SELECT public.game_state() AS state')).rows[0]?.state);
@@ -188,7 +191,7 @@ export async function createLocalServer(options: LocalServerOptions = {}) {
         const input = route === '/api/auth/delete'
           ? {action: 'delete_account', payload: z.object({confirmation: z.literal('DELETE')}).strict().parse(body), key: randomUUID()}
           : command.parse(body);
-        const result = await database.asUser(user.id, async (tx) => (await tx.query<{response: CommandResponse}>('SELECT public.game_command($1,$2::jsonb,$3::uuid) AS response', [input.action, JSON.stringify(input.payload), input.key])).rows[0]?.response);
+        const result = input.action.startsWith('world_')?await runWorldCommand(database,user.id,input.action,input.payload,input.key):await database.asUser(user.id, async (tx) => (await tx.query<{response: CommandResponse}>('SELECT public.game_command($1,$2::jsonb,$3::uuid) AS response', [input.action, JSON.stringify(input.payload), input.key])).rows[0]?.response);
         if (input.action === 'delete_account') {
           await database.owner(async (tx) => { await tx.query('DELETE FROM auth.users WHERE id=$1', [user.id]); });
           response.setHeader('Set-Cookie', sessionCookie('', secureCookies, true));
