@@ -1,8 +1,8 @@
 # Ultimate V6 — factual progress, 2026-10-31 (Asia/Riyadh)
 
 The uploaded specification is preserved in [the original text](../specs/LifeCity-Ultimate-V6.txt).
-This release slice implements the missing monetary/world foundation. It does
-**not** claim that V5 or all twenty V6 expansions were already present or are now
+This increment implements the monetary/world foundation and all16 approved tasks. It does
+**not** claim that all V5 systems or all twenty V6 expansions were already present or are now
 finished. All20 remain approved mandatory scope. [Discovery evidence](AUDIT.md).
 
 ## Completed foundation slice
@@ -39,17 +39,18 @@ this slice does not pretend those systems exist.
 | Requirement | Status |
 |---|---|
 | Original study/prayer/home/custom task behavior | IMPLEMENTED and regression-tested |
-|16 new exact task definitions and claim engine | NOT STARTED in this repository |
-|Five-distinct/day,1200-minute/week, immutable weekly plan,30-day streak | NOT STARTED |
+|16 new exact task definitions and claim engine | IMPLEMENTED and tested; applied migration20261031000407 |
+|Five-distinct/day,1200-minute/week, immutable weekly plan,30-day streak | IMPLEMENTED and tested |
 |Measured multistory construction, paid stages and Blueprint Studio | NOT STARTED |
 |Event-backed city replay, landmark gates, split-funded shared projects | NOT STARTED |
 |Business income allowance, restaurant/resident/driving/museum/animal/auction packs | NOT STARTED |
 |FX display/history throughout every legacy screen | PARTIAL: HUD, wallets and shop integrated; older task/ledger wording and historical FX receipts need completion |
-|Cloud registration/confirmation/recovery URLs and real email acceptance | BLOCKED by unconfigured Auth URLs; owner answered they have not set them |
+|Cloud registration/confirmation/recovery URLs and real email acceptance | DEFERRED by owner; do not resume until requested |
 
 ## All twenty approved V6 expansions
 
-The shared foundation above is a prerequisite. None of the rows below is claimed
+The shared foundation/task engine above is complete. Expansion work is PAUSED
+by the owner pending publication of the current increment. None of the rows below is claimed
 complete, and no nonfunctional expansion buttons have been added.
 
 | ID | Feature | Status | Remaining implementation / evidence boundary |
@@ -77,7 +78,8 @@ complete, and no nonfunctional expansion buttons have been added.
 
 ## Verification and publication boundary
 
-Commands and evidence are recorded in [the phase release](RELEASE-foundation.md).
+Current commands and evidence are recorded in [the task release](RELEASE-tasks.md);
+[foundation evidence](RELEASE-foundation.md) records the prior slice.
 The earlier game-interface upgrade is published at
 https://mdaar21.github.io/LifeCity3D/ (run41139285295, commit e32bf7e), verified in
 an actual mobile-sized browser. [Live UI proof](../evidence/live-ui-publication.json).

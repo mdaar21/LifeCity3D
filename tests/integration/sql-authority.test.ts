@@ -93,15 +93,16 @@ describe('authoritative RPCs under the real authenticated SQL role', () => {
       await runCommand(database, player.id, 'prayer_set', {prayer, status: 'completed'});
       await runCommand(database, player.id, 'prayer_set', {prayer, status: 'completed'});
     }
-    expect((await state(database, player.id)).wallet.balance).toBe(110);
+    // Five distinct prayers retain 110 base units and unlock the separate +30 milestone.
+    expect((await state(database, player.id)).wallet.balance).toBe(140);
     await expect(runCommand(database, player.id, 'prayer_set', {prayer: 'fajr', status: 'missed'})).rejects.toThrow(/confirm_missed/i);
     const key = randomUUID();
     await runCommand(database, player.id, 'prayer_set', {prayer: 'fajr', status: 'missed', confirmed_missed: true}, key);
     await runCommand(database, player.id, 'prayer_set', {prayer: 'fajr', status: 'missed', confirmed_missed: true}, key);
-    expect((await state(database, player.id)).wallet.balance).toBe(-20);
+    expect((await state(database, player.id)).wallet.balance).toBe(10);
     await runCommand(database, player.id, 'prayer_set', {prayer: 'fajr', status: 'excused'});
     const corrected = await state(database, player.id);
-    expect(corrected.wallet.balance).toBe(80);
+    expect(corrected.wallet.balance).toBe(110);
     expect(corrected.wallet.player_xp).toBeGreaterThanOrEqual(110);
     const audit = await database.owner((tx) => tx.query('SELECT * FROM public.prayer_audit WHERE user_id=$1', [player.id]));
     expect(audit.rows.length).toBeGreaterThanOrEqual(7);

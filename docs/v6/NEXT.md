@@ -1,32 +1,24 @@
-# Next permitted V6 implementation slice
+# Next work — owner paused expansions for publication
 
-Preserve the foundation and original master specification; do not reset accounts
-or pretend the16 tasks/twenty expansions were implemented by the current slice.
+The exact16-task engine is implemented, tested and its Supabase migration applied.
+Read RELEASE-tasks.md before changing it. Existing main/MAD history remains intact.
 
-Next priority is the exact16-task V5 dependency engine, before monetized V6
-business/construction systems. Generate a new forward migration with the CLI.
-Reuse game_command serialization/idempotency and apply_coins for canonical MAIN
-awards. Do not route any task/prayer/study reward into YUYI_MAD.
+The latest owner instruction is STOP new feature work and publish the current
+foundation +16-task increment. Do not start expansions or Auth configuration until
+the owner explicitly asks again. All20 expansions remain mandatory future scope,
+tracked NOT STARTED in STATUS.md. No nonfunctional expansion menus were added.
 
-Files to extend: a new migration, server/database.ts's discovered migration
-loader (no hard-coded list), src/lib/types.ts/api.ts, Tasks.tsx plus a dedicated
-approved-task/progress component, and tests/integration/v5-tasks.test.ts plus
-browser task flows. Keep old task IDs/history and three excluded defaults absent.
+When continuation is requested, begin the V6 shared world-meter/entity schema,
+server-authoritative quotes/settlement and measured parcels/construction, then
+avatar/walk-through/driving, terrain/underground, infrastructure, living services,
+contractors/installments/materials and private surprises/planner/celebrations in
+the original specification order. Preserve the exact task engine, genuine FX,
+independent MAD wallet and paid-basis50% demolition throughout.
 
-Required schema/services: versioned16-row fixed catalog, immutable eligible
-calendar periods (Saudi Sunday–Saturday), unique daily/weekly/laundry claims,
-self-report evidence, predeclared wake targets, non-overlapping sleep intervals,
-manual/time-backed walk/social claims, verified study-time segments, immutable
-weekly-plan snapshots (>=3 meaningful distinct goals), daily-distinct whitelist,
-streak identity/milestone receipts and atomic nonrecursive reconciliation.
-Freeze/reconcile calendar transitions prospectively so timezone hopping cannot
-replay an old claim. Never award prior days just by seeding the new catalog.
-
-Test exact rewards, all duplicate keys/device races, laundry ceiling3/unique load,
-20-minute/7-hour/60-minute thresholds, Sunday boundaries,1200-minute split across
-week boundary,5 DISTINCT base tasks,0/2/3-goal eligibility,29/30/60-day streaks,
-unchanged Yuyi MAD, and populated migration. Then run legacy regression again.
-
-Only after these dependencies are tested, proceed through all twenty rows in
-STATUS.md using the staged order in the original V6 specification. Do not add
-an expansion menu item until it performs real validated operations.
+Suggested new modules: src/expansion/types.ts and simulation/planning modules,
+a NEW CLI-generated migration (never edit either already-applied20261030/31 SQL),
+server-authoritative command adapter, accessible in-game controls and R3F world
+integration. Implement real operations before exposing each menu. Test ownership,
+RLS, conflicts/idempotency, original source-wallet costs, exact half refunds,
+network disconnects, debt, passive-income cap, real traversal and saved reloads.
+No arbitrary client balance/eligibility/quote authority. No Auth/email work now.

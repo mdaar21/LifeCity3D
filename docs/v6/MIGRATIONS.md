@@ -49,3 +49,11 @@ the public URL and publishable browser key as an alternative controlled config;
 its enabled flag remainsfalse until Auth setup and hosted email acceptance.
 VITE_BACKEND_MODE/VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY overrides still work.
 No secret key belongs in this JSON file or any VITE_ variable.
+
+## Exact16 tasks — second applied migration
+
+20261031000407_approved_tasks_engine.sql adds the fixed catalog, immutable claims,
+calendars, study segments, weekly plans, wake targets, streaks and audited laundry
+rule. It preserves the same command gate and original task/study/prayer amounts.
+No rewards are backfilled; production Auth remains explicitly deferred by owner.
+See RELEASE-tasks.md and evidence/approved-tasks-release.json for actual checks.

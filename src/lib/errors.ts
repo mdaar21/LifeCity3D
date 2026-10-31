@@ -1,5 +1,20 @@
 export class ApiError extends Error {constructor(public code:string){super(code);this.name='ApiError';}}
 const messages:Record<string,[string,string]>={
+ ALREADY_CLAIMED:['احتُسبت هذه المهمة لهذه الفترة بالفعل. حدّث الحالة لعرض الإيصال.','This task was already rewarded for this period. Refresh to see its receipt.'],
+ SELF_REPORT_REQUIRED:['أكّد أنك أنجزت النشاط فعليًا بإقرارك.','Confirm that you actually completed this self-reported activity.'],
+ TASK_NOT_CLAIMABLE:['هذا إنجاز تلقائي؛ يُحتسب من السجل بعد تحقق شروطه.','This milestone is derived automatically after its requirements are met.'],
+ LAUNDRY_LIMIT:['وصلت إلى حد الأمان اليومي للغسيل. تبقى الغسلة الواحدة مدفوعة مرة واحدة.','The daily laundry safeguard has been reached. Each distinct load is rewarded only once.'],
+ INVALID_SLEEP_INTERVAL:['سجّل فترة نوم من ٧ إلى ١٦ ساعة، تنتهي في يوم الاستيقاظ الحالي ودون وقت مستقبلي.','Record 7–16 elapsed hours, ending on the current waking date with no future time.'],
+ SLEEP_OVERLAP:['فترة النوم تتداخل مع فترة احتُسبت سابقًا.','This sleep interval overlaps one already rewarded.'],
+ WAKE_TARGET_NOT_MET:['يلزم موعد محفوظ قبل اليوم، ووقت استيقاظ لا يتجاوز سماح ١٠ دقائق.','A target must have been saved before today, and wake time must be within the 10-minute grace window.'],
+ WAKE_TARGET_IN_ADVANCE:['اختر موعدًا ليوم قادم خلال ٧ أيام؛ لا يمكن ضبط موعد اليوم بأثر رجعي.','Choose a future date within 7 days. Today’s target cannot be set retroactively.'],
+ WAKE_TARGET_LOCKED:['موعد هذا اليوم محفوظ وثابت بالفعل.','This day’s wake target is already saved and locked.'],
+ THREE_GOALS_REQUIRED:['تعتمد الخطة ٣ أهداف مختلفة ذات معنى على الأقل.','Commit to at least 3 distinct meaningful goals.'],
+ INVALID_WEEKLY_GOAL:['اختر أهدافًا معتمدة مختلفة وعددًا صحيحًا ضمن الحدود.','Choose different approved goals with valid whole-number targets.'],
+ GOAL_ALREADY_ACCOMPLISHED:['أحد الأهداف مكتمل قبل اعتماد الخطة. اختر هدفًا لم يتحقق بعد أو ارفع عدده ضمن الحدود.','One goal was accomplished before commitment. Choose an unmet goal or increase its target within the limits.'],
+ PLAN_LOCKED:['خطة هذا الأسبوع محفوظة وثابتة. يمكنك اختيار خطة جديدة الأسبوع القادم.','This week’s plan is saved and immutable. Choose a new plan next week.'],
+ TASK_CALENDAR_TRANSITION:['مطالبات المهام الجديدة في وقفة أمان أثناء انتقال التقويم. يظهر موعد انتهائها في المهام.','New task claims are paused during the calendar transition. Its end time is shown in Tasks.'],
+ CALENDAR_CHANGE_PENDING:['يوجد تغيير تقويم مجدول بالفعل.','A calendar change is already scheduled.'],
  FX_UNAVAILABLE:['مرجع FX غير متاح أو متقادم. حدّث المرجع قبل الشراء بالدرهم.','FX reference unavailable or stale. Refresh before MAD purchases.'],FX_UNSUPPORTED:['هذه العملة غير مدعومة بمرجع متاح.','This currency has no supported reference.'],QUOTE_EXPIRED:['انتهى عرض السعر أو تغيّر. اطلب عرضًا جديدًا.','Quote expired or changed. Request a fresh quote.'],QUOTE_USED:['استُخدم هذا العرض بالفعل.','This quote was already used.'],COST_BASIS_UNVERIFIED:['لا يوجد إثبات كافٍ لتكلفة هذا العنصر القديمة. لا يمكن احتساب استرداد مختلق.','The original paid cost is unverified; an invented refund cannot be issued.'],ALREADY_REVERSED:['صُحّحت هذه الحركة سابقًا.','This entry was already corrected.'],
 
  PROJECT_ACTIVE:['لديك مشروع ادخار نشط. أكمله أو ألغِه أولًا.','You have an active project. Complete or cancel it first.'],PROJECT_NOT_ACTIVE:['هذا المشروع اكتمل أو أُلغي. حدّث الحالة.','This project is complete or cancelled. Refresh its state.'],PROJECT_AMOUNT:['المبلغ يتجاوز المتبقي للمشروع.','The amount exceeds the remaining project cost.'],SHARE_UNAVAILABLE:['رابط الزيارة غير صالح أو انتهى أو أوقفه صاحب المدينة.','This visit link is invalid, expired or disabled by the owner.'],SELF_VISIT:['لا يمكنك تسجيل إعجاب أو تحية لمدينتك.','You cannot react to your own city.'],DEMO_SHARING_REQUIRES_ACCOUNTS:['رابط الزيارة يحتاج خدمة حسابات مهيأة. مدينتك التجريبية تبقى في هذا المتصفح.','Visit links need a configured account service. Your guest city stays in this browser.'],

@@ -20,7 +20,7 @@ existing React/Vite build. No Next.js migration or root package replacement was
 performed. `npm run check:config` now validates public build configuration before
 bundling and keeps credential values out of its output.
 
-## Ultimate V6 continuation — working foundation slice
+## Ultimate V6 continuation — foundation and exact16 tasks
 
 The owner-approved complete spec is preserved under docs/specs. The current
 branch adds two empty adjacent territories in one renderer, a strictly separate
@@ -31,8 +31,10 @@ Actual password-JWT login/cloud saving was checked with a disposable confirmed
 fixture in two independent browsers; real email confirmation/recovery remains
 unverified and the production client flag stays disabled pending Auth URL setup.
 
-**V6 is incomplete.** The16 new V5 task/milestone systems and all20 new expansion
-features are still pending. See [the complete status register](docs/v6/STATUS.md),
+**The exact16 tasks are implemented and tested.** All20 expansion features remain
+pending and are paused by the owner while this increment is published. Auth work
+is explicitly deferred. See [task release evidence](docs/v6/RELEASE-tasks.md).
+**V6 is incomplete.** See [the complete status register](docs/v6/STATUS.md),
 [phase evidence](docs/v6/RELEASE-foundation.md), and
 [migrations/Auth setup](docs/v6/MIGRATIONS.md). Do not treat the original spec's
 preserved-V5 wording as proof those features existed in the actual baseline.

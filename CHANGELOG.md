@@ -1,5 +1,15 @@
 # Changelog
 
+## Exact16 approved tasks — 2026-10-31
+
+- Implement exact daily/weekly/load/manual qualification and four automatic
+  milestones, immutable weekly plans, wake targets and consecutive-day streaks.
+- Split verified study seconds at local day/week boundaries; protect calendar
+  changes and store historical task FX metadata without changing canonical awards.
+- Add functional grouped RTL/LTR task UI, progress/history and a local guest engine.
+- Apply additive Supabase migration20261031000407;69 tests and3 focused browser
+  cases pass. Auth and all20 expansions are paused by owner for current publication.
+
 ## Ultimate V6 foundation slice — 2026-10-31
 
 - Preserve baseline and the complete owner-approved V6 specification/audit.

@@ -51,3 +51,15 @@ approved despite the older cancellation above; no free assets in either plot.
 New Yuyi grants/debits belong ONLY to a separate exact MAD wallet. Never rewrite
 legacy main-wallet history. Genuine dated FX and50% verified paid-cost demolition
 are mandatory. Use additive migrations, exact DB money and truthful status.
+
+## Latest owner sequence
+Implement the exact16 tasks FIRST, then all20 expansions, before returning to
+Auth configuration. Auth URL/email work is explicitly deferred until the owner
+asks after feature implementation; do not ask about Auth during these stages.
+Continue existing branches and test each stage; no completion claim for pending work.
+
+## Latest publication steering
+The owner has now PAUSED expansion work and explicitly requested publication of
+the completed foundation +16 tasks. Publish this tested increment on GitHub Pages,
+keep Auth deferred/client enabled=false, and wait for a later continuation request
+before implementing expansions. Do not continue new feature work during publication.

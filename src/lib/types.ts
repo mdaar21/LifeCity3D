@@ -1,4 +1,5 @@
 import type {V6Foundation} from './v6-types';
+import type {ApprovedTasks} from './task-types';
 export type Language='ar-SA'|'en';
 export type BackendMode='demo'|'local'|'supabase';
 export type Json=string|number|boolean|null|Json[]|{[key:string]:Json|undefined};
@@ -28,7 +29,7 @@ export interface CityProject {id:string;catalog_id:string;target_price:number;fu
 export interface CityShare {enabled:boolean;expires_at:string|null;revision:number}
 export type Greeting='beautiful'|'keep_going'|'welcome';
 export interface CityVisit {title:string;size:number;placements:Pick<Placement,'catalog_id'|'x'|'y'|'z'|'rotation'|'variant'>[];catalog:CatalogItem[];like_count:number;greetings:{code:Greeting;count:number}[];expires_at:string}
-export interface GameSnapshot {v6?:V6Foundation;profile:Profile;wallet:Wallet;world:World;catalog:CatalogItem[];inventory:InventoryItem[];placements:Placement[];furniture:Placement[];tasks:Task[];completions:Completion[];prayers:PrayerLog[];study_sessions:StudySession[];ledger:LedgerEntry[];partner_links:PartnerLink[];partner_permissions:PartnerPolicy[];partner_actions:PartnerAction[];partner_messages:PartnerMessage[];partner_challenges:PartnerChallenge[];yuyi_memories:YuyiMemory[];achievements:Achievement[];preferences:Preferences;projects:CityProject[];city_share:CityShare|null;server_now:string;local_day:string}
+export interface GameSnapshot {approved_tasks?:ApprovedTasks;v6?:V6Foundation;profile:Profile;wallet:Wallet;world:World;catalog:CatalogItem[];inventory:InventoryItem[];placements:Placement[];furniture:Placement[];tasks:Task[];completions:Completion[];prayers:PrayerLog[];study_sessions:StudySession[];ledger:LedgerEntry[];partner_links:PartnerLink[];partner_permissions:PartnerPolicy[];partner_actions:PartnerAction[];partner_messages:PartnerMessage[];partner_challenges:PartnerChallenge[];yuyi_memories:YuyiMemory[];achievements:Achievement[];preferences:Preferences;projects:CityProject[];city_share:CityShare|null;server_now:string;local_day:string}
 export interface CommandResponse {state:GameSnapshot|null;result:Record<string,unknown>}
 export interface SessionUser {id:string;email:string;display_name?:string}
 export interface GameApi {mode:BackendMode;signIn(email:string,password:string):Promise<SessionUser>;signUp(email:string,password:string,name:string):Promise<{user:SessionUser|null;confirmation_required:boolean}>;signOut():Promise<void>;getUser():Promise<SessionUser|null>;resetPassword(email:string):Promise<void>;updatePassword(password:string):Promise<void>;getState():Promise<GameSnapshot>;visit(code:string):Promise<CityVisit>;command(action:string,payload:Record<string,unknown>,key:string):Promise<CommandResponse>;refreshFx?():Promise<void>;subscribe?(onChange:()=>void):()=>void;deleteAccount():Promise<void>}
