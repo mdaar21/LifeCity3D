@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "checkedAt": "2026-10-31T18:49:40.805Z",
+  "base": "https://mdaar21.github.io/LifeCity3D",
+  "published": true,
+  "authPasswordStatuses": [
+    200,
+    200
+  ],
+  "twoIndependentBrowsers": true,
+  "exactCloudSaveRestored": true,
+  "mainWallet": 20,
+  "yuyiWallet": "0.0000",
+  "savedPaidPlacement": true,
+  "reloadRestored": true,
+  "logoutAndReload": true,
+  "emailDeliveryVerified": false,
+  "fixtureCleanupPending": false,
+  "errors": [],
+  "scope": "REAL public GitHub Pages frontend and hosted Supabase with a disposable pre-confirmed diagnostic account. No email delivery claim or user-data reset.",
+  "disposableFixtureDeleted": true,
+  "diagnosticSessionsRevoked": true,
+  "pagesRun": 41230810738,
+  "publishedRevision": "22c1098efb9831220a8e00c4023785e153ea8c85",
+  "ciTestsPassed": 96,
+  "ciBrowserCasesPassed": 14
+}

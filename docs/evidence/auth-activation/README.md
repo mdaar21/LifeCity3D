@@ -30,3 +30,14 @@ is temporary and must be removed with sessions revoked after live verification.
 See hosted-browser.json for actual local-compiled/real-hosted scope. A separate
 live-site report is recorded after publication; this file is not evidence that
 email confirmation or recovery messages reached a human inbox.
+
+## Published acceptance
+
+PR5 merged at22c1098. Pages run41230810738 succeeded with96 unit/integration
+tests and14 browser cases. The REAL public website passed password login in
+desktop/mobile contexts, exact cloud-save restoration, reload and logout. See
+live-site.json. The diagnostic account/profile/sessions were removed and the
+remaining counts were verified as0. Email delivery remains unverified.
+
+This final evidence is recorded on codex/stylized-visual-overhaul so recording
+acceptance does not trigger another production build. Only Auth was published.

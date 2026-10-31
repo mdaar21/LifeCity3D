@@ -83,3 +83,18 @@
 المستخدم أفاد أن المتصفح لا يعرض إلا3 مهام، ثم طلب استئناف البروم كاملًا
 والتوسعات20. لا تتبع فقرة الوقف التاريخية أعلاه. أول إصلاح هو وصول تحديث
 PWA مع حفظ البيانات، ثم تابع تنفيذ جميع الأنظمة. Auth مرحلة لاحقة.
+
+## Latest owner — Auth activation,2026-10-31
+
+The owner explicitly requested live login activation. Narrow PR5/main22c1098
+was published by successful Pages41230810738.96 tests and14 browser cases passed.
+The REAL public site passed Supabase password login, cloud restoration from an
+independent mobile browser, reload and logout. Guest saves remain separate; the
+disposable diagnostic account and sessions were removed. Public client is now
+enabled=true, superseding the older deferred-Auth notes above. Email confirmation
+remains required; delivery to a real inbox is still unverified.
+
+Visual batches and paid vegetation/agriculture remain unpublished on
+codex/stylized-visual-overhaul. The live world-command engine was not redeployed.
+Do not publish those features without new permission and a compatible backend.
+Final acceptance: docs/evidence/auth-activation/live-site.json on that branch.

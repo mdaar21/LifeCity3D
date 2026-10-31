@@ -1,5 +1,19 @@
 # LifeCity3D — focused implementation context
 
+## Latest owner — activate login only
+- Owner requested live login activation. Narrow Auth PR5 merged into main22c1098;
+  Pages run41230810738 succeeded (96 tests/14 browser cases). The REAL public
+  site passed password login, logout and independent-browser cloud restoration.
+  Evidence: docs/evidence/auth-activation; temporary account/profile/sessions
+  were removed and verified absent. Real email delivery remains unverified.
+- Public Supabase client enabled=true. Hosted password login, callback after guest
+  use, paid purchase/placement and independent-browser cloud restoration passed.
+  Allowed confirmation/recovery destinations verified live. Email delivery to a
+  real inbox remains unverified; email confirmation was not disabled.
+- Auth changes carried into this content branch; its visuals/agriculture stay
+  unpublished. Future content publication still needs explicit owner permission
+  and deployment of the compatible world-command engine before its frontend.
+
 ## Current owner priority — paid content, not another visual batch
 - Continue this branch; both visual batches are complete. Do not repeat them.
 - Vegetation/agriculture group implemented:14 paid species,8 crops/orchards,2 paid
@@ -34,7 +48,7 @@
 - Existing financial boundary: world-engine.ts + service-only settlement RPC.
   Exact16 tasks, prayers/study, independent MAD, real FX and50% paid-cost refunds.
 - Supabase world migration20261031055923 is APPLIED and immutable; world-command
-  v1 active. Auth setup/client activation remain deferred; public guest is local.
+  v1 active. Guest saves remain local and separate from the Auth account adapter.
 - Existing V6 acceptance gaps: docs/v6/WORLD-SYSTEMS.md; do not claim all20 complete.
 
 ## Files
@@ -72,4 +86,5 @@
 - Yuyi's separate MAD panel is neutral; original memory garden remains in a drawer.
 - New evidence: docs/evidence/visual-batch2.100 regression tests and all19 browser
   cases passed; no schema/server/dependency changes and no publication.
-- Broader V6 gaps and hosted Auth/world acceptance remain as documented earlier.
+- Broader V6 gaps, real email delivery and hosted world acceptance remain as
+  documented earlier. Auth password/cloud acceptance has newer evidence above.

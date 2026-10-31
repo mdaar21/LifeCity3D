@@ -15,5 +15,7 @@
   "reloadRestored": true,
   "errors": [],
   "emailDeliveryVerified": false,
-  "fixtureCleanupPending": true
+  "fixtureCleanupPending": false,
+  "disposableFixtureDeleted": true,
+  "diagnosticSessionsRevoked": true
 }
