@@ -37,6 +37,12 @@ Edge deployment, migration or production account/data write in this stage.
   Legacy numeric browser journeys explicitly select Advanced tools.
 - Lint/typecheck and the8 focused unit/integration checks passed locally. Full
   CI regression/build result is recorded in `verification.json` when completed.
+- `npm run build:github` and `npm run verify:github` passed locally with the
+  compiled Supabase-configured client. Repository-base assets/deep links, login
+  excluding Three, explicit guest choice in a fresh tab, PWA control/icons,
+  offline balance40, disabled offline spending and project reserve/refund passed.
+  `pages-build.json`, `pages-browser.json` and `pwa.json` record this local scope.
+  The Pages smoke script now respects the existing per-tab guest/Auth boundary.
   Browser PNGs are local rendered evidence; the CI HTML report includes attachments.
 
 ## Limits and future release
