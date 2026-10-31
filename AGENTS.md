@@ -121,3 +121,6 @@ New road_draw and measured foundation rotation use the shared trusted engine;
 keep canonical pricing, receipts, independent MAD and historical50% cost bases.
 No migration/dependency change. Test-only funded accounts stay under tests/.
 See docs/evidence/stage-a/README.md for verification and release dependencies.
+Verification:124 tests/26 files passed.28 unique browser cases verified across
+full CI41246740296 and corrected focused CI41247729824; latter CI is green.
+Compiled repository paths/PWA/offline reserve/refund also passed locally.

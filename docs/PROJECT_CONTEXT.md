@@ -1,6 +1,10 @@
 # LifeCity3D — focused implementation context
 
 ## Current owner — Stage A mobile controls, unpublished
+- Implemented/tested:124 unit/integration tests and28 unique browser cases across
+  full run41246740296 (26 passed) + corrected focused run41247729824 (2 passed).
+  Lint/typecheck/production build and local compiled Pages/offline checks passed.
+  No game-source changes between runs; full details in stage-a/verification.json.
 - Continue codex/stylized-visual-overhaul. No merge, deployment or publication.
 - Default beginner tools: contextual selection/hold/drag/rotation, preview history,
   visual owned/plant/build/furniture catalogs, touch road strokes, garage guidance.

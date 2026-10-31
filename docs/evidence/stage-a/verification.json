@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-10-31T22:24:15.772524+00:00",
+  "branch": "codex/stylized-visual-overhaul",
+  "gameCommit": "844c37fe56a8de2baf2cdd02f1526df15943e99a",
+  "testCorrectionCommit": "15988396702706486bfc688eb147e8265e304aff",
+  "gameCodeUnchangedBetweenRuns": true,
+  "unitIntegration": {
+    "passed": 124,
+    "files": 26,
+    "lint": true,
+    "typecheck": true,
+    "productionBuild": true
+  },
+  "browser": {
+    "uniqueCasesVerified": 28,
+    "realTouchJourneys": 8,
+    "initialFullRun": {
+      "id": 41246740296,
+      "passed": 26,
+      "failed": 2,
+      "reason": "Cold-render tap before the camera was ready; screenshot helper wrongly required an empty interior to exceed500 triangles."
+    },
+    "focusedCorrectionRun": {
+      "id": 41247729824,
+      "passed": 2,
+      "failed": 0,
+      "conclusion": "success"
+    },
+    "scope": "26 passing cases from the full suite plus both corrected cases passing on the same game code; not a claim that the first run passed all28."
+  },
+  "compiledPages": {
+    "build": true,
+    "routesAndAssets": true,
+    "freshTabGuestAuthBoundary": true,
+    "offlinePwaPersistence": true,
+    "offlineFinancialWritesBlocked": true
+  },
+  "finance": "Trusted atomic road pricing, receipts/idempotency, no preview/cancel charge, original paid components, exact50% refunds, dated FX and independent MAD verified in the disposable reference database.",
+  "environment": "Chromium mobile touch emulation and disposable local/reference Postgres; no hosted Supabase acceptance or physical-device FPS claim.",
+  "migrations": [],
+  "dependencyChanges": false,
+  "productionDataWritten": false,
+  "merged": false,
+  "published": false,
+  "futureReleaseDependency": "Deploy the compatible world-command engine before this frontend only after owner authorization.",
+  "remainingContentGroups": [
+    "Complete paid recoloring/customization across all applicable objects",
+    "Additional paid road, lighting and architectural variants"
+  ]
+}

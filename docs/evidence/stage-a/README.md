@@ -35,8 +35,13 @@ Edge deployment, migration or production account/data write in this stage.
   furnishing, paid material preview/cancel/confirmation, road intersections, paid
   plants, driving/parking and reload saves.
   Legacy numeric browser journeys explicitly select Advanced tools.
-- Lint/typecheck and the8 focused unit/integration checks passed locally. Full
-  CI regression/build result is recorded in `verification.json` when completed.
+- Lint/typecheck,124 unit/integration tests across26 files and production build
+  passed on GitHub. Full run41246740296 passed26/28 browser cases. The2 failures
+  were test readiness/capture assumptions: wait for the actual rendered camera
+  before tapping after reload; accept the empty interior's real110 triangles.
+  Focused run41247729824 passed both corrected cases and every other CI check.
+  Game source is identical across those runs:28 unique browser cases verified,
+  including all8 touch journeys. Details/links are in `verification.json`.
 - `npm run build:github` and `npm run verify:github` passed locally with the
   compiled Supabase-configured client. Repository-base assets/deep links, login
   excluding Three, explicit guest choice in a fresh tab, PWA control/icons,
