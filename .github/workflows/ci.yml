@@ -1,6 +1,11 @@
 name: LifeCity checks
 on:
   workflow_dispatch:
+    inputs:
+      browser_grep:
+        description: 'Optional focused browser title pattern; blank runs every browser case'
+        required: false
+        default: ''
   pull_request:
 permissions:
   contents: read
@@ -19,7 +24,15 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
+      - name: Run browser checks
+        env:
+          BROWSER_GREP: ${{ inputs.browser_grep || '' }}
+        run: |
+          if [ -n "$BROWSER_GREP" ]; then
+            npm run test:e2e -- --grep "$BROWSER_GREP"
+          else
+            npm run test:e2e
+          fi
       - run: npm run build
       - uses: actions/upload-artifact@v4
         if: always()

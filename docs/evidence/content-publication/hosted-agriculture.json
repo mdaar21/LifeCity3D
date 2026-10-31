@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "realHostedBackend": true,
+  "trustedPricing": true,
+  "freeQuote": true,
+  "idempotentCommits": true,
+  "mainWallet": 5,
+  "madWallet": "0.0000",
+  "paidPlantAndPlotPersisted": true,
+  "paidWaterPersisted": true,
+  "earlyHarvestRejected": true,
+  "fixtureCleanupPending": false,
+  "disposableFixtureDeleted": true,
+  "sessionsRevoked": true
+}

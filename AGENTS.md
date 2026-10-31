@@ -104,3 +104,23 @@ codex/stylized-visual-overhaul and is not included in that publication.
 Supabase public client enabled=true. Hosted password login/cloud persistence and
 allowed confirmation/recovery destinations were verified; actual email delivery
 has not been proved. Preserve email confirmation and separate guest saves.
+
+## Latest owner — publish the completed batches
+The owner explicitly approved publication. PR6/main a9b4799 and Pages41231861062
+succeeded. Both visual batches and paid vegetation/agriculture are now live;
+world-command v2 is compatible.116 tests and20 browser cases passed, followed by
+real public catalog/farm verification. Evidence: docs/evidence/content-publication.
+Earlier no-publication notes are historical for this released increment. Future
+paid recoloring and additional variants remain unfinished. Preserve all saves.
+
+## Latest owner — Stage A touch interaction (unpublished)
+Continue codex/stylized-visual-overhaul. Beginner touch tools are now the default;
+advanced numeric/studio tools remain selectable on the device. Preserve existing
+visual batches/content. No merge, deployment or publication is authorized.
+New road_draw and measured foundation rotation use the shared trusted engine;
+keep canonical pricing, receipts, independent MAD and historical50% cost bases.
+No migration/dependency change. Test-only funded accounts stay under tests/.
+See docs/evidence/stage-a/README.md for verification and release dependencies.
+Verification:124 tests/26 files passed.28 unique browser cases verified across
+full CI41246740296 and corrected focused CI41247729824; latter CI is green.
+Compiled repository paths/PWA/offline reserve/refund also passed locally.

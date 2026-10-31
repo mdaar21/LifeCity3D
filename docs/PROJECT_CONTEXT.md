@@ -1,5 +1,34 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — Stage A mobile controls, unpublished
+- Implemented/tested:124 unit/integration tests and28 unique browser cases across
+  full run41246740296 (26 passed) + corrected focused run41247729824 (2 passed).
+  Lint/typecheck/production build and local compiled Pages/offline checks passed.
+  No game-source changes between runs; full details in stage-a/verification.json.
+- Continue codex/stylized-visual-overhaul. No merge, deployment or publication.
+- Default beginner tools: contextual selection/hold/drag/rotation, preview history,
+  visual owned/plant/build/furniture catalogs, touch road strokes, garage guidance.
+  Advanced numeric controls remain available through a device-only preference.
+- TouchWorld owns pointer gestures; useTouchTools owns drafts/history; TouchTools
+  reviews trusted quotes and confirms through existing idempotent settlement.
+- road_draw and building rotation extend the shared world engine without a schema
+  change. Road crossings preserve old paid entities/components via graph splitting.
+- Checks/evidence: docs/evidence/stage-a. Compatible world-command must be deployed
+  BEFORE the frontend in a future explicitly authorized release. Neither is live.
+- Whole-object paid recoloring and extra road/light/architecture variants remain
+  separate unfinished groups. Do not repeat the released visual/horticulture work.
+
+## Latest owner — content publication complete
+- Owner explicitly approved publishing both visual batches and horticulture.
+- PR6/main a9b4799 published successfully in Pages41231861062.116 tests and20
+  browser cases passed. All six visual stages,14 species and8 crop recipes live.
+- Compatible world-command v2 deployed first. Real hosted trusted purchases,
+  idempotency, paid planting/watering and growth guard passed. Public mobile
+  catalog and saved paid farm restoration passed. Temporary fixture removed.
+- Evidence: docs/evidence/content-publication. No data reset or new migration.
+- Paid recoloring and additional road/light/architecture variants remain next.
+  Earlier unpublished/deferred statements below describe historical checkpoints.
+
 ## Latest owner — activate login only
 - Owner requested live login activation. Narrow Auth PR5 merged into main22c1098;
   Pages run41230810738 succeeded (96 tests/14 browser cases). The REAL public

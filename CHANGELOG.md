@@ -1,5 +1,17 @@
 # Changelog
 
+## Stage A mobile interaction — unpublished
+
+- Default visual touch controls: select, hold to edit, drag, rotate, validate,
+  undo/redo previews, cancel, review and explicitly confirm. Advanced tools remain.
+- Touch-drawn roads with live cost and connected intersections; trusted atomic
+  pricing preserves every original paid cost component and50% refund basis.
+- Guided building stages, floor furniture, garages, car purchases/driving/parking,
+  RTL thumb controls and camera reset. Reuse existing models and backend authority.
+- 124 unit/integration checks and28 unique browser cases verified across the full
+  suite and corrected focused rerun; compiled Pages/offline checks passed locally.
+- No dependency, schema, production data, merge or deployment changes.
+
 ## Supabase Auth activation — 2026-10-31
 
 - Enable the existing public Supabase adapter for account login and cloud saves.

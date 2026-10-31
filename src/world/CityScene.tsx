@@ -10,10 +10,14 @@ import { footprint, type DraftPlacement } from './building'
 import { ProceduralModel, SCENE_BACKGROUND } from './ProceduralModel'
 import {CoastalBackdrop} from './CoastalBackdrop'
 import {roadConnections} from './road-visuals'
+import {TouchWorld} from './TouchWorld'
+import {useTouchTools} from './useTouchTools'
 import {WorldRealms} from './WorldRealms'
 import '../world.css'
 
 interface SceneProps {
+  touchGame?:GameSnapshot
+  interiorHouseId?:string
   previewElevation?:number
   worldGame?:GameSnapshot
   active?:boolean
@@ -40,6 +44,7 @@ interface SceneProps {
 }
 
 export interface LifeCityRenderMetrics {
+  camera?: {x:number;y:number;z:number;zoom:number}
   scene: 'city' | 'interior'
   startedAtMs: number
   lastRenderedAtMs: number | null
@@ -88,7 +93,7 @@ function RendererDiagnostics({ interior,publish=true }: { interior: boolean;publ
       if (window.__LIFECITY_RENDER_METRICS__ === metrics) delete window.__LIFECITY_RENDER_METRICS__
     }
   }, [gl, interior,publish])
-  useFrame(() => {
+  useFrame(({camera}) => {
     // Fiber renders synchronously after its useFrame callbacks. Read info in a
     // microtask so these counters describe that finished render, not a RAF tick.
     queueMicrotask(() => {
@@ -100,6 +105,7 @@ function RendererDiagnostics({ interior,publish=true }: { interior: boolean;publ
         if (metrics.frameGapsMs.length >= 240) metrics.frameGapsMs.shift()
         metrics.frameGapsMs.push(now - metrics.lastRenderedAtMs)
       }
+      metrics.camera={x:camera.position.x,y:camera.position.y,z:camera.position.z,zoom:camera.zoom}
       metrics.renderedFrames += frame - previousRendererFrame.current
       gl.domElement.dataset.renderedFrames = String(metrics.renderedFrames)
       previousRendererFrame.current = frame
@@ -164,19 +170,21 @@ function Landscape({ size }: { size: number }) {
 }
 
 function CameraRig({ size, perspective, resetKey, interior, targetY=0 }: { size: number; perspective: boolean; resetKey: number; interior: boolean; targetY?:number }) {
+  const editing=useTouchTools(s=>!s.advanced&&!!s.draft),extraReset=useTouchTools(s=>s.reset)
   const target = useMemo(() => [0, targetY, 0] as [number, number, number], [targetY])
   const controls = useRef<ComponentRef<typeof OrbitControls>>(null)
   const { camera, size: viewport } = useThree()
   useEffect(() => {
     camera.position.set(size * 1.04, size * 0.95+targetY, size * 1.04)
     camera.lookAt(0, targetY, 0)
+    camera.zoom=perspective?1:Math.min(viewport.width,viewport.height)/(size*(interior?1.5:1.72));camera.updateProjectionMatrix()
     controls.current?.target.set(0, targetY, 0)
     controls.current?.update()
-  }, [camera, resetKey, size, perspective,targetY])
+  }, [camera, resetKey, extraReset,size, perspective,targetY,viewport.width,viewport.height,interior])
   const zoom = Math.min(viewport.width, viewport.height) / (size * (interior ? 1.5 : 1.72))
   return <>
     {perspective ? <PerspectiveCamera makeDefault fov={43} position={[size, size, size]} near={0.1} far={220} /> : <OrthographicCamera makeDefault position={[size, size, size]} zoom={zoom} near={0.1} far={220} />}
-    <OrbitControls ref={controls} target={target} makeDefault enableDamping dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = targetY } }} />
+    <OrbitControls ref={controls} target={target} makeDefault enableDamping enableRotate={!editing} enablePan={!editing} dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = targetY } }} />
   </>
 }
 
@@ -205,7 +213,7 @@ function PlotContents({placements=[],catalog=CATALOG,size=16,selectedId,draft,va
       const item = catalog.find(entry => entry.id === placement.catalog_id)
       if (!item) return null
       const [w, d] = footprint(item, placement.rotation)
-      return <group key={placement.id} position={[placement.x + w / 2 - size / 2, 0.04, placement.z + d / 2 - size / 2]} onClick={readOnly ? undefined : event => { event.stopPropagation(); if (draft) tileEvent(event); else onSelect?.(placement) }}>
+      return <group key={placement.id} userData={{touchTarget:{source:interior?'interior':'legacy',id:placement.id,realm:'main'}}} position={[placement.x + w / 2 - size / 2, 0.04, placement.z + d / 2 - size / 2]} onClick={readOnly ? undefined : event => { event.stopPropagation(); if (draft) tileEvent(event); else onSelect?.(placement) }}>
         {selectedId === placement.id && <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.007, 0]}><planeGeometry args={[w + 0.12, d + 0.12]} /><meshBasicMaterial color="#f5cd77" transparent opacity={0.72} depthWrite={false} /></mesh>}
         <group rotation={[0, placement.rotation * Math.PI / 180, 0]}><ProceduralModel item={item} variation={placement.id} connections={roads.get(placement.id)} ghost={draft?.placementId === placement.id} valid /></group>
       </group>
@@ -225,6 +233,7 @@ function SceneContents(props:SceneProps){
  const origin=neighbor?(realm==='main'?-size/2-1:size/2+1):0;
  const otherOrigin=neighbor?(realm==='main'?neighbor.size/2+1:-neighbor.size/2-1):0;
  return <>
+  {props.touchGame&&props.interior&&<TouchWorld game={props.touchGame} realm="main" offset={[-size/2,-size/2]} active={!props.readOnly} interiorHouseId={props.interiorHouseId}/>}
   <RendererDiagnostics interior={interior} publish={!props.readOnly}/>
   <primitive object={SCENE_BACKGROUND} attach="background"/>
   <fog attach="fog" args={['#dce9e1',75,180]}/>

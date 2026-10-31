@@ -1,5 +1,11 @@
 export class ApiError extends Error {constructor(public code:string){super(code);this.name='ApiError';}}
 const messages:Record<string,[string,string]>={
+ NO_ROAD_CHANGE:['هذا المسار موجود بالفعل. ارسم امتدادًا جديدًا.','This route already exists. Draw a new extension.'],
+ GARAGE_NOT_NEAR:['قد السيارة إلى مخرج المرآب ثم اضغط اركن.','Drive close to the garage exit, then tap Park.'],
+ EXIT_BLOCKED:['المخرج مشغول. أبعد العناصر أو اختر مرآبًا بمخرج خالٍ.','The exit is blocked. Clear nearby objects or choose a garage with a clear exit.'],
+ EXIT_BUILDING_FIRST:['اخرج من المبنى قبل ركوب السيارة.','Exit the building before entering a car.'],
+ DRIVING_NOT_ACTIVE:['اركب السيارة أولًا من قسم المركبات.','Enter a car from Vehicles first.'],
+
  PLANT_NOT_FOUND:["اختر نباتًا من القائمة المتاحة.", "Choose an available plant."],
  CROP_NOT_COMPATIBLE:["هذا المحصول لا يناسب نوع القطعة؛ اختر حوضًا أو بستانًا مناسبًا.", "This crop needs a compatible bed or orchard."],
  CROP_ALREADY_PLANTED:["المحصول قائم. احصده أو أخلِه قبل بذر دورة جديدة.", "Harvest or clear the current crop before a new paid planting."],

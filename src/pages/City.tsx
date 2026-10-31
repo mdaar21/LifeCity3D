@@ -17,9 +17,12 @@ import type {DemolitionQuote} from '../lib/v6-types'
 import FirstCityGuide from '../components/FirstCityGuide'
 import CitySharing from '../components/CitySharing'
 import WorldStudio from '../world/WorldStudio'
+import TouchTools from '../world/TouchTools'
+import {useTouchTools} from '../world/useTouchTools'
 import '../world.css'
 
 export default function City({active=true}:{active?:boolean}) {
+  const advanced=useTouchTools(s=>s.advanced)
   const { state, loading, error, mutate, refresh, online } = useGame()
   const {realm,select:selectRealm}=useTerritory()
   const {format}=useMoney()
@@ -90,8 +93,8 @@ export default function City({active=true}:{active?:boolean}) {
     catch (cause) { setSuccess(false); setNotice(worldError(cause, t)) }
     finally { setBusy(false) }
   }
-  return <div className={`city-page immersive-city ${active ? 'is-playing' : ''} ${state.world_systems?.entities.some(e=>e.kind==='avatar'&&e.realm===realm&&e.mode!=='aerial')?'is-exploring':''}`}>
-    {active && <WorldStudio/>}
+  return <div className={`city-page immersive-city ${advanced?'advanced-city':'beginner-city'} ${active ? 'is-playing' : ''} ${state.world_systems?.entities.some(e=>e.kind==='avatar'&&e.realm===realm&&e.mode!=='aerial')?'is-exploring':''}`}>
+    {active && <><WorldStudio/><TouchTools/></>}
     {active && <>
       <div className="game-city-label"><span className="world-eyebrow">{t('عالمك الخاص', 'YOUR OWN WORLD')}</span><h1 aria-label={yuyi?t('مدينة ويوي','Yuyi City'):t('مدينتي','My city')}>{yuyi?t('مدينة ويوي','Yuyi City'):t('مدينتي', 'My city')}<span>{t('المستوى', 'LEVEL')} {number(levelFromXp(yuyi?state.v6!.yuyi_world.city_xp:state.wallet.city_xp))}</span></h1></div>
       <div className="game-city-guide">{!yuyi&&!state.world_systems?.entities.some(e=>e.kind==='building'&&e.realm===realm&&e.status==='active')&&<FirstCityGuide compact/>}</div>
