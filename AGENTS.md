@@ -96,3 +96,11 @@ growth/paid operations and preserved50% historical refunds. Reuse existing JSONB
 world storage; no new migration needed for optional decoration metadata.
 Next groups are complete paid recoloring and paid road/light/architecture variants.
 Do not deploy, publish or merge without explicit owner permission.
+
+## Latest owner — activate account login
+The owner explicitly requested activating login on the live website. This
+authorizes the narrow Auth release from main; visual/paid-content work stays on
+codex/stylized-visual-overhaul and is not included in that publication.
+Supabase public client enabled=true. Hosted password login/cloud persistence and
+allowed confirmation/recovery destinations were verified; actual email delivery
+has not been proved. Preserve email confirmation and separate guest saves.

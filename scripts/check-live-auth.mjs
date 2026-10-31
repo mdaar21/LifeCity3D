@@ -1,0 +1,19 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {chromium} from '@playwright/test';
+const fixture=JSON.parse(await readFile('work/auth-fixture.json','utf8'));
+assert.equal(fixture.email,`lifecity-auth-${fixture.id}@example.invalid`,'Use a disposable diagnostic account.');
+const cfg=JSON.parse(await readFile('deployment/client-service.json','utf8'));
+const base='https://mdaar21.github.io/LifeCity3D';
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
+const timer=setTimeout(()=>void browser.close(),56000),errors=[],statuses=[];let stage='start';
+async function state(page){return page.evaluate(async cfg=>{const key=Object.keys(localStorage).find(k=>k.startsWith('sb-')&&k.endsWith('-auth-token'));if(!key)throw new Error('NO_SESSION');const s=JSON.parse(localStorage.getItem(key));const r=await fetch(cfg.url+'/rest/v1/rpc/game_state',{method:'POST',headers:{apikey:cfg.publishableKey,Authorization:'Bearer '+s.access_token,'Content-Type':'application/json'},body:'{}'});if(!r.ok)throw new Error('STATE_'+r.status);return r.json();},cfg);}
+async function login(page){page.setDefaultTimeout(10000);page.on('pageerror',()=>errors.push('browser error'));page.on('response',r=>{if(r.url().includes('/auth/v1/token'))statuses.push(r.status());});await page.goto(base+'/login');await page.getByRole('button',{name:'English',exact:true}).click();assert(await page.getByTestId('auth-submit').isEnabled());await page.getByTestId('auth-email').fill(fixture.email);await page.getByTestId('auth-password').fill(fixture.password);await page.getByTestId('auth-submit').click();await page.waitForURL('**/city');await page.getByTestId('wallet-balance').waitFor();}
+try{
+ const desktop=await browser.newContext({viewport:{width:1440,height:900}}),mobile=await browser.newContext({viewport:{width:390,height:844}}),a=await desktop.newPage(),b=await mobile.newPage();
+ stage='public desktop login';await login(a);const saved=await state(a);assert.equal(saved.profile.id,fixture.id);assert.equal(saved.wallet.balance,20);assert.equal(saved.v6.yuyi_wallet.balance,'0.0000');assert.equal(saved.placements.length,1);
+ stage='public mobile login';await login(b);const restored=await state(b);for(const key of ['wallet','placements','inventory','approved_tasks'])assert.deepEqual(restored[key],saved[key]);assert.deepEqual(restored.v6.yuyi_wallet,saved.v6.yuyi_wallet);await b.reload();await b.getByTestId('wallet-balance').waitFor();assert.deepEqual((await state(b)).placements,saved.placements);
+ stage='public logout';await a.goto(base+'/settings');await a.getByRole('button',{name:'Sign out',exact:true}).click();await a.waitForURL('**/login');await a.reload();await a.getByTestId('auth-submit').waitFor();assert(await a.getByTestId('auth-submit').isEnabled());
+ await mkdir('docs/evidence/auth-activation',{recursive:true});await b.screenshot({path:'docs/evidence/auth-activation/live-cloud-mobile.png'});await a.screenshot({path:'docs/evidence/auth-activation/live-login.png'});assert.deepEqual(errors,[]);
+ await writeFile('docs/evidence/auth-activation/live-site.json',JSON.stringify({ok:true,checkedAt:new Date().toISOString(),base,published:true,authPasswordStatuses:statuses,twoIndependentBrowsers:true,exactCloudSaveRestored:true,mainWallet:20,yuyiWallet:'0.0000',savedPaidPlacement:true,reloadRestored:true,logoutAndReload:true,emailDeliveryVerified:false,fixtureCleanupPending:true,errors,scope:'REAL public GitHub Pages frontend and hosted Supabase with a disposable pre-confirmed diagnostic account. No email delivery claim or user-data reset.'},null,2)+'\n');console.log('Public Pages password login, cloud restoration and logout passed.');
+}catch{console.log('Public auth verification failed at: '+stage);process.exitCode=1;}finally{clearTimeout(timer);await browser.close();}

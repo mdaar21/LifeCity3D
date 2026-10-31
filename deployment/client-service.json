@@ -1,6 +1,6 @@
 {
-  "enabled": false,
+  "enabled": true,
   "url": "https://taevxcuqsanfyywkuygl.supabase.co",
   "publishableKey": "sb_publishable_JUMRhZ5RwO01o1Ww16UXyA_rJAXLFsW",
-  "note": "Public browser configuration only. Enable after Auth Site URL/redirects and hosted signup/recovery are verified. Never place a secret or service-role key here."
+  "note": "Public Supabase Auth configuration. Hosted password login, cloud saving and allowed callback destinations verified; email delivery is separate. Never place a secret or service-role key here."
 }

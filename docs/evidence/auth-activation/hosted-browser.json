@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:4176/LifeCity3D",
+  "scope": "Compiled frontend against REAL hosted Supabase Auth/Postgres with one disposable pre-confirmed diagnostic account. This does not prove public email delivery.",
+  "authPasswordStatuses": [
+    200,
+    200
+  ],
+  "twoIndependentBrowsers": true,
+  "callbackAfterGuest": true,
+  "guestSavePreserved": true,
+  "mainWallet": 20,
+  "yuyiWallet": "0.0000",
+  "paidPurchaseAndPlacement": true,
+  "reloadRestored": true,
+  "errors": [],
+  "emailDeliveryVerified": false,
+  "fixtureCleanupPending": true
+}
