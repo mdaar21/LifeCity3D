@@ -6,12 +6,13 @@ R3F/Three procedural world, Zustand editor, TanStack Query, Supabase Auth/Postgr
 transactional RPCs, RLS and a real installable PWA.
 
 The frontend is published at https://mdaar21.github.io/LifeCity3D/ through GitHub
-Pages. Guest entry has been verified in the real public app. Hosted Supabase
-accounts are not activated in the published build. Read-only inspection now
-confirms the LifeCity schema/RPCs and RLS. A disposable password-JWT/cloud-save
-test now passes; public email flows and production client activation still need
-verification. This is not a fully launched
-commercial cloud service. Read [the current handoff](docs/HANDOFF.md) before
+Pages. The Auth activation increment enables the existing Supabase account
+adapter. Hosted password login, a callback after guest use, paid purchases and
+two-browser cloud persistence passed against the compiled frontend. Existing
+confirmation/recovery redirect destinations and rejection of external destinations
+were checked live; public email delivery remains unverified. See
+[activation evidence](docs/evidence/auth-activation/README.md). Read
+[the current handoff](docs/HANDOFF.md) before
 continuing; older local release records describe earlier deployment blockers.
 
 The owner-provided [starter template](docs/starter-template-integration.md) is

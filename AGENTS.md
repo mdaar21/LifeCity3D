@@ -74,3 +74,11 @@ master prompt and all20 expansions. Fix stale PWA update delivery/discoverabilit
 first without deleting guest saves, then continue all remaining approved systems.
 The paused-scope paragraphs above are historical. Do not claim20-feature completion
 until real operations and tests exist. Keep Auth as the later feature stage.
+
+## Latest owner — activate account login
+The owner explicitly requested activating login on the live website. This
+authorizes the narrow Auth release from main; visual/paid-content work stays on
+codex/stylized-visual-overhaul and is not included in that publication.
+Supabase public client enabled=true. Hosted password login/cloud persistence and
+allowed confirmation/recovery destinations were verified; actual email delivery
+has not been proved. Preserve email confirmation and separate guest saves.

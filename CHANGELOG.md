@@ -1,5 +1,14 @@
 # Changelog
 
+## Supabase Auth activation — 2026-10-31
+
+- Enable the existing public Supabase adapter for account login and cloud saves.
+- Let confirmed account callbacks leave guest mode across reloads, preserving
+  the separate guest city. No wallets, purchases or migrations are replaced.
+- Hosted password login, a paid purchase/placement and independent-browser
+  restoration passed. Public email delivery remains a separate unverified limit.
+- This release excludes the unpublished visual and horticulture branches.
+
 ## PWA delivery repair — 2026-10-31
 
 - Reproduce the old cached3-task client with actual compiled releases.
