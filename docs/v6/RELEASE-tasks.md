@@ -45,8 +45,7 @@ Three focused browser cases passed: mobile plan/settlement/independent-browser
 restore; local guest confirmation/laundry/five-distinct persistence; and the
 existing9-state game HUD desktop/mobile RTL/LTR/dark accessibility regression.
 No detected WCAG violations in checked task screens. These are local browser
-checks, not a hosted public-email acceptance claim. The full browser suite also
-runs in GitHub CI before publication.
+checks, not a hosted public-email acceptance claim. The complete13-case browser suite passed in GitHub CI before publication.
 
 `npm run build:github` and `npm run verify:github` pass, including compiled base
 paths, deep-link fallback and guest offline PWA with financial writes blocked.
@@ -71,3 +70,13 @@ client policy, like existing private FX/deletion audit tables. See the
 No Auth settings, public signup, email delivery or recovery were changed/tested
 in this phase. Public client activation staysfalse. Publication is the owner-
 authorized guest-capable increment; this is not a complete V6 release.
+
+## Published and checked
+
+Merged PR2 at e6adb873 after CI41148564919 passed69 tests and all13 browser cases.
+Pages run41148905443 completed both build and deploy successfully. A real public
+mobile browser verified16 task definitions,12 regular cards, explicit confirmation,
+MAIN+20/MAD unchanged, disabled duplicate claim and persistence after reload,
+with no page exceptions. [Live proof](../evidence/live-tasks-publication.json).
+The owner paused all20 expansions; Auth remains deferred and the public build
+remains an explicitly local guest experience.

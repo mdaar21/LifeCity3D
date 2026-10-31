@@ -63,3 +63,7 @@ The owner has now PAUSED expansion work and explicitly requested publication of
 the completed foundation +16 tasks. Publish this tested increment on GitHub Pages,
 keep Auth deferred/client enabled=false, and wait for a later continuation request
 before implementing expansions. Do not continue new feature work during publication.
+
+Publication is now COMPLETE: PR2 merged at e6adb873, Pages41148905443 succeeded,
+and the real public16-task guest flow passed. All20 expansions and Auth remain
+paused; wait for a new user instruction. See docs/evidence/live-tasks-publication.json.

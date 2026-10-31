@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-31T00:17:00.840Z",
+  "url": "https://mdaar21.github.io/LifeCity3D/tasks",
+  "sourceCommit": "5c087965d1f5a82d23d22793a256750606870153",
+  "deploymentCommit": "e6adb873bc12a675a4ad1f8726af428a672dbad2",
+  "workflowRun": 41148905443,
+  "published": true,
+  "rootHttpStatus": 200,
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "guestOpened": true,
+  "approvedCatalogCount": 16,
+  "regularTaskCards": 12,
+  "twoEmptyTerritories": true,
+  "confirmationRequired": true,
+  "completedTask": "wash_dishes",
+  "mainBalanceAfterClaim": 20,
+  "yuyiBalanceUnchanged": "0.0000",
+  "reloadPreservedClaim": true,
+  "duplicateButtonDisabled": true,
+  "commitmentDay": 1,
+  "pageErrors": [],
+  "scope": "Real public GitHub Pages guest flow. Auth activation is deferred; all20 expansions are paused and not implemented."
+}

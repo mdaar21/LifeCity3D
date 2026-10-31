@@ -3,8 +3,9 @@
 The exact16-task engine is implemented, tested and its Supabase migration applied.
 Read RELEASE-tasks.md before changing it. Existing main/MAD history remains intact.
 
-The latest owner instruction is STOP new feature work and publish the current
-foundation +16-task increment. Do not start expansions or Auth configuration until
+The latest owner instruction was STOP new feature work and publish the current
+foundation +16-task increment. Publication is complete (run41148905443), with
+real public guest verification recorded in live-tasks-publication.json. Do not start expansions or Auth configuration until
 the owner explicitly asks again. All20 expansions remain mandatory future scope,
 tracked NOT STARTED in STATUS.md. No nonfunctional expansion menus were added.
 

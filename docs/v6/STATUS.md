@@ -80,10 +80,12 @@ complete, and no nonfunctional expansion buttons have been added.
 
 Current commands and evidence are recorded in [the task release](RELEASE-tasks.md);
 [foundation evidence](RELEASE-foundation.md) records the prior slice.
-The earlier game-interface upgrade is published at
-https://mdaar21.github.io/LifeCity3D/ (run41139285295, commit e32bf7e), verified in
-an actual mobile-sized browser. [Live UI proof](../evidence/live-ui-publication.json).
-This does not claim V6 frontend publication.
+The foundation +16-task frontend is published at
+https://mdaar21.github.io/LifeCity3D/ (run41148905443, merge e6adb873).
+CI passed69 tests and13 browser cases. A real public390px guest browser verified
+all16 definitions, explicit dishwashing confirmation, MAIN20/MAD0 and exact reload
+persistence. [Live publication proof](../evidence/live-tasks-publication.json).
+This is not a complete V6 or hosted public-email activation claim.
 
 Supabase migration v6_wallets_territory_fx is **applied**, actual FX reference is
 stored, and refresh-fx v1 is deployed with in-handler session validation.

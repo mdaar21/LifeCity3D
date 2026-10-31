@@ -29,5 +29,18 @@
     "buildGithub": true,
     "compiledPagesPwa": true
   },
-  "limits": "Hosted verification checked schema/catalog/privileges and preservation counts. No new hosted Auth identities or email flows were created or exercised in this phase. The owner explicitly deferred Auth configuration. Local browser flows use the development server; guest mode remains labeled local-only. All20 expansions are paused/not implemented."
+  "limits": "Hosted verification checked schema/catalog/privileges and preservation counts. No new hosted Auth identities or email flows were created or exercised in this phase. The owner explicitly deferred Auth configuration. Local browser flows use the development server; guest mode remains labeled local-only. All20 expansions are paused/not implemented.",
+  "ci": {
+    "run": 41148564919,
+    "conclusion": "success",
+    "tests": 69,
+    "browserCases": 13
+  },
+  "publication": {
+    "workflowRun": 41148905443,
+    "conclusion": "success",
+    "commit": "e6adb873bc12a675a4ad1f8726af428a672dbad2",
+    "liveGuestVerified": true,
+    "proof": "live-tasks-publication.json"
+  }
 }

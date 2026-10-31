@@ -47,3 +47,10 @@ for completed source, exact incomplete16-task/twenty-feature register, applied
 Supabase migration/function, real hosted password-JWT/cloud-save evidence and
 remaining Auth URL/email setup. The earlier game interface is now published;
 V6 frontend work remains on its separate review branch.
+
+## 2026-10-31 — owner-requested current release published
+
+Completed the exact16-task engine and applied migration20261031000407.
+PR2 merged at e6adb873; CI69 tests/13 browser cases passed. Pages41148905443
+succeeded and the actual public guest dishwashing/reload/MAD-isolation flow passed.
+All20 expansions are paused/not started; Auth remains deferred at owner request.
