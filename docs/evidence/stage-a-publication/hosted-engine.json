@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "realHostedBackend": true,
+  "edgeVersion": 3,
+  "anonymousWriteDenied": true,
+  "trustedRoadTotal": 64,
+  "freeQuotes": true,
+  "idempotentSettlements": true,
+  "crossingPreservesOriginalPaidCosts": true,
+  "originalEdgeRefundQuote": "12.0000",
+  "actualHalfRefundAndPaidReconstruction": true,
+  "legacyPurchaseAndNewVegetationCompatible": true,
+  "mainWallet": 15.0,
+  "madWallet": "0.0000",
+  "cloudStateSaved": true,
+  "fixtureCleanupPending": false,
+  "fixtureRemovedAndSessionsRevoked": true
+}

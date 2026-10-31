@@ -1,6 +1,6 @@
 # Changelog
 
-## Stage A mobile interaction — unpublished
+## Stage A mobile interaction — published 2026-11-01
 
 - Default visual touch controls: select, hold to edit, drag, rotate, validate,
   undo/redo previews, cancel, review and explicitly confirm. Advanced tools remain.
@@ -8,9 +8,10 @@
   pricing preserves every original paid cost component and50% refund basis.
 - Guided building stages, floor furniture, garages, car purchases/driving/parking,
   RTL thumb controls and camera reset. Reuse existing models and backend authority.
-- 124 unit/integration checks and28 unique browser cases verified across the full
-  suite and corrected focused rerun; compiled Pages/offline checks passed locally.
-- No dependency, schema, production data, merge or deployment changes.
+- Release pipeline passed124 unit/integration checks and all28 browser cases.
+  Public mobile touch, paid cloud relocation and independent cloud restore passed.
+- PR7/main e92d4a46 published with compatible world-command v3 deployed first.
+  No dependency/schema changes or player data resets. Diagnostic account removed.
 
 ## Supabase Auth activation — 2026-10-31
 

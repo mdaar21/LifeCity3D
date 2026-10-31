@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "checkedAt": "2026-10-31T23:29:42.924Z",
+  "base": "https://mdaar21.github.io/LifeCity3D",
+  "published": true,
+  "realHostedSupabase": true,
+  "defaultBeginnerControls": true,
+  "realCdpTouch": true,
+  "holdDragUndoRedoCancel": true,
+  "previewAndCancelFree": true,
+  "paidPlantMoveChargedOnce": 1,
+  "mainWallet": 14,
+  "madWallet": "0.0000",
+  "originalPaidCostsPreserved": true,
+  "reloadRestored": true,
+  "independentBrowserCloudRestore": true,
+  "approvedTaskCount": 16,
+  "logout": true,
+  "errors": [],
+  "fixtureCleanupPending": false,
+  "fixtureRemovedAndSessionsRevoked": true
+}

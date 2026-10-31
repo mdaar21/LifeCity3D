@@ -124,3 +124,11 @@ See docs/evidence/stage-a/README.md for verification and release dependencies.
 Verification:124 tests/26 files passed.28 unique browser cases verified across
 full CI41246740296 and corrected focused CI41247729824; latter CI is green.
 Compiled repository paths/PWA/offline reserve/refund also passed locally.
+
+## Latest owner — publish Stage A: complete
+Owner explicitly approved publishing this increment. PR7/main e92d4a46 and
+Pages41252010125 succeeded:124 tests and28 browser journeys. world-command v3
+was deployed first; actual hosted finance and public mobile touch/cloud restore
+passed. Diagnostic sessions/account/data were removed and verified absent.
+See docs/evidence/stage-a-publication. No schema/data resets. Earlier no-publication
+statements are historical for this release. Future paid recoloring/variants remain.

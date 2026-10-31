@@ -1,5 +1,20 @@
 # LifeCity3D — focused implementation context
 
+## Latest owner — Stage A publication complete
+- Owner explicitly approved publication. PR7/main e92d4a46 is live on GitHub Pages;
+  Pages41252010125 passed124 tests and all28 browser journeys in one release run.
+- Compatible world-command v3 deployed first. Hosted road pricing/idempotency,
+  original costs, exact50% refunds and legacy/new purchases passed.
+- REAL public mobile touch: hold/drag/undo/redo/cancel, free previews, confirmed
+  paid relocation exactly once, original costs and MAIN/MAD isolation passed.
+  Reload and independent-browser cloud restoration/login/logout also passed.
+- Disposable diagnostic sessions and account/profile/wallet/world data were
+  removed and verified zero. Existing player data and schemas were untouched.
+- Evidence: docs/evidence/stage-a-publication. Working evidence branch:
+  codex/stage-a-publication-evidence (based on published main).
+- Full paid recoloring and additional variants remain future groups. Earlier
+  unpublished statements below are historical for this now-published Stage A.
+
 ## Current owner — Stage A mobile controls, unpublished
 - Implemented/tested:124 unit/integration tests and28 unique browser cases across
   full run41246740296 (26 passed) + corrected focused run41247729824 (2 passed).
