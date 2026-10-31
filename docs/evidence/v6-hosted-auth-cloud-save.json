@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "project": "taevxcuqsanfyywkuygl",
+  "scope": "Current V6 frontend locally served against REAL Supabase Auth/Postgres; two independent browser contexts. Disposable pre-confirmed diagnostic Auth fixture, not public email signup.",
+  "authTokenResponses": [
+    {
+      "path": "Auth password token",
+      "status": 200
+    },
+    {
+      "path": "Auth password token",
+      "status": 200
+    }
+  ],
+  "mainTaskWallet": 40,
+  "yuyiWalletAfterRealFxPurchase": "47.4800",
+  "referenceSource": "ExchangeRate-API",
+  "referenceUpdated": "2026-10-30T00:02:31+00:00",
+  "placement": {
+    "catalog_id": "tree",
+    "x": 2,
+    "z": 3,
+    "rotation": 90
+  },
+  "twoBrowserExactMatch": true,
+  "reloadMatch": true,
+  "emailConfirmationOrRecoveryVerified": false,
+  "fixtureCleanupPending": false,
+  "disposableFixtureDeleted": true,
+  "authenticatedFxRefreshHttpStatus": 200
+}

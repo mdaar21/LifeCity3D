@@ -1,0 +1,33 @@
+{
+  "migration": "20261031000407_approved_tasks_engine",
+  "project": "taevxcuqsanfyywkuygl",
+  "applied": true,
+  "sourceSha256": "82c96b6387d14f4cba82d727b1a1b1f1c5f69dbaf647ce91105bf0c936fefd27",
+  "liveVerification": {
+    "catalogDefinitions": 16,
+    "catalogRewardSum": 1130,
+    "claimsCreatedByMigration": 0,
+    "profilesBeforeAndAfter": 0,
+    "mainLedgerBeforeAndAfter": 0,
+    "madLedgerBeforeAndAfter": 0,
+    "all11TaskTablesRls": true,
+    "directClientWritesDenied": true,
+    "privateHelperExecutableByAuthenticated": false,
+    "gameCommandExecutableByAuthenticated": true
+  },
+  "localTests": {
+    "passed": 69,
+    "files": 16,
+    "taskEngineCases": 12,
+    "populatedUpgrade": true,
+    "newBrowserFlows": [
+      "mobile weekly plan and second-browser restoration",
+      "guest confirmation, laundry safeguard and five-distinct bonus"
+    ],
+    "regressionBrowserFlow": "9 desktop/mobile Arabic/English/dark game HUD accessibility states",
+    "allThreeFocusedBrowserCasesPassed": true,
+    "buildGithub": true,
+    "compiledPagesPwa": true
+  },
+  "limits": "Hosted verification checked schema/catalog/privileges and preservation counts. No new hosted Auth identities or email flows were created or exercised in this phase. The owner explicitly deferred Auth configuration. Local browser flows use the development server; guest mode remains labeled local-only. All20 expansions are paused/not implemented."
+}

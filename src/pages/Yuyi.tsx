@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import {appUrl} from '../lib/paths';
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { Check, Copy, Flower2, Heart, History, Leaf, Link2, LoaderCircle, MessageCircle, Plus, ShieldCheck, Sparkles, Sprout, Unlink, UserPlus } from 'lucide-react';
@@ -98,7 +99,7 @@ export default function Yuyi() {
     try { await navigator.clipboard.writeText(appUrl('yuyi?code='+encodeURIComponent(invite.code))); setNotice({ text: t('نُسخ رابط الدعوة.', 'Invitation link copied.') }); }
     catch { setNotice({ text: t('تعذر النسخ. انسخ الكود الظاهر يدويًا.', 'Copying failed. Please copy the displayed code manually.'), error: true }); }
   }
-  if (loading && !state) return <div className="lc-social social-loading" role="status"><LoaderCircle size={30} /><span>{t('تُفتح حديقتك…', 'Opening your garden…')}</span></div>;
+  if (loading && !state) return <div className="lc-social social-loading" role="status"><Link className="button button-secondary" to="/economy">{t('رصيد ويوي · سجّل توجيهها من جهازك','Yuyi MAD · record her instruction from your device')}</Link><p className="page-footnote">{t('دفتر MAD مستقل للحركات الجديدة. الحركات التاريخية السابقة بقيت في محفظتها الأصلية ولم تُحوّل تلقائيًا.','New MAD entries use a separate ledger. Older history stays in its original wallet and was not converted automatically.')}</p><LoaderCircle size={30} /><span>{t('تُفتح حديقتك…', 'Opening your garden…')}</span></div>;
   if (!state) return <div className="lc-social"><div className="social-notice error" role="alert">{error ? error : t('تعذر تحميل المساحة.', 'This space could not be loaded.')}</div><button className="social-button" onClick={() => void refresh().catch(() => undefined)}>{t('إعادة المحاولة', 'Try again')}</button></div>;
   const disabled = !!busy || !online;
   return <div className="lc-social">

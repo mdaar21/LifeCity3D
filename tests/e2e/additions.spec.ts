@@ -16,7 +16,7 @@ test('first-city guide leads to manual planting; saved building project funds, c
  test.setTimeout(90_000);
  const email=await signup(page,'Project builder');
  await expect(page.getByTestId('first-city-guide')).toContainText('Choose a first task');expect((await state(page)).placements).toHaveLength(0);
- await page.getByTestId('first-city-guide').getByRole('link',{name:'Choose a first task'}).click();await page.locator('.task-card').filter({hasText:'+40'}).getByRole('button',{name:'Mark complete',exact:true}).click();await expect(page.getByTestId('wallet-balance')).toHaveText('40');
+ await page.getByTestId('first-city-guide').getByRole('link',{name:'Choose a first task'}).click();await page.locator('.task-card').filter({hasText:/Clean (your )?room/}).getByRole('button',{name:'Mark complete',exact:true}).click();await expect(page.getByTestId('wallet-balance')).toHaveText('40');
  await page.goto('/dashboard');await page.getByTestId('first-city-guide').getByRole('link',{name:'Choose your tree'}).click();await expect(page).toHaveURL(/item=tree/);await expect(page.locator('.shop-showcase h2')).toHaveText('Tree');await page.getByTestId('purchase-tree').click();await expect(page.getByTestId('wallet-balance')).toHaveText('20');
  await page.goto('/dashboard');await page.getByTestId('first-city-guide').getByRole('link',{name:'Plant it in your city'}).click();await expect(page.getByTestId('placement-controls')).toBeVisible();expect((await state(page)).placements).toHaveLength(0);
  await page.getByTestId('placement-x').fill('1');await page.getByTestId('placement-z').fill('2');await page.getByTestId('commit-placement').click();await expect(page.getByTestId('first-city-guide')).toContainText('Your first story is planted.');

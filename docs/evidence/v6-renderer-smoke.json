@@ -1,0 +1,61 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "before": {
+    "scene": "city",
+    "startedAtMs": 2804.199999999255,
+    "lastRenderedAtMs": 2859.800000000745,
+    "renderedFrames": 1,
+    "rendererFrame": 1,
+    "calls": 13,
+    "triangles": 126,
+    "dpr": 1,
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "drawingBufferWidth": 390,
+    "drawingBufferHeight": 844,
+    "frameGapsMs": []
+  },
+  "after": {
+    "scene": "city",
+    "startedAtMs": 2804.199999999255,
+    "lastRenderedAtMs": 13330,
+    "renderedFrames": 165,
+    "rendererFrame": 165,
+    "calls": 13,
+    "triangles": 126,
+    "dpr": 1,
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "drawingBufferWidth": 390,
+    "drawingBufferHeight": 844,
+    "frameGapsMs": [
+      41,
+      69.80000000074506,
+      41.399999998509884,
+      73.5,
+      72.40000000037253,
+      42.90000000037253,
+      73.80000000074506,
+      83.09999999962747,
+      43.79999999888241,
+      71.40000000037253,
+      43.90000000037253,
+      72.90000000037253,
+      71.29999999888241,
+      43.5,
+      96.90000000037253,
+      70.5,
+      39.70000000111759,
+      81.89999999850988,
+      73.60000000149012,
+      49,
+      67.5,
+      75.5,
+      45.69999999925494,
+      94.5
+    ]
+  },
+  "interactionMs": 10578,
+  "limits": "Empty two-territory baseline, synthetic orbit in cloud Chromium/software WebGL. Not a real-device FPS claim or loaded-city benchmark."
+}

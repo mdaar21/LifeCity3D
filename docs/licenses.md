@@ -29,3 +29,12 @@ The optional starter submodule remains attributed to its upstream and is not
 part of LifeCity's compiled or copied source distribution. The inspected commit
 has no explicit license file. See starter-template-integration.md for its URL,
 pin and scope; no third-party source relicensing is claimed.
+
+
+## FX reference data
+
+ExchangeRate-API open access (https://www.exchangerate-api.com/docs/free), reviewed
+2026-10-31: daily indicative data, caching/conversion for commercial or personal
+use permitted with attribution, bulk redistribution prohibited. Data is kept
+private; game UI shows only selected conversion and MAD quote metadata, with
+source attribution. No rate snapshot is seeded as a purported live constant.

@@ -41,3 +41,9 @@ Read-only Supabase inspection now confirms the selected project's LifeCity
 schema, required RPCs,25 catalog items and RLS on every public table. No reset
 or schema change was needed. Auth redirects, production build variables, email
 and actual hosted two-browser acceptance remain unverified; see HANDOFF.md.
+
+Ultimate V6 foundation continuation (not the full V6 upgrade): see v6/STATUS.md
+for completed source, exact incomplete16-task/twenty-feature register, applied
+Supabase migration/function, real hosted password-JWT/cloud-save evidence and
+remaining Auth URL/email setup. The earlier game interface is now published;
+V6 frontend work remains on its separate review branch.

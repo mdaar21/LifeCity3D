@@ -25,12 +25,13 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - run: npm run build:github
+        id: client
         env:
-          VITE_BACKEND_MODE: ${{ vars.VITE_BACKEND_MODE || 'demo' }}
+          VITE_BACKEND_MODE: ${{ vars.VITE_BACKEND_MODE }}
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
       - name: Verify compiled guest routes and offline PWA
-        if: ${{ vars.VITE_BACKEND_MODE != 'supabase' }}
+        if: ${{ steps.client.outputs.backend == 'demo' }}
         run: npm run verify:github
       - uses: actions/upload-pages-artifact@v3
         with:

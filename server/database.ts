@@ -1,5 +1,5 @@
 import { PGlite } from '@electric-sql/pglite';
-import { readFile,mkdir } from 'node:fs/promises';
+import { readFile,mkdir,readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import {dirname,resolve} from 'node:path';
 
@@ -65,6 +65,7 @@ export async function createLocalDatabase(options: DatabaseOptions = {}): Promis
         DO $$ BEGIN
           IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname='anon') THEN CREATE ROLE anon NOLOGIN; END IF;
           IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname='authenticated') THEN CREATE ROLE authenticated NOLOGIN; END IF;
+          IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname='service_role') THEN CREATE ROLE service_role NOLOGIN; END IF;
         END $$;
         CREATE OR REPLACE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$
           SELECT nullif(current_setting('request.jwt.claim.sub',true),'')::uuid
@@ -84,7 +85,8 @@ export async function createLocalDatabase(options: DatabaseOptions = {}): Promis
         );
         CREATE INDEX IF NOT EXISTS local_auth_sessions_expiry ON local_auth.sessions(expires_at);
       `);
-      for (const name of ['migrations/001_core.sql', 'migrations/002_city_partner.sql', 'migrations/003_realtime.sql', 'migrations/004_schedule_avatar_upgrade.sql', 'migrations/005_signup_locale.sql', 'migrations/006_projects_visits.sql', 'seed.sql']) {
+      const migrations=(await readdir(`${projectRoot}/supabase/migrations`)).filter(name=>name.endsWith('.sql')).sort().map(name=>`migrations/${name}`);
+      for (const name of [...migrations,'seed.sql']) {
         const applied = await tx.query('SELECT name FROM local_auth.migrations WHERE name=$1', [name]);
         if (applied.rows.length) continue;
         const sql = await readFile(`${projectRoot}/supabase/${name}`, 'utf8');

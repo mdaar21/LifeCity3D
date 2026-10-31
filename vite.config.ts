@@ -1,3 +1,4 @@
+import publicService from './deployment/client-service.json';
 import {defineConfig,loadEnv} from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwind from '@tailwindcss/vite';
@@ -7,7 +8,7 @@ export default defineConfig(({mode})=>{
  const base=process.env.VITE_BASE_PATH||env.VITE_BASE_PATH||'/';
  if(!/^\/(?:[A-Za-z0-9_.-]+\/)*$/.test(base)||base.includes('..'))throw new Error('VITE_BASE_PATH must be / or /repository-name/.');
  const router=process.env.VITE_ROUTER_MODE||env.VITE_ROUTER_MODE||'browser';
- const backend=process.env.VITE_BACKEND_MODE||env.VITE_BACKEND_MODE||'demo';
+ const backend=process.env.VITE_BACKEND_MODE||env.VITE_BACKEND_MODE||(publicService.enabled?'supabase':'demo');
  if(router==='hash'&&backend!=='demo')throw new Error('Hash routing is reserved for the clearly labeled local guest preview. Use browser routing for configured accounts.');
  const csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://*.supabase.co wss://*.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'";
  return {
