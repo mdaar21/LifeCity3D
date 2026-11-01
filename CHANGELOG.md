@@ -8,8 +8,9 @@
   and matching procedural catalog pictures; existing economies and saves preserved.
 - Added rendered mobile/RTL/finance/persistence coverage and asset-footprint budgets.
   No schema, dependency or backend deployment changes. Not published.
+- Full CI41290225129 passed126 tests and all32 browser journeys, lint, types and build.
 
-## Advanced architectural play — unpublished
+## Advanced architectural play — published in PR8, 2026-11-01
 
 - Inspect owned buildings/floors directly, with a camera framed for one-handed
   live fitting of10 existing materials and3 qualities in the rendered world.

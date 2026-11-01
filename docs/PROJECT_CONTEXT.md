@@ -14,6 +14,8 @@
   active-plot shadows. Refreshed procedural catalog images; no new dependencies.
 - All spending uses the existing quote/commit authority. No new server command,
   schema, migration, wallet/data write or deployment. Never seed free objects.
+- Verified on d621b48: full CI41290225129 passed126 tests/27 files, all32 browser
+  journeys, lint, typecheck and production/PWA build. No merge/publication.
 - Verification and actual game screenshots: docs/evidence/oasis-play. Full-object
   customization and the larger V6 acceptance backlog remain separate work.
 

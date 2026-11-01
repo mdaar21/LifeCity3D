@@ -170,3 +170,7 @@ Current group: simpler beginner controls, real task shortcut, floor-count previe
 quick stage confirmation, all-paid-floor inspection and richer cached owned assets.
 Continue the same feature branch. This group is NOT authorized for merge/publication.
 See docs/PROJECT_CONTEXT.md and docs/evidence/oasis-play for current verification.
+
+Verification: full CI41290225129 passed on d621b48:126 tests/27 files, all32 browser
+journeys, lint, types and production/PWA build. Evidence: docs/evidence/oasis-play.
+No new backend/schema/data/dependency changes; this group remains unpublished.

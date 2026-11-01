@@ -13,5 +13,17 @@
   "arabicRtl": true,
   "axeViolations": 0,
   "errors": [],
-  "published": false
+  "published": false,
+  "applicationSource": "d621b4834eee2fa4cab2d3d39b68650fb6cc5af1",
+  "branch": "codex/stylized-visual-overhaul",
+  "fullCi": "https://github.com/mdaar21/LifeCity3D/actions/runs/41290225129",
+  "fullCiConclusion": "success",
+  "unitIntegrationTests": 126,
+  "testFiles": 27,
+  "browserJourneys": 32,
+  "lint": "passed",
+  "typecheck": "passed",
+  "productionPwaBuild": "passed",
+  "newDependencies": false,
+  "databaseOrBackendChanges": false
 }

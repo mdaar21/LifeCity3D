@@ -18,11 +18,17 @@ It checks preview/cancel, MAIN/MAD isolation, original costs, real rendered worl
 selection/cutaway, English/Arabic RTL, accessibility and reload persistence.
 Test accounts only exist in the local reference fixture; no free objects are seeded.
 
-Local checks: new mobile journey passed (24.3s),57 unit tests passed previously,
-production/PWA build passed. Existing shop, architectural-finance and visual
-construction/furniture journeys also passed. Full regression status is recorded
-in verification.json after CI. Screenshots show actual owned paid test objects;
-they are development-server evidence, not a published version or final art promise.
+Full regression passed on application source `d621b48` in
+[CI41290225129](https://github.com/mdaar21/LifeCity3D/actions/runs/41290225129):
+126 unit/integration tests in27 files, all32 browser journeys (5.5min), clean lint,
+TypeScript and production/PWA build. Covers trusted finance/idempotency/refunds,
+MAIN/MAD isolation, roads, touch gestures, vehicle/garage, paid material fitting,
+all16 life tasks, persistence and106 working catalog photos. No tests skipped.
+
+Local new mobile journey passed24.3s, including English/Arabic RTL/Axe checks;
+57 unit tests and production/PWA build also passed. Screenshots show actual owned
+paid test objects; development-server evidence, not a published version or final
+art promise. No physical-device or newly hosted Supabase verification claimed.
 
 Full-object recoloring, additional paid variants and the larger V6 acceptance
 backlog remain separate work. Physical-device performance is not claimed.
