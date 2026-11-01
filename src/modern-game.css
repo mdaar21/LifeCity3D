@@ -49,3 +49,7 @@
 .modern-game .beginner-interior :is(.builder-sidebar,.world-owned-summary,.world-stage-bottom){display:none}
 .modern-game .camera-cue{position:fixed;bottom:calc(171px + env(safe-area-inset-bottom));inset-inline:16px;text-align:center;font-size:10px;font-weight:600;letter-spacing:.15px;color:#234653;text-shadow:0 1px 2px #ffffff95;pointer-events:none;margin:0}
 @media(min-width:1000px){.modern-game .camera-cue{bottom:102px;inset-inline-start:auto;inset-inline-end:28px}}
+.modern-game .world-studio .studio-building,.modern-game .world-studio .studio-score{background:var(--surface);color:var(--text);border-color:var(--border)}
+.modern-game .world-studio .studio-building dt,.modern-game .world-studio .studio-quote small{color:var(--muted)}
+.modern-game .world-studio .studio-notice{background:#463d28;color:#ffe4ab;border-color:#f4cf8350}
+.modern-game .world-studio .plan-view{color:#183446}

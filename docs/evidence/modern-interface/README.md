@@ -30,3 +30,8 @@ caught the floating tools button covering the advanced studio's Close button.
 The tool rail now disappears while that studio is open. The previously blocked
 horticulture purchase/harvest/cross-browser restore journey passed locally after
 the fix. A corrected focused CI verifies the affected flows; see final results.
+The construction regression then exposed inherited white text on an old cream
+building-details card. Its surfaces/labels now use the shared dark palette. The
+entire construction/cutaway/material/advanced navigation/Arabic/dark accessibility
+journey passed locally (47.9s); its screenshot-heavy budget is75s for CI rendering.
+No assertions, financial checks or persistence checks were removed.
