@@ -8,6 +8,8 @@
   coping and brighter night readability. Merge facade geometry across floors.
 - Preview/cancel is local/free; review and confirmation reuse authoritative
   prices, receipts, wallets and exact50% replacement salvage. Preserve all saves.
+- 124 unit/integration tests and29 browser journeys passed in CI41266983389,
+  including rendered paid fitting, refunds, persistence, Arabic and accessibility.
 - No schema, dependency, backend deployment or publication changes.
 
 ## Stage A mobile interaction — published 2026-11-01

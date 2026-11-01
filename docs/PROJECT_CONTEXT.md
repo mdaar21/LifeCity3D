@@ -1,6 +1,9 @@
 # LifeCity3D — focused implementation context
 
 ## Current owner — modern, advanced GAME (unpublished)
+- Implemented/tested: CI41266983389 passed124 unit/integration checks and all29
+  browser journeys, lint/typecheck and production build. Evidence: architect-mode.
+  No merge, publication, live account write or backend change in this group.
 - Continue codex/stylized-visual-overhaul; published Stage A remains untouched.
 - New architecture finish batches all paid floors/four elevations by material;
   visible glazing/frames/doors/roof coping, actual paid finish colors/roughness.

@@ -141,3 +141,6 @@ floor inspection and readable night scenes. Reuse existing material_apply pricin
 atomic receipts, quality costs and historical50% salvage; no new free objects.
 No schema/dependency/backend deployment changes. This group is not published.
 Full-object recoloring and the remaining expansion packs remain separate work.
+Verified: CI41266983389 passed124 tests and29 browser journeys, including the
+new rendered fitting/quality/salvage/RTL flow; lint/typecheck/build passed.
+No publication. Keep hosted Stage A unchanged until another release request.

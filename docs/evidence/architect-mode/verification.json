@@ -34,5 +34,21 @@
     }
   },
   "errors": [],
-  "scope": "Actual rendered Chromium mobile touch and reference Postgres; not a hosted release or physical-phone benchmark."
+  "scope": "Actual rendered Chromium mobile touch and reference Postgres; not a hosted release or physical-phone benchmark.",
+  "checkedAt": "2026-11-01T03:01:13.200678+00:00",
+  "ci": {
+    "runId": 41266983389,
+    "url": "https://github.com/mdaar21/LifeCity3D/actions/runs/41266983389",
+    "headSha": "773646d6deceb22bb13e08e437d636f381fc4c8c",
+    "conclusion": "success",
+    "unitIntegrationPassed": 124,
+    "browserJourneysPassed": 29,
+    "lint": true,
+    "typecheck": true,
+    "productionBuild": true
+  },
+  "published": false,
+  "backendChanges": false,
+  "schemaChanges": false,
+  "dependencyChanges": false
 }
