@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — simpler gameplay and richer owned assets
+
+- Simplified beginner camera tools and contextual actions, real-life task shortcut,
+  visual floor-count planning, quick paid construction and all-floor inspection.
+- Richer owned palms, furniture, fountains, building/finish details, lighting/water
+  and matching procedural catalog pictures; existing economies and saves preserved.
+- Added rendered mobile/RTL/finance/persistence coverage and asset-footprint budgets.
+  No schema, dependency or backend deployment changes. Not published.
+
 ## Advanced architectural play — unpublished
 
 - Inspect owned buildings/floors directly, with a camera framed for one-handed

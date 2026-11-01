@@ -7,5 +7,5 @@ export function graphicsProfile(preset:GraphicsPreset,worldQuality:'low'|'standa
 }
 export function visualEnvironment(hour:number,weather:string){
  const h=((hour%24)+24)%24,night=h<6||h>=19,golden=!night&&(h<7.5||h>=16.5),wet=weather==='rain';
- return {night,golden,sky:night?'#182f43':wet?'#adc3c9':weather==='fog'?'#cfdddc':golden?'#efd3bc':'#c7e1e4',ambient:night?.68:wet?.95:golden?1.05:1.2,sun:night?.45:wet?.9:golden?1.5:2,sunColor:night?'#adc9e5':golden?'#ffd2a1':'#fff4dc',ground:night?'#506d6c':'#6f8d75',cloud:night?'#52677a':wet?'#b8c8cc':golden?'#f3e4d5':'#f0f4e9',fog:weather==='fog'?55:wet?110:250,water:night?'#426e85':wet?'#759ca9':golden?'#9fc3c7':'#82bfd0'};
+ return {night,golden,sky:night?'#182f43':wet?'#adc3c9':weather==='fog'?'#cfdddc':golden?'#efd3bc':'#c7e1e4',ambient:night?.68:wet?.95:golden?.85:.8,sun:night?.45:wet?.9:golden?2:2.6,sunColor:night?'#adc9e5':golden?'#ffd2a1':'#fff4dc',ground:night?'#506d6c':'#6f8d75',cloud:night?'#52677a':wet?'#b8c8cc':golden?'#f3e4d5':'#f0f4e9',fog:weather==='fog'?55:wet?110:250,water:night?'#426e85':wet?'#759ca9':golden?'#9fc3c7':'#82bfd0'};
 }

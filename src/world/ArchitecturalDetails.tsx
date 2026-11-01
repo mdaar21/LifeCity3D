@@ -40,16 +40,18 @@ export function ArchitecturalDetails({building:b,night,powered}:{building:Buildi
     const position:[number,number,number]=side===0?[u,y,-out]:side===1?[b.width-u,y,b.depth+out]:side===2?[-out,y,b.depth-u]:[b.width+out,y,u];
     add(position,[w,h,d],s,side<2?0:Math.PI/2);
    };
-   box(length/2,.24,.04,length,.2,.1,wood);box(length/2,2.86,.04,length,.12,.1,trim);
+   box(length/2,.24,.04,length,.2,.1,wood);box(length/2,.1,.055,length,.045,.13,trim);box(length/2,2.86,.04,length,.12,.1,trim);
    for(let i=0;i<count;i++){
     const u=(i+.5)*bay;
     if(floor===0&&(side===0&&Math.abs(u-length/2)<1||side===3&&b.archetype==='garage'&&Math.abs(u-length/2)<1.8))continue;
-    const w=Math.min(bay-.35,commercial?2.2:1.55),h=commercial?1.9:1.35,y=commercial?1.52:1.6;
+    const w=Math.min(bay-.35,commercial?2.2:1.55),h=commercial?1.9:1.65,y=commercial?1.52:1.6;
     box(u,y,.07,w+.14,h+.14,.12,windowFrame);box(u,y,.14,w,h,.04,panes);
-    box(u,y,.17,.045,h,.025,hasWindows?windowFrame:trim);box(u,y-h/2-.08,.13,w+.22,.1,.2,trim);
+    box(u,y,.17,.045,h,.025,hasWindows?windowFrame:trim);box(u,y+.18,.17,w,.035,.03,windowFrame);box(u,y-h/2-.08,.13,w+.22,.1,.2,trim);
     if(commercial)box(u,2.65,.09,w+.2,.06,.18,metal);
     else box(u,2.42,.09,w+.25,.08,.25,wood);
    }
+   // Masonry joints belong to the ground-floor finish, within the existing wall.
+   if(floor===0){for(let row=0;row<2;row++)for(let k=1;k<length;k+=1.1)box(k+(row%2)*.28,.34+row*.16,.065,.018,.14,.012,trim);box(length/2,.5,.065,length,.018,.012,trim);}
   }
   // Corner reveals and a real material-bearing door inside the existing opening.
   for(const x of [0,b.width])for(const z of [0,b.depth])add([x,1.5,z],[.13,3,.13],trim);
@@ -61,8 +63,8 @@ export function ArchitecturalDetails({building:b,night,powered}:{building:Buildi
   }
   if(floor===Math.max(...b.floors.map(f=>f.index))&&b.stages.some(s=>s.type==='roof'&&s.paid)){
    // Thin coping is integrated into the installed roof, never an extra object.
-   for(const z of [.08,b.depth-.08])add([b.width/2,3.11,z],[b.width-.06,.025,.16],trim);
-   for(const x of [.08,b.width-.08])add([x,3.11,b.depth/2],[.16,.025,b.depth-.06],trim);
+   for(const z of [.08,b.depth-.08])add([b.width/2,3.11,z],[b.width-.06,.18,.16],trim);
+   for(const x of [.08,b.width-.08])add([x,3.11,b.depth/2],[.16,.18,b.depth-.06],trim);
   }
   }
   return [...groups.values()].map(({surface,parts})=>{

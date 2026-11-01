@@ -1,0 +1,7 @@
+import type {} from '@react-three/fiber';
+import {BufferGeometry,CatmullRomCurve3,CylinderGeometry,MeshStandardMaterial,TubeGeometry,Vector3} from 'three';
+import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+function build(){const stone:BufferGeometry[]=[],water:BufferGeometry[]=[];const ring=(parts:BufferGeometry[],r:number,h:number,y:number)=>{const g=new CylinderGeometry(r,r,h,32);g.translate(0,y,0);parts.push(g);};ring(stone,1,.17,.085);ring(stone,.94,.28,.23);ring(stone,.2,.7,.64);ring(stone,.48,.09,1.02);ring(stone,.11,.35,1.2);ring(water,.85,.018,.38);ring(water,.41,.018,1.07);for(let i=0;i<6;i++){const a=i*Math.PI/3,curve=new CatmullRomCurve3([new Vector3(0,1.38,0),new Vector3(Math.cos(a)*.35,1.55,Math.sin(a)*.35),new Vector3(Math.cos(a)*.72,.4,Math.sin(a)*.72)]);water.push(new TubeGeometry(curve,10,.012,4,false));}const merge=(parts:BufferGeometry[])=>{const g=mergeGeometries(parts)!;parts.forEach(p=>p.dispose());return g;};return {stone:merge(stone),water:merge(water)};}
+const geometry=build(),stone=new MeshStandardMaterial({color:'#d7ccb2',roughness:.78}),water=new MeshStandardMaterial({color:'#75bac4',roughness:.22,metalness:.18});
+/** Replaces only the geometry of an already-owned fountain, inside its original 2m footprint. */
+export function FountainAsset(){return <group dispose={null}><mesh geometry={geometry.stone} material={stone} castShadow receiveShadow/><mesh geometry={geometry.water} material={water} receiveShadow/></group>;}

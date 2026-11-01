@@ -20,7 +20,7 @@ export function FinishStudio({building:b,busy,onReview,onClose}:{building:Buildi
  const context=useMemo(()=>state?viewWorldContext(state):null,[state]);
  const request=useMemo(()=>({building_id:b.id,surface,material,quality,floor}),[b.id,surface,material,quality,floor]);
  const fitting=useMemo(()=>{if(!context)return {quote:null,error:''};try{return {quote:worldTransition(context,'world_quote',{operation:'material_apply',request:{realm:b.realm,...request},expected_revision:context.world.revision}).quote,error:''};}catch(cause){return {quote:null,error:localizeError(cause,language)};}},[context,request,b.realm,language]);
- useEffect(()=>{useTouchTools.getState().set({designOpen:true});return()=>useTouchTools.getState().set({finishPreview:null,designOpen:false});},[]);
+ useEffect(()=>{useTouchTools.getState().set({designOpen:true});useWorldUI.getState().set({cutawayAll:false});return()=>useTouchTools.getState().set({finishPreview:null,designOpen:false});},[]);
  useEffect(()=>{useTouchTools.getState().set({finishPreview:fitting.quote});},[fitting.quote]);
  useEffect(()=>{useWorldUI.getState().set({selected:b.id,inspectFocus:true,floor:surface==='floor'||surface==='stairs'?floor??b.floors[0]?.index??0:null});},[b.id,b.floors,surface,floor]);
  useEffect(()=>{const escape=(event:KeyboardEvent)=>{if(event.key==='Escape'&&!busy){event.preventDefault();onClose();}};document.addEventListener('keydown',escape);return()=>document.removeEventListener('keydown',escape);},[busy,onClose]);

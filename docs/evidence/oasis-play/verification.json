@@ -1,0 +1,17 @@
+{
+  "realLifeTasks": 16,
+  "earnedReward": 20,
+  "paidFloorCount": 2,
+  "quickConstruction": true,
+  "freePreviewAndCancel": true,
+  "actualOwnedPalms": true,
+  "ownedFurnitureOnly": true,
+  "allFloorCutaway": true,
+  "unchangedMad": true,
+  "originalPaidCostsPreserved": true,
+  "referencePersistence": true,
+  "arabicRtl": true,
+  "axeViolations": 0,
+  "errors": [],
+  "published": false
+}

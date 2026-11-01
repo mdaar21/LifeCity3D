@@ -1,5 +1,29 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — simpler gameplay and richer owned assets (unpublished)
+- Integrate the original art study's ideas into the existing game. Do not seed
+  the illustrated neighborhood or restart/reset existing cities. Continue on
+  codex/stylized-visual-overhaul; no merge or publication authorized for this group.
+- Beginner camera rail has three controls with a labeled optional tools menu;
+  pan/orbit, tutorial, local visual quality and advanced tools remain available.
+- Real16-task progress shortcut, free floor-count preview, quick trusted stage
+  confirmation, compact context actions and all-paid-floor interior inspection.
+- Curved leaflet palms with device detail levels, richer legacy building skins,
+  paid finish trim/glazing, actual owned furniture models and tiered fountains.
+  Cached merged meshes, same placement envelopes, static sea shader and tighter
+  active-plot shadows. Refreshed procedural catalog images; no new dependencies.
+- All spending uses the existing quote/commit authority. No new server command,
+  schema, migration, wallet/data write or deployment. Never seed free objects.
+- Verification and actual game screenshots: docs/evidence/oasis-play. Full-object
+  customization and the larger V6 acceptance backlog remain separate work.
+
+## Latest publication — interface and architecture complete
+- Owner-approved PR8/main0779951f902db568a03ac96cde046fa8bb524b36 published
+  successfully in Pages41272583338.124 tests and31 browser journeys passed.
+- Public106-image catalog and mobile interface were verified. Compatible hosted
+  world-command v3 remains unchanged. Release: https://github.com/mdaar21/LifeCity3D/actions/runs/41272583338.
+- Earlier unpublished interface/architecture paragraphs below are historical.
+
 ## Current owner — interface rebuild (unpublished)
 - The owner explicitly requested a ground-up INTERFACE redesign. This supersedes
   earlier no-repeat visual guidance for UI only; keep the existing project/world.
