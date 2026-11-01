@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:38441/LifeCity3D",
+  "router": "browser",
+  "published": false,
+  "scope": "Local simulation of GitHub Pages path and routing behavior, not a remote deployment.",
+  "rootStatus": 200,
+  "coldDeepLinkStatus": 404,
+  "spaCityRendered": true,
+  "freshTabChoosesGuestExplicitly": true,
+  "fontsAndIconsUnderRepoBase": true,
+  "pricingRendered": true,
+  "productionCspMeta": true,
+  "loginAvoidsThreeEngineDownload": true,
+  "publicVisitRouteWithoutLogin": true,
+  "pageErrors": []
+}

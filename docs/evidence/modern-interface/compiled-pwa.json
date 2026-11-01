@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:38441/LifeCity3D",
+  "router": "browser",
+  "serviceWorkerControlled": true,
+  "manifest": {
+    "display": "standalone",
+    "lang": "ar-SA"
+  },
+  "icons": [
+    {
+      "src": "/LifeCity3D/icons/icon-192.png",
+      "width": 192,
+      "height": 192,
+      "purpose": "any"
+    },
+    {
+      "src": "/LifeCity3D/icons/icon-512.png",
+      "width": 512,
+      "height": 512,
+      "purpose": "any"
+    },
+    {
+      "src": "/LifeCity3D/icons/maskable-512.png",
+      "width": 512,
+      "height": 512,
+      "purpose": "maskable"
+    }
+  ],
+  "offlineReloadWithSavedBalance": 40,
+  "offlineFinancialButtonsDisabled": true,
+  "guestProjectReserveReloadRefund": true,
+  "noAutomaticOfflineReward": true,
+  "pageErrors": [],
+  "scope": "Locally served compiled browser-only guest demo. This is not a remote GitHub deployment, hosted Supabase or real account cloud saving."
+}

@@ -17,3 +17,10 @@ Screenshots are actual rendered Chromium mobile scenes and disposable local
 Postgres accounts with real game operations. They are not a hosted release,
 real-device benchmark or proof that the remaining V6 content is complete.
 No production writes, database migration, free city objects or added dependencies.
+
+Additional focused verification: guided garage→car purchase→walking→entry→touch
+joystick→parking passed with unchanged other wallet. Mouse and touch now share
+pan/orbit modes. Reset flushes remaining gesture inertia before restoring the
+view; the regression journey verifies a stable reset after panning and real mouse
+panning, then reloads the same paid city. Local lint/typecheck/build and compiled
+repository-path/PWA offline financial-blocking, save/reserve/refund checks passed.

@@ -2,7 +2,7 @@ import {useGraphicsProfile} from './useGraphics'
 import { Component, Suspense, useEffect, useMemo, useRef, useState, type ComponentRef, type ReactNode } from 'react'
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import { OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
-import { TOUCH, InstancedMesh, Object3D, PCFSoftShadowMap } from 'three'
+import { TOUCH, MOUSE, InstancedMesh, Object3D, PCFSoftShadowMap } from 'three'
 import type { CatalogItem, Placement, GameSnapshot } from '../lib/types'
 import { CATALOG } from '../lib/catalog'
 import { useLocale } from '../lib/locale'
@@ -176,6 +176,9 @@ function CameraRig({ size, perspective, resetKey, interior, targetY=0, readOnly=
   const controls = useRef<ComponentRef<typeof OrbitControls>>(null)
   const { camera, size: viewport } = useThree()
   useEffect(() => {
+    // Flush gesture inertia before restoring the camera so it cannot drift away.
+    const orbit=controls.current
+    if(orbit){const damping=orbit.enableDamping;orbit.enableDamping=false;orbit.update();orbit.enableDamping=damping}
     camera.position.set(size * 1.04, size * 0.95+targetY, size * 1.04)
     camera.lookAt(0, targetY, 0)
     camera.zoom=perspective?1:Math.min(viewport.width,viewport.height)/(size*(interior?1.5:1.72));camera.updateProjectionMatrix()
@@ -185,7 +188,7 @@ function CameraRig({ size, perspective, resetKey, interior, targetY=0, readOnly=
   const zoom = Math.min(viewport.width, viewport.height) / (size * (interior ? 1.5 : 1.72))
   return <>
     {perspective ? <PerspectiveCamera makeDefault fov={43} position={[size, size, size]} near={0.1} far={220} /> : <OrthographicCamera makeDefault position={[size, size, size]} zoom={zoom} near={0.1} far={220} />}
-    <OrbitControls touches={{ONE:!readOnly&&cameraStyle==='pan'?TOUCH.PAN:TOUCH.ROTATE,TWO:TOUCH.DOLLY_PAN}} ref={controls} target={target} makeDefault enableDamping enableRotate={readOnly||!editing} enablePan={!readOnly&&!editing} dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = targetY } }} />
+    <OrbitControls mouseButtons={{LEFT:!readOnly&&cameraStyle==='pan'?MOUSE.PAN:MOUSE.ROTATE,MIDDLE:MOUSE.DOLLY,RIGHT:!readOnly&&cameraStyle==='pan'?MOUSE.ROTATE:MOUSE.PAN}} touches={{ONE:!readOnly&&cameraStyle==='pan'?TOUCH.PAN:TOUCH.ROTATE,TWO:TOUCH.DOLLY_PAN}} ref={controls} target={target} makeDefault enableDamping enableRotate={readOnly||!editing} enablePan={readOnly||!editing} dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = targetY } }} />
   </>
 }
 
