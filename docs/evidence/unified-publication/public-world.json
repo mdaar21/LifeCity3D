@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "actualPublic3D": true,
+  "renderedSchoolSelection": true,
+  "paidFloorInspection": true,
+  "freeCameraChanges": true,
+  "singleVisibleMenu": true,
+  "arabicRtl": true,
+  "cloudDataPreserved": true,
+  "errors": [],
+  "fixtureCleanupPending": false,
+  "fixtureRemoved": true
+}

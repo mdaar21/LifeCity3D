@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — unified menus and logical construction catalog
+## Unified menus and logical construction catalog — published 2026-11-01
 
 - One panel grammar/navigation, separate tool categories and safe menu transitions;
   removed stacked details/confirmation and duplicate saved feedback.
@@ -9,7 +9,10 @@
 - Frozen authoritative new-building contracts; preserve legacy buildings' rates,
   original paid costs, receipts, exact50% refunds and independent wallets.
 - Distinct procedural architecture/default sizes and matching photos for13 types.
-  No dependency/schema change; compatible backend release required before frontend.
+  No dependency/schema change. Compatible world-command v4 deployed first.
+- PR10/mainfc3a913 and Pages41338417932 passed132 tests and33 browser journeys.
+  Real hosted/public touch, legacy/new pricing, FX/refunds, cached PWA upgrade,
+  independent cloud restoration and diagnostic cleanup verified.
 
 ## Simpler gameplay and richer owned assets — published 2026-11-01
 

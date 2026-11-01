@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "fixtureAccountRemoved": true,
+  "fixtureSessionsRevoked": true,
+  "fixtureGameDataRemoved": true,
+  "counts": {
+    "users": 0,
+    "sessions": 0,
+    "refresh_tokens": 0,
+    "identities": 0,
+    "profiles": 0,
+    "main_wallets": 0,
+    "mad_wallets": 0,
+    "main_ledger": 0,
+    "mad_ledger": 0,
+    "world_scenes": 0,
+    "world_entities": 0,
+    "paid_components": 0,
+    "quotes": 0,
+    "settlements": 0,
+    "history": 0,
+    "historical_components": 0,
+    "paid_cost_fingerprint": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "preexistingPaidComponentsUnchanged": true,
+  "baselineAt": "2026-11-01 18:32:20.595761+00"
+}

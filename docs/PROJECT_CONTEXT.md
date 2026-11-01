@@ -1,5 +1,21 @@
 # LifeCity3D — focused implementation context
 
+## Latest publication — unified menus, complete prices and distinct architecture
+- Owner approved publication after verification. PR10/mainfc3a913 is live;
+  Pages41338417932/deployment7477529984 passed132 tests/28 files, all33 browser
+  journeys, lint/types and compiled repository/PWA build. CI41336234830 green.
+- world-command v4 deployed and hosted-verified first. New type-based complete
+  prices freeze v2 contracts; old buildings keep legacy rates and historical50%
+  refunds. No schema migration, data reset or free objects in real cities.
+- Live legacy77+48/refund62.5, school6500, invalid-price/confirmation guards,
+  idempotency, separate MAD and dated FX passed. Existing refresh-fx refreshed
+  the stale real feed; historical snapshots/costs retained.
+- Real public old-worker upgrade/login/cloud state, touch preview/cancel,13-type
+  catalog, rendered school/floor view, Arabic and independent-browser restore/
+  logout passed. One exact diagnostic account/game data was removed; all counts0.
+- Evidence: docs/evidence/unified-publication. Earlier unpublished notes below
+  describe pre-release checkpoints. Existing saves and V6 backlog remain intact.
+
 ## Current owner — one menu system, logical construction prices and distinct types
 - Owner clarified: unify menu structure/navigation and put each feature in its
   own section; do NOT make building prices uniform. This new group is unpublished.

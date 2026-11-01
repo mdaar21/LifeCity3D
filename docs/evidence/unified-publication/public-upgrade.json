@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "published": true,
+  "base": "https://mdaar21.github.io/LifeCity3D",
+  "realHostedSupabase": true,
+  "realOldServiceWorkerUpgrade": true,
+  "existingLoginAndCloudSnapshotPreserved": true,
+  "completeHousePrice": 800,
+  "completeSchoolPrice": 6500,
+  "types": 13,
+  "realTouchDrag": true,
+  "freePreviewAndCancelledQuote": true,
+  "mainMadAndTasksPreserved": true,
+  "errors": [],
+  "fixtureCleanupPending": false,
+  "fixtureRemoved": true
+}
