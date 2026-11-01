@@ -42,7 +42,7 @@ export default function WorldStudio(){
   catch(e){setNotice(localizeError(e,language));}finally{setBusy(false);}
  };
  const confirm=async()=>{if(!ui.ghost||busy)return;setBusy(true);try{const r=await mutate('world_commit',{quote_id:ui.ghost.id,expected_revision:ui.ghost.revision,confirmed:true});ui.set({ghost:null,...(r.result.building_id?{selected:String(r.result.building_id)}:{})});setNotice(t('حُفظ التنفيذ وإيصاله.','Saved with its receipt.'));}catch(e){setNotice(localizeError(e,language));}finally{setBusy(false);}};
- const form=(title:[string,string],operation:string,fields:Field[],fixed:Record<string,unknown>={},quoted=true)=><StudioForm key={operation+String(fixed.building_id??'')} title={title} roomEditor={operation==='blueprint_generate'} fields={fields} entities={entities} busy={busy||!online} submit={p=>void run(operation,{...fixed,...p},quoted)} label={quoted?undefined:['حفظ','Save']}/>;
+ const form=(title:[string,string],operation:string,fields:Field[],fixed:Record<string,unknown>={},quoted=true)=><StudioForm key={operation+String(fixed.building_id??'')} title={title} operation={operation} roomEditor={operation==='blueprint_generate'} fields={fields} entities={entities} busy={busy||!online} submit={p=>void run(operation,{...fixed,...p},quoted)} label={quoted?undefined:['حفظ','Save']}/>;
  const point=[{...num('x','شرق X · م','X · m',ui.point.x),pick:true},{...num('z','جنوب Z · م','Z · m',ui.point.z),pick:true}];
  const own=(key:string,ar:string,en:string,kind:Field['kind'],filter?:Field['filter']):Field=>({key,ar,en,kind,filter});
  const parcelField=own('parcel_id','قطعة الأرض','Parcel','parcel');

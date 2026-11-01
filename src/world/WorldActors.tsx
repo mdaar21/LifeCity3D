@@ -33,7 +33,7 @@ export function CarActor({car,driven,realm}:{car:Car;driven:boolean;realm:Realm}
  return <group ref={ref} position={[car.pose.x,car.pose.y,car.pose.z]} rotation={[0,car.pose.heading,0]}><CarMesh car={car}/></group>;
 }
 export function PlayController({context,realm,offset,active}:{context:WorldContext;realm:Realm;offset:[number,number];active:boolean}){
- const toolOpen=useTouchTools(s=>s.sheet!==null||s.draft!==null);
+ const toolOpen=useTouchTools(s=>s.sheet!==null||s.draft!==null||s.designOpen);
  const {mutate}=useGame(),invalidate=useThree(s=>s.invalidate),camera=useThree(s=>s.camera),uiOpen=useWorldUI(s=>s.open),input=useWorldUI(s=>s.input);
  const a=activeAvatar(context,realm),exploring=!!a&&a.mode!=='aerial';const live=useRef(context),actor=useRef(a),busy=useRef(false),trace=useRef<Point[]>([]),lastSample=useRef(0),lastSave=useRef(0),velocity=useRef(0),keys=useRef(new Set<string>()),path=useRef<Point[]>([]),target=useRef<Point|null>(null),disposed=useRef(false);
  const roads=useMemo(()=>graph(context,realm,'road'),[context,realm]);

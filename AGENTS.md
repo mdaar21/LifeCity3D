@@ -124,3 +124,35 @@ See docs/evidence/stage-a/README.md for verification and release dependencies.
 Verification:124 tests/26 files passed.28 unique browser cases verified across
 full CI41246740296 and corrected focused CI41247729824; latter CI is green.
 Compiled repository paths/PWA/offline reserve/refund also passed locally.
+
+## Latest owner — publish Stage A: complete
+Owner explicitly approved publishing this increment. PR7/main e92d4a46 and
+Pages41252010125 succeeded:124 tests and28 browser journeys. world-command v3
+was deployed first; actual hosted finance and public mobile touch/cloud restore
+passed. Diagnostic sessions/account/data were removed and verified absent.
+See docs/evidence/stage-a-publication. No schema/data resets. Earlier no-publication
+statements are historical for this release. Future paid recoloring/variants remain.
+
+## Current owner — modern, advanced gameplay (unpublished)
+The owner clarified that the GAME should feel modern and sophisticated. Continue
+codex/stylized-visual-overhaul, preserving the released visual batches/Stage A.
+Current group: richer batched paid architectural detail, in-world material fitting,
+floor inspection and readable night scenes. Reuse existing material_apply pricing,
+atomic receipts, quality costs and historical50% salvage; no new free objects.
+No schema/dependency/backend deployment changes. This group is not published.
+Full-object recoloring and the remaining expansion packs remain separate work.
+Verified: CI41266983389 passed124 tests and29 browser journeys, including the
+new rendered fitting/quality/salvage/RTL flow; lint/typecheck/build passed.
+No publication. Keep hosted Stage A unchanged until another release request.
+
+## Current owner — rebuild the interface (unpublished)
+Owner now explicitly requests a new modern, simpler game interface and a picture
+for every purchase. Rebuild UI over existing gameplay; do not restart/reset data.
+Five-destination chrome, unified visual catalog and pan-first beginner controls.
+Reuse procedural renders, all paid commands and optional advanced capabilities.
+No new dependency, schema changes, merge or publication for this request.
+See docs/PROJECT_CONTEXT.md and docs/evidence/modern-interface for this group.
+
+Interface verification: CI41271576846 green on a98dec1,124 tests plus corrected
+touch journeys; all31 unique browser cases verified across full and focused runs.
+Evidence: docs/evidence/modern-interface/verification.json. No publication.

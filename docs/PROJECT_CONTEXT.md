@@ -1,5 +1,53 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — interface rebuild (unpublished)
+- The owner explicitly requested a ground-up INTERFACE redesign. This supersedes
+  earlier no-repeat visual guidance for UI only; keep the existing project/world.
+- Modern navy/mint chrome, five destinations, contextual touch tools and one
+  searchable construction catalog. Default one-finger pan, explicit orbit switch.
+- 106 cached original procedural asset renders, shared by shop, crops, plants,
+  buildings, materials, furniture, vehicles and advanced purchase forms. No new
+  dependency, live Canvas per card, seeded objects or cloud/schema changes.
+- Shop purchases can hand an owned item straight into a free placement preview;
+  all original trusted purchases, review/commit, receipts, 50% refund and separate
+  MAD remain. Settings still expose the complete advanced tools.
+- Source branch: codex/stylized-visual-overhaul. No merge or publication authorized.
+- Verified: CI41271576846 passed124 tests/26 files, corrected touch journeys, lint,
+  types and build on a98dec1. All31 unique browser journeys verified across the
+  full30/31 run41270709313 and corrected focused run; see modern-interface evidence.
+  Final compiled Pages/PWA/offline checks also passed locally. No publication.
+
+## Current owner — modern, advanced GAME (unpublished)
+- Implemented/tested: CI41266983389 passed124 unit/integration checks and all29
+  browser journeys, lint/typecheck and production build. Evidence: architect-mode.
+  No merge, publication, live account write or backend change in this group.
+- Continue codex/stylized-visual-overhaul; published Stage A remains untouched.
+- New architecture finish batches all paid floors/four elevations by material;
+  visible glazing/frames/doors/roof coping, actual paid finish colors/roughness.
+  Cutaways retain furniture picking and the original building envelope/layout.
+- FinishStudio fits10 existing materials and3 qualities directly in3D, with
+  floor selection, live cost/refund, free cancel and explicit server review/commit.
+  Inspect-floor controls and camera framing keep the model above the thumb panel.
+- No backend/schema/dependency changes or seeded assets. Existing world-command
+  v3 supports all commands; no new publication is authorized by this request.
+- Tests/evidence: docs/evidence/architect-mode. Full-object paid customization,
+  extra variants and the larger V6 acceptance gaps are NOT claimed complete.
+
+## Latest owner — Stage A publication complete
+- Owner explicitly approved publication. PR7/main e92d4a46 is live on GitHub Pages;
+  Pages41252010125 passed124 tests and all28 browser journeys in one release run.
+- Compatible world-command v3 deployed first. Hosted road pricing/idempotency,
+  original costs, exact50% refunds and legacy/new purchases passed.
+- REAL public mobile touch: hold/drag/undo/redo/cancel, free previews, confirmed
+  paid relocation exactly once, original costs and MAIN/MAD isolation passed.
+  Reload and independent-browser cloud restoration/login/logout also passed.
+- Disposable diagnostic sessions and account/profile/wallet/world data were
+  removed and verified zero. Existing player data and schemas were untouched.
+- Evidence: docs/evidence/stage-a-publication. Working evidence branch:
+  codex/stage-a-publication-evidence (based on published main).
+- Full paid recoloring and additional variants remain future groups. Earlier
+  unpublished statements below are historical for this now-published Stage A.
+
 ## Current owner — Stage A mobile controls, unpublished
 - Implemented/tested:124 unit/integration tests and28 unique browser cases across
   full run41246740296 (26 passed) + corrected focused run41247729824 (2 passed).

@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "checkedAt": "2026-10-31T23:31:29.642Z",
+  "site": "https://mdaar21.github.io/LifeCity3D/",
+  "pullRequest": "https://github.com/mdaar21/LifeCity3D/pull/7",
+  "mainCommit": "e92d4a46f4249812b01dbfe3fa0e52649a2d5afe",
+  "pagesRun": {
+    "id": 41252010125,
+    "url": "https://github.com/mdaar21/LifeCity3D/actions/runs/41252010125",
+    "build": "success",
+    "deploy": "success",
+    "unitIntegrationPassed": 124,
+    "browserCasesPassed": 28
+  },
+  "edge": {
+    "name": "world-command",
+    "version": 3,
+    "status": "ACTIVE",
+    "sha256": "aabcd9c9129c5aa53118a7829f27d942c03213064025061b50e8b4b4e2806900",
+    "verifyJwtGateway": false,
+    "authentication": "Existing explicit getUser(token) retained and anonymous writes rejected",
+    "deployedBeforeFrontend": true
+  },
+  "migrations": [],
+  "realPlayerDataReset": false,
+  "publicMobileTouchAndIndependentCloudRestore": true,
+  "fixtureCleanup": {
+    "ok": true,
+    "sessionsRevokedBeforeDeletion": true,
+    "counts": {
+      "fixture_users": 0,
+      "fixture_sessions": 0,
+      "fixture_identities": 0,
+      "fixture_profiles": 0,
+      "fixture_wallets": 0,
+      "fixture_world_entities": 0
+    }
+  },
+  "pendingContent": [
+    "Complete paid object recoloring/customization",
+    "Additional paid road, lighting and architectural variants"
+  ]
+}

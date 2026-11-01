@@ -1,6 +1,18 @@
 # Changelog
 
-## Stage A mobile interaction — unpublished
+## Advanced architectural play — unpublished
+
+- Inspect owned buildings/floors directly, with a camera framed for one-handed
+  live fitting of10 existing materials and3 qualities in the rendered world.
+- Four detailed elevations, glazing and material-bearing frames/doors, roof
+  coping and brighter night readability. Merge facade geometry across floors.
+- Preview/cancel is local/free; review and confirmation reuse authoritative
+  prices, receipts, wallets and exact50% replacement salvage. Preserve all saves.
+- 124 unit/integration tests and29 browser journeys passed in CI41266983389,
+  including rendered paid fitting, refunds, persistence, Arabic and accessibility.
+- No schema, dependency, backend deployment or publication changes.
+
+## Stage A mobile interaction — published 2026-11-01
 
 - Default visual touch controls: select, hold to edit, drag, rotate, validate,
   undo/redo previews, cancel, review and explicitly confirm. Advanced tools remain.
@@ -8,9 +20,10 @@
   pricing preserves every original paid cost component and50% refund basis.
 - Guided building stages, floor furniture, garages, car purchases/driving/parking,
   RTL thumb controls and camera reset. Reuse existing models and backend authority.
-- 124 unit/integration checks and28 unique browser cases verified across the full
-  suite and corrected focused rerun; compiled Pages/offline checks passed locally.
-- No dependency, schema, production data, merge or deployment changes.
+- Release pipeline passed124 unit/integration checks and all28 browser cases.
+  Public mobile touch, paid cloud relocation and independent cloud restore passed.
+- PR7/main e92d4a46 published with compatible world-command v3 deployed first.
+  No dependency/schema changes or player data resets. Diagnostic account removed.
 
 ## Supabase Auth activation — 2026-10-31
 

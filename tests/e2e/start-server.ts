@@ -14,7 +14,7 @@ import { E2E_OTHER, E2E_OWNER, E2E_PASSWORD } from './accounts.js';
 const directory = await mkdtemp(join(tmpdir(), 'lifecity-browser-'));
 const database = await createLocalDatabase({path: join(directory, 'db')});
 const derived = await hashPassword(E2E_PASSWORD);
-for (const [email, name, balance] of [[E2E_OWNER, 'Browser owner', 2000], [E2E_OTHER, 'Separate account', 0], ['visual-builder@example.test','Visual fixture',50000], ['visual-weather@example.test','Weather fixture',50000], ['garden-test@example.test','Garden fixture',2000], ...['legacy','garden','roads','construction','drive'].map(name=>['visual-touch-'+name+'@example.test','Touch fixture',50000] as const)] as const) {
+for (const [email, name, balance] of [[E2E_OWNER, 'Browser owner', 2000], [E2E_OTHER, 'Separate account', 0], ['visual-builder@example.test','Visual fixture',50000], ['visual-weather@example.test','Weather fixture',50000], ['garden-test@example.test','Garden fixture',2000], ...['legacy','garden','roads','construction','drive','architect','interface'].map(name=>['visual-touch-'+name+'@example.test','Touch fixture',50000] as const)] as const) {
   const id = randomUUID();
   await database.owner(async (tx) => {
     await tx.query('INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES($1,$2,$3::jsonb)', [id, email, JSON.stringify({display_name: name})]);
