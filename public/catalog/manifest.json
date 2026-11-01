@@ -205,8 +205,8 @@
     },
     {
       "id": "house",
-      "ar": "منزل",
-      "en": "House",
+      "ar": "منزل صغير",
+      "en": "Small house",
       "key": "building:house",
       "family": "building",
       "path": "catalog/world/building-house.png"
@@ -221,16 +221,16 @@
     },
     {
       "id": "restaurant",
-      "ar": "مطعم",
-      "en": "Restaurant",
+      "ar": "مطعم ومقهى",
+      "en": "Restaurant & café",
       "key": "building:restaurant",
       "family": "building",
       "path": "catalog/world/building-restaurant.png"
     },
     {
       "id": "mall",
-      "ar": "مجمع",
-      "en": "Mall",
+      "ar": "مجمع تجاري",
+      "en": "Shopping mall",
       "key": "building:mall",
       "family": "building",
       "path": "catalog/world/building-mall.png"
@@ -302,7 +302,7 @@
     {
       "id": "office",
       "ar": "مكاتب",
-      "en": "Office",
+      "en": "Offices",
       "key": "building:office",
       "family": "building",
       "path": "catalog/world/building-office.png"

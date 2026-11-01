@@ -16,7 +16,7 @@ function fixture(){
  return {c,step,apply,quote,buy,parcel,building};
 }
 describe('measured construction and recoverable ownership',()=>{
- it('increases upper-floor rates, pays every finish, preserves movable furniture and refunds all destroyed components exactly',()=>{const f=fixture(),b=f.building('house',3);const slabs=f.c.world.components.filter(v=>v.entity_id===b.id&&v.part.endsWith(':slab'));expect(slabs.map(v=>v.paid)).toEqual(['144.0000','165.6000','187.2000']);expect(f.c.world.components.filter(v=>v.part.endsWith(':finish'))).toHaveLength(3);
+ it('increases upper-floor rates, pays every finish, preserves movable furniture and refunds all destroyed components exactly',()=>{const f=fixture(),b=f.building('house',3);const slabs=f.c.world.components.filter(v=>v.entity_id===b.id&&v.part.endsWith(':slab'));expect(slabs.map(v=>v.paid)).toEqual(['274.3100','315.4500','356.6000']);expect(f.c.world.components.filter(v=>v.part.endsWith(':finish'))).toHaveLength(3);
   const sofa=f.buy('furniture_buy',{type:'sofa'}),id=sofa.patch.result.furniture_id,room=b.floors[1].rooms[0];f.apply('furniture_place',{furniture_id:id,building_id:b.id,floor:1,room_id:room.id,x:.3,z:.3,rotation:0});
   const basis=f.c.world.components.filter(v=>v.entity_id===b.id&&!v.destroyed_at).reduce((a,v)=>a+amount(v.paid),0n),q=f.buy('building_demolish',{building_id:b.id,destroy_furniture_ids:[]});expect(amount(q.refunds[0].amount)).toBe(basis/2n);expect(f.c.world.entities.find(v=>v.id===id)).toMatchObject({status:'stored',building_id:null});expect(f.c.world.components.filter(v=>v.entity_id===id).every(v=>!v.destroyed_at)).toBe(true);expect(f.parcel().status).toBe('active');
  });

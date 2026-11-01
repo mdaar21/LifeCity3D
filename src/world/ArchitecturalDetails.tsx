@@ -1,3 +1,4 @@
+import {BUILDING_CATALOG} from '../../supabase/functions/_shared/building-catalog';
 import {useEffect,useMemo} from 'react';
 import {BoxGeometry,BufferGeometry,Matrix4} from 'three';
 import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -11,7 +12,7 @@ export function buildingSurface(b:Building,type:string,floor:number|null,room:st
  const chosen=MATERIALS.find(v=>v.id===assignment?.material);
  if(chosen)return {...chosen,roughness:Math.max(.04,chosen.roughness-(Math.max(1,assignment!.quality)-1)*.08)};
  const fallback=MATERIALS.find(v=>v.id===(type==='roof'?'roof':type==='stairs'?'concrete':'plaster'))!;
- return {...fallback,color:b.style==='desert'?(type==='roof'?'#ae7f57':'#d5b88c'):b.style==='coastal'?(type==='roof'?'#6d9da7':'#e2e7d9'):fallback.color};
+ return {...fallback,color:b.style==='desert'?(type==='roof'?'#ae7f57':'#d5b88c'):b.style==='coastal'?(type==='roof'?'#6d9da7':'#e2e7d9'):type==='roof'?BUILDING_CATALOG[b.archetype].roof:type==='walls'?BUILDING_CATALOG[b.archetype].wall:fallback.color};
 }
 interface Surface {color:string;roughness:number;metalness:number;emissive?:boolean}
 /** Structural detail belongs to the paid finish. Batches share one draw per material;
@@ -35,7 +36,7 @@ export function ArchitecturalDetails({building:b,night,powered}:{building:Buildi
   const wood={color:accent,roughness:.8,metalness:0},metal={color:VISUAL.steel,roughness:.4,metalness:.45};
   // Four readable elevations: inset glazing, mullions, sills and floor bands.
   for(let side=0;side<4;side++){
-   const length=side<2?b.width:b.depth,count=Math.max(2,Math.min(6,Math.floor(length/2.5))),bay=length/count;
+   const length=side<2?b.width:b.depth,count=Math.max(2,Math.min(6,Math.floor(length/(b.archetype==='school'?3.5:b.archetype==='office'?1.9:2.5)))),bay=length/count;
    const box=(u:number,y:number,out:number,w:number,h:number,d:number,s:Surface)=>{
     const position:[number,number,number]=side===0?[u,y,-out]:side===1?[b.width-u,y,b.depth+out]:side===2?[-out,y,b.depth-u]:[b.width+out,y,u];
     add(position,[w,h,d],s,side<2?0:Math.PI/2);
@@ -43,8 +44,9 @@ export function ArchitecturalDetails({building:b,night,powered}:{building:Buildi
    box(length/2,.24,.04,length,.2,.1,wood);box(length/2,.1,.055,length,.045,.13,trim);box(length/2,2.86,.04,length,.12,.1,trim);
    for(let i=0;i<count;i++){
     const u=(i+.5)*bay;
+    if(b.archetype==='garage'&&side===3)continue;
     if(floor===0&&(side===0&&Math.abs(u-length/2)<1||side===3&&b.archetype==='garage'&&Math.abs(u-length/2)<1.8))continue;
-    const w=Math.min(bay-.35,commercial?2.2:1.55),h=commercial?1.9:1.65,y=commercial?1.52:1.6;
+    const w=Math.min(bay-.35,commercial?2.2:1.55),h=b.archetype==='school'?1.15:b.archetype==='clinic'?1.35:commercial?1.9:1.65,y=b.archetype==='school'?1.62:commercial?1.52:1.6;
     box(u,y,.07,w+.14,h+.14,.12,windowFrame);box(u,y,.14,w,h,.04,panes);
     box(u,y,.17,.045,h,.025,hasWindows?windowFrame:trim);box(u,y+.18,.17,w,.035,.03,windowFrame);box(u,y-h/2-.08,.13,w+.22,.1,.2,trim);
     if(commercial)box(u,2.65,.09,w+.2,.06,.18,metal);

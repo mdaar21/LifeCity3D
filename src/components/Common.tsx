@@ -1,5 +1,6 @@
+import {GamePanelHeader} from './GamePanelHeader';
 import { useEffect, useId, useRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
-import { AlertCircle, CheckCircle2, Info, LoaderCircle, Sprout, X } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Info, LoaderCircle, Sprout } from 'lucide-react';
 import { useLocale } from '../lib/locale';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'ghost' | 'danger'; loading?: boolean };
@@ -46,5 +47,5 @@ export function Modal({ open, onClose, title, children }: { open: boolean; onClo
     return () => { document.body.style.overflow = overflow; document.removeEventListener('keydown', key); previous?.focus(); };
   }, [open]);
   if (!open) return null;
-  return <div className="modal-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby={id} ref={ref} tabIndex={-1}><header className="modal-header"><h2 id={id}>{title}</h2><button className="icon-button" aria-label={t('إغلاق', 'Close')} onClick={onClose}><X size={21} /></button></header>{children}</div></div>;
+  return <div className="modal-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}><div className="modal game-panel" role="dialog" aria-modal="true" aria-labelledby={id} ref={ref} tabIndex={-1}><GamePanelHeader className="modal-header" title={title} titleId={id} eyebrow="" onClose={onClose} closeLabel={t('إغلاق','Close')}/>{children}</div></div>;
 }

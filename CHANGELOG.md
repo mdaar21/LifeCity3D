@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — unified menus and logical construction catalog
+
+- One panel grammar/navigation, separate tool categories and safe menu transitions;
+  removed stacked details/confirmation and duplicate saved feedback.
+- Complete basic building prices, starting with a small house at800 SAR, distinct
+  higher type tiers, explicit foundation deposits and accurate component-rounded MAD.
+- Frozen authoritative new-building contracts; preserve legacy buildings' rates,
+  original paid costs, receipts, exact50% refunds and independent wallets.
+- Distinct procedural architecture/default sizes and matching photos for13 types.
+  No dependency/schema change; compatible backend release required before frontend.
+
 ## Simpler gameplay and richer owned assets — published 2026-11-01
 
 - Simplified beginner camera tools and contextual actions, real-life task shortcut,

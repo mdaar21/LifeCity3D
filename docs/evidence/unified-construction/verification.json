@@ -1,0 +1,17 @@
+{
+  "published": false,
+  "types": 13,
+  "smallHouse": 800,
+  "school": 6500,
+  "restaurant": 2800,
+  "fullPricesAndDeposits": true,
+  "realRenderedSchoolAndRestaurant": true,
+  "singleActiveMenu": true,
+  "freeMenusAndPreviews": true,
+  "historicalRefund": 3250,
+  "unchangedMadAndTasks": true,
+  "persistence": true,
+  "arabicRtl320": true,
+  "axeViolations": 0,
+  "errors": []
+}

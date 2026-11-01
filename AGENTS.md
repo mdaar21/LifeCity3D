@@ -183,3 +183,15 @@ guest controls,16-task reward, paid plant, free cancel, MAIN/MAD isolation, relo
 106 pictures and save-preserving update route passed. No backend/schema changes
 or cloud-account writes. Evidence: docs/evidence/oasis-publication. Earlier
 unpublished notes are historical for this released increment. Preserve all saves.
+
+
+## Current owner — unify MENUS, distinct building prices and architecture
+The owner explicitly clarified that menu systems/navigation must be unified and
+features put in their own sections. Do NOT unify prices. New complete basic
+construction starts at800 SAR for a small house; other types have logical higher
+prices. Work on the current feature branch. No publication/merge requested.
+New server-created ConstructionPricing v2 locks new contracts in optional entity
+JSONB. Old buildings keep legacy rates and every historical paid component;
+MAIN/MAD, FX, idempotency, refunds and saves must stay intact. No schema migration
+is necessary. Compatible world-command update is required before any FUTURE
+frontend release, but do not deploy it now. See PROJECT_CONTEXT and unified-construction.
