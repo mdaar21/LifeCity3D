@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-01T09:05:19.053Z",
+  "published": true,
+  "base": "https://mdaar21.github.io/LifeCity3D",
+  "commit": "c9b592c6903803085eb73d5bbdae32c6feb296c7",
+  "workflowRun": 41290863075,
+  "scope": "Actual public mobile Arabic guest flow; cloud backend unchanged, no live Auth/account writes",
+  "actual3DFrames": true,
+  "taskCount": 16,
+  "earnedReward": 20,
+  "floorPreview": 2,
+  "freePreviewCancel": true,
+  "confirmedPlantCost": 18,
+  "mainBalance": 2,
+  "madUnchanged": true,
+  "reloadRestored": true,
+  "updateRoutePreservedGuestState": true,
+  "catalogImages": 106,
+  "brokenImages": [],
+  "errors": []
+}

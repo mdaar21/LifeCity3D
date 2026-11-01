@@ -1,3 +1,4 @@
+import {GamePanelHeader} from '../components/GamePanelHeader'
 import { useEffect, useRef, useState } from 'react'
 import { Link,useSearchParams } from 'react-router-dom'
 import { ArrowDown, List, Share2, ArrowLeft, ArrowRight, ArrowUp, Check, Grid2X2, Home, Maximize2, Move, Package, Plus, Redo2, RotateCw, Trash2, Undo2, X } from 'lucide-react'
@@ -111,8 +112,8 @@ export default function City({active=true}:{active?:boolean}) {
         <div className="world-stage-bottom"><span>{draft ? t('اختر بلاطة، عدّل الاتجاه، ثم ثبّت.', 'Choose a tile, rotate, then confirm.') : t('اسحب للدوران · قرّب بإصبعين · اختر عنصرًا لتعديله', 'Drag to orbit · Pinch to zoom · Select an object to edit')}</span><span className="world-compass" dir="ltr">{t('ش ↑', 'N ↑')}</span></div>
         {active && !state.world_systems?.initialized && !placements.length && !draft && !panel && <div className="world-empty-callout"><span>✦</span><strong>{t('هنا تبدأ حكاية مدينتك', 'Your city story begins here')}</strong><p>{available.length ? t('اختر عنصرًا من المخزون وامنحه مكانًا.', 'Choose an inventory item and give it a home.') : t('أكمل مهمة، اجمع عملات، وازرع أول شجرة.', 'Complete an activity, earn coins, and plant your first tree.')}</p></div>}
       </div>
-      {active && (panel || draft || selected) && <aside className="builder-sidebar game-build-panel" id="city-tool-panel" aria-label={t('لوحة أدوات المدينة','City tools panel')}>
-        <div className="game-build-panel-heading"><strong>{panel==='share'?t('زيارات المدينة','City visits'):panel==='objects'?t('عناصر مدينتك','City objects'):t('ورشة البناء','Build workshop')}</strong><button className="game-close" aria-label={t('إغلاق أدوات البناء','Close building tools')} onClick={()=>{setPanel(null);clear();setSelectedId(null)}}><X size={19}/></button></div>
+      {active && (panel || draft || selected) && <aside className="builder-sidebar game-build-panel game-panel" id="city-tool-panel" aria-label={t('لوحة أدوات المدينة','City tools panel')}>
+        <GamePanelHeader className="game-build-panel-heading" title={panel==='share'?t('زيارات المدينة','City visits'):panel==='objects'?t('عناصر مدينتك','City objects'):t('المخزون والبناء','Inventory & build')} closeLabel={t('إغلاق أدوات البناء','Close building tools')} onClose={()=>{setPanel(null);clear();setSelectedId(null)}}/>
         {panel==='share' && (yuyi?<p>{t('روابط الزيارة الحالية لمدينتك الرئيسية فقط؛ مدينة ويوي تبقى خاصة.','Current visit links cover My City only; Yuyi City stays private.')}</p>:<CitySharing/>)}
         {(panel==='inventory'||draft||selected) && <>
         <section className="panel builder-panel"><div className="world-panel-heading"><div><span className="world-eyebrow">{t('أفكارك أصبحت أماكن', 'MAKE ROOM FOR IDEAS')}</span><h2><Package size={19} /> {t('المخزون', 'Inventory')}</h2></div><span className="world-count" data-testid="inventory-count">{number(available.length)}</span></div>

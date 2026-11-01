@@ -1,3 +1,4 @@
+import {BuildingIdentity} from './BuildingIdentity';
 import {FountainAsset} from './FountainAsset';
 import {FurnitureAsset} from './FurnitureAsset';
 import {BotanicalPlant,FarmModel} from './BotanicalAssets';
@@ -56,6 +57,7 @@ export function MeasuredBuilding({building:b,context,ghost=false,visualHour}:{bu
    {showInterior&&context.world.entities.filter((e):e is Furniture=>e.kind==='furniture'&&e.status==='active'&&e.building_id===b.id&&e.floor===f.index).map(e=><group key={e.id} userData={{touchTarget:{source:'world',id:e.id,realm:b.realm}}}><FurnitureMesh item={e}/></group>)}
   </group>)}
   {state.finished&&!cutaway&&<ArchitecturalDetails building={b} night={night} powered={powered}/>}
+  {!cutaway&&chosenFloor===null&&(state.roof||state.finished)&&<BuildingIdentity building={b} showRoof={state.roof} showFacade={state.finished}/>}
   {chosenFloor===null&&!cutaway&&state.roof&&<Box at={[b.width/2,(Math.max(...b.floors.map(f=>f.index))+1)*3,b.depth/2]} size={[b.width+.2,.2,b.depth+.2]} color={roof.color} roughness={roof.roughness} metalness={roof.metalness}/>}
   {b.opened_at&&<><Box at={[b.width/2,2.25,-.5]} size={[1.8,.14,1]} color={roof.color}/><Box at={[b.width/2-.65,1.1,-.1]} size={[.12,2.2,.15]} color="#8d744c"/><Box at={[b.width/2+.65,1.1,-.1]} size={[.12,2.2,.15]} color="#8d744c"/></>}
   {b.opened_at&&['restaurant','mall','hotel','resort','school','university','clinic','hospital','garage','museum','office'].includes(b.archetype)&&<TextSurface text={b.name} width={Math.min(2.1,b.width-.6)} height={.3} position={[b.width/2,2.5,-.17]} rotation={[0,Math.PI,0]}/>}

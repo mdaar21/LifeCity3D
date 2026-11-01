@@ -1,5 +1,39 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — one menu system, logical construction prices and distinct types
+- Owner clarified: unify menu structure/navigation and put each feature in its
+  own section; do NOT make building prices uniform. This new group is unpublished.
+- Shared game-panel header/close/tabs and catalog window bounds. Opening More or
+  changing routes closes prior city tools/previews without spending. Construction,
+  nature, furniture, roads, vehicles and owned inventory have separate entrances.
+- New building catalog groups13 types by use and shows COMPLETE basic cost plus
+  the initial foundation deposit. Small house800 SAR, garage1200, villa2200,
+  restaurant2800, clinic4200, school6500, offices8000, museum10000, mall14000,
+  hotel18000, hospital24000, university32000, resort40000 (one default-size floor,
+  Moss contractor). Extra area/floors/contractor/lifts change the trusted price.
+- New buildings freeze server-created ConstructionPricing v2 in existing entity
+  JSONB; stage components sum exactly to the displayed total. MAD previews sum
+  separately converted components to match actual FX rounding. Browser prices
+  cannot override the server. Old buildings omit pricing and KEEP legacy rates;
+  original paid components and exact50% refunds remain unchanged.
+- Original type-specific roofs/frontages/windows, real default footprints and13
+  refreshed model pictures. No free city objects, dependency or schema changes.
+- Existing live world-command v3 is unchanged. Next owner-authorized release MUST
+  deploy the compatible updated function BEFORE this frontend. No live backend,
+  accounts, database migration, merge or publication authorized for this group.
+- Evidence/verification: docs/evidence/unified-construction. Full V6 acceptance
+  and whole-object paid customization remain separate unfinished groups.
+
+## Latest publication — simpler gameplay and richer owned assets complete
+- Owner explicitly requested publication. PR9/mainc9b592c is live on GitHub Pages.
+  Pages41290863075 and deployment7470902587 succeeded:126 tests,32 browser
+  journeys, lint, types and compiled repository/PWA build passed.
+- Real public Arabic mobile guest flow verified new controls,16 tasks,20 reward,
+  free previews/cancel,18 plant purchase, independent MAD, reload and update-route
+  persistence,106 working pictures and real3D frames. No page/shader errors.
+- No backend/schema/data reset or hosted account writes. Evidence:
+  docs/evidence/oasis-publication. Earlier unpublished notes below are historical.
+
 ## Current owner — simpler gameplay and richer owned assets (unpublished)
 - Integrate the original art study's ideas into the existing game. Do not seed
   the illustrated neighborhood or restart/reset existing cities. Continue on

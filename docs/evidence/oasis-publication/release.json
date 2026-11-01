@@ -1,0 +1,20 @@
+{
+  "published": true,
+  "pr": 9,
+  "main": "c9b592c6903803085eb73d5bbdae32c6feb296c7",
+  "pagesRun": 41290863075,
+  "pagesConclusion": "success",
+  "deploymentId": 7470902587,
+  "deploymentState": "success",
+  "base": "https://mdaar21.github.io/LifeCity3D/",
+  "recoveryUrl": "https://mdaar21.github.io/LifeCity3D/api/update.html",
+  "tests": 126,
+  "browserJourneys": 32,
+  "lint": "passed",
+  "typecheck": "passed",
+  "githubPagesBuild": "passed",
+  "backendChanged": false,
+  "schemaChanged": false,
+  "liveCloudAccountsWritten": false,
+  "publicVerification": "live-site.json"
+}

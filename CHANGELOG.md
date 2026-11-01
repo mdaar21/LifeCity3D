@@ -1,13 +1,24 @@
 # Changelog
 
-## Unreleased — simpler gameplay and richer owned assets
+## Unreleased — unified menus and logical construction catalog
+
+- One panel grammar/navigation, separate tool categories and safe menu transitions;
+  removed stacked details/confirmation and duplicate saved feedback.
+- Complete basic building prices, starting with a small house at800 SAR, distinct
+  higher type tiers, explicit foundation deposits and accurate component-rounded MAD.
+- Frozen authoritative new-building contracts; preserve legacy buildings' rates,
+  original paid costs, receipts, exact50% refunds and independent wallets.
+- Distinct procedural architecture/default sizes and matching photos for13 types.
+  No dependency/schema change; compatible backend release required before frontend.
+
+## Simpler gameplay and richer owned assets — published 2026-11-01
 
 - Simplified beginner camera tools and contextual actions, real-life task shortcut,
   visual floor-count planning, quick paid construction and all-floor inspection.
 - Richer owned palms, furniture, fountains, building/finish details, lighting/water
   and matching procedural catalog pictures; existing economies and saves preserved.
 - Added rendered mobile/RTL/finance/persistence coverage and asset-footprint budgets.
-  No schema, dependency or backend deployment changes. Not published.
+  No schema, dependency or backend deployment changes. Published in PR9/mainc9b592c.
 - Full CI41290225129 passed126 tests and all32 browser journeys, lint, types and build.
 
 ## Advanced architectural play — published in PR8, 2026-11-01
