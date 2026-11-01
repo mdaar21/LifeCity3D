@@ -152,3 +152,7 @@ Five-destination chrome, unified visual catalog and pan-first beginner controls.
 Reuse procedural renders, all paid commands and optional advanced capabilities.
 No new dependency, schema changes, merge or publication for this request.
 See docs/PROJECT_CONTEXT.md and docs/evidence/modern-interface for this group.
+
+Interface verification: CI41271576846 green on a98dec1,124 tests plus corrected
+touch journeys; all31 unique browser cases verified across full and focused runs.
+Evidence: docs/evidence/modern-interface/verification.json. No publication.

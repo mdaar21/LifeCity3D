@@ -21,7 +21,9 @@ The last failure was an immediate reset tap after a pan: Chromium can suppress
 its compatibility click. Reset now handles a stationary primary touch/pen release
 and suppresses its following duplicate click; mouse/keyboard keep normal click.
 The corrected purchase/cancel/place/reset/mouse-pan/restore and real pinch/cancel/
-orbit/reset journeys both passed locally. Corrected focused CI is pending.
+orbit/reset journeys both passed locally. Corrected CI41271576846 passed both journeys, all124 tests, lint, typecheck and
+production build on source a98dec1. Together the full run and corrected run verify
+all31 unique browser journeys; the full run alone was30/31, not green.
 The complete106-image collection decoded in the browser without missing images.
 
 The final compiled GitHub Pages artifact also passed repository-path routing,

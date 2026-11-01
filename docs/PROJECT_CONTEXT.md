@@ -12,8 +12,10 @@
   all original trusted purchases, review/commit, receipts, 50% refund and separate
   MAD remain. Settings still expose the complete advanced tools.
 - Source branch: codex/stylized-visual-overhaul. No merge or publication authorized.
-- Current test evidence: docs/evidence/modern-interface. Check its README for final
-  verification; architecture group below remains part of this unpublished branch.
+- Verified: CI41271576846 passed124 tests/26 files, corrected touch journeys, lint,
+  types and build on a98dec1. All31 unique browser journeys verified across the
+  full30/31 run41270709313 and corrected focused run; see modern-interface evidence.
+  Final compiled Pages/PWA/offline checks also passed locally. No publication.
 
 ## Current owner — modern, advanced GAME (unpublished)
 - Implemented/tested: CI41266983389 passed124 unit/integration checks and all29
