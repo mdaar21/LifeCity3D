@@ -1,5 +1,15 @@
 # Changelog
 
+## Advanced architectural play — unpublished
+
+- Inspect owned buildings/floors directly, with a camera framed for one-handed
+  live fitting of10 existing materials and3 qualities in the rendered world.
+- Four detailed elevations, glazing and material-bearing frames/doors, roof
+  coping and brighter night readability. Merge facade geometry across floors.
+- Preview/cancel is local/free; review and confirmation reuse authoritative
+  prices, receipts, wallets and exact50% replacement salvage. Preserve all saves.
+- No schema, dependency, backend deployment or publication changes.
+
 ## Stage A mobile interaction — published 2026-11-01
 
 - Default visual touch controls: select, hold to edit, drag, rotate, validate,

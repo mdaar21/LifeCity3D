@@ -132,3 +132,12 @@ was deployed first; actual hosted finance and public mobile touch/cloud restore
 passed. Diagnostic sessions/account/data were removed and verified absent.
 See docs/evidence/stage-a-publication. No schema/data resets. Earlier no-publication
 statements are historical for this release. Future paid recoloring/variants remain.
+
+## Current owner — modern, advanced gameplay (unpublished)
+The owner clarified that the GAME should feel modern and sophisticated. Continue
+codex/stylized-visual-overhaul, preserving the released visual batches/Stage A.
+Current group: richer batched paid architectural detail, in-world material fitting,
+floor inspection and readable night scenes. Reuse existing material_apply pricing,
+atomic receipts, quality costs and historical50% salvage; no new free objects.
+No schema/dependency/backend deployment changes. This group is not published.
+Full-object recoloring and the remaining expansion packs remain separate work.

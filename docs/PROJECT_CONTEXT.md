@@ -1,5 +1,18 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — modern, advanced GAME (unpublished)
+- Continue codex/stylized-visual-overhaul; published Stage A remains untouched.
+- New architecture finish batches all paid floors/four elevations by material;
+  visible glazing/frames/doors/roof coping, actual paid finish colors/roughness.
+  Cutaways retain furniture picking and the original building envelope/layout.
+- FinishStudio fits10 existing materials and3 qualities directly in3D, with
+  floor selection, live cost/refund, free cancel and explicit server review/commit.
+  Inspect-floor controls and camera framing keep the model above the thumb panel.
+- No backend/schema/dependency changes or seeded assets. Existing world-command
+  v3 supports all commands; no new publication is authorized by this request.
+- Tests/evidence: docs/evidence/architect-mode. Full-object paid customization,
+  extra variants and the larger V6 acceptance gaps are NOT claimed complete.
+
 ## Latest owner — Stage A publication complete
 - Owner explicitly approved publication. PR7/main e92d4a46 is live on GitHub Pages;
   Pages41252010125 passed124 tests and all28 browser journeys in one release run.
