@@ -106,3 +106,5 @@ body:has([aria-modal=true]) .touch-error{visibility:hidden}
 .modern-game .touch-tools .touch-help{inset-inline:12px;top:calc(122px + env(safe-area-inset-top));padding:0;overflow:hidden}.modern-game .touch-help>p{padding:8px 16px 16px;margin:0;line-height:1.8;color:#d3e5df}.modern-game .touch-help .game-panel-header{padding:10px 14px}.modern-game .game-build-panel>.game-panel-header{margin:-16px -16px 12px}
 
 .modern-game .construction-price-summary{display:grid;gap:6px;padding:14px;margin:12px 0;border:1px solid #efca7970;border-radius:15px;background:#efca790b;color:#e8f3eb}.modern-game .construction-price-summary>span{font-size:12px;color:#c5d8db}.modern-game .construction-price-summary>strong{font-size:23px;color:#ffdb91}.modern-game .construction-price-summary>p{font-size:12px;line-height:1.8;margin:0;color:#c5d8db}
+
+.modern-game[data-game-panel=menu] main.game-window{visibility:hidden;pointer-events:none}
