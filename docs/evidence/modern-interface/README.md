@@ -1,44 +1,36 @@
-# Modern interface — unpublished
+# Modern game interface — unpublished
 
-Rebuilt the interface over the existing world: five navigation destinations,
-navy/mint panels, one searchable visual construction catalog, contextual actions,
-pan-first touch controls, explicit orbit/walking/reset and optional advanced tools.
-106 original procedural PNGs (648 KiB including the complete catalog), with no
-live WebGL canvas per card. Purchases can hand the owned item into placement.
-All original quotes, confirmations, wallets, receipts and persistence remain.
+Branch: `codex/stylized-visual-overhaul`. Application source includes the final touch-release correction on the same branch.
+The published Stage A website and all hosted player data are unchanged.
 
-Focused local browser checks passed: paid plant preview/cancel/relocation/restore;
-road drawing and atomic connected intersections; responsive game windows,
-Arabic/English/dark mode and WCAG AA scan; new shop→purchase→place/cancel/save
-flow; all106 image loads; unified catalog search, RTL and320px layout/touch targets.
-Full verification is recorded below after the branch checks finish.
+- Navy/mint game chrome, five navigation destinations and compact contextual tools.
+- One searchable visual construction catalog: buildings, nature, furniture, roads,
+  vehicles and owned items; the full advanced studio remains available.
+- 106 original procedural asset renders, shared by every purchase surface, including
+  crops, materials and utilities. About648KiB total; no live Canvas per card.
+- Purchase→place handoff uses the returned owned inventory item. Preview/cancel
+  remain free; existing trusted commands, receipts and settlements remain intact.
+- One-finger/mouse pan, explicit orbit/walking/reset, pinch zoom, edit handles and
+  existing undo/redo. Camera reset is local and immediate, independent of server
+  command locks; fresh controls and explicit redraw keep the restored view stable.
+- Arabic RTL, safe-area offsets, minimum44px targets, responsive320–1440px layouts,
+  reduced motion and consistent readable advanced building-detail surfaces.
 
-Screenshots are actual rendered Chromium mobile scenes and disposable local
-Postgres accounts with real game operations. They are not a hosted release,
-real-device benchmark or proof that the remaining V6 content is complete.
-No production writes, database migration, free city objects or added dependencies.
+Verification: full CI41270709313 passed124 checks and30/31 browser journeys.
+The last failure was an immediate reset tap after a pan: Chromium can suppress
+its compatibility click. Reset now handles a stationary primary touch/pen release
+and suppresses its following duplicate click; mouse/keyboard keep normal click.
+The corrected purchase/cancel/place/reset/mouse-pan/restore and real pinch/cancel/
+orbit/reset journeys both passed locally. Corrected focused CI is pending.
+The complete106-image collection decoded in the browser without missing images.
 
-Additional focused verification: guided garage→car purchase→walking→entry→touch
-joystick→parking passed with unchanged other wallet. Mouse and touch now share
-pan/orbit modes. Reset flushes remaining gesture inertia before restoring the
-view; the regression journey verifies a stable reset after panning and real mouse
-panning, then reloads the same paid city. Local lint/typecheck/build and compiled
-repository-path/PWA offline financial-blocking, save/reserve/refund checks passed.
+The final compiled GitHub Pages artifact also passed repository-path routing,
+fonts/icons, CSP, login bundle separation, public visits, PWA/offline reload,
+blocked offline financial writes and project reserve/refund checks; see
+compiled-pages.json and compiled-pwa.json. Screenshots show actual rendered
+Chromium journeys with disposable reference Postgres accounts and paid operations.
 
-The first full CI (41269261896) passed124 checks and29/31 browser journeys. It
-caught the floating tools button covering the advanced studio's Close button.
-The tool rail now disappears while that studio is open. The previously blocked
-horticulture purchase/harvest/cross-browser restore journey passed locally after
-the fix. A corrected focused CI verifies the affected flows; see final results.
-The construction regression then exposed inherited white text on an old cream
-building-details card. Its surfaces/labels now use the shared dark palette. The
-entire construction/cutaway/material/advanced navigation/Arabic/dark accessibility
-journey passed locally (47.9s); its screenshot-heavy budget is75s for CI rendering.
-No assertions, financial checks or persistence checks were removed.
-
-Final camera correction: local view reset executes immediately, independently of
-online/server-command locks. Any required avatar-mode change still uses the
-existing command guard. Reset recreates the controls and explicitly invalidates
-the demand-rendered scene. The regression asserts the reset event, actual3D
-camera coordinates, mouse pan, both wallets and reloaded placement. This plus the
-real pinch/cancel/orbit/reset journey passed locally with no debug handlers.
+No new dependency, database migration, cloud write, seeded city asset, merge or
+publication. This is not a physical-phone benchmark or completion of the remaining
+V6 expansion backlog. Existing MAIN/MAD separation, historical costs,50% refunds,
+16 approved tasks, account data and cloud/guest saves are preserved.
