@@ -1,13 +1,13 @@
 # Changelog
 
-## Unreleased — simpler gameplay and richer owned assets
+## Simpler gameplay and richer owned assets — published 2026-11-01
 
 - Simplified beginner camera tools and contextual actions, real-life task shortcut,
   visual floor-count planning, quick paid construction and all-floor inspection.
 - Richer owned palms, furniture, fountains, building/finish details, lighting/water
   and matching procedural catalog pictures; existing economies and saves preserved.
 - Added rendered mobile/RTL/finance/persistence coverage and asset-footprint budgets.
-  No schema, dependency or backend deployment changes. Not published.
+  No schema, dependency or backend deployment changes. Published in PR9/mainc9b592c.
 - Full CI41290225129 passed126 tests and all32 browser journeys, lint, types and build.
 
 ## Advanced architectural play — published in PR8, 2026-11-01

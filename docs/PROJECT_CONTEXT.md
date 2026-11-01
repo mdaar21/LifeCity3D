@@ -1,5 +1,15 @@
 # LifeCity3D — focused implementation context
 
+## Latest publication — simpler gameplay and richer owned assets complete
+- Owner explicitly requested publication. PR9/mainc9b592c is live on GitHub Pages.
+  Pages41290863075 and deployment7470902587 succeeded:126 tests,32 browser
+  journeys, lint, types and compiled repository/PWA build passed.
+- Real public Arabic mobile guest flow verified new controls,16 tasks,20 reward,
+  free previews/cancel,18 plant purchase, independent MAD, reload and update-route
+  persistence,106 working pictures and real3D frames. No page/shader errors.
+- No backend/schema/data reset or hosted account writes. Evidence:
+  docs/evidence/oasis-publication. Earlier unpublished notes below are historical.
+
 ## Current owner — simpler gameplay and richer owned assets (unpublished)
 - Integrate the original art study's ideas into the existing game. Do not seed
   the illustrated neighborhood or restart/reset existing cities. Continue on

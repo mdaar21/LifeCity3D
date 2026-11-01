@@ -174,3 +174,12 @@ See docs/PROJECT_CONTEXT.md and docs/evidence/oasis-play for current verificatio
 Verification: full CI41290225129 passed on d621b48:126 tests/27 files, all32 browser
 journeys, lint, types and production/PWA build. Evidence: docs/evidence/oasis-play.
 No new backend/schema/data/dependency changes; this group remains unpublished.
+
+
+## Latest owner — publish simpler gameplay: complete
+The owner explicitly requested publication. PR9/mainc9b592c and Pages41290863075
+succeeded, including126 tests and32 browser journeys. Real public Arabic mobile
+guest controls,16-task reward, paid plant, free cancel, MAIN/MAD isolation, reload,
+106 pictures and save-preserving update route passed. No backend/schema changes
+or cloud-account writes. Evidence: docs/evidence/oasis-publication. Earlier
+unpublished notes are historical for this released increment. Preserve all saves.
