@@ -24,3 +24,9 @@ pan/orbit modes. Reset flushes remaining gesture inertia before restoring the
 view; the regression journey verifies a stable reset after panning and real mouse
 panning, then reloads the same paid city. Local lint/typecheck/build and compiled
 repository-path/PWA offline financial-blocking, save/reserve/refund checks passed.
+
+The first full CI (41269261896) passed124 checks and29/31 browser journeys. It
+caught the floating tools button covering the advanced studio's Close button.
+The tool rail now disappears while that studio is open. The previously blocked
+horticulture purchase/harvest/cross-browser restore journey passed locally after
+the fix. A corrected focused CI verifies the affected flows; see final results.
