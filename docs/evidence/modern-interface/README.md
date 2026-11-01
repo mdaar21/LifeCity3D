@@ -35,3 +35,10 @@ building-details card. Its surfaces/labels now use the shared dark palette. The
 entire construction/cutaway/material/advanced navigation/Arabic/dark accessibility
 journey passed locally (47.9s); its screenshot-heavy budget is75s for CI rendering.
 No assertions, financial checks or persistence checks were removed.
+
+Final camera correction: local view reset executes immediately, independently of
+online/server-command locks. Any required avatar-mode change still uses the
+existing command guard. Reset recreates the controls and explicitly invalidates
+the demand-rendered scene. The regression asserts the reset event, actual3D
+camera coordinates, mouse pan, both wallets and reloaded placement. This plus the
+real pinch/cancel/orbit/reset journey passed locally with no debug handlers.
