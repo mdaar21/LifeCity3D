@@ -156,3 +156,21 @@ See docs/PROJECT_CONTEXT.md and docs/evidence/modern-interface for this group.
 Interface verification: CI41271576846 green on a98dec1,124 tests plus corrected
 touch journeys; all31 unique browser cases verified across full and focused runs.
 Evidence: docs/evidence/modern-interface/verification.json. No publication.
+
+
+## Current owner — simpler gameplay and owned-asset art integration
+The interface/architecture group above WAS published by explicit owner request:
+PR8/main0779951, successful Pages41272583338;124 tests and31 browser journeys.
+Earlier no-publication notes apply historically to that released increment.
+New owner request integrates the original art study into the EXISTING game with
+much simpler menus. Preserve all16 tasks, MAIN/MAD separation, trusted purchase
+quotes/receipts, historical50% refunds, saves and manual paid placement. No free
+illustrated neighborhood, new dependency, backend/schema/data reset or deployment.
+Current group: simpler beginner controls, real task shortcut, floor-count preview,
+quick stage confirmation, all-paid-floor inspection and richer cached owned assets.
+Continue the same feature branch. This group is NOT authorized for merge/publication.
+See docs/PROJECT_CONTEXT.md and docs/evidence/oasis-play for current verification.
+
+Verification: full CI41290225129 passed on d621b48:126 tests/27 files, all32 browser
+journeys, lint, types and production/PWA build. Evidence: docs/evidence/oasis-play.
+No new backend/schema/data/dependency changes; this group remains unpublished.

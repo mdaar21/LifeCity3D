@@ -1,3 +1,5 @@
+import {FountainAsset} from './FountainAsset';
+import {FurnitureAsset} from './FurnitureAsset';
 import {BotanicalPlant,FarmModel} from './BotanicalAssets';
 import {useShallow} from 'zustand/react/shallow';
 import {useEffect,useMemo,useRef,type ReactNode} from 'react';
@@ -6,7 +8,6 @@ import {BufferGeometry,Group,Mesh,Material,DoubleSide,Float32BufferAttribute} fr
 import type {Building,Furniture,NetworkEdge,NetworkNode,Parcel,Realm,WorldContext} from '../../supabase/functions/_shared/world-types';
 import {bounds,heightAt,terrainAt} from '../../supabase/functions/_shared/world-math';
 import {worldHour} from '../../supabase/functions/_shared/world-environment';
-import {MATERIALS} from '../../supabase/functions/_shared/world-planner';
 import {ConstructionVisuals} from './ConstructionVisuals';
 import {constructionVisualState} from './construction-visual-state';
 import {ArchitecturalDetails,buildingSurface} from './ArchitecturalDetails';
@@ -32,13 +33,13 @@ function WallDoor({x,z,height=2.7,length,door,color,vertical=false,roughness=.85
  return <>{left>0&&box(left/2,left,height/2,height,'left')}{right>0&&box(length-right/2,right,height/2,height,'right')}{height>2.1&&box(door,gap,2.4,.6,'lintel')}</>;
 }
 export function MeasuredBuilding({building:b,context,ghost=false,visualHour}:{building:Building;context:WorldContext;ghost?:boolean;visualHour?:number}){
- const ui=useWorldUI(useShallow(s=>({selected:s.selected,floor:s.floor,replay:s.replay,set:s.set}))),selected=ui.selected===b.id,avatar=context.world.entities.find(e=>e.kind==='avatar'&&e.realm===b.realm&&e.status==='active'),inside=avatar?.kind==='avatar'&&avatar.inside_building===b.id;
+ const ui=useWorldUI(useShallow(s=>({selected:s.selected,floor:s.floor,cutawayAll:s.cutawayAll,replay:s.replay,set:s.set}))),selected=ui.selected===b.id,avatar=context.world.entities.find(e=>e.kind==='avatar'&&e.realm===b.realm&&e.status==='active'),inside=avatar?.kind==='avatar'&&avatar.inside_building===b.id;
  const modelRef=useRef<Group>(null),state=constructionVisualState(b);
  useEffect(()=>{if(!ghost||!modelRef.current)return;const restore:(()=>void)[]=[];modelRef.current.traverse(o=>{if(!(o instanceof Mesh))return;const original=o.material,clones=(Array.isArray(original)?original:[original]).map((m:Material)=>{const c=m.clone();c.transparent=true;c.opacity=.32;c.depthWrite=false;return c;});o.material=Array.isArray(original)?clones:clones[0];restore.push(()=>{o.material=original;for(const c of clones)c.dispose();});});return()=>{for(const undo of restore)undo();};},[ghost,b.version]);
  const chosenFloor=inside&&avatar.kind==='avatar'?avatar.floor:selected?ui.floor:null,frame=state.frame,night=(visualHour??worldHour(context))<6||(visualHour??worldHour(context))>=19;
  const powered=context.world.metrics.find(m=>m.realm===b.realm)?.powered.includes(b.id)??!context.world.settings.infrastructure;
  const surface=(type:string,floor:number|null,room:string|null=null)=>buildingSurface(b,type,floor,room);
- const cutaway=selected&&chosenFloor!==null&&!inside,showInterior=inside||cutaway;const roof=surface('roof',null),floors=state.paidFloors;
+ const cutaway=selected&&(chosenFloor!==null||ui.cutawayAll)&&!inside,showInterior=inside||cutaway;const roof=surface('roof',null),floors=state.paidFloors;
  return <group ref={modelRef} position={[b.x+(b.rotation===90?b.depth:0),b.y,b.z]} rotation={[0,-b.rotation*Math.PI/180,0]} onClick={e=>{e.stopPropagation();if(!ghost&&!ui.replay)ui.set({selected:b.id,tab:'build',open:true});}}>
   <Box at={[b.width/2,-.1,b.depth/2]} size={[b.width,.2,b.depth]} color={ghost?'#b8be8c':'#858f83'} opacity={ghost?.5:1}/>
   <ConstructionVisuals building={b} reducedMotion={context.world.settings.reduced_motion||context.world.settings.photosensitive} details={context.world.settings.quality==='standard'||selected||context.world.entities.filter(e=>e.kind==='building'&&e.status==='active'&&!e.opened_at).slice(0,2).some(e=>e.id===b.id)}/>
@@ -55,22 +56,21 @@ export function MeasuredBuilding({building:b,context,ghost=false,visualHour}:{bu
    {showInterior&&context.world.entities.filter((e):e is Furniture=>e.kind==='furniture'&&e.status==='active'&&e.building_id===b.id&&e.floor===f.index).map(e=><group key={e.id} userData={{touchTarget:{source:'world',id:e.id,realm:b.realm}}}><FurnitureMesh item={e}/></group>)}
   </group>)}
   {state.finished&&!cutaway&&<ArchitecturalDetails building={b} night={night} powered={powered}/>}
-  {chosenFloor===null&&state.roof&&<Box at={[b.width/2,(Math.max(...b.floors.map(f=>f.index))+1)*3,b.depth/2]} size={[b.width+.2,.2,b.depth+.2]} color={roof.color} roughness={roof.roughness} metalness={roof.metalness}/>}
+  {chosenFloor===null&&!cutaway&&state.roof&&<Box at={[b.width/2,(Math.max(...b.floors.map(f=>f.index))+1)*3,b.depth/2]} size={[b.width+.2,.2,b.depth+.2]} color={roof.color} roughness={roof.roughness} metalness={roof.metalness}/>}
   {b.opened_at&&<><Box at={[b.width/2,2.25,-.5]} size={[1.8,.14,1]} color={roof.color}/><Box at={[b.width/2-.65,1.1,-.1]} size={[.12,2.2,.15]} color="#8d744c"/><Box at={[b.width/2+.65,1.1,-.1]} size={[.12,2.2,.15]} color="#8d744c"/></>}
   {b.opened_at&&['restaurant','mall','hotel','resort','school','university','clinic','hospital','garage','museum','office'].includes(b.archetype)&&<TextSurface text={b.name} width={Math.min(2.1,b.width-.6)} height={.3} position={[b.width/2,2.5,-.17]} rotation={[0,Math.PI,0]}/>}
   {b.opened_at&&<Box at={[b.width/2,2.5,-.12]} size={[Math.min(2.2,b.width-.5),.35,.08]} color={b.archetype==='hospital'||b.archetype==='clinic'?'#d9e9dd':b.archetype==='school'||b.archetype==='university'?'#7b9bac':'#c2a96d'}/>}
  </group>;
 }
 export function FurnitureMesh({item:f}:{item:Furniture}){
- const color=MATERIALS.find(v=>v.id===f.material)?.color??'#967349',w=f.width,d=f.depth;
- return <group position={[f.x+(f.rotation%180?d:w)/2,.15,f.z+(f.rotation%180?w:d)/2]} rotation={[0,f.rotation*Math.PI/180,0]}>
-  {f.type==='plant'?<><mesh position={[0,.16,0]}><cylinderGeometry args={[.18,.12,.32,8]}/><meshStandardMaterial color="#a77952"/></mesh><mesh position={[0,.55,0]}><icosahedronGeometry args={[.3,0]}/><meshStandardMaterial color="#5a8051"/></mesh></>:f.type==='bed'?<><Box at={[0,.18,0]} size={[w,.36,d]} color={color}/><Box at={[0,.4,0]} size={[w-.05,.16,d-.05]} color="#ddd8c5"/><Box at={[0,.55,-d*.32]} size={[w*.8,.17,.45]} color="#e8eadc"/></>:f.type==='sofa'?<><Box at={[0,.3,0]} size={[w,.6,d]} color="#788f77"/><Box at={[0,.65,d*.38]} size={[w,.6,.18]} color="#6d836b"/></>:f.type==='shelf'?<>{[.15,.8,1.45].map(y=><Box key={y} at={[0,y,0]} size={[w,.1,d]} color={color}/>)}{[-1,1].map(s=><Box key={s} at={[s*w/2,.8,0]} size={[.08,1.7,d]} color={color}/>)}</>:<><Box at={[0,f.type==='counter'?.8:.5,0]} size={[w,f.type==='counter'?.8:.12,d]} color={color}/>{[-1,1].flatMap(x=>[-1,1].map(z=><Box key={x+':'+z} at={[x*w*.38,.24,z*d*.36]} size={[.07,.48,.07]} color={color}/>))}{f.type==='chair'&&<Box at={[0,.85,d*.4]} size={[w,.7,.07]} color={color}/>}</>}
- </group>;
+ const w=f.width,d=f.depth;
+ return <group position={[f.x+(f.rotation%180?d:w)/2,.15,f.z+(f.rotation%180?w:d)/2]} rotation={[0,f.rotation*Math.PI/180,0]}><FurnitureAsset item={f}/></group>;
 }
+
 export function NetworkMesh({edge,nodes,context}:{edge:NetworkEdge;nodes:NetworkNode[];context:WorldContext}){
  const overlay=useWorldUI(s=>s.overlay),a=nodes.find(v=>v.id===edge.from),b=nodes.find(v=>v.id===edge.to);if(!a||!b)return null;const terrain=terrainAt(context,a.realm),visible=edge.network==='road'||overlay===edge.network;if(!visible)return null;
  const length=Math.hypot(a.x-b.x,a.z-b.z),angle=Math.atan2(b.x-a.x,b.z-a.z),color=edge.blocked?'#a96954':edge.network==='road'?'#78837c':edge.network==='power'?'#d5b766':edge.network==='water'?'#6babbc':edge.network==='sewage'?'#927f68':'#9c82b7';
- if(edge.network==='road')return <group>{Array.from({length:Math.max(1,Math.ceil(length/2))},(_,i)=>{const n=Math.max(1,Math.ceil(length/2)),ratio=(i+.5)/n,x=a.x+(b.x-a.x)*ratio,z=a.z+(b.z-a.z)*ratio;return <group key={i} position={[x,heightAt(terrain,x,z)+.045,z]} rotation={[0,angle,0]}><Box at={[0,0,0]} size={[edge.directed?edge.lanes*1.6:edge.lanes*3,.07,length/n+.01]} color={edge.blocked?'#ac796a':VISUAL.asphalt}/>{[-1,1].map(side=><Box key={side} at={[side*((edge.directed?edge.lanes*1.6:edge.lanes*3)/2-.08),.055,0]} size={[.16,.08,length/n+.01]} color={VISUAL.curb}/>)}<Box at={[0,.041,0]} size={[.04,.01,Math.min(.6,length/n*.6)]} color="#e4dfbc"/>{edge.directed&&<mesh rotation={[-Math.PI/2,0,0]} position={[0,.055,0]}><coneGeometry args={[.12,.28,3]}/><meshBasicMaterial color="#c8cbbb"/></mesh>}</group>;})}</group>;
+ if(edge.network==='road')return <group>{Array.from({length:Math.max(1,Math.ceil(length/2))},(_,i)=>{const n=Math.max(1,Math.ceil(length/2)),ratio=(i+.5)/n,x=a.x+(b.x-a.x)*ratio,z=a.z+(b.z-a.z)*ratio;return <group key={i} position={[x,heightAt(terrain,x,z)+.045,z]} rotation={[0,angle,0]}><Box at={[0,0,0]} size={[edge.directed?edge.lanes*1.6:edge.lanes*3,.07,length/n+.01]} color={edge.blocked?'#ac796a':'#56646b'}/>{[-1,1].map(side=><Box key={side} at={[side*((edge.directed?edge.lanes*1.6:edge.lanes*3)/2-.08),.055,0]} size={[.16,.08,length/n+.01]} color={VISUAL.curb}/>)}<Box at={[0,.041,0]} size={[.07,.012,Math.min(.8,length/n*.65)]} color="#e4dfbc"/>{edge.directed&&<mesh rotation={[-Math.PI/2,0,0]} position={[0,.055,0]}><coneGeometry args={[.12,.28,3]}/><meshBasicMaterial color="#c8cbbb"/></mesh>}</group>;})}</group>;
  return <Line points={[[a.x,edge.network==='power'?a.y+2.5:edge.depth,a.z],[b.x,edge.network==='power'?b.y+2.5:edge.depth,b.z]]} color={color} lineWidth={overlay===edge.network?4:2} dashed={edge.blocked} depthTest={false}/>;
 }
 export function NodeMesh({node:n,context,night=worldHour(context)<6||worldHour(context)>=19}:{node:NetworkNode;context:WorldContext;night?:boolean}){
@@ -82,5 +82,5 @@ export function NodeMesh({node:n,context,night=worldHour(context)<6||worldHour(c
 }
 export function DecorationMesh({context,realm,id,night=false,now=context.now}:{context:WorldContext;realm:Realm;id:string;night?:boolean;now?:string}){
  const e=context.world.entities.find(v=>v.id===id);if(e?.kind!=='decoration')return null;const y=heightAt(terrainAt(context,realm),e.x,e.z);
- return <group position={[e.x+e.width/2,y,e.z+e.depth/2]}>{e.type==='vegetation'&&e.species?<BotanicalPlant species={e.species}/>:e.type==='farm_plot'?<FarmModel entity={e} now={now}/>:e.type==='tree'?<StylizedPlant seed={e.id}/>:e.type==='bench'?<><Box at={[0,.45,0]} size={[1.5,.12,.5]} color="#a58353"/><Box at={[0,.8,.23]} size={[1.5,.55,.08]} color="#a58353"/>{[-.55,.55].map(x=><Box key={x} at={[x,.2,0]} size={[.09,.4,.4]} color="#647365"/>)}</>:e.type==='fountain'?<><mesh position={[0,.1,0]}><cylinderGeometry args={[1,1,.2,16]}/><meshStandardMaterial color="#bfc7b0"/></mesh><mesh position={[0,.23,0]} rotation={[-Math.PI/2,0,0]}><circleGeometry args={[.87,16]}/><meshStandardMaterial color="#8bbac0"/></mesh><Box at={[0,.55,0]} size={[.2,.9,.2]} color="#b4d4cf"/></>:e.type==='lamp'?<><Box at={[0,1.2,0]} size={[.07,2.4,.07]} color="#6d796a"/><mesh position={[0,2.4,0]}><sphereGeometry args={[.2,8,6]}/><meshStandardMaterial color="#f1d89d" emissive={night&&!context.world.settings.infrastructure?'#f1d89d':'#000000'} emissiveIntensity={.7}/></mesh></>:<><Box at={[0,.025,0]} size={[e.width,.05,e.depth]} color="#6e945d"/>{e.type==='park'&&[-1,1].map(x=><mesh key={x} position={[x*.7,.3,.6]}><icosahedronGeometry args={[.35,0]}/><meshStandardMaterial color="#4f7d4d"/></mesh>)}</>}</group>;
+ return <group position={[e.x+e.width/2,y,e.z+e.depth/2]}>{e.type==='vegetation'&&e.species?<BotanicalPlant species={e.species} quality={context.world.settings.quality}/>:e.type==='farm_plot'?<FarmModel entity={e} now={now}/>:e.type==='tree'?<StylizedPlant seed={e.id}/>:e.type==='bench'?<><Box at={[0,.45,0]} size={[1.5,.12,.5]} color="#a58353"/><Box at={[0,.8,.23]} size={[1.5,.55,.08]} color="#a58353"/>{[-.55,.55].map(x=><Box key={x} at={[x,.2,0]} size={[.09,.4,.4]} color="#647365"/>)}</>:e.type==='fountain'?<FountainAsset/>:e.type==='lamp'?<><Box at={[0,1.2,0]} size={[.07,2.4,.07]} color="#6d796a"/><mesh position={[0,2.4,0]}><sphereGeometry args={[.2,8,6]}/><meshStandardMaterial color="#f1d89d" emissive={night&&!context.world.settings.infrastructure?'#f1d89d':'#000000'} emissiveIntensity={.7}/></mesh></>:<><Box at={[0,.025,0]} size={[e.width,.05,e.depth]} color="#6e945d"/>{e.type==='park'&&[-1,1].map(x=><mesh key={x} position={[x*.7,.3,.6]}><icosahedronGeometry args={[.35,0]}/><meshStandardMaterial color="#4f7d4d"/></mesh>)}</>}</group>;
 }
