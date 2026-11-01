@@ -2,7 +2,7 @@ import {useGraphicsProfile} from './useGraphics'
 import { Component, Suspense, useEffect, useMemo, useRef, useState, type ComponentRef, type ReactNode } from 'react'
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import { OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
-import { InstancedMesh, Object3D, PCFSoftShadowMap } from 'three'
+import { TOUCH, InstancedMesh, Object3D, PCFSoftShadowMap } from 'three'
 import type { CatalogItem, Placement, GameSnapshot } from '../lib/types'
 import { CATALOG } from '../lib/catalog'
 import { useLocale } from '../lib/locale'
@@ -169,7 +169,8 @@ function Landscape({ size }: { size: number }) {
   </>
 }
 
-function CameraRig({ size, perspective, resetKey, interior, targetY=0 }: { size: number; perspective: boolean; resetKey: number; interior: boolean; targetY?:number }) {
+function CameraRig({ size, perspective, resetKey, interior, targetY=0, readOnly=false }: { size: number; perspective: boolean; resetKey: number; interior: boolean; targetY?:number;readOnly?:boolean }) {
+  const cameraStyle=useTouchTools(s=>s.advanced?'orbit':s.cameraStyle)
   const editing=useTouchTools(s=>!s.advanced&&!!s.draft),extraReset=useTouchTools(s=>s.reset)
   const target = useMemo(() => [0, targetY, 0] as [number, number, number], [targetY])
   const controls = useRef<ComponentRef<typeof OrbitControls>>(null)
@@ -184,7 +185,7 @@ function CameraRig({ size, perspective, resetKey, interior, targetY=0 }: { size:
   const zoom = Math.min(viewport.width, viewport.height) / (size * (interior ? 1.5 : 1.72))
   return <>
     {perspective ? <PerspectiveCamera makeDefault fov={43} position={[size, size, size]} near={0.1} far={220} /> : <OrthographicCamera makeDefault position={[size, size, size]} zoom={zoom} near={0.1} far={220} />}
-    <OrbitControls ref={controls} target={target} makeDefault enableDamping enableRotate={!editing} enablePan={!editing} dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = targetY } }} />
+    <OrbitControls touches={{ONE:!readOnly&&cameraStyle==='pan'?TOUCH.PAN:TOUCH.ROTATE,TWO:TOUCH.DOLLY_PAN}} ref={controls} target={target} makeDefault enableDamping enableRotate={readOnly||!editing} enablePan={!readOnly&&!editing} dampingFactor={0.12} minPolarAngle={0.2} maxPolarAngle={Math.PI / 2.35} minDistance={size * 0.5} maxDistance={size * 3} minZoom={Math.max(3, zoom * 0.6)} maxZoom={zoom * 3.5} panSpeed={0.65} rotateSpeed={0.55} zoomSpeed={0.8} onChange={() => { if (controls.current) { controls.current.target.x = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.x)); controls.current.target.z = Math.max(-size * 0.65, Math.min(size * 0.65, controls.current.target.z)); controls.current.target.y = targetY } }} />
   </>
 }
 
@@ -239,7 +240,7 @@ function SceneContents(props:SceneProps){
   <fog attach="fog" args={['#dce9e1',75,180]}/>
   <ambientLight intensity={1.5}/><hemisphereLight args={['#f3f7eb','#6c8876',1.5]}/>
   <directionalLight position={[12,22,8]} intensity={2.5} castShadow shadow-mapSize={[1024,1024]} shadow-camera-left={-45} shadow-camera-right={45} shadow-camera-top={45} shadow-camera-bottom={-45} shadow-bias={-.0008} shadow-normalBias={.04}/>
-  <CameraRig size={neighbor?Math.max(size,neighbor.size)*1.85:size} perspective={perspective} resetKey={resetKey} interior={interior} targetY={props.previewElevation}/>
+  <CameraRig size={neighbor?Math.max(size,neighbor.size)*1.85:size} perspective={perspective} resetKey={resetKey} interior={interior} targetY={props.previewElevation} readOnly={props.readOnly}/>
   {neighbor&&<CoastalBackdrop/>}
   <group key={realm} position={[origin,0,0]}><PlotContents {...props} bare={props.bare||!!neighbor} originX={origin}/></group>
   {neighbor&&<group key={realm==='main'?'yuyi':'main'} position={[otherOrigin,0,0]}><PlotContents placements={neighbor.placements} catalog={props.catalog} size={neighbor.size} bare originX={otherOrigin} readOnly={props.readOnly} onTile={()=>onRealm?.(realm==='main'?'yuyi':'main')} onSelect={()=>onRealm?.(realm==='main'?'yuyi':'main')}/></group>}

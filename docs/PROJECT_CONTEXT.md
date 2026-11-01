@@ -1,5 +1,20 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — interface rebuild (unpublished)
+- The owner explicitly requested a ground-up INTERFACE redesign. This supersedes
+  earlier no-repeat visual guidance for UI only; keep the existing project/world.
+- Modern navy/mint chrome, five destinations, contextual touch tools and one
+  searchable construction catalog. Default one-finger pan, explicit orbit switch.
+- 106 cached original procedural asset renders, shared by shop, crops, plants,
+  buildings, materials, furniture, vehicles and advanced purchase forms. No new
+  dependency, live Canvas per card, seeded objects or cloud/schema changes.
+- Shop purchases can hand an owned item straight into a free placement preview;
+  all original trusted purchases, review/commit, receipts, 50% refund and separate
+  MAD remain. Settings still expose the complete advanced tools.
+- Source branch: codex/stylized-visual-overhaul. No merge or publication authorized.
+- Current test evidence: docs/evidence/modern-interface. Check its README for final
+  verification; architecture group below remains part of this unpublished branch.
+
 ## Current owner — modern, advanced GAME (unpublished)
 - Implemented/tested: CI41266983389 passed124 unit/integration checks and all29
   browser journeys, lint/typecheck and production build. Evidence: architect-mode.

@@ -144,3 +144,11 @@ Full-object recoloring and the remaining expansion packs remain separate work.
 Verified: CI41266983389 passed124 tests and29 browser journeys, including the
 new rendered fitting/quality/salvage/RTL flow; lint/typecheck/build passed.
 No publication. Keep hosted Stage A unchanged until another release request.
+
+## Current owner — rebuild the interface (unpublished)
+Owner now explicitly requests a new modern, simpler game interface and a picture
+for every purchase. Rebuild UI over existing gameplay; do not restart/reset data.
+Five-destination chrome, unified visual catalog and pan-first beginner controls.
+Reuse procedural renders, all paid commands and optional advanced capabilities.
+No new dependency, schema changes, merge or publication for this request.
+See docs/PROJECT_CONTEXT.md and docs/evidence/modern-interface for this group.

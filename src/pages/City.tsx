@@ -42,7 +42,7 @@ export default function City({active=true}:{active?:boolean}) {
   const [success, setSuccess] = useState(false)
   const [expanding, setExpanding] = useState(false)
   useEffect(() => () => {clear();guided.current=false}, [clear])
-  useEffect(()=>{if(active&&params.get('panel')==='inventory')setPanel('inventory')},[active,params])
+  useEffect(()=>{if(active&&params.get('panel')==='inventory'){if(useTouchTools.getState().advanced)setPanel('inventory');else useTouchTools.getState().set({pendingTool:'catalog'});}},[active,params])
   useEffect(()=>{
     if(realm==='yuyi'||guided.current||params.get('guide')!=='tree'||!state)return
     const item=state.catalog.find(v=>v.id==='tree')
