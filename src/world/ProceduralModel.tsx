@@ -1,3 +1,4 @@
+import {SurfaceMaterial} from './SurfaceMaterial'
 import {BotanicalPlant} from './BotanicalAssets'
 import type { ReactNode } from 'react'
 import { Color } from 'three'
@@ -12,7 +13,7 @@ const palette = { forest: '#315e49', moss: '#73945c', ivory: '#f6f0d9', gold: '#
 /** Original procedural assets: all dimensions are expressed in owned grid tiles. */
 export function ProceduralModel({ item, ghost = false, valid = true, variation=item.id, connections, night=false }: ModelProps) {
   const color = (value: string) => ghost ? (valid ? '#75d9a0' : '#ed7880') : value
-  const material = (value: string, extra: object = {}) => <meshStandardMaterial color={color(value)} roughness={0.83} transparent={ghost} opacity={ghost ? 0.58 : 1} {...extra} />
+  const material = (value: string, extra: object = {}) => <SurfaceMaterial color={color(value)} roughness={0.83} transparent={ghost} opacity={ghost ? 0.58 : 1} {...extra} />
   const box = (position: [number, number, number], scale: [number, number, number], shade: string, key?: string) => <mesh key={key} position={position} castShadow receiveShadow><boxGeometry args={scale} />{material(shade)}</mesh>
   const sphere = (position: [number, number, number], radius: number, shade: string, key?: string) => <mesh key={key} position={position} castShadow><icosahedronGeometry args={[radius, 1]} />{material(shade)}</mesh>
   const tree = (x = 0, z = 0, scale = 1, pink = false) => <group position={[x, 0, z]} scale={scale}>

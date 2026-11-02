@@ -297,3 +297,13 @@ Publication complete: PR15/mainedb15d5a, Pages41526624403 succeeded. Real public
 guest browser verified25 ready/staged cards in one grid, absence of split galleries,
 native Space jump rendered and landed at its original height, unchanged wallets
 and no console errors. No hosted-account writes. Public receipt is in that folder.
+
+## Current owner — graphics levels and richer locomotion
+Owner explicitly approved substantial graphics/mesh/material/light/water upgrades,
+four selectable levels (منخفض، متوسط، عالي، فائق), improved walk/run/jump and automatic
+GitHub Pages publication. Keep the existing Auto preference compatible. This is
+frontend-only: preserve world-command v6, all saves, owned objects, 16 tasks,
+MAIN/MAD, paid finish colors/costs and camera-return behavior. No free city objects,
+dependencies, backend/schema/Auth changes or numerical “10×”/phone-FPS claims.
+Work is on the same branch. Evidence: docs/evidence/graphics-motion. Publication
+is authorized after focused verification; no new permission is needed.

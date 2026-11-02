@@ -14,7 +14,8 @@ test('all six shop categories use one grid and card structure, preserving legacy
  await expect(page.getByTestId('wallet-balance')).toHaveText(wallet!);await expect(page.getByTestId('yuyi-hud')).toHaveText(mad!);
 });
 test('Left Shift runs and Space jumps once in place, in every movement direction and on touch',async({page})=>{
- test.setTimeout(90000);await guest(page);await page.getByTestId('play-explore').click();await page.keyboard.down('KeyW');await page.waitForTimeout(1300);await page.keyboard.up('KeyW');await page.keyboard.down('KeyA');await page.waitForTimeout(1300);await page.keyboard.up('KeyA');await page.waitForTimeout(250);
+ // Keep software WebGL's pixel cost bounded; this journey verifies native input and physics.
+ test.setTimeout(120000);await page.setViewportSize({width:960,height:640});await guest(page);await page.getByTestId('play-explore').click();await page.keyboard.down('KeyW');await page.waitForTimeout(1300);await page.keyboard.up('KeyW');await page.keyboard.down('KeyA');await page.waitForTimeout(1300);await page.keyboard.up('KeyA');await page.waitForTimeout(250);
  // Observe rendered frames rather than assuming software WebGL matches wall time.
  await page.evaluate(async path=>{const {worldRuntime:r}=await import(path);const w=window as unknown as Window&{jumpProof:{peak:number;speed:number;takeoffs:number};stopJumpObserver?:boolean};w.jumpProof={peak:0,speed:0,takeoffs:0};let airborne=false;const sample=()=>{if(w.stopJumpObserver)return;w.jumpProof.peak=Math.max(w.jumpProof.peak,r.jump.height);w.jumpProof.speed=Math.max(w.jumpProof.speed,r.speed);if(!r.jump.grounded&&!airborne)w.jumpProof.takeoffs++;airborne=!r.jump.grounded;requestAnimationFrame(sample);};sample();},'/src/world/useWorldUI.ts');
  const reset=()=>page.evaluate(()=>{(window as unknown as Window&{jumpProof:unknown}).jumpProof={peak:0,speed:0,takeoffs:0};});

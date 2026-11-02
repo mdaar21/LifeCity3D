@@ -2,7 +2,8 @@ import {test,expect} from '@playwright/test';
 test.use({storageState:{cookies:[],origins:[]},viewport:{width:390,height:844},hasTouch:true,isMobile:true});
 
 test('walking camera survives every menu return and still accepts wheel and native pinch zoom',async({page})=>{
- test.setTimeout(120000);
+ // Allow the complete ten-route touch journey on CPU-rendered WebGL runners.
+ test.setTimeout(180000);
  await page.goto('/login');await page.getByRole('button',{name:/استكشف التجربة المحلية|Explore.*local/i}).click();await page.getByTestId('play-explore').click();
  const camera=()=>page.evaluate(()=>(window as Window&{__LIFECITY_RENDER_METRICS__?:{camera:{zoom:number;projection:number[];x:number;y:number;z:number}}}).__LIFECITY_RENDER_METRICS__?.camera);
  await expect.poll(async()=>(await camera())?.zoom).toBe(1);

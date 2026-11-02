@@ -16,13 +16,16 @@ import {useTouchTools} from './useTouchTools';
 import {useWorldUI,worldRuntime} from './useWorldUI';
 export {HumanFigure as PersonMesh} from './HumanFigure';
 import {HumanFigure as PersonMesh} from './HumanFigure';
+import {VehicleBody} from './VehicleBody';
+import {FootContact} from './FootContact';
+import {useRenderQuality} from './RenderQuality';
 export function CarMesh({car}:{car:Car}){
- const model=CARS.find(v=>v.id===car.model)!,w=model.width,l=model.length;
- return <><Box at={[0,.42,0]} size={[w,.5,l]} color={car.paint}/><Box at={[0,.88,-l*.08]} size={[w*.85,.55,l*.5]} color={car.paint}/><Box at={[0,.95,l*.18]} size={[w*.8,.38,.04]} color="#708c91" opacity={1-car.tint/2}/><Box at={[0,.98,-l*.28]} size={[w*.8,.35,.04]} color="#708c91"/>{[-1,1].flatMap(x=>[-1,1].map(z=><mesh key={x+':'+z} position={[x*w*.49,.27,z*l*.31]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.28,.28,.18,car.rims==='sport'?12:8]}/><meshStandardMaterial color={car.rims==='classic'?'#c3bd9e':car.rims==='sport'?'#566b71':'#3c4945'}/></mesh>))}{[-1,1].map(s=><Box key={s} at={[s*w*.32,.5,l/2+.015]} size={[.25,.15,.04]} color="#f1d997" emissive/>)}<Box at={[0,.4,-l/2-.02]} size={[.45,.15,.04]} color="#dfdec7"/><TextSurface text={car.plate} width={.43} height={.14} position={[0,.4,-l/2-.043]} rotation={[0,Math.PI,0]}/>{car.trim!=='standard'&&<Box at={[0,.71,0]} size={[w*.6,.06,l*.32]} color={car.trim==='wood'?'#9b774d':'#b2b9b7'}/>}</>;
+ const model=CARS.find(v=>v.id===car.model)!,w=model.width,l=model.length,profile=useRenderQuality();
+ return <><VehicleBody width={w} length={l} paint={car.paint} tint={car.tint}/>{[-1,1].flatMap(x=>[-1,1].map(z=><mesh key={x+':'+z} position={[x*w*.49,.27,z*l*.31]} rotation={[0,0,Math.PI/2]} castShadow><cylinderGeometry args={[.28,.28,.18,profile.materialDetail>=2?24:12]}/><meshStandardMaterial color={car.rims==='classic'?'#c3bd9e':car.rims==='sport'?'#566b71':'#3c4945'}/></mesh>))}{[-1,1].map(s=><Box key={s} at={[s*w*.32,.5,l/2+.015]} size={[.25,.15,.04]} color="#f1d997" emissive/>)}<Box at={[0,.4,-l/2-.02]} size={[.45,.15,.04]} color="#dfdec7"/><TextSurface text={car.plate} width={.43} height={.14} position={[0,.4,-l/2-.043]} rotation={[0,Math.PI,0]}/>{car.trim!=='standard'&&<Box at={[0,.71,0]} size={[w*.6,.06,l*.32]} color={car.trim==='wood'?'#9b774d':'#b2b9b7'}/>}</>;
 }
 export function AvatarActor({avatar,realm}:{avatar:Avatar;realm:Realm}){
  const ref=useRef<Group>(null);useFrame((_,delta)=>{if(!ref.current)return;const p=worldRuntime.realm===realm&&worldRuntime.pose?worldRuntime.pose:avatar.pose;ref.current.position.set(p.x,p.y+(worldRuntime.realm===realm?worldRuntime.jump.height:0),p.z);ref.current.rotation.y+=Math.atan2(Math.sin(p.heading-ref.current.rotation.y),Math.cos(p.heading-ref.current.rotation.y))*damping(14,delta);});
- return <group ref={ref} position={[avatar.pose.x,avatar.pose.y,avatar.pose.z]} visible={avatar.mode!=='drive'&&avatar.mode!=='first'}><PersonMesh appearance={avatar.appearance} live liveRealm={realm}/></group>;
+ return <><FootContact avatar={avatar} realm={realm}/><group ref={ref} position={[avatar.pose.x,avatar.pose.y,avatar.pose.z]} visible={avatar.mode!=='drive'&&avatar.mode!=='first'}><PersonMesh appearance={avatar.appearance} live liveRealm={realm}/></group></>;
 }
 export function CarActor({car,driven,realm}:{car:Car;driven:boolean;realm:Realm}){
  const ref=useRef<Group>(null);useFrame(()=>{if(!ref.current)return;const p=driven&&worldRuntime.realm===realm&&worldRuntime.pose?worldRuntime.pose:car.pose;ref.current.position.set(p.x,p.y,p.z);ref.current.rotation.y=p.heading;});

@@ -13,6 +13,11 @@ import {roadConnections} from './road-visuals'
 import {TouchWorld} from './TouchWorld'
 import {useTouchTools} from './useTouchTools'
 import {WorldRealms} from './WorldRealms'
+import {RenderQuality} from './RenderQuality'
+import {RenderEffects} from './RenderEffects'
+import {SkyEnvironment} from './SkyEnvironment'
+import {useRenderQuality} from './RenderQuality'
+import {boundedDpr} from './graphics-profile'
 import '../world.css'
 
 interface SceneProps {
@@ -44,6 +49,7 @@ interface SceneProps {
 }
 
 export interface LifeCityRenderMetrics {
+  graphics?: {level:string;ao:boolean;bloom:boolean;materialDetail:number;waterDetail:number}
   camera?: {x:number;y:number;z:number;zoom:number;projection:number[];inverse:number[]}
   scene: 'city' | 'interior'
   startedAtMs: number
@@ -67,6 +73,7 @@ declare global {
 /** Samples completed Three renders, without another render loop or React updates. */
 function RendererDiagnostics({ interior,publish=true }: { interior: boolean;publish?:boolean }) {
   const gl = useThree(state => state.gl)
+  const quality=useRenderQuality()
   const metricsRef = useRef<LifeCityRenderMetrics | null>(null)
   const previousRendererFrame = useRef(gl.info.render.frame)
   useEffect(() => {
@@ -106,7 +113,8 @@ function RendererDiagnostics({ interior,publish=true }: { interior: boolean;publ
         metrics.frameGapsMs.push(now - metrics.lastRenderedAtMs)
       }
       metrics.camera={x:camera.position.x,y:camera.position.y,z:camera.position.z,zoom:camera.zoom,projection:camera.projectionMatrix.toArray(),inverse:camera.matrixWorldInverse.toArray()}
-      metrics.renderedFrames += frame - previousRendererFrame.current
+      metrics.renderedFrames += 1
+      metrics.graphics={level:quality.level,ao:quality.ao,bloom:quality.bloom,materialDetail:quality.materialDetail,waterDetail:quality.waterDetail}
       gl.domElement.dataset.renderedFrames = String(metrics.renderedFrames)
       previousRendererFrame.current = frame
       metrics.lastRenderedAtMs = now
@@ -238,7 +246,7 @@ function SceneContents(props:SceneProps){
   {props.touchGame&&props.interior&&<TouchWorld game={props.touchGame} realm="main" offset={[-size/2,-size/2]} active={!props.readOnly} interiorHouseId={props.interiorHouseId}/>}
   <RendererDiagnostics interior={interior} publish={!props.readOnly}/>
   <primitive object={SCENE_BACKGROUND} attach="background"/>
-  <fog attach="fog" args={['#dce9e1',75,180]}/>
+  <fog attach="fog" args={['#dce9e1',75,180]}/><SkyEnvironment hour={12} weather="clear"/>
   <ambientLight intensity={1.5}/><hemisphereLight args={['#f3f7eb','#6c8876',1.5]}/>
   <directionalLight position={[12,22,8]} intensity={2.5} castShadow shadow-mapSize={[1024,1024]} shadow-camera-left={-45} shadow-camera-right={45} shadow-camera-top={45} shadow-camera-bottom={-45} shadow-bias={-.0008} shadow-normalBias={.04}/>
   <CameraRig size={neighbor?Math.max(size,neighbor.size)*1.85:size} perspective={perspective} resetKey={resetKey} interior={interior} targetY={props.previewElevation} readOnly={props.readOnly}/>
@@ -246,6 +254,11 @@ function SceneContents(props:SceneProps){
   <group key={realm} position={[origin,0,0]}><PlotContents {...props} bare={props.bare||!!neighbor} originX={origin}/></group>
   {neighbor&&<group key={realm==='main'?'yuyi':'main'} position={[otherOrigin,0,0]}><PlotContents placements={neighbor.placements} catalog={props.catalog} size={neighbor.size} bare originX={otherOrigin} readOnly={props.readOnly} onTile={()=>onRealm?.(realm==='main'?'yuyi':'main')} onSelect={()=>onRealm?.(realm==='main'?'yuyi':'main')}/></group>}
  </>;
+}
+function RenderBudget({dpr}:{dpr:number}){
+ const {size,setDpr}=useThree();
+ useEffect(()=>setDpr(boundedDpr(dpr,size.width,size.height)),[setDpr,dpr,size.width,size.height]);
+ return null;
 }
 
 export function WorldCanvas(props: SceneProps) {
@@ -261,7 +274,7 @@ export function WorldCanvas(props: SceneProps) {
     } catch { setSupported(false) }
   }, [])
   return <div className={`world-canvas ${props.className || ''}`} data-testid={props.readOnly?'asset-preview-canvas':'city-canvas'} role="region" aria-label={props.interior ? t('غرفة ثلاثية الأبعاد قابلة للتأثيث', 'Interactive 3D room') : t('مدينة ثلاثية الأبعاد قابلة للبناء', 'Interactive 3D city')}>
-    {supported === null ? <div className="world-loading">{t('نجهّز عالمك…', 'Preparing your world…')}</div> : supported ? <CanvasErrorBoundary fallback={<WebGLFallback />}><Canvas shadows={graphics.shadows} frameloop="demand" dpr={graphics.dpr} gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }} fallback={<WebGLFallback />} onCreated={({ gl }) => { gl.setClearColor(SCENE_BACKGROUND); gl.shadowMap.type = PCFSoftShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setSupported(false) }, { once: true }) }}><Suspense fallback={null}><SceneContents {...props} /></Suspense></Canvas></CanvasErrorBoundary> : <WebGLFallback />}
+    {supported === null ? <div className="world-loading">{t('نجهّز عالمك…', 'Preparing your world…')}</div> : supported ? <CanvasErrorBoundary fallback={<WebGLFallback />}><Canvas shadows={graphics.shadows} frameloop="demand" dpr={props.readOnly?Math.min(1.25,graphics.dpr):graphics.dpr} gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }} fallback={<WebGLFallback />} onCreated={({ gl }) => { gl.setClearColor(SCENE_BACKGROUND); gl.shadowMap.type = PCFSoftShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setSupported(false) }, { once: true }) }}><RenderQuality.Provider value={graphics}><RenderBudget dpr={props.readOnly?Math.min(1.25,graphics.dpr):graphics.dpr}/><Suspense fallback={null}><SceneContents {...props} />{props.worldGame&&!props.readOnly&&<RenderEffects/>}</Suspense></RenderQuality.Provider></Canvas></CanvasErrorBoundary> : <WebGLFallback />}
   </div>
 }
 

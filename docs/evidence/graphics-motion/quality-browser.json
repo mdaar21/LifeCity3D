@@ -1,0 +1,145 @@
+{
+  "samples": [
+    {
+      "mode": "aerial",
+      "level": "low",
+      "visible": 1024,
+      "graphics": {
+        "level": "low",
+        "ao": false,
+        "bloom": false,
+        "materialDetail": 0,
+        "waterDetail": 1
+      },
+      "zoom": 27.586206896551726,
+      "dpr": 1,
+      "pixels": 614400,
+      "calls": 10,
+      "triangles": 1862
+    },
+    {
+      "mode": "aerial",
+      "level": "medium",
+      "visible": 1024,
+      "graphics": {
+        "level": "medium",
+        "ao": false,
+        "bloom": false,
+        "materialDetail": 1,
+        "waterDetail": 2
+      },
+      "zoom": 27.586206896551726,
+      "dpr": 1.25,
+      "pixels": 960000,
+      "calls": 10,
+      "triangles": 1862
+    },
+    {
+      "mode": "aerial",
+      "level": "high",
+      "visible": 1024,
+      "graphics": {
+        "level": "high",
+        "ao": true,
+        "bloom": false,
+        "materialDetail": 2,
+        "waterDetail": 3
+      },
+      "zoom": 27.586206896551726,
+      "dpr": 1.5,
+      "pixels": 1382400,
+      "calls": 22,
+      "triangles": 7772
+    },
+    {
+      "mode": "aerial",
+      "level": "ultra",
+      "visible": 1024,
+      "graphics": {
+        "level": "ultra",
+        "ao": true,
+        "bloom": true,
+        "materialDetail": 3,
+        "waterDetail": 4
+      },
+      "zoom": 27.586206896551726,
+      "dpr": 2,
+      "pixels": 2457600,
+      "calls": 35,
+      "triangles": 7785
+    },
+    {
+      "mode": "walking",
+      "level": "low",
+      "visible": 1018,
+      "graphics": {
+        "level": "low",
+        "ao": false,
+        "bloom": false,
+        "materialDetail": 0,
+        "waterDetail": 1
+      },
+      "zoom": 1,
+      "dpr": 1,
+      "pixels": 614400,
+      "calls": 35,
+      "triangles": 4194
+    },
+    {
+      "mode": "walking",
+      "level": "medium",
+      "visible": 1018,
+      "graphics": {
+        "level": "medium",
+        "ao": false,
+        "bloom": false,
+        "materialDetail": 1,
+        "waterDetail": 2
+      },
+      "zoom": 1,
+      "dpr": 1.25,
+      "pixels": 960000,
+      "calls": 45,
+      "triangles": 4314
+    },
+    {
+      "mode": "walking",
+      "level": "high",
+      "visible": 1016,
+      "graphics": {
+        "level": "high",
+        "ao": true,
+        "bloom": false,
+        "materialDetail": 2,
+        "waterDetail": 3
+      },
+      "zoom": 1,
+      "dpr": 1.5,
+      "pixels": 1382400,
+      "calls": 169,
+      "triangles": 49812
+    },
+    {
+      "mode": "walking",
+      "level": "ultra",
+      "visible": 1014,
+      "graphics": {
+        "level": "ultra",
+        "ao": true,
+        "bloom": true,
+        "materialDetail": 3,
+        "waterDetail": 4
+      },
+      "zoom": 1,
+      "dpr": 2,
+      "pixels": 2457600,
+      "calls": 182,
+      "triangles": 49825
+    }
+  ],
+  "savedPresetRestored": true,
+  "mobileLayoutNoOverflow": true,
+  "gameDataUnchanged": true,
+  "errors": [],
+  "scope": "Local guest; software Chromium WebGL. No physical-phone FPS or cloud-account writes."
+}

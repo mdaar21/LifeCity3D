@@ -54,7 +54,7 @@ export function WorldRealms(props:Props){
  const surprise=preview.world.entities.find(e=>e.id===ui.selected&&e.kind==='surprise');
  if(ui.tab==='surprises'&&surprise?.kind==='surprise'&&(ui.open||touch.draft?.request.return_operation==='surprise_prop')){const d=touch.draft;return <><SurpriseRoom scene={d?.request.return_operation==='surprise_prop'?{props:[...surprise.props,{id:'local-preview',type:d.request.type as 'flowers'|'present'|'memory',x:d.x,z:d.z,text:String(d.request.text??'')}]}:surprise}/><TouchWorld game={game} realm={realm} offset={[0,0]} active={active&&!ui.replay}/></>;}
  return <>
-  {!(ui.floor!==null&&ui.floor<0||['water','sewage','metro'].includes(ui.overlay))&&<CoastalBackdrop hour={hour} weather={context.world.settings.weather}/>}
+  {!(ui.floor!==null&&ui.floor<0||['water','sewage','metro'].includes(ui.overlay))&&<CoastalBackdrop hour={hour} weather={context.world.settings.weather} active={active&&!ui.open} reduced={context.world.settings.reduced_motion||context.world.settings.photosensitive}/>}
   <WorldWeather context={context} active={active} profile={graphics} hour={hour}/>
   <WorldAtmosphere hour={hour} weather={context.world.settings.weather} profile={graphics} center={[origin(realm)[0]+extents(realm).width/2,0,origin(realm)[1]+extents(realm).depth/2]} span={Math.max(extents(realm).width,extents(realm).depth)}/>
   {!exploring&&<MapCamera active={active&&!ui.open&&!ui.replay} cinematic={ui.inspectFocus&&ui.cutawayAll} width={main.width+yuyi.width+2} depth={depth} perspective={perspective} resetKey={resetKey} focus={focus??(!touch.advanced?[origin(realm)[0]+extents(realm).width/2,0,origin(realm)[1]+extents(realm).depth/2,Math.max(extents(realm).width,extents(realm).depth)]:undefined)}/>}

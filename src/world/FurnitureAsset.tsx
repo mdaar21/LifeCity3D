@@ -1,9 +1,10 @@
+import {SurfaceMaterial} from './SurfaceMaterial';
 import type {} from '@react-three/fiber';
-import {BoxGeometry,BufferGeometry,Color,CylinderGeometry,IcosahedronGeometry,Float32BufferAttribute,MeshStandardMaterial} from 'three';
+import {BoxGeometry,BufferGeometry,Color,CylinderGeometry,IcosahedronGeometry,Float32BufferAttribute} from 'three';
 import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import type {Furniture} from '../../supabase/functions/_shared/world-types';
 import {MATERIALS} from '../../supabase/functions/_shared/world-planner';
-const shapes=new Map<string,BufferGeometry>(),materials=new Map<string,MeshStandardMaterial>();
+const shapes=new Map<string,BufferGeometry>();
 /** Detail is part of the purchased furnishing. No extra item or ownership is created. */
 export function furnitureGeometry(type:string,w:number,d:number,color:string){
  const key=[type,w,d,color].join(':');if(shapes.has(key))return shapes.get(key)!;const parts:BufferGeometry[]=[];
@@ -20,7 +21,6 @@ export function furnitureGeometry(type:string,w:number,d:number,color:string){
  const geometry=mergeGeometries(parts)!;for(const g of parts)g.dispose();geometry.computeBoundingBox();const bounds=geometry.boundingBox!;geometry.scale(Math.min(1,w*.5/Math.max(Math.abs(bounds.min.x),Math.abs(bounds.max.x))),1,Math.min(1,d*.5/Math.max(Math.abs(bounds.min.z),Math.abs(bounds.max.z))));shapes.set(key,geometry);return geometry;
 }
 export function FurnitureAsset({item:f}:{item:Furniture}){
- const finish=MATERIALS.find(m=>m.id===f.material)??MATERIALS.find(m=>m.id==='wood')!,key=finish.id;
- if(!materials.has(key))materials.set(key,new MeshStandardMaterial({vertexColors:true,roughness:finish.roughness,metalness:finish.metalness}));
- return <mesh name="owned-furniture-detail" geometry={furnitureGeometry(f.type,f.width,f.depth,finish.color)} material={materials.get(key)} castShadow receiveShadow dispose={null}/>;
+ const finish=MATERIALS.find(m=>m.id===f.material)??MATERIALS.find(m=>m.id==='wood')!;
+ return <mesh name="owned-furniture-detail" geometry={furnitureGeometry(f.type,f.width,f.depth,finish.color)} castShadow receiveShadow dispose={null}><SurfaceMaterial surface={f.type==='sofa'||f.type==='bed'?'fabric':f.material==='wood'?'wood':'stone'} vertexColors roughness={finish.roughness} metalness={finish.metalness}/></mesh>;
 }

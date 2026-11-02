@@ -1,0 +1,8 @@
+import {describe,it,expect} from 'vitest';
+import {locomotionPose} from '../../src/world/locomotion';
+const base={speed:2.7,phase:.8,forward:1,side:0,airborne:false,verticalSpeed:0,landing:0};
+describe('articulated walking, running and jump landing',()=>{
+ it('blends continuously across the old abrupt run threshold and compensates foot pitch',()=>{const a=locomotionPose({...base,speed:3.099}),b=locomotionPose({...base,speed:3.101});expect(Math.abs(a.legs[0].hip-b.legs[0].hip)).toBeLessThan(.002);expect(Math.abs(a.legs[0].elbow-b.legs[0].elbow)).toBeLessThan(.002);expect(a.legs[0].ankle).toBeCloseTo(-(a.legs[0].hip+a.legs[0].knee)*.65);});
+ it('reverses stride backwards, transfers weight sideways and rests without a residual stride',()=>{const front=locomotionPose(base),back=locomotionPose({...base,forward:-1}),side=locomotionPose({...base,side:1}),idle=locomotionPose({...base,speed:0});expect(back.legs[0].hip).toBeCloseTo(-front.legs[0].hip);expect(side.legs[0].splay).not.toBe(0);expect(side.roll).toBeLessThan(front.roll);expect(idle.legs.every(l=>l.hip===0&&l.knee===0)).toBe(true);});
+ it('extends the legs for descent and absorbs landing without changing vertical game physics',()=>{const takeoff=locomotionPose({...base,airborne:true,verticalSpeed:6}),fall=locomotionPose({...base,airborne:true,verticalSpeed:-5}),land=locomotionPose({...base,speed:0,landing:1});expect(takeoff.legs[0].knee).toBeGreaterThan(fall.legs[0].knee);expect(takeoff.legs[0].arm).toBeLessThan(fall.legs[0].arm);expect(land.bob).toBeCloseTo(-.095);expect(base).toEqual({speed:2.7,phase:.8,forward:1,side:0,airborne:false,verticalSpeed:0,landing:0});});
+});

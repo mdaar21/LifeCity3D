@@ -1,5 +1,20 @@
 # Changelog
 
+## Richer world graphics and smooth locomotion — 2026-11-02
+
+- Four explicit Low / Medium / High / Ultra levels in Arabic and English, with
+  compatible Auto and device-local persistence. Meaningful material, geometry,
+  water, shadow, resolution, AO and bloom differences; bounded render buffers.
+- Generated HDR sky/reflections, horizon gradients, animated reflective ocean,
+  cached mipmapped original surface textures, architectural/plant detail tiers,
+  reflective glazing and original bevelled purchased vehicle bodywork.
+- Better character proportions and materials, continuous walk/run joint blends,
+  ankle compensation, backwards/strafe balance and takeoff/descent/landing poses.
+  Existing WASD, Left Shift, Space, touch jump and trusted floor physics retained.
+- Frontend-only; preserves all tasks, purchases, home residents, saved cities,
+  MAIN/MAD wallets, paid finishes and camera return behavior. No new dependencies,
+  backend/schema/Auth or economy changes. Evidence: docs/evidence/graphics-motion.
+
 ## One product grid and walking/running/jumping — published 2026-11-02
 
 - Shared ProductCard and one grid for all Shop categories, including ready-made
