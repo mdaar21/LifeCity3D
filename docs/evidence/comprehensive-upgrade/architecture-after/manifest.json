@@ -1,0 +1,369 @@
+{
+  "source": "Original procedural renderer; no account or city writes",
+  "rows": [
+    {
+      "asset": "legacy:house",
+      "ar": "بيت صغير",
+      "en": "Small house",
+      "style": "forest",
+      "path": "legacy-house-forest.png"
+    },
+    {
+      "asset": "legacy:villa",
+      "ar": "فيلا",
+      "en": "Villa",
+      "style": "forest",
+      "path": "legacy-villa-forest.png"
+    },
+    {
+      "asset": "legacy:skyscraper",
+      "ar": "ناطحة سحاب",
+      "en": "Skyscraper",
+      "style": "forest",
+      "path": "legacy-skyscraper-forest.png"
+    },
+    {
+      "asset": "legacy:palace",
+      "ar": "قصر",
+      "en": "Palace",
+      "style": "forest",
+      "path": "legacy-palace-forest.png"
+    },
+    {
+      "asset": "legacy:apartment",
+      "ar": "عمارة",
+      "en": "Apartments",
+      "style": "forest",
+      "path": "legacy-apartment-forest.png"
+    },
+    {
+      "asset": "building:house",
+      "ar": "منزل صغير",
+      "en": "Small house",
+      "style": "forest",
+      "path": "building-house-forest.png"
+    },
+    {
+      "asset": "building:house",
+      "ar": "منزل صغير",
+      "en": "Small house",
+      "style": "coastal",
+      "path": "building-house-coastal.png"
+    },
+    {
+      "asset": "building:house",
+      "ar": "منزل صغير",
+      "en": "Small house",
+      "style": "desert",
+      "path": "building-house-desert.png"
+    },
+    {
+      "asset": "building:villa",
+      "ar": "فيلا",
+      "en": "Villa",
+      "style": "forest",
+      "path": "building-villa-forest.png"
+    },
+    {
+      "asset": "building:villa",
+      "ar": "فيلا",
+      "en": "Villa",
+      "style": "coastal",
+      "path": "building-villa-coastal.png"
+    },
+    {
+      "asset": "building:villa",
+      "ar": "فيلا",
+      "en": "Villa",
+      "style": "desert",
+      "path": "building-villa-desert.png"
+    },
+    {
+      "asset": "building:restaurant",
+      "ar": "مطعم ومقهى",
+      "en": "Restaurant & café",
+      "style": "forest",
+      "path": "building-restaurant-forest.png"
+    },
+    {
+      "asset": "building:restaurant",
+      "ar": "مطعم ومقهى",
+      "en": "Restaurant & café",
+      "style": "coastal",
+      "path": "building-restaurant-coastal.png"
+    },
+    {
+      "asset": "building:restaurant",
+      "ar": "مطعم ومقهى",
+      "en": "Restaurant & café",
+      "style": "desert",
+      "path": "building-restaurant-desert.png"
+    },
+    {
+      "asset": "building:mall",
+      "ar": "مجمع تجاري",
+      "en": "Shopping mall",
+      "style": "forest",
+      "path": "building-mall-forest.png"
+    },
+    {
+      "asset": "building:mall",
+      "ar": "مجمع تجاري",
+      "en": "Shopping mall",
+      "style": "coastal",
+      "path": "building-mall-coastal.png"
+    },
+    {
+      "asset": "building:mall",
+      "ar": "مجمع تجاري",
+      "en": "Shopping mall",
+      "style": "desert",
+      "path": "building-mall-desert.png"
+    },
+    {
+      "asset": "building:hotel",
+      "ar": "فندق",
+      "en": "Hotel",
+      "style": "forest",
+      "path": "building-hotel-forest.png"
+    },
+    {
+      "asset": "building:hotel",
+      "ar": "فندق",
+      "en": "Hotel",
+      "style": "coastal",
+      "path": "building-hotel-coastal.png"
+    },
+    {
+      "asset": "building:hotel",
+      "ar": "فندق",
+      "en": "Hotel",
+      "style": "desert",
+      "path": "building-hotel-desert.png"
+    },
+    {
+      "asset": "building:resort",
+      "ar": "منتجع",
+      "en": "Resort",
+      "style": "forest",
+      "path": "building-resort-forest.png"
+    },
+    {
+      "asset": "building:resort",
+      "ar": "منتجع",
+      "en": "Resort",
+      "style": "coastal",
+      "path": "building-resort-coastal.png"
+    },
+    {
+      "asset": "building:resort",
+      "ar": "منتجع",
+      "en": "Resort",
+      "style": "desert",
+      "path": "building-resort-desert.png"
+    },
+    {
+      "asset": "building:school",
+      "ar": "مدرسة",
+      "en": "School",
+      "style": "forest",
+      "path": "building-school-forest.png"
+    },
+    {
+      "asset": "building:school",
+      "ar": "مدرسة",
+      "en": "School",
+      "style": "coastal",
+      "path": "building-school-coastal.png"
+    },
+    {
+      "asset": "building:school",
+      "ar": "مدرسة",
+      "en": "School",
+      "style": "desert",
+      "path": "building-school-desert.png"
+    },
+    {
+      "asset": "building:university",
+      "ar": "جامعة",
+      "en": "University",
+      "style": "forest",
+      "path": "building-university-forest.png"
+    },
+    {
+      "asset": "building:university",
+      "ar": "جامعة",
+      "en": "University",
+      "style": "coastal",
+      "path": "building-university-coastal.png"
+    },
+    {
+      "asset": "building:university",
+      "ar": "جامعة",
+      "en": "University",
+      "style": "desert",
+      "path": "building-university-desert.png"
+    },
+    {
+      "asset": "building:clinic",
+      "ar": "عيادة",
+      "en": "Clinic",
+      "style": "forest",
+      "path": "building-clinic-forest.png"
+    },
+    {
+      "asset": "building:clinic",
+      "ar": "عيادة",
+      "en": "Clinic",
+      "style": "coastal",
+      "path": "building-clinic-coastal.png"
+    },
+    {
+      "asset": "building:clinic",
+      "ar": "عيادة",
+      "en": "Clinic",
+      "style": "desert",
+      "path": "building-clinic-desert.png"
+    },
+    {
+      "asset": "building:hospital",
+      "ar": "مستشفى",
+      "en": "Hospital",
+      "style": "forest",
+      "path": "building-hospital-forest.png"
+    },
+    {
+      "asset": "building:hospital",
+      "ar": "مستشفى",
+      "en": "Hospital",
+      "style": "coastal",
+      "path": "building-hospital-coastal.png"
+    },
+    {
+      "asset": "building:hospital",
+      "ar": "مستشفى",
+      "en": "Hospital",
+      "style": "desert",
+      "path": "building-hospital-desert.png"
+    },
+    {
+      "asset": "building:garage",
+      "ar": "مرآب",
+      "en": "Garage",
+      "style": "forest",
+      "path": "building-garage-forest.png"
+    },
+    {
+      "asset": "building:garage",
+      "ar": "مرآب",
+      "en": "Garage",
+      "style": "coastal",
+      "path": "building-garage-coastal.png"
+    },
+    {
+      "asset": "building:garage",
+      "ar": "مرآب",
+      "en": "Garage",
+      "style": "desert",
+      "path": "building-garage-desert.png"
+    },
+    {
+      "asset": "building:museum",
+      "ar": "متحف",
+      "en": "Museum",
+      "style": "forest",
+      "path": "building-museum-forest.png"
+    },
+    {
+      "asset": "building:museum",
+      "ar": "متحف",
+      "en": "Museum",
+      "style": "coastal",
+      "path": "building-museum-coastal.png"
+    },
+    {
+      "asset": "building:museum",
+      "ar": "متحف",
+      "en": "Museum",
+      "style": "desert",
+      "path": "building-museum-desert.png"
+    },
+    {
+      "asset": "building:office",
+      "ar": "مكاتب",
+      "en": "Offices",
+      "style": "forest",
+      "path": "building-office-forest.png"
+    },
+    {
+      "asset": "building:office",
+      "ar": "مكاتب",
+      "en": "Offices",
+      "style": "coastal",
+      "path": "building-office-coastal.png"
+    },
+    {
+      "asset": "building:office",
+      "ar": "مكاتب",
+      "en": "Offices",
+      "style": "desert",
+      "path": "building-office-desert.png"
+    },
+    {
+      "asset": "building:tower_glass",
+      "ar": "برج الزجاج",
+      "en": "Crystal tower",
+      "style": "forest",
+      "path": "building-tower_glass-forest.png"
+    },
+    {
+      "asset": "building:tower_round",
+      "ar": "برج المدار",
+      "en": "Orbit tower",
+      "style": "forest",
+      "path": "building-tower_round-forest.png"
+    },
+    {
+      "asset": "building:tower_twist",
+      "ar": "برج الالتفاف",
+      "en": "Helix tower",
+      "style": "forest",
+      "path": "building-tower_twist-forest.png"
+    },
+    {
+      "asset": "building:tower_steps",
+      "ar": "برج المصاطب",
+      "en": "Terrace tower",
+      "style": "forest",
+      "path": "building-tower_steps-forest.png"
+    },
+    {
+      "asset": "building:tower_twin",
+      "ar": "البرجان التوأمان",
+      "en": "Twin towers",
+      "style": "forest",
+      "path": "building-tower_twin-forest.png"
+    },
+    {
+      "asset": "building:tower_spire",
+      "ar": "برج القمة",
+      "en": "Pinnacle tower",
+      "style": "forest",
+      "path": "building-tower_spire-forest.png"
+    },
+    {
+      "asset": "building:tower_sail",
+      "ar": "برج الشراع",
+      "en": "Sail tower",
+      "style": "forest",
+      "path": "building-tower_sail-forest.png"
+    },
+    {
+      "asset": "building:tower_crown",
+      "ar": "برج التاج",
+      "en": "Crown tower",
+      "style": "forest",
+      "path": "building-tower_crown-forest.png"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import {XP_LEVEL_UNIT} from '../../supabase/functions/_shared/product-unlocks';
+import {UnlockToast} from './ProductProgress';
 import {closeCityPanels} from '../world/city-tools';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -14,6 +16,7 @@ import '../game-shell.css';
 import '../stylized-game.css';
 import '../game-panels.css';
 import '../modern-game.css';
+import './game-controls.css';
 import {useTouchTools} from '../world/useTouchTools';
 import {useWorldUI} from '../world/useWorldUI';
 
@@ -48,9 +51,9 @@ export default function AppLayout() {
   ];
   const current = [...primary, ...extra].find(item => location.pathname.startsWith(item.path));
   const level = levelFromXp(state?.wallet.player_xp ?? 0);
-  const levelStart = (level - 1) ** 2 * 100;
-  const levelGoal = level ** 2 * 100 - levelStart;
-  const xp = (state?.wallet.player_xp ?? 0) - levelStart;
+  const levelStart = (level - 1) ** 2 * XP_LEVEL_UNIT;
+  const levelGoal = level ** 2 * XP_LEVEL_UNIT - levelStart;
+  const xp = Math.min(levelGoal,Math.max(0,(state?.wallet.player_xp ?? 0) - levelStart));
   const activeStudy = state?.study_sessions.find(item => item.status !== 'finished');
   const conflict = saveStatus === 'conflict';
   const statusLabel = !online ? t('غير متصل', 'Offline') : conflict ? t('راجع المزامنة', 'Check sync') : saveStatus === 'saving' ? t('جارٍ الحفظ…', 'Saving…') : mode === 'demo' ? t('محفوظ محليًا', 'Saved locally') : t('تم الحفظ', 'Saved');
@@ -67,7 +70,7 @@ export default function AppLayout() {
     return () => document.removeEventListener('keydown', close);
   }, [location.pathname, isCity, navigate]);
   return <div className="game-shell modern-game" data-game-panel={menu?'menu':!isCity?'route':catalogOpen?'catalog':designOpen?'design':studioOpen?'studio':'world'}>
-    <a href="#main-content" className="skip-link">{t('انتقل إلى المحتوى', 'Skip to content')}</a>
+    <UnlockToast/><a href="#main-content" className="skip-link">{t('انتقل إلى المحتوى', 'Skip to content')}</a>
     <div className="game-world" aria-hidden={!isCity || menu || undefined} inert={!isCity || menu ? true : undefined}>
       {!isInterior && <City active={isCity&&!menu} />}
     </div>

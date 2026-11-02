@@ -1,0 +1,56 @@
+[
+  {
+    "width": 1440,
+    "route": "city",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 1440,
+    "route": "tasks",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 1440,
+    "route": "shop",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 1440,
+    "route": "timer",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "route": "city",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "route": "tasks",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "route": "shop",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "route": "timer",
+    "language": "ar",
+    "violations": []
+  },
+  {
+    "width": 390,
+    "route": "tasks",
+    "language": "en-dark",
+    "violations": []
+  }
+]

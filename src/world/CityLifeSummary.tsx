@@ -9,6 +9,7 @@ export function CityLifeSummary(){
  const {state}=useGame(),{realm}=useTerritory(),{t,number}=useLocale(),tools=useTouchTools(),ui=useWorldUI();
  if(!state||tools.advanced||tools.sheet||tools.draft||tools.selection||ui.open||tools.designOpen)return null;
  const entities=state.world_systems?.entities.filter(e=>e.realm===realm&&e.status==='active')??[],legacy=realm==='main'?state.placements:state.v6?.yuyi_placements??[];
+ if(entities.some(e=>e.kind==='avatar'&&e.mode!=='aerial'))return null;
  const homes=entities.filter(e=>e.kind==='building'&&['house','villa'].includes(e.archetype)&&e.opened_at).length+legacy.filter(e=>['house','villa','apartment','palace'].includes(e.catalog_id)).length;
  const roads=entities.some(e=>e.kind==='edge'&&e.network==='road')||legacy.some(e=>['road','path'].includes(e.catalog_id));
  const greenery=entities.some(e=>e.kind==='decoration')||legacy.some(e=>['tree','palm','park','bush','flower'].includes(e.catalog_id));

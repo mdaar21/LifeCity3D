@@ -1,0 +1,28 @@
+{
+  "unitIntegration": {
+    "files": 37,
+    "tests": 152,
+    "passed": true
+  },
+  "browser": {
+    "unique": 46,
+    "firstFullPassed": 35,
+    "firstFullFailed": 11,
+    "correctedRegressionPassed": 9,
+    "secondRegressionPassed": 2,
+    "allUniqueVerified": true,
+    "singleGreenFullRun": {
+      "run": 41420774088,
+      "head": "2eab60a221b9d1586536d3e305782bf01255a851",
+      "all46Passed": true,
+      "note": "Subsequent camera-right/left correction has four unit checks and actual native browser proof; final-head CI will rerun."
+    },
+    "screenDirectionsVerifiedFromActualViewMatrix": true
+  },
+  "notes": [
+    "No financial assertions removed. Tests now follow six shop sections and actual room positions/prices.",
+    "Fixed scroll keyboard access and actual actor-mode/autosave revision conflict.",
+    "Preserved explicit garage destination when entering follow mode; distinguish interactive world from read-only preview canvases.",
+    "Scene budgets use Chromium software WebGL, not physical-phone FPS."
+  ]
+}

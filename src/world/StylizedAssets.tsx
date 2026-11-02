@@ -1,3 +1,4 @@
+import {premiumArchitecture,type ArchitectureFamily} from './premium-architecture';
 import {palmGeometry} from './palm-geometry';
 import {BoxGeometry,Color,CylinderGeometry,Float32BufferAttribute,IcosahedronGeometry,MeshStandardMaterial,BufferGeometry,DoubleSide} from 'three';
 import {mergeGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils.js';
@@ -17,35 +18,10 @@ const roofGeometry=(()=>{const g=new BufferGeometry();g.setAttribute('position',
 export function GableRoof({width,depth,height,color,ghost=false}:{width:number;depth:number;height:number;color:string;ghost?:boolean}){return <mesh geometry={roofGeometry} material={material(color,ghost)} scale={[width,height,depth]} castShadow dispose={null}/>;}
 const architectureCache=new Map<string,BufferGeometry>(),architectureMaterial=new MeshStandardMaterial({vertexColors:true,roughness:.82});
 function architectureGeometry(family:string,w:number,d:number,h:number,night:boolean){
- const key=[family,w,d,h,night].join(':');if(architectureCache.has(key))return architectureCache.get(key)!;const parts:BufferGeometry[]=[];
- const colored=(g:BufferGeometry,tone:string)=>{const c=new Color(tone),colors=new Float32Array(g.getAttribute('position').count*3);for(let i=0;i<colors.length;i+=3){colors[i]=c.r;colors[i+1]=c.g;colors[i+2]=c.b;}g.setAttribute('color',new Float32BufferAttribute(colors,3));parts.push(g);};
- const box=(at:[number,number,number],size:[number,number,number],tone:string)=>{const g=cube.toNonIndexed();g.scale(...size);g.translate(...at);colored(g,tone);};
- const tower=family==='tower',apartment=family==='apartment',palace=family==='palace',villa=family==='villa',levels=tower?10:apartment?3:palace?3:villa?2:1;
- box([0,.06,0],[w+.12,.12,d+.12],'#c7c7b5');box([0,h/2+.12,0],[w,h,d],tower?'#bdd1d5':apartment?'#e6c8a4':palace?'#e8dac0':'#f1e4cf');
- for(let i=0;i<levels;i++){
-  const floor=h/levels,y=.3+(i+.5)*(h-.15)/levels;
-  box([0,y+floor*.45,0],[w+.06,.055,d+.06],'#e4decc');
-  for(const side of [-1,1]){
-   for(const x of [-.28,.28]){
-    const ww=w*(tower?.28:.22),hh=floor*.56,zz=side*(d/2+.025);
-    box([w*x,y,zz],[ww+.065,hh+.065,.05],VISUAL.navy);
-    box([w*x,y,zz+side*.032],[ww,hh,.025],night?'#f2ce8e':VISUAL.glass);
-    box([w*x,y,zz+side*.05],[.025,hh,.02],'#d4decd');
-    box([w*x,y-hh/2-.035,zz+side*.035],[ww+.12,.045,.1],VISUAL.ivory);
-    if(!tower)box([w*x,y+hh/2+.06,zz+side*.04],[ww+.15,.045,.13],'#c8b18b');
-   }
-   box([side*(w/2+.018),y,0],[.035,floor*.55,d*.45],night?'#f2ce8e':VISUAL.glass);
-   box([side*(w/2+.04),y,0],[.025,floor*.55,.03],VISUAL.ivory);
-  }
- }
- for(const x of [-1,1])for(const z of [-1,1])box([x*w*.487,h/2+.15,z*d*.487],[.055,h,.055],'#d1c1a6');
- for(let row=0;row<2;row++)for(let k=0;k<Math.ceil(w/.35);k++)box([-w/2+(k+.5)*w/Math.ceil(w/.35),.16+row*.07,d/2+.02],[.008,.06,.01],'#f0e5cf');
-
- box([0,.43,d/2+.025],[Math.min(.35,w*.24),.62,.055],VISUAL.wood);box([0,.86,d/2+.09],[w*.4,.065,.2],tower?VISUAL.navy:VISUAL.ocean);
- if(family==='home'){const roof=roofGeometry.clone();roof.scale(w+.12,.48,d+.12);roof.translate(0,h+.13,0);colored(roof,'#bd795e');}
- else{box([0,h+.16,0],[w+.1,.12,d+.1],tower?VISUAL.navy:VISUAL.ivory);box([0,h+.38,0],[w*.6,.32,d*.55],tower?VISUAL.ocean:VISUAL.cream);if(villa){for(const x of [-1,1])for(const z of [-1,1])box([x*w*.32,h+.42,z*d*.3],[.04,.55,.04],VISUAL.wood);for(let i=0;i<8;i++)box([-w*.36+i*w*.103,h+.7,0],[.035,.045,d*.72],VISUAL.wood);}if(palace)for(const side of [-1,1])box([side*w*.35,h+.45,0],[w*.17,.5,d*.28],VISUAL.earth);}
- // Roofs have no UVs; this material uses only vertex colors. Keep merged attributes uniform.
- for(const p of parts)p.deleteAttribute('uv');const merged=mergeGeometries(parts);for(const p of parts)p.dispose();architectureCache.set(key,merged);return merged;
+ const key=[family,w,d,h,night].join(':');if(architectureCache.has(key))return architectureCache.get(key)!;const familyMap:Record<string,ArchitectureFamily>={home:'house',villa:'villa',apartment:'apartment',palace:'palace',tower:'office'};
+ const count=family==='tower'?10:family==='apartment'||family==='palace'?3:family==='villa'?2:1;
+ const shapes=premiumArchitecture({family:familyMap[family],width:w,depth:d,style:family==='villa'?'coastal':family==='palace'?'desert':'forest',floors:Array.from({length:count},(_,index)=>({index,height:h/count,rooms:[],corridor:{x:w*.4,z:0,width:w*.2,depth:d},stairs:null,elevator:null})),finished:true,roofPaid:true,glassAt:()=>night?'#e5c68e':'#82aeb9'});
+ const list=Object.values(shapes).filter(g=>g.getAttribute('position').count>0);const merged=mergeGeometries(list)!;for(const g of Object.values(shapes))g.dispose();merged.translate(-w/2,0,-d/2);architectureCache.set(key,merged);return merged;
 }
 export function ArchitectureAsset({family,width:w,depth:d,height:h,ghost=false,valid=true,night=false}:{family:'home'|'villa'|'apartment'|'tower'|'palace';width:number;depth:number;height:number;ghost?:boolean;valid?:boolean;night?:boolean}){
  return <mesh geometry={architectureGeometry(family,w,d,h,night)} material={ghost?material(valid?VISUAL.mint:VISUAL.warning,true):architectureMaterial} castShadow receiveShadow dispose={null}/>;

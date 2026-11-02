@@ -4,7 +4,7 @@ import type {Archetype} from './world-types.ts';
  * Paid changes, furniture and land remain separately quoted. */
 export const BUILDING_CATALOG:Record<Archetype,{ar:string;en:string;group:'homes'|'commerce'|'hospitality'|'education'|'health'|'services'|'skyline';width:number;depth:number;price:number;wall:string;roof:string}>= {
  house:{ar:'منزل صغير',en:'Small house',group:'homes',width:8,depth:12,price:800,wall:'#e8dfcb',roof:'#a96347'},
- villa:{ar:'فيلا',en:'Villa',group:'homes',width:10,depth:12,price:2200,wall:'#f0e8d6',roof:'#b97450'},
+ villa:{ar:'فيلا',en:'Villa',group:'homes',width:10,depth:12,price:6800,wall:'#f0e8d6',roof:'#b97450'},
  restaurant:{ar:'مطعم ومقهى',en:'Restaurant & café',group:'commerce',width:10,depth:10,price:2800,wall:'#dfc9a7',roof:'#775b47'},
  mall:{ar:'مجمع تجاري',en:'Shopping mall',group:'commerce',width:14,depth:12,price:14000,wall:'#dbdacf',roof:'#73969b'},
  hotel:{ar:'فندق',en:'Hotel',group:'hospitality',width:10,depth:14,price:18000,wall:'#e0d2ba',roof:'#6b7f83'},
@@ -16,14 +16,14 @@ export const BUILDING_CATALOG:Record<Archetype,{ar:string;en:string;group:'homes
  garage:{ar:'مرآب',en:'Garage',group:'services',width:10,depth:8,price:1200,wall:'#b8c0b9',roof:'#6a7476'},
  museum:{ar:'متحف',en:'Museum',group:'services',width:12,depth:12,price:10000,wall:'#ded1b6',roof:'#927a60'},
  office:{ar:'مكاتب',en:'Offices',group:'services',width:10,depth:12,price:8000,wall:'#c4d6d3',roof:'#526f7c'},
- tower_glass:{ar:'برج الزجاج',en:'Crystal tower',group:'skyline',width:12,depth:12,price:80000,wall:'#96bbc8',roof:'#547d98'},
- tower_round:{ar:'برج المدار',en:'Orbit tower',group:'skyline',width:12,depth:12,price:95000,wall:'#b4d2d4',roof:'#668d9b'},
- tower_twist:{ar:'برج الالتفاف',en:'Helix tower',group:'skyline',width:12,depth:12,price:150000,wall:'#9baec9',roof:'#7c88a6'},
- tower_steps:{ar:'برج المصاطب',en:'Terrace tower',group:'skyline',width:12,depth:12,price:110000,wall:'#c9d5c6',roof:'#79948b'},
- tower_twin:{ar:'البرجان التوأمان',en:'Twin towers',group:'skyline',width:12,depth:12,price:180000,wall:'#9bb8b7',roof:'#557d85'},
- tower_spire:{ar:'برج القمة',en:'Pinnacle tower',group:'skyline',width:12,depth:12,price:140000,wall:'#bbc5ce',roof:'#708b9d'},
- tower_sail:{ar:'برج الشراع',en:'Sail tower',group:'skyline',width:12,depth:12,price:165000,wall:'#c9dedc',roof:'#76a0a7'},
- tower_crown:{ar:'برج التاج',en:'Crown tower',group:'skyline',width:12,depth:12,price:130000,wall:'#d1cbb5',roof:'#8f917d'},
+ tower_glass:{ar:'برج الزجاج',en:'Crystal tower',group:'skyline',width:12,depth:12,price:20000,wall:'#96bbc8',roof:'#547d98'},
+ tower_round:{ar:'برج المدار',en:'Orbit tower',group:'skyline',width:12,depth:12,price:24000,wall:'#b4d2d4',roof:'#668d9b'},
+ tower_twist:{ar:'برج الالتفاف',en:'Helix tower',group:'skyline',width:12,depth:12,price:40000,wall:'#9baec9',roof:'#7c88a6'},
+ tower_steps:{ar:'برج المصاطب',en:'Terrace tower',group:'skyline',width:12,depth:12,price:28000,wall:'#c9d5c6',roof:'#79948b'},
+ tower_twin:{ar:'البرجان التوأمان',en:'Twin towers',group:'skyline',width:12,depth:12,price:48000,wall:'#9bb8b7',roof:'#557d85'},
+ tower_spire:{ar:'برج القمة',en:'Pinnacle tower',group:'skyline',width:12,depth:12,price:35000,wall:'#bbc5ce',roof:'#708b9d'},
+ tower_sail:{ar:'برج الشراع',en:'Sail tower',group:'skyline',width:12,depth:12,price:44000,wall:'#c9dedc',roof:'#76a0a7'},
+ tower_crown:{ar:'برج التاج',en:'Crown tower',group:'skyline',width:12,depth:12,price:32000,wall:'#d1cbb5',roof:'#8f917d'},
 };
 
 export const BUILDING_GROUPS=[

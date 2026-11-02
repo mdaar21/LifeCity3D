@@ -221,3 +221,18 @@ No agents requested; work sequentially.
 Latest clarification: towers start38 floors,4m each (152m); each additional floor
 is incrementally priced, up to250 floors/1000m. Never start a purchase at1000m
 unless the player explicitly chooses that floor count.
+
+## Latest owner — comprehensive twelve-stage upgrade (2026-11-02)
+Implement docs/specs/LifeCity-Comprehensive-Upgrade-2026-11-02.md in the existing
+project, on this continuation branch. Announce EACH completed stage in commentary
+and continue immediately; do not end the task between stages or seek publication
+approval. The prior living-city release is live at main43771049/Pages41388879374.
+New stages: single shop taxonomy (keep lower Roads including all lighting; upper
+Cars including all vehicle capabilities), consistent menus, genuinely distinct
+base building geometry/variants, independent category unlocks through40 with
+server enforcement and grandfathered ownership, measured economic rebalance,
+MM:SS study timer, WASD strafing and RIGHT-button camera drag only, remove the
+fixed walking instruction box, polish/performance, preservation, comprehensive
+verification, then automatic main/Pages publication. New right-drag/strafe rules
+supersede previous walking mouse/turn behavior. Do not grant free assets or cash,
+reset data, rewrite paid costs, merge wallets or claim unverified completion.

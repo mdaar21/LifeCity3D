@@ -15,4 +15,4 @@ export const ASSET_ART:AssetArt[]=[
  ...group('furniture',FURNITURE),...group('car',CARS),...group('node',NODE_CATALOG),...group('decoration',DECORATIONS),...group('material',MATERIALS),
  ...group('tool',[{id:'road',ar:'رسم طريق',en:'Draw road'},{id:'land',ar:'أرض جديدة',en:'Land'},{id:'terrain',ar:'تشكيل الأرض',en:'Terrain'}])
 ];
-export function assetArtPath(key:string){const [family,id]=key.split(':');return family==='legacy'?`catalog/${id}.png`:`catalog/world/${family}-${id}.png`;}
+export function assetArtPath(key:string,style:'forest'|'coastal'|'desert'='forest'){const [family,id]=key.split(':');return family==='legacy'?`catalog/${id}.png`:`catalog/world/${family}-${id}${family==='building'&&!id.startsWith('tower_')&&style!=='forest'?'-'+style:''}.png`;}
