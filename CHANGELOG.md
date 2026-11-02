@@ -1,6 +1,6 @@
 # Changelog
 
-## Scene-first mobile HUD — 2026-11-02
+## Scene-first mobile HUD — published 2026-11-02
 
 - Removed permanent floating purchase/inventory/mission/population controls and
   the central walking/view bar. One edge toggle, compact city selector and wallet
@@ -12,7 +12,7 @@
   full-content scroll, aligned Arabic task/prayer buttons and temporary feedback.
 - Lint/types/build and targeted320/390/844/1440 browser review passed; long full
   suite not repeated. No backend, schema, accounts or financial changes.
-  Evidence: docs/evidence/mobile-hud.
+  PR13/main379371d9 and Pages41427669708 succeeded. Evidence: docs/evidence/mobile-hud.
 
 ## Comprehensive city upgrade — published 2026-11-02
 

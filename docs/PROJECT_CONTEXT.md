@@ -8,7 +8,7 @@
   uses the same player XP as the account. City XP and purchases are untouched.
 - Lint/types/build and targeted real guest browser/touch/reward/reload review pass.
   Full long suite was not rerun. Existing journeys follow new navigation.
-- Publication is explicitly authorized, pending. No server/schema/Auth changes.
+- Published PR13/main379371d9; Pages41427669708 succeeded. No server/schema/Auth changes.
   Evidence: docs/evidence/mobile-hud.
 
 ## Current owner — comprehensive twelve-stage upgrade (2026-11-02)

@@ -1,0 +1,15 @@
+{
+  "published": true,
+  "url": "https://mdaar21.github.io/LifeCity3D/city",
+  "newCitySelector": true,
+  "oldMiddleBar": false,
+  "floatingShopOrInventory": false,
+  "permanentPopulation": false,
+  "overflow": false,
+  "entryScript": [
+    "/LifeCity3D/assets/index-DzjVvFc9.js"
+  ],
+  "guestOnly": true,
+  "hostedAccountWrites": false,
+  "errors": []
+}

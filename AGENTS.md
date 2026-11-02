@@ -257,3 +257,7 @@ advanced tools in More, aligned task/prayer cards, dock-safe panels and joystick
 No backend/schema/Auth/financial changes. Preserve world-command v6 and all data.
 Lint/types/build and targeted real browser/touch/Arabic-key review passed; do not
 claim the complete long test suite ran. See docs/evidence/mobile-hud.
+
+Publication complete: PR13/main379371d9, Pages41427669708 succeeded. This is a
+frontend-only release; world-command v6, existing schema and all financial rules
+remain unchanged. Public guest delivery receipt is in mobile-hud/public-receipt.json.

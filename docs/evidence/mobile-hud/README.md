@@ -37,3 +37,7 @@ The long full suite was not repeated; the owner previously requested avoiding
 further long test repetition. This release changes no backend, schema, Auth,
 ledger, purchases, paid-cost bases, FX or rewards. Production world-command v6
 is retained. Automatic main/Pages publication is explicitly requested.
+
+Published: PR13 merged at379371d96df73273a52171a1f88b04573fa36a41;
+Pages41427669708 succeeded. Public delivery receipt records the real newly served
+UI in an independent guest browser, without cloud-account writes.
