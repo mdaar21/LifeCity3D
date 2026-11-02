@@ -1,0 +1,42 @@
+{
+  "samples": [
+    {
+      "level": "low",
+      "engine": "three.js r181",
+      "quality": "low",
+      "calls": "240",
+      "triangles": "15114",
+      "width": 1000,
+      "height": 750
+    },
+    {
+      "level": "medium",
+      "engine": "three.js r181",
+      "quality": "medium",
+      "calls": "256",
+      "triangles": "21782",
+      "width": 1250,
+      "height": 937
+    },
+    {
+      "level": "high",
+      "engine": "three.js r181",
+      "quality": "high",
+      "calls": "1004",
+      "triangles": "141484",
+      "width": 1500,
+      "height": 1125
+    },
+    {
+      "level": "ultra",
+      "engine": "three.js r181",
+      "quality": "ultra",
+      "calls": "1017",
+      "triangles": "141497",
+      "width": 1500,
+      "height": 1125
+    }
+  ],
+  "errors": [],
+  "scope": "Development-only isolated procedural art fixture; creates no account, assets or balances."
+}

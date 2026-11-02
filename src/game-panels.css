@@ -35,3 +35,4 @@
 .game-window .prayers-page .notice{background:#183547;color:#d6e6e8;border-color:#44616b}.game-window .prayers-page .notice .text-link{color:#a8efd5}.game-window .prayer-daily-progress a{color:inherit;display:inline-flex;align-items:center;min-height:44px;font-weight:700}
 
 .prayer-bonus-explanation{font-size:12px;line-height:1.9;color:var(--muted);margin-block:12px}
+.graphics-auto{border:1px solid var(--border);border-radius:10px;padding:9px 14px;background:var(--surface-soft);color:var(--text);font-weight:700}.graphics-auto[aria-pressed=true]{border-color:#7fcbb5;background:#21443e;color:#e4fff6}.graphics-options button{transition:background .15s,border-color .15s;min-height:88px}.graphics-options button:focus-visible,.graphics-auto:focus-visible{outline:3px solid #98e2cf;outline-offset:3px}.graphics-options button[aria-pressed=true]{border-color:#98e2cf;background:#21443e}

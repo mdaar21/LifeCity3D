@@ -1,0 +1,39 @@
+{
+  "scope": "Frontend graphics/locomotion over published PR15; no backend/schema/Auth/dependency/financial changes",
+  "lint": "passed",
+  "types": "passed",
+  "targetedUnits": {
+    "passed": 21,
+    "files": 6,
+    "covers": [
+      "graphics budgets and presets",
+      "WASD/Shift/Space and jump ballistics",
+      "continuous locomotion and landing",
+      "seamless cached texture",
+      "paid architecture geometry",
+      "construction visual gating"
+    ]
+  },
+  "uniqueBrowserCasesPassed": 4,
+  "browserEvidence": {
+    "quality": "quality-browser.json",
+    "camera": "browser-runs.txt",
+    "art": "art/review.json"
+  },
+  "browserDetails": [
+    "Six shop categories retain one grid and all products",
+    "Native Left Shift and Space, stationary/four-direction/run jump and touch landing",
+    "All four quality levels in aerial/walking cameras, actual visible screenshots, bounded pixels, mobile persistence and unchanged wallet/inventory/paid components",
+    "All ten route returns, repeated More/tools, custom orbit/distance, wheel, native pinch and orientation"
+  ],
+  "timingNotes": "Grouped run passed three cases; the unchanged camera assertions exceeded the old120-second total deadline during build load. Camera then passed alone with a180-second budget. Native-input canvas is960×640, with390×844 touch retained, to bound software WebGL cost. This is not a full-suite or physical-phone FPS claim.",
+  "artScope": "Eight final isolated renders use real building/car/plant/character components at four levels, day/sunset/night/rain and a38-floor152m tower. No account or save writes. Final runtime/shader console errors:0.",
+  "productionBuild": {
+    "command": "npm run build:github",
+    "result": "passed",
+    "base": "/LifeCity3D/",
+    "backend": "existing Supabase configuration",
+    "pwaEntries": 224
+  },
+  "publication": "pending"
+}
