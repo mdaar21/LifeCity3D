@@ -1,5 +1,17 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — unified product cards and improved locomotion
+- Ready-made/staged/other products now share ProductCard and one actual grid per
+  Shop category; no family blocks/side showcase. All SKUs, prices and financial
+  commands retained. Optional construction settings/projects and farming care stay.
+- Left Shift runs; Space jumps once per press in place or while moving any axis.
+  Ballistic transient height, ceiling clearance, articulated run/strafe/back/jump
+  animation, touch jump, time-based turning. Trusted ground position and speed
+  validation remain unchanged. Prior camera-navigation fix preserved.
+-4 unit tests,4 unique focused browser cases across runs,36 rendered category/
+  viewport samples; lint/types/build pass. No backend, Auth/schema/financial change.
+  Evidence: docs/evidence/unified-catalog-jump. Authorized publication pending.
+
 ## Current owner — camera stability and complete menu review
 - Reproduced and fixed map/walk camera ownership during route inactivity: walking
   zoom no longer changes1→16.8103 on menu return. Custom orbit/distance survive

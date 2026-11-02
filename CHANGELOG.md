@@ -1,5 +1,17 @@
 # Changelog
 
+## One product grid and walking/running/jumping — 2026-11-02
+
+- Shared ProductCard and one grid for all Shop categories, including ready-made
+  and staged buildings. No separate family catalog or permanent 3D sidebar.
+  Existing SKUs, prices, gates and receipts retained; detailed preview on request.
+- Left Shift runs; Space jumps in place or with WASD, one jump per press. Added
+  transient gravity/grounded landing/ceiling clearance and touch jump. Articulated
+  back/strafe/run cycles, knee/elbow movement, flight/landing and time-based turns.
+- Focused physics/browser/catalog/paid-farming restoration checks and36 viewport
+  samples passed; lint/types/build passed. No backend/schema/Auth/financial changes.
+  Evidence: docs/evidence/unified-catalog-jump. Full unrelated suite not repeated.
+
 ## Stable walking camera and menu organization — published 2026-11-02
 
 - Fixed orthographic map zoom being written into the walking camera while menus

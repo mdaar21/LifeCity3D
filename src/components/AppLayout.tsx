@@ -23,6 +23,7 @@ import {useWorldUI} from '../world/useWorldUI';
 import CitySharing from './CitySharing';
 import '../scene-hud.css';
 import '../menu-layout.css';
+import '../product-catalog.css';
 
 export default function AppLayout() {
   useStudyHeartbeat();
