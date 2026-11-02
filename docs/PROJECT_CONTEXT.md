@@ -1,5 +1,17 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — camera stability and complete menu review
+- Reproduced and fixed map/walk camera ownership during route inactivity: walking
+  zoom no longer changes1→16.8103 on menu return. Custom orbit/distance survive
+  all10 routes, More/tools, wheel/pinch and rotation in the new browser regression.
+- More groups secondary destinations into city/progress/account. Shop header and
+  short landscape compacted, progress-card implicit columns fixed, weekly/streak
+  details optional, English timer/sidebar and heading wrapping corrected.
+-192 rendered samples across Arabic/English route tops/ends and11 studio tabs;
+  no clipping, document overflow, dock overlap or console errors. Lint/types/build
+  pass. Full unrelated suite not repeated. No server/schema/Auth/financial changes.
+- Evidence: docs/evidence/camera-menu-review. Authorized publication pending.
+
 ## Current owner — mobile HUD and physical WASD
 - Full source: specs/LifeCity-Mobile-HUD-2026-11-02.md. Fifteen UI groups implemented;
   central bar/floating duplicates removed, single edge mode toggle, inventory in

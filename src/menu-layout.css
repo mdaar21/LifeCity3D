@@ -1,0 +1,98 @@
+/* Secondary navigation is a journal, with one destination per labeled row. */
+.modern-game .game-menu-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 20px;margin-block:4px 22px}
+.modern-game .menu-section{min-width:0}
+.modern-game .menu-section-city{grid-column:1/-1}
+.modern-game .menu-section h3{font-size:12px;font-weight:600;color:var(--sub);margin:0 0 10px;padding-inline:3px}
+.modern-game .menu-section-items{display:grid;gap:6px}
+.modern-game .menu-section-city .menu-section-items{grid-template-columns:repeat(2,minmax(0,1fr))}
+.modern-game .game-menu-row{display:flex;align-items:center;gap:12px;text-align:start;width:100%;min-width:0;min-height:64px;padding:11px 12px;border:1px solid #ffffff12;border-radius:13px;background:#ffffff04;color:var(--ink);transition:background .15s,border-color .15s}
+.modern-game .game-menu-row:hover{background:#8be1c410;border-color:#8be1c43a}
+.modern-game .menu-row-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:#8be1c410;color:var(--mint);flex-shrink:0}
+.modern-game .menu-row-copy{min-width:0;flex:1;display:grid;gap:4px}
+.modern-game .menu-row-copy strong{font-size:13px;line-height:1.6;font-weight:600;overflow-wrap:anywhere}
+.modern-game .menu-row-copy small{font-size:10px;line-height:1.7;color:var(--sub);overflow-wrap:anywhere}
+.modern-game .game-menu-row>svg{color:#7f9ca7;flex-shrink:0}
+.modern-game .game-menu-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:16px;font-size:11px}
+.modern-game .game-menu-footer .language-switch{margin:0;min-width:86px}
+.modern-game[data-game-panel=route] .game-world::after{content:'';position:absolute;inset:0;background:#07172245;pointer-events:none}
+.modern-game .game-window-scroll{scroll-behavior:auto}
+.modern-game .game-window-scroll :is(.lc-social,.social-form){min-height:0}
+.modern-game .game-window-scroll .social-heading{gap:12px;align-items:start;flex-wrap:wrap}
+.modern-game .game-window-scroll .social-heading h1{font-size:22px;line-height:1.6}
+.modern-game .game-window-scroll .social-heading p{font-size:12px;line-height:1.9;max-width:60ch}
+.game-shell.modern-game .game-window-scroll .timer-sidebar{display:grid;grid-template-columns:minmax(0,1fr);min-width:0;gap:14px}
+.modern-game .timer-sidebar :is(h2,h3){overflow-wrap:anywhere;line-height:1.7}
+.modern-game .game-window-scroll :is(.social-panel,.panel){border-radius:16px}
+.modern-game .game-window-scroll :is(h2,h3,h4){text-wrap:pretty}
+.modern-game .game-window-scroll :is(p,small,label){overflow-wrap:break-word}
+.modern-game .game-window-scroll .notice{font-size:12px;line-height:1.9;padding:12px 14px;border-radius:12px}
+.modern-game .game-window-scroll .notice-info{background:#233d4a;border-color:#496575;color:#d0e2e8}
+.modern-game .game-window-scroll .notice-success{background:#1c4238;border-color:#426b5c;color:#b6edd6}
+.modern-game .game-window-scroll .notice-warning{background:#403921;border-color:#7f7047;color:#f4dba8}
+.modern-game .game-window-scroll .notice-danger{background:#462c35;border-color:#8e5765;color:#ffd4db}
+.modern-game .shop-header-tools{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.modern-game .shop-city-choice{display:flex;align-items:center;gap:8px;min-width:0;font-size:11px;color:var(--sub)}
+.modern-game .shop-city-choice>svg{flex-shrink:0;color:var(--mint)}
+.modern-game .shop-city-choice select{min-width:0;max-width:170px;min-height:44px;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:11px;padding:7px 10px;font-size:12px}
+.modern-game .shop-header-tools>.button{min-height:44px;flex-shrink:0;padding:9px 13px;font-size:12px}
+.modern-game .shop-hero{padding:4px 0;gap:10px;align-items:center}
+.modern-game .shop-hero>svg{display:none}
+.modern-game .shop-hero h2{font-size:19px;line-height:1.7}
+.modern-game .shop-hero p{font-size:11px;line-height:1.8;margin-top:3px;color:var(--muted)}
+.modern-game .shop-discovery{border-bottom:1px solid var(--border);padding-bottom:12px;font-size:11px;color:var(--sub)}
+.modern-game .shop-discovery summary{cursor:pointer;min-height:36px;display:list-item;align-content:center}
+.modern-game .shop-discovery .next-products{margin-top:10px}
+.modern-game .shop-primary-nav{width:100%;scrollbar-width:thin;scroll-padding-inline:8px}
+.modern-game .shop-primary-nav>button{flex-shrink:0}
+.modern-game .shop-browse-bar{align-items:center;gap:10px}
+.modern-game .shop-level{font-size:10px;white-space:nowrap;gap:5px}
+.modern-game .shop-search{min-width:0;flex:1}
+.modern-game .shop-search input{min-width:0}
+.modern-game .shop-header-tools select:focus-visible,.modern-game .game-menu-row:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+.modern-game .approved-progress{grid-template-columns:repeat(2,minmax(0,1fr))}
+.modern-game .game-window .approved-progress>.panel{grid-template-columns:24px minmax(0,1fr);align-items:start;gap:10px}
+.modern-game .game-window .approved-progress>.panel>*{grid-column:1/-1;min-width:0}
+.modern-game .game-window .approved-progress>.panel>svg{grid-column:1;grid-row:1;width:20px;height:20px}
+.modern-game .game-window .approved-progress>.panel>h3{grid-column:2;grid-row:1;margin:0;align-self:center}
+.modern-game .game-window .approved-progress>.panel>strong{white-space:nowrap;line-height:1.4;font-size:23px;font-variant-numeric:tabular-nums}
+.modern-game .progress-details-toggle{min-height:36px;padding:6px 0;text-align:start;font-size:11px;color:var(--mint);justify-self:start;text-decoration:underline;text-underline-offset:4px}
+.modern-game .dashboard-greeting h1{gap:8px;flex-wrap:wrap;padding-inline-end:6px;line-height:1.8}
+.modern-game .dashboard-greeting .greeting-leaf{margin:0;flex-shrink:0}
+@media(min-width:1000px){.modern-game .approved-progress[data-expanded=true]{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){
+ .modern-game .game-menu-sections{grid-template-columns:minmax(0,1fr);gap:20px}
+ .modern-game .menu-section-city .menu-section-items{grid-template-columns:minmax(0,1fr)}
+ .modern-game .game-menu-row{min-height:60px;padding:10px;gap:10px}
+ .modern-game .menu-row-copy strong{font-size:13px}
+ .modern-game .menu-row-copy small{font-size:10px}
+ .modern-game .game-window-scroll .social-heading h1{font-size:19px}
+ .modern-game .shop-city-choice>span{display:none}
+ .modern-game .shop-city-choice select{max-width:145px;font-size:11px}
+ .modern-game .shop-header-tools>.button{font-size:11px;padding-inline:11px}
+ .modern-game .shop-hero h2{font-size:17px}
+ .modern-game .shop-browse-bar{flex-wrap:nowrap}
+ .modern-game .shop-search{flex-basis:auto}
+ .modern-game .shop-level{margin-inline-start:auto}
+ .modern-game .game-window-scroll .social-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media(orientation:landscape) and (max-height:600px){
+ .modern-game .game-menu-sections{gap:16px}
+ .modern-game .game-menu-row{min-height:56px;padding:8px 10px}
+ .modern-game .menu-row-icon{width:32px;height:32px}
+ .modern-game .game-menu-footer{padding-top:12px}
+ .modern-game .shop-hero{display:none}
+ .modern-game .shop-page{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 12px;align-items:center}
+ .modern-game .shop-page>*{grid-column:1/-1;min-width:0}
+ .modern-game .shop-page>.shop-header-tools{grid-column:2;grid-row:1;gap:8px}
+ .modern-game .shop-page>.game-shop-toolbar{grid-column:1;grid-row:1;min-width:0}
+ .modern-game .shop-city-choice>span,.modern-game .shop-city-choice>svg{display:none}
+ .modern-game .shop-city-choice select{max-width:115px;font-size:10px;min-height:40px;padding:6px}
+ .modern-game .shop-header-tools>.button{min-height:40px;font-size:10px;padding:6px 9px}
+ .modern-game .shop-page .shop-primary-nav{padding:2px;gap:3px;overflow-x:auto;flex-wrap:nowrap}
+ .modern-game .shop-page .shop-primary-nav button{min-height:40px;font-size:10px;padding:6px 9px}
+ .modern-game .shop-page>.shop-browse-bar{display:flex;flex-wrap:nowrap;margin:0}
+ .modern-game .shop-page .shop-search{flex:1;flex-basis:auto}
+ .modern-game .shop-discovery{padding-bottom:4px}
+ .modern-game .shop-discovery summary{min-height:28px}
+}
+@media(prefers-reduced-motion:reduce){.modern-game .game-menu-row{transition:none}}

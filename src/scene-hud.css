@@ -6,7 +6,7 @@
   --dock-height:66px;
   --dock-gap:max(8px,env(safe-area-inset-bottom));
   --dock-clearance:calc(var(--dock-height) + var(--dock-gap));
-  --panel-top:calc(var(--hud-bottom) + 12px);
+  --panel-top:calc(var(--hud-bottom) + 24px);
   --panel-bottom:calc(var(--dock-clearance) + 12px);
   --safe-start:env(safe-area-inset-left);--safe-end:env(safe-area-inset-right);
   height:100dvh;min-height:0;overflow:hidden;
@@ -221,7 +221,7 @@
 }
 /* Short landscape gets a different layout, with a single-row compact dock. */
 @media(orientation:landscape) and (max-height:600px){
- .game-shell.modern-game{--hud-top:max(6px,env(safe-area-inset-top));--hud-height:40px;--dock-height:44px;--dock-gap:max(6px,env(safe-area-inset-bottom));--panel-top:calc(var(--hud-bottom) + 6px);--panel-bottom:calc(var(--dock-clearance) + 6px)}
+ .game-shell.modern-game{--hud-top:max(6px,env(safe-area-inset-top));--hud-height:40px;--dock-height:44px;--dock-gap:max(6px,env(safe-area-inset-bottom));--panel-top:calc(var(--hud-bottom) + 20px);--panel-bottom:calc(var(--dock-clearance) + 6px)}
  .modern-game .game-hud{left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right))}
  .modern-game .game-player{padding:3px 7px 3px 4px;border-radius:12px;gap:7px}
  .modern-game .game-avatar{width:31px;height:31px;font-size:16px}

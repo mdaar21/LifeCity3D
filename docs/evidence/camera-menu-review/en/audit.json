@@ -1,0 +1,645 @@
+{
+  "routes": [
+    {
+      "name": "tasks",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "tasks-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "timer",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "timer-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "shop",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "shop-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "dashboard",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "dashboard-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "prayers",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "prayers-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "stats",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "stats-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "economy",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "economy-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "yuyi",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "yuyi-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "settings",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "settings-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "interior",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "interior-end",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "more",
+      "width": 320,
+      "height": 740,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "tasks",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "tasks-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "timer",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "timer-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "shop",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "shop-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "dashboard",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "dashboard-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "prayers",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "prayers-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "stats",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "stats-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "economy",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "economy-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "yuyi",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "yuyi-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "settings",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "settings-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "interior",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "interior-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "more",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-0",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-0-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-1",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-1-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-2",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-2-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-3",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-3-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-4",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-4-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-5",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-5-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-6",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-6-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-7",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-7-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-8",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-8-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-9",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-9-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-10",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    },
+    {
+      "name": "studio-10-end",
+      "width": 844,
+      "height": 390,
+      "documentOverflow": false,
+      "panelAboveDock": true,
+      "visiblePanels": 1,
+      "clipped": [],
+      "scrollable": true
+    }
+  ],
+  "errors": []
+}

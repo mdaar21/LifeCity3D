@@ -1,0 +1,30 @@
+{
+  "original": {
+    "before": {
+      "zoom": 1,
+      "projection0": 4.437067800751092
+    },
+    "during": {
+      "zoom": 16.810344827586206,
+      "projection0": 0.08620689655172414
+    },
+    "after": {
+      "zoom": 16.810344827586206,
+      "projection0": 74.58863975400543
+    }
+  },
+  "fixed": {
+    "before": {
+      "zoom": 1,
+      "projection0": 4.437067800751092
+    },
+    "during": {
+      "zoom": 1,
+      "projection0": 4.437067800751092
+    },
+    "after": {
+      "zoom": 1,
+      "projection0": 4.437067800751092
+    }
+  }
+}

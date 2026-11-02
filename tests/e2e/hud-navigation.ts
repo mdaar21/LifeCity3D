@@ -9,3 +9,8 @@ export async function openStudio(page:Page){
  await page.getByRole('button',{name:/^(Game menu|قائمة اللعبة)$/}).last().click();
  await page.getByTestId('world-studio').click();
 }
+
+export async function openShopSection(page:Page,name:string){
+ await page.locator('.game-dock a[href="/shop"]').click();
+ await page.getByTestId('shop-sections').getByRole('button',{name,exact:true}).click();
+}
