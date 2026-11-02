@@ -43,3 +43,9 @@ plus English narrow/landscape views. See audit.json, en/audit.json and screensho
 These are software-rendered Chromium viewport checks, not physical iOS testing.
 The unrelated full suite was not repeated; existing journeys were updated for
 the new navigation. No backend, Auth, database, reward or paid-asset changes.
+
+Published PR14/maine8b72761; Pages41432629490 succeeded. The real public guest
+browser retained its custom distance and zoom1 after Missions/Focus/Shop, showed
+the new3-group More menu, and accepted wheel zoom-out afterward. Wallets remained
+unchanged and console errors were empty; no hosted-account writes. See
+public-receipt.json, publication.json and the published screenshots.

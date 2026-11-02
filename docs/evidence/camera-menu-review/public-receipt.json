@@ -1,0 +1,20 @@
+{
+  "published": true,
+  "base": "https://mdaar21.github.io/LifeCity3D",
+  "guestOnly": true,
+  "hostedAccountWrites": false,
+  "stableCustomDistanceAndZoom": true,
+  "zoom": 1,
+  "returns": [
+    "tasks",
+    "timer",
+    "shop"
+  ],
+  "moreGroups": 3,
+  "wheelZoomOutAfterMenus": true,
+  "bothWalletsUnchanged": true,
+  "errors": [],
+  "entryScripts": [
+    "/LifeCity3D/assets/index-DzB6STz9.js"
+  ]
+}

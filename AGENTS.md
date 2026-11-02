@@ -274,4 +274,7 @@ grid, timer sidebar, headings, notice palette and panel spacing corrected.192
 rendered samples (Arabic128/English64) show no clipping/dock overlap/overflow or
 console errors. Lint/types/build pass. Full unrelated suite not repeated. No backend,
 Auth/schema/financial changes. Automatic publication authorization persists.
-Evidence: docs/evidence/camera-menu-review. Publication pending.
+Evidence: docs/evidence/camera-menu-review. Published PR14/maine8b72761,
+Pages41432629490 succeeded. Real public guest browser verified custom distance and
+zoom after Missions/Focus/Shop, More's3 groups and working wheel zoom-out, with
+unchanged wallets and no console errors. No cloud-account writes for this release.

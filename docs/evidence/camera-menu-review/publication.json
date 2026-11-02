@@ -1,0 +1,17 @@
+{
+  "pullRequest": "https://github.com/mdaar21/LifeCity3D/pull/14",
+  "publishedSource": "e8b72761d308f2f213a3f0ac638601bb7c0a1eaa",
+  "pagesRun": 41432629490,
+  "pagesConclusion": "success",
+  "backendChanges": false,
+  "databaseChanges": false,
+  "authChanges": false,
+  "financialChanges": false,
+  "lint": "passed",
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "focusedCameraBrowserRegression": "passed, including custom orbit/distance and all10 routes",
+  "renderedSamples": {"arabic":128,"english":64},
+  "renderedIssues": {"documentOverflow":0,"dockOverlap":0,"clipping":0,"consoleErrors":0},
+  "fullUnrelatedSuiteRepeated": false
+}

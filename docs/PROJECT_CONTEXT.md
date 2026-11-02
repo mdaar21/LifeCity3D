@@ -10,7 +10,9 @@
 -192 rendered samples across Arabic/English route tops/ends and11 studio tabs;
   no clipping, document overflow, dock overlap or console errors. Lint/types/build
   pass. Full unrelated suite not repeated. No server/schema/Auth/financial changes.
-- Evidence: docs/evidence/camera-menu-review. Authorized publication pending.
+- Published PR14/maine8b72761, Pages41432629490 succeeded. Public guest camera
+  returns, custom distance, zoom-out and grouped More verified, no cloud writes.
+  Evidence: docs/evidence/camera-menu-review/public-receipt.json.
 
 ## Current owner — mobile HUD and physical WASD
 - Full source: specs/LifeCity-Mobile-HUD-2026-11-02.md. Fifteen UI groups implemented;

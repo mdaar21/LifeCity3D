@@ -1,6 +1,6 @@
 # Changelog
 
-## Stable walking camera and menu organization — 2026-11-02
+## Stable walking camera and menu organization — published 2026-11-02
 
 - Fixed orthographic map zoom being written into the walking camera while menus
   were open. Returning preserves the selected perspective, orbit and distance;
@@ -13,6 +13,8 @@
 - Focused browser regression,192 Arabic/English rendered samples, lint/types and
   production build passed. No backend/schema/financial changes. Evidence:
   docs/evidence/camera-menu-review. Full unrelated suite was not repeated.
+  PR14/maine8b72761 and Pages41432629490 succeeded; public custom-distance returns,
+  wheel zoom-out and grouped More verified without cloud-account writes.
 
 ## Scene-first mobile HUD — published 2026-11-02
 
