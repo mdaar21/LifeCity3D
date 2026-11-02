@@ -1,3 +1,4 @@
+import {UnlockToast} from './ProductProgress';
 import {closeCityPanels} from '../world/city-tools';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
@@ -51,7 +52,7 @@ export default function AppLayout() {
   const level = levelFromXp(state?.wallet.player_xp ?? 0);
   const levelStart = (level - 1) ** 2 * 100;
   const levelGoal = level ** 2 * 100 - levelStart;
-  const xp = (state?.wallet.player_xp ?? 0) - levelStart;
+  const xp = Math.min(levelGoal,Math.max(0,(state?.wallet.player_xp ?? 0) - levelStart));
   const activeStudy = state?.study_sessions.find(item => item.status !== 'finished');
   const conflict = saveStatus === 'conflict';
   const statusLabel = !online ? t('غير متصل', 'Offline') : conflict ? t('راجع المزامنة', 'Check sync') : saveStatus === 'saving' ? t('جارٍ الحفظ…', 'Saving…') : mode === 'demo' ? t('محفوظ محليًا', 'Saved locally') : t('تم الحفظ', 'Saved');
@@ -68,7 +69,7 @@ export default function AppLayout() {
     return () => document.removeEventListener('keydown', close);
   }, [location.pathname, isCity, navigate]);
   return <div className="game-shell modern-game" data-game-panel={menu?'menu':!isCity?'route':catalogOpen?'catalog':designOpen?'design':studioOpen?'studio':'world'}>
-    <a href="#main-content" className="skip-link">{t('انتقل إلى المحتوى', 'Skip to content')}</a>
+    <UnlockToast/><a href="#main-content" className="skip-link">{t('انتقل إلى المحتوى', 'Skip to content')}</a>
     <div className="game-world" aria-hidden={!isCity || menu || undefined} inert={!isCity || menu ? true : undefined}>
       {!isInterior && <City active={isCity&&!menu} />}
     </div>

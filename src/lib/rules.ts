@@ -1,6 +1,6 @@
 import type {CatalogItem,Placement,Prayer} from './types';
 export const PRAYER_REWARDS:Record<Prayer,number>={fajr:30,dhuhr:20,asr:20,maghrib:20,isha:20};
-export const levelFromXp=(xp:number)=>Math.floor(Math.sqrt(Math.max(0,xp)/100))+1;
+export {levelFromXp} from '../../supabase/functions/_shared/product-unlocks';
 export function localDay(now:Date,timezone:string){return new Intl.DateTimeFormat('en-CA',{timeZone:timezone,year:'numeric',month:'2-digit',day:'2-digit'}).format(now);}
 export function footprint(item:CatalogItem,rotation:number){return rotation===90||rotation===270?[item.footprint_z,item.footprint_x]:[item.footprint_x,item.footprint_z];}
 export function canPlace(item:CatalogItem,x:number,z:number,rotation:number,size:number,placements:Placement[],catalog:CatalogItem[],exclude?:string){

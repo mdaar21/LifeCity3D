@@ -60,7 +60,7 @@ describe('authoritative construction savings',()=>{
 
 describe('revocable city-only links',()=>{
  it('allows anonymous safe projection while denying tables/private identity and old, expired or disabled links',async()=>{
-  const owner=await createPlayer(database,'private-city-owner',2000);const own=await state(database,owner.id);
+  const owner=await createPlayer(database,'private-city-owner',2000,1600);const own=await state(database,owner.id);
   await runCommand(database,owner.id,'task_complete',{task_id:own.tasks.find(task=>task.key==='clean_room')!.id});await runCommand(database,owner.id,'prayer_set',{prayer:'fajr',status:'completed'});
   await runCommand(database,owner.id,'task_create',{title:'NEVER_PUBLIC_NOTE_7281',reward:1,category:'private',daily_limit:1});
   const bought=await runCommand(database,owner.id,'purchase',{catalog_id:'house'});const placed=await runCommand(database,owner.id,'place',{inventory_id:bought.result.inventory_id,x:1,z:1,rotation:90});

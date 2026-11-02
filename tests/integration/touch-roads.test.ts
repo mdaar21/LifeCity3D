@@ -8,7 +8,7 @@ import type {WorldQuote} from '../../supabase/functions/_shared/world-types';
 import {viewWorldContext} from '../../src/lib/world-state';
 import {graph,shortestPath} from '../../supabase/functions/_shared/world-networks';
 let db:LocalDatabase;beforeAll(async()=>{db=await createLocalDatabase({path:'memory://'});});afterAll(async()=>{await db.close();});
-async function setup(balance=500){const p=await createPlayer(db,'touch-road-fixture',balance);await runWorldCommand(db,p.id,'world_apply',{operation:'initialize',request:{realm:'main'},expected_revision:0});return p.id;}
+async function setup(balance=500){const p=await createPlayer(db,'touch-road-fixture',balance,152100);await runWorldCommand(db,p.id,'world_apply',{operation:'initialize',request:{realm:'main'},expected_revision:0});return p.id;}
 async function quote(user:string,points:{x:number;z:number}[]){const s=await state(db,user);return (await runWorldCommand(db,user,'world_quote',{operation:'road_draw',request:{realm:'main',points,price:0},expected_revision:s.world_systems!.revision})).result.quote as WorldQuote;}
 async function commit(user:string,q:WorldQuote,key=randomUUID()){return runWorldCommand(db,user,'world_commit',{quote_id:q.id,expected_revision:q.revision,confirmed:true},key);}
 const horizontal=[{x:2,z:12},{x:5,z:12},{x:10,z:12}],vertical=[{x:5,z:9},{x:5,z:14}];

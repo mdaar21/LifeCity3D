@@ -1,3 +1,4 @@
+import {AccessLabel,useProductGate} from '../components/ProductAccess';
 import {useMemo} from 'react';
 import {AssetThumbnail} from '../components/AssetThumbnail';
 import {useLocale} from '../lib/locale';
@@ -13,12 +14,12 @@ export function buildingOffer(id:Archetype,floors:number,style:'forest'|'coastal
  return {...item,floors,pricing,total:pricing.total,foundation:money(amount(pricing.components.survey)+amount(pricing.components.foundation))};
 }
 export function BuildingCatalog({floors,realm,query,busy,onSelect,style='forest'}:{floors:number;style?:'forest'|'coastal'|'desert';realm:Realm;query:string;busy:boolean;onSelect:(id:Archetype)=>void}){
- const {t}=useLocale(),{format,fx}=useMoney();
+ const {t}=useLocale(),{format,fx}=useMoney(),gate=useProductGate();
  const offers=useMemo(()=>Object.keys(BUILDING_CATALOG).map(id=>({id:id as Archetype,...buildingOffer(id as Archetype,floors,style)})),[floors,style]);
- return <div className="building-collection">{BUILDING_GROUPS.map(group=>{
+ return <div className="building-collection">{gate.modal}{BUILDING_GROUPS.map(group=>{
   const items=offers.filter(item=>item.group===group.id&&(!query||(item.ar+' '+item.en).toLowerCase().includes(query.toLowerCase())));
-  return items.length?<section className="building-family" key={group.id}><h3>{t(group.ar,group.en)}</h3><div className="touch-cards building-cards">{items.map(item=>{const price=constructionQuotedTotals(item.pricing,realm==='yuyi'?fx?.mad_rate:undefined);return <button className="building-card" data-testid={'touch-build-'+item.id} key={item.id} disabled={busy} onClick={()=>onSelect(item.id)}>
-   <AssetThumbnail assetKey={'building:'+item.id}/><strong>{t(item.ar,item.en)}</strong>
+  return items.length?<section className="building-family" key={group.id}><h3>{t(group.ar,group.en)}</h3><div className="touch-cards building-cards">{items.map(item=>{const price=constructionQuotedTotals(item.pricing,realm==='yuyi'?fx?.mad_rate:undefined);return <button className="building-card" data-testid={'touch-build-'+item.id} key={item.id} disabled={busy} data-locked={gate.locked("building:"+item.id)} onClick={()=>gate.guard("building:"+item.id,t(item.ar,item.en),"building:"+item.id,()=>onSelect(item.id))}>
+   <AssetThumbnail assetKey={'building:'+item.id}/><AccessLabel product={"building:"+item.id} level={gate.level}/><strong>{t(item.ar,item.en)}</strong>
    <span className="building-total" data-testid={'building-total-'+item.id}>{format(price.total,realm,realm==='yuyi'&&!!fx)}</span><small>{t('إجمالي البناء الأساسي','Complete basic construction')}</small>
    <span className="building-spec" dir="ltr">{item.width} × {item.depth} m · {item.floors} {t('طابق','floor(s)')}</span><span className="building-deposit">{t('الأساس أولًا: ','Foundation first: ')}{format(price.foundation,realm,realm==='yuyi'&&!!fx)}</span>
   </button>;})}</div></section>:null;

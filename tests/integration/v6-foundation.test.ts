@@ -42,7 +42,7 @@ describe('V6 isolated MAD ledger and adjacent-city foundation',()=>{
   await expect(runCommand(db,u.id,'yuyi_place',{inventory_id:buy.result.inventory_id,x:0,z:0,rotation:0})).rejects.toThrow(/NOT_OWNED/);
  });
  it('refunds verified MAIN purchase history, excludes recovered furniture and keeps original land',async()=>{
-  const u=await createPlayer(db,'main',2000);
+  const u=await createPlayer(db,'main',2000,1600);
   const house=await runCommand(db,u.id,'purchase',{catalog_id:'house'});const p=await runCommand(db,u.id,'place',{inventory_id:house.result.inventory_id,x:0,z:0,rotation:0});
   const chair=await runCommand(db,u.id,'purchase',{catalog_id:'desk'});await runCommand(db,u.id,'interior_place',{inventory_id:chair.result.inventory_id,house_id:p.result.placement_id,x:0,z:0,rotation:0});
   const before=await snapshot(u.id);const quote=await runCommand(db,u.id,'demolition_quote',{placement_id:p.result.placement_id,expected_version:1});
@@ -60,7 +60,7 @@ describe('V6 isolated MAD ledger and adjacent-city foundation',()=>{
  });
 });
 it('includes explicitly destroyed furniture basis and rolls back an unconfirmed or changed quote atomically',async()=>{
- const u=await createPlayer(db,'destroy-furniture',2000);const house=await runCommand(db,u.id,'purchase',{catalog_id:'house'});const p=await runCommand(db,u.id,'place',{inventory_id:house.result.inventory_id,x:0,z:0,rotation:0});const desk=await runCommand(db,u.id,'purchase',{catalog_id:'desk'});await runCommand(db,u.id,'interior_place',{house_id:p.result.placement_id,inventory_id:desk.result.inventory_id,x:0,z:0,rotation:0});
+ const u=await createPlayer(db,'destroy-furniture',2000,1600);const house=await runCommand(db,u.id,'purchase',{catalog_id:'house'});const p=await runCommand(db,u.id,'place',{inventory_id:house.result.inventory_id,x:0,z:0,rotation:0});const desk=await runCommand(db,u.id,'purchase',{catalog_id:'desk'});await runCommand(db,u.id,'interior_place',{house_id:p.result.placement_id,inventory_id:desk.result.inventory_id,x:0,z:0,rotation:0});
  const original=await state(db,u.id);const payload={placement_id:p.result.placement_id,expected_version:1,destroy_furniture_ids:[desk.result.inventory_id]};const q=await runCommand(db,u.id,'demolition_quote',payload);const paid=800+original.catalog.find(x=>x.id==='desk')!.price;
  expect(Number(q.result.paid_basis)).toBe(paid);expect(q.result.kept_inventory).toEqual([]);
  await expect(runCommand(db,u.id,'demolish',{...payload,quoted_basis:'0.0000',confirmed:true})).rejects.toThrow(/QUOTE_EXPIRED/);expect((await state(db,u.id)).wallet).toEqual(original.wallet);expect((await state(db,u.id)).placements).toEqual(original.placements);

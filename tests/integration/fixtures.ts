@@ -5,13 +5,14 @@ import { hashPassword } from '../../server/security.js';
 
 export const TEST_PASSWORD = 'Local-test-passphrase-482!';
 
-export async function createPlayer(database: LocalDatabase, label = 'player', balance = 0) {
+export async function createPlayer(database: LocalDatabase, label = 'player', balance = 0, cityXp = 0) {
   const id = randomUUID();
   const email = `${label}-${id}@example.test`;
   const derived = await hashPassword(TEST_PASSWORD);
   await database.owner(async (tx) => {
     await tx.query('INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES($1,$2,$3::jsonb)', [id, email, JSON.stringify({display_name: label})]);
     await tx.query('INSERT INTO local_auth.credentials(user_id,password_hash,password_salt) VALUES($1,$2,$3)', [id, derived.hash, derived.salt]);
+    if(cityXp){await tx.query('update public.wallets set city_xp=$2 where user_id=$1',[id,cityXp]);await tx.query('update public.yuyi_worlds set city_xp=$2 where user_id=$1',[id,cityXp]);}
     if (balance) await tx.query('SELECT public.apply_coins($1,$2,$3,$4)', [id, balance, 'test_fixture', `fixture:${randomUUID()}`]);
   });
   return {id, email, password: TEST_PASSWORD};

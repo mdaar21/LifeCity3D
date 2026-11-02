@@ -67,7 +67,7 @@ function perform(record:DemoRecord,action:string,p:Record<string,unknown>,key:st
   s.projects??=[];
   if(s.projects.some(v=>v.status==='saving'))throw new ApiError('PROJECT_ACTIVE');
   const item=CATALOG.find(v=>v.id===p.catalog_id&&['house','villa','apartment','skyscraper','palace'].includes(v.model));if(!item)throw new ApiError('NOT_FOUND');
-  if(item.unlock_level>levelFromXp(s.wallet.city_xp))throw new ApiError('LEVEL_LOCKED');
+  if(item.unlock_level>levelFromXp(Math.max(s.wallet.city_xp,s.wallet.player_xp)))throw new ApiError('LEVEL_LOCKED');
   const project={id:uuid(),catalog_id:item.id,target_price:item.price,funded:0,status:'saving' as const,inventory_id:null,created_at:iso};s.projects.unshift(project);result={project_id:project.id};
  }else if(action==='project_contribute'||action==='project_cancel'){
   const project=(s.projects??[]).find(v=>v.id===p.project_id&&v.status==='saving');if(!project)throw new ApiError('PROJECT_NOT_ACTIVE');
@@ -75,7 +75,7 @@ function perform(record:DemoRecord,action:string,p:Record<string,unknown>,key:st
   else{const amount=integer(p.amount,1,1000000);if(amount>project.target_price-project.funded)throw new ApiError('PROJECT_AMOUNT');if(amount>s.wallet.balance)throw new ApiError('INSUFFICIENT_FUNDS');coins(-amount,'project:contribution:'+project.catalog_id);project.funded+=amount;if(project.funded===project.target_price){const id=uuid();s.inventory.push({id,catalog_id:project.catalog_id,user_id:s.profile.id,created_at:iso});project.inventory_id=id;project.status='completed';result={inventory_id:id};}}
  }else if(action.startsWith('share_')||action==='visit_react')throw new ApiError('DEMO_SHARING_REQUIRES_ACCOUNTS');
  else if(action==='purchase'){
-  const item=CATALOG.find(v=>v.id===p.catalog_id);if(!item)throw new ApiError('NOT_FOUND');if(item.unlock_level>levelFromXp(s.wallet.city_xp))throw new ApiError('LEVEL_LOCKED');if(s.wallet.balance<item.price)throw new ApiError('INSUFFICIENT_FUNDS');coins(-item.price,'purchase:'+item.id);const id=uuid();s.inventory.push({id,catalog_id:item.id,user_id:s.profile.id,created_at:iso});result={inventory_id:id};
+  const item=CATALOG.find(v=>v.id===p.catalog_id);if(!item)throw new ApiError('NOT_FOUND');if(item.unlock_level>levelFromXp(Math.max(s.wallet.city_xp,s.wallet.player_xp)))throw new ApiError('LEVEL_LOCKED');if(s.wallet.balance<item.price)throw new ApiError('INSUFFICIENT_FUNDS');coins(-item.price,'purchase:'+item.id);const id=uuid();s.inventory.push({id,catalog_id:item.id,user_id:s.profile.id,created_at:iso});result={inventory_id:id};
  }else if(action==='place')place(false);else if(action==='interior_place')place(true);
  else if(['move','remove','interior_move','interior_remove'].includes(action)){
   const interior=action.startsWith('interior'),list=interior?s.furniture:s.placements,v=list.find(v=>v.id===p.placement_id);if(!v)throw new ApiError('NOT_FOUND');if(v.version!==p.expected_version)throw new ApiError('VERSION_CONFLICT');

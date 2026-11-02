@@ -13,7 +13,7 @@ async function world(id:string):Promise<WorldSnapshot>{return (await state(db,id
 async function apply(id:string,operation:string,request:Record<string,unknown>,key=randomUUID()){return runWorldCommand(db,id,'world_apply',{operation,request,expected_revision:(await world(id)).revision},key);}
 async function quote(id:string,operation:string,request:Record<string,unknown>){return (await runWorldCommand(db,id,'world_quote',{operation,request,expected_revision:(await world(id)).revision})).result.quote as WorldQuote;}
 async function commit(id:string,q:WorldQuote,key=randomUUID()){return runWorldCommand(db,id,'world_commit',{quote_id:q.id,confirmed:true,expected_revision:q.revision},key);}
-async function player(balance=5000){const p=await createPlayer(db,'world',balance);await apply(p.id,'initialize',{});return p;}
+async function player(balance=5000){const p=await createPlayer(db,'world',balance,152100);await apply(p.id,'initialize',{});return p;}
 async function blueprint(id:string,realm='main'){const parcel=(await world(id)).entities.find(e=>e.kind==='parcel'&&e.realm===realm)!;return (await apply(id,'blueprint_generate',{realm,parcel_id:parcel.id,name:'Measured home',archetype:'house',width:8,depth:12,floors:2,budget:'5000',accessible:false})).result.blueprint_id as string;}
 describe('trusted world settlement on the existing wallets/RLS',()=>{
  it('preserves original land expansion beside financed titles without overlaps and prevents old store objects bypassing advanced collision',async()=>{
