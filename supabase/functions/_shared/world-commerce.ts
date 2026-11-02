@@ -3,13 +3,13 @@ import {amount,contains,fail,integer,money,numeric,overlap,owned,priced,text} fr
 import {worldHour} from './world-environment.ts';
 import {entrance,graph,metrics,passiveRemaining,shortestPath,travel} from './world-networks.ts';
 export const FURNITURE=[
- {id:'bed',ar:'سرير',en:'Bed',width:1.5,depth:2,price:3500},
- {id:'chair',ar:'كرسي',en:'Chair',width:.5,depth:.5,price:800},
- {id:'table',ar:'طاولة',en:'Table',width:1.2,depth:.8,price:1800},
- {id:'sofa',ar:'أريكة',en:'Sofa',width:2,depth:.8,price:4500},
- {id:'counter',ar:'منضدة',en:'Counter',width:1.5,depth:.7,price:2500},
- {id:'plant',ar:'نبات داخلي',en:'Indoor plant',width:.5,depth:.5,price:600},
- {id:'shelf',ar:'رف',en:'Shelf',width:1,depth:.4,price:1200}
+ {id:'bed',ar:'سرير',en:'Bed',width:1.5,depth:2,price:45000},
+ {id:'chair',ar:'كرسي',en:'Chair',width:.5,depth:.5,price:12000},
+ {id:'table',ar:'طاولة',en:'Table',width:1.2,depth:.8,price:30000},
+ {id:'sofa',ar:'أريكة',en:'Sofa',width:2,depth:.8,price:55000},
+ {id:'counter',ar:'منضدة',en:'Counter',width:1.5,depth:.7,price:40000},
+ {id:'plant',ar:'نبات داخلي',en:'Indoor plant',width:.5,depth:.5,price:4000},
+ {id:'shelf',ar:'رف',en:'Shelf',width:1,depth:.4,price:25000}
 ] as const;
 function furnished(c:WorldContext,p:Record<string,unknown>,f:Furniture,realm:Realm){
  const b=owned(c,p.building_id,'building',realm),floor=integer(p,'floor',-4,249),plan=b.floors.find(v=>v.index===floor),room=plan?.rooms.find(v=>v.id===p.room_id);

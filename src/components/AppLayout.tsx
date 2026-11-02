@@ -1,3 +1,4 @@
+import {XP_LEVEL_UNIT} from '../../supabase/functions/_shared/product-unlocks';
 import {UnlockToast} from './ProductProgress';
 import {closeCityPanels} from '../world/city-tools';
 import { Suspense, useEffect, useRef, useState } from 'react';
@@ -50,8 +51,8 @@ export default function AppLayout() {
   ];
   const current = [...primary, ...extra].find(item => location.pathname.startsWith(item.path));
   const level = levelFromXp(state?.wallet.player_xp ?? 0);
-  const levelStart = (level - 1) ** 2 * 100;
-  const levelGoal = level ** 2 * 100 - levelStart;
+  const levelStart = (level - 1) ** 2 * XP_LEVEL_UNIT;
+  const levelGoal = level ** 2 * XP_LEVEL_UNIT - levelStart;
   const xp = Math.min(levelGoal,Math.max(0,(state?.wallet.player_xp ?? 0) - levelStart));
   const activeStudy = state?.study_sessions.find(item => item.status !== 'finished');
   const conflict = saveStatus === 'conflict';

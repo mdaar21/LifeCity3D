@@ -1,3 +1,4 @@
+import {XP_LEVEL_UNIT} from '../../supabase/functions/_shared/product-unlocks';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Building2, Check, Coins, Focus, Leaf, ListChecks, MoonStar, Plus, Sparkles, Sprout, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useGame } from '../lib/game';
@@ -17,9 +18,9 @@ export default function Dashboard() {
   const { wallet, profile } = state;
   const playerLevel = levelFromXp(wallet.player_xp);
   const cityLevel = levelFromXp(wallet.city_xp);
-  const levelStart = (playerLevel - 1) ** 2 * 100;
-  const levelGoal = playerLevel ** 2 * 100 - levelStart;
-  const levelProgress = wallet.player_xp - levelStart;
+  const levelStart = (playerLevel - 1) ** 2 * XP_LEVEL_UNIT;
+  const levelGoal = playerLevel ** 2 * XP_LEVEL_UNIT - levelStart;
+  const levelProgress = Math.max(0,Math.min(levelGoal,wallet.player_xp-levelStart));
   const tasks = state.tasks.filter(task => !task.archived);
   const completed = state.completions.filter(item => item.day === state.local_day);
   const monday = new Date(`${state.local_day}T12:00:00Z`);

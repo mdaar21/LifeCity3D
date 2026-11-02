@@ -1,6 +1,7 @@
 import {requiredLevel} from '../../supabase/functions/_shared/product-unlocks';
 import type {CatalogItem,Category} from './types';
-const item=(id:string,ar:string,en:string,price:number,category:Category,x=1,z=1,level=1,furniture=false):CatalogItem=>({id,name_ar:ar,name_en:en,description_ar:`${ar} بتصميم أصلي لمدينتك.`,description_en:`An original ${en.toLowerCase()} for your city.`,price,category,footprint_x:x,footprint_z:z,unlock_level:Math.max(level,requiredLevel("legacy:"+id)),model:id,is_furniture:furniture});
+const FUTURE_PRICES:Record<string,number>={villa:7500,car:2400,desk:180,sofa:550,bed:450,rug:100,lamp:90,plant:40,shelf:250};
+const item=(id:string,ar:string,en:string,price:number,category:Category,x=1,z=1,level=1,furniture=false):CatalogItem=>({id,name_ar:ar,name_en:en,description_ar:`${ar} بتصميم أصلي لمدينتك.`,description_en:`An original ${en.toLowerCase()} for your city.`,price:FUTURE_PRICES[id]??price,category,footprint_x:x,footprint_z:z,unlock_level:Math.max(level,requiredLevel("legacy:"+id)),model:id,is_furniture:furniture});
 export const CATALOG:CatalogItem[]=[
 item('road','طريق','Road',10,'roads'),item('tree','شجرة','Tree',20,'nature'),item('bush','شجيرة','Bush',15,'nature'),
 item('house','بيت صغير','Small house',800,'homes',2,2),item('villa','فيلا','Villa',2500,'homes',3,3,2),

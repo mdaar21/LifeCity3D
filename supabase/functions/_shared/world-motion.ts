@@ -3,7 +3,7 @@ import type {Appearance,Avatar,Building,Car,FloorPlan,Point,Pose,Realm,WorldCont
 import {buildingRect,color,contains,distance,fail,heightAt,integer,numeric,owned,pointOnOwnedLand,priced,terrainAt,text,WORLD_LIMIT,pointSegmentDistance} from './world-math.ts';
 import {entrance,graph} from './world-networks.ts';
 export const DEFAULT_APPEARANCE:Appearance={skin:'#c99b75',hair:'short',hair_color:'#382e29',top:'#4c866a',bottom:'#293d47',shoes:'#3e352e',outfit:'casual',accessory:'none'};
-export const CARS=[{id:'cedar',ar:'سِدر',en:'Cedar',price:15000,width:1.4,length:2.7,speed:8},{id:'dune',ar:'كثبان',en:'Dune',price:22000,width:1.6,length:3.1,speed:10},{id:'atlas',ar:'أطلس',en:'Atlas',price:35000,width:1.8,length:3.7,speed:7}] as const;
+export const CARS=[{id:'cedar',ar:'سِدر',en:'Cedar',price:320000,width:1.4,length:2.7,speed:8},{id:'dune',ar:'كثبان',en:'Dune',price:520000,width:1.6,length:3.1,speed:10},{id:'atlas',ar:'أطلس',en:'Atlas',price:850000,width:1.8,length:3.7,speed:7}] as const;
 export function toLocal(b:Building,p:Point):Point{return b.rotation===90?{x:p.z-b.z,z:b.depth-(p.x-b.x)}:{x:p.x-b.x,z:p.z-b.z};}
 export function toWorld(b:Building,p:Point):Point{return b.rotation===90?{x:b.x+b.depth-p.z,z:b.z+p.x}:{x:b.x+p.x,z:b.z+p.z};}
 export function interiorFree(plan:FloorPlan,width:number,depth:number,p:Point,radius=.24):boolean{

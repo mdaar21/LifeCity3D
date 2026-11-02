@@ -18,7 +18,8 @@ export const PRODUCT_UNLOCKS:Record<string,number>={
  'node:power_plant':5,'node:solar':8,'node:battery':5,'node:transformer':3,'node:power_junction':1,'node:water_tank':3,'node:water_pump':3,'node:water_junction':1,'node:treatment':5,'node:sewage_junction':1,
  'decoration:park':5,'decoration:tree':1,'decoration:bench':2,'decoration:lamp':3,'decoration:fountain':7,'decoration:pet_habitat':10,
 };
-export const levelFromXp=(xp:number)=>Math.min(40,Math.floor(Math.sqrt(Math.max(0,Number.isFinite(xp)?xp:0)/100))+1);
+export const XP_LEVEL_UNIT=25;
+export const levelFromXp=(xp:number)=>Math.min(40,Math.floor(Math.sqrt(Math.max(0,Number.isFinite(xp)?xp:0)/XP_LEVEL_UNIT))+1);
 export const requiredLevel=(key:string)=>PRODUCT_UNLOCKS[key]??1;
 export function purchaseKey(c:WorldContext,op:string,p:Record<string,unknown>):string|null{
  if(op==='building_start'){const b=c.world.entities.find(e=>e.id===p.blueprint_id&&e.kind==='blueprint');return b?.kind==='blueprint'?'building:'+b.archetype:null;}
