@@ -93,8 +93,8 @@ describe('authoritative RPCs under the real authenticated SQL role', () => {
       await runCommand(database, player.id, 'prayer_set', {prayer, status: 'completed'});
       await runCommand(database, player.id, 'prayer_set', {prayer, status: 'completed'});
     }
-    // Five distinct prayers retain 110 base units and unlock the separate +30 milestone.
-    expect((await state(database, player.id)).wallet.balance).toBe(140);
+    // Five distinct prayers retain 110 base units, the separate +30 milestone and the new +50 daily-prayer bonus.
+    expect((await state(database, player.id)).wallet.balance).toBe(190);
     await expect(runCommand(database, player.id, 'prayer_set', {prayer: 'fajr', status: 'missed'})).rejects.toThrow(/confirm_missed/i);
     const key = randomUUID();
     await runCommand(database, player.id, 'prayer_set', {prayer: 'fajr', status: 'missed', confirmed_missed: true}, key);

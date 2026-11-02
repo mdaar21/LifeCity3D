@@ -1,5 +1,18 @@
 # Changelog
 
+## Living city and intuitive tools — 2026-11-02
+
+- Smooth PC/mouse movement and articulated characters; completed paid homes add
+  residents who walk out and return. Connected-road details and worksite activity.
+- All purchases in Shop, owned-only inventory, world picking/terrain brushes in
+  place of X/Y/Z fields, simpler camera controls and non-overlapping mission tabs.
+- Prayer section beside daily challenges; server-authoritative MAIN50 daily5/5
+  bonus with replay-safe corrections, no historical backfill or MAD changes.
+- Eight distinct towers:38–250 floors,4m/floor,152–1000m, frozen incremental prices,
+  actual floor navigation and batched full-height geometry. Existing costs retained.
+-114 original asset pictures. Two additive migrations; no dependency/data reset.
+  See docs/evidence/living-city and subsequent publication evidence.
+
 ## Unified menus and logical construction catalog — published 2026-11-01
 
 - One panel grammar/navigation, separate tool categories and safe menu transitions;

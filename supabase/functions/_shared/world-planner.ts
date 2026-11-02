@@ -1,6 +1,6 @@
 import type {Archetype,Blueprint,Building,ConstructionPricing,FloorPlan,Point,Rect,Room,RoomUse} from './world-types.ts';
 import {amount,contains,converted,distance,fail,money,overlap,priced} from './world-math.ts';
-import {BUILDING_CATALOG} from './building-catalog.ts';
+import {BUILDING_CATALOG,isTower,maxFloors,minFloors,floorStep} from './building-catalog.ts';
 export const CONTRACTORS=[
  {id:'moss',name_ar:'بُناة الغابة',name_en:'Moss Builders',price:100,effort:100,quality:2},
  {id:'dune',name_ar:'عمران الكثبان',name_en:'Dune Works',price:90,effort:125,quality:1},
@@ -18,13 +18,13 @@ export const MATERIALS=[
  {id:'glass',ar:'زجاج',en:'Glass',cents:140,color:'#a5d5df',roughness:.1,metalness:.1},
  {id:'roof',ar:'قرميد',en:'Roof tiles',cents:80,color:'#6e7861',roughness:.9,metalness:0}
 ] as const;
-export const ARCHETYPES:Archetype[]=['house','villa','restaurant','mall','hotel','resort','school','university','clinic','hospital','garage','museum','office'];
+export const ARCHETYPES=Object.keys(BUILDING_CATALOG) as Archetype[];
 export const ROOM_USES:RoomUse[]=['bedroom','living','kitchen','bathroom','shop','dining','cinema','guest','reception','classroom','waiting','treatment','parking','exhibit','office'];
 export interface RoomRequest {name:string;use:RoomUse;area:number}
 export interface PlanRequest {width:number;depth:number;floors:number;rooms:RoomRequest[];accessible:boolean;archetype:Archetype;budget:string}
 export function wallLength(f:FloorPlan,width:number,depth:number):number{return (width+depth)*2+f.rooms.reduce((sum,r)=>sum+r.depth+(r.z>0?r.width:0),0);}
 export function defaultRooms(kind:Archetype):RoomRequest[]{
- const uses:RoomUse[]=kind==='mall'?['shop','shop','dining','bathroom']:['hotel','resort'].includes(kind)?['guest','guest','reception','bathroom']:['school','university'].includes(kind)?['classroom','classroom','office','bathroom']:['clinic','hospital'].includes(kind)?['waiting','treatment','office','bathroom']:kind==='restaurant'?['dining','kitchen','bathroom']:kind==='garage'?['parking','parking']:kind==='museum'?['exhibit','exhibit']:kind==='office'?['office','office','reception']:['living','bedroom','kitchen','bathroom'];
+ const uses:RoomUse[]=kind==='mall'?['shop','shop','dining','bathroom']:['hotel','resort'].includes(kind)?['guest','guest','reception','bathroom']:['school','university'].includes(kind)?['classroom','classroom','office','bathroom']:['clinic','hospital'].includes(kind)?['waiting','treatment','office','bathroom']:kind==='restaurant'?['dining','kitchen','bathroom']:kind==='garage'?['parking','parking']:kind==='museum'?['exhibit','exhibit']:(kind==='office'||isTower(kind))?['office','office','reception']:['living','bedroom','kitchen','bathroom'];
  return uses.map((use,i)=>({name:use+' '+(i+1),use,area:use==='bathroom'?4:8}));
 }
 export function validatePlan(plan:FloorPlan,width:number,depth:number){
@@ -38,7 +38,7 @@ export function validatePlan(plan:FloorPlan,width:number,depth:number){
  return true;
 }
 export function generatePlans(p:PlanRequest,parcel:Rect):FloorPlan[]{
- if(!ARCHETYPES.includes(p.archetype)||p.width<4||p.depth<5||p.floors<1||p.floors>12||!Number.isInteger(p.floors))return fail('INVALID_DIMENSIONS');
+ if(!ARCHETYPES.includes(p.archetype)||p.width<4||p.depth<5||p.floors<minFloors(p.archetype)||p.floors>maxFloors(p.archetype)||!Number.isInteger(p.floors))return fail('INVALID_DIMENSIONS');
  if(p.width+2>parcel.width||p.depth+2>parcel.depth)return fail('PLAN_EXCEEDS_PARCEL');
  if(p.rooms.length<2||p.rooms.length>10||p.rooms.some(r=>r===null||typeof r!=='object'||typeof r.name!=='string'||typeof r.use!=='string'||!ROOM_USES.includes(r.use)||r.name.length<1||r.name.length>60||!Number.isFinite(r.area)||r.area<2||r.area>100))return fail('INVALID_ROOM_REQUEST');
  const corridorWidth=Math.min(2,p.width/3),wing=(p.width-corridorWidth)/2;
@@ -55,12 +55,12 @@ export function generatePlans(p:PlanRequest,parcel:Rect):FloorPlan[]{
    let z=offset;
    for(const request of requests){const d=available*request.area/total,x=side===0?0:wing+corridorWidth;rooms.push({id:crypto.randomUUID(),x,z,width:wing,depth:d,name:request.name,use:request.use,door:{x:side===0?wing:wing+corridorWidth,z:z+d/2},material:'plaster',capacity:request.use==='parking'?1:Math.max(1,Math.floor(wing*d/(request.use==='guest'?8:4)))});z+=d;}
   }
-  const floor:FloorPlan={index,height:3,rooms,corridor,stairs,elevator,entry:{x:p.width/2,z:0},area:p.width*p.depth};validatePlan(floor,p.width,p.depth);plans.push(floor);
+  const floor:FloorPlan={index,height:floorStep(p.archetype),rooms,corridor,stairs,elevator,entry:{x:p.width/2,z:0},area:p.width*p.depth};validatePlan(floor,p.width,p.depth);plans.push(floor);
  }
  const estimated=estimateConstruction(p.width,p.depth,p.floors,'moss',p.accessible,plans,p.archetype);if(amount(p.budget)<amount(estimated))return fail('PLAN_EXCEEDS_BUDGET');return plans;
 }
 export function estimateConstruction(width:number,depth:number,floors:number,contractor:string,accessible=false,plans?:FloorPlan[],archetype?:Archetype):string{
- if(archetype){const firm=CONTRACTORS.find(f=>f.id===contractor);if(!firm)return fail('CONTRACTOR_NOT_FOUND');const item=BUILDING_CATALOG[archetype],areaFactor=Math.max(1,width*depth/(item.width*item.depth)),lifts=plans?plans.filter(f=>f.elevator).length:accessible&&floors>1?floors:0;const value=amount(priced(areaFactor*(100+(floors-1)*72)/100,item.price*100,firm.price))+amount(priced(lifts,20000,firm.price));return money(value/100n*100n);}
+ if(archetype){const firm=CONTRACTORS.find(f=>f.id===contractor);if(!firm)return fail('CONTRACTOR_NOT_FOUND');const item=BUILDING_CATALOG[archetype],areaFactor=Math.max(1,width*depth/(item.width*item.depth)),lifts=plans?plans.filter(f=>f.elevator).length:accessible&&floors>1?floors:0;const value=amount(priced(areaFactor*(isTower(archetype)?100+Math.max(0,floors-38)*2:100+(floors-1)*72)/100,item.price*100,firm.price))+amount(priced(lifts,20000,firm.price));return money(value/100n*100n);}
  const firm=CONTRACTORS.find(f=>f.id===contractor);if(!firm)return fail('CONTRACTOR_NOT_FOUND');const a=width*depth;let value=amount(priced(a,75,firm.price))+amount(priced(1,500,firm.price))+amount(priced(a*floors,50,firm.price))+amount(priced(a,60,firm.price))+amount(priced(a*floors,40,firm.price));
  for(let i=0;i<floors;i++)value+=amount(priced(a,150,firm.price*(100+i*15),10000))+amount(priced(plans?.[i]?wallLength(plans[i],width,depth):(width+depth)*2,50,firm.price))+amount(priced(1,1000,firm.price))+((plans?!!plans[i]?.elevator:accessible&&floors>1)?amount(priced(1,2000,firm.price)):0n);
  const n=value<0n?-value:value;return `${n/10000n}.${(n%10000n).toString().padStart(4,'0')}`;
@@ -70,12 +70,12 @@ export function estimateConstruction(width:number,depth:number,floors:number,con
 export function constructionPricing(width:number,depth:number,plans:FloorPlan[],contractor:string,archetype:Archetype):ConstructionPricing{
  const firm=CONTRACTORS.find(f=>f.id===contractor);if(!firm)return fail('CONTRACTOR_NOT_FOUND');
  const area=width*depth,raw:Record<string,string>={survey:priced(1,500,firm.price),foundation:priced(area,75,firm.price)};
- for(const floor of plans){const i=floor.index,prefix='floor:'+i;raw[prefix+':frame']=priced(area,50,firm.price);raw[prefix+':slab']=priced(area,150,firm.price*(100+Math.max(0,i)*15),10000);raw[prefix+':walls']=priced((width+depth)*2,50,firm.price);for(const room of floor.rooms)raw[prefix+':room:'+room.id+':walls']=priced(room.depth+(room.z>0?room.width:0),50,firm.price);if(floor.stairs)raw[prefix+':stairs']=priced(1,1000,firm.price);if(floor.elevator)raw[prefix+':elevator']=priced(1,2000,firm.price);raw[prefix+':finish']=priced(area,40,firm.price);}
+ for(const floor of plans){const i=floor.index,prefix='floor:'+i;raw[prefix+':frame']=priced(area,50,firm.price);raw[prefix+':slab']=priced(area,150,firm.price*(100+(isTower(archetype)?0:Math.max(0,i)*15)),10000);raw[prefix+':walls']=priced((width+depth)*2,50,firm.price);for(const room of floor.rooms)raw[prefix+':room:'+room.id+':walls']=priced(room.depth+(room.z>0?room.width:0),50,firm.price);if(floor.stairs)raw[prefix+':stairs']=priced(1,1000,firm.price);if(floor.elevator)raw[prefix+':elevator']=priced(1,2000,firm.price);raw[prefix+':finish']=priced(area,40,firm.price);}
  raw.roof=priced(area,60,firm.price);
  const total=estimateConstruction(width,depth,plans.length,contractor,false,plans,archetype),rawTotal=Object.values(raw).reduce((n,v)=>n+amount(v),0n),cents=amount(total)/100n;
  const components:Record<string,string>={};let assigned=0n;for(const [id,value]of Object.entries(raw)){const share=cents*amount(value)/rawTotal;assigned+=share;components[id]=money(share*100n);}
  components.foundation=money(amount(components.foundation)+(cents-assigned)*100n);
- return {version:2,total:money(cents*100n),raw_total:money(rawTotal),components};
+ return {version:2,total:money(cents*100n),raw_total:money(rawTotal),components,...(isTower(archetype)?{tower_floor_price:money(amount(estimateConstruction(width,depth,plans.length+1,contractor,plans.some(f=>!!f.elevator),undefined,archetype))-amount(estimateConstruction(width,depth,plans.length,contractor,plans.some(f=>!!f.elevator),undefined,archetype)))}:{})};
 }
 export function constructionChangeCost(b:Building,legacy:string):string{return b.pricing?money((amount(legacy)*amount(b.pricing.total)/amount(b.pricing.raw_total)/100n)*100n):legacy;}
 export function constructionPartCost(b:Building,part:string,legacy:string):string{return b.pricing?.components[part]??constructionChangeCost(b,legacy);}

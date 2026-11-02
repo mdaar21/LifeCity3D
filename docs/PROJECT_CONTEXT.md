@@ -1,5 +1,21 @@
 # LifeCity3D — focused implementation context
 
+## Active owner request — living city (2026-11-02)
+- Authorized implementation and publication after all checks: seamless roads and
+  move ghosts, PC/mouse control and modern avatar, prayers plus daily5/5 bonus,
+  store-only purchase catalog and purchased inventory,1000m diverse paid towers,
+  all coordinate fields replaced by world tools, scrolling/menu overlap fixes.
+- Approved additions: home-owned walking residents/traffic, smart roads, visible
+  construction, tower details/floor navigation, smooth camera, district identity,
+  real-life-task-led city goals, time/weather/quality and contextual tutorials.
+- Preserve all historical saves/purchases/costs and finance/privacy invariants.
+- Towers start38 floors/152m, add4m/floor up to250/1000m. Incremental extra-floor
+  pricing freezes in the new contract; legacy building rates/cost bases stay intact.
+- Implementation complete; local141 tests/31 files passed and six new rendered
+  journeys verified. Full release CI/hosted migration/public upgrade checks are
+  pending. See docs/evidence/living-city. Nothing in this group published yet.
+
+
 ## Latest publication — unified menus, complete prices and distinct architecture
 - Owner approved publication after verification. PR10/mainfc3a913 is live;
   Pages41338417932/deployment7477529984 passed132 tests/28 files, all33 browser

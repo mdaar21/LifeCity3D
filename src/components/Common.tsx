@@ -1,3 +1,4 @@
+import {worldRuntime,useWorldUI} from '../world/useWorldUI';
 import {GamePanelHeader} from './GamePanelHeader';
 import { useEffect, useId, useRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { AlertCircle, CheckCircle2, Info, LoaderCircle, Sprout } from 'lucide-react';
@@ -29,6 +30,7 @@ export function Modal({ open, onClose, title, children }: { open: boolean; onClo
   closeRef.current = onClose;
   useEffect(() => {
     if (!open) return;
+    worldRuntime.modalCount++;useWorldUI.getState().set({input:{forward:0,turn:0,run:false}});
     const previous = document.activeElement as HTMLElement | null;
     const overflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -44,7 +46,7 @@ export function Modal({ open, onClose, title, children }: { open: boolean; onClo
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     };
     document.addEventListener('keydown', key);
-    return () => { document.body.style.overflow = overflow; document.removeEventListener('keydown', key); previous?.focus(); };
+    return () => { worldRuntime.modalCount=Math.max(0,worldRuntime.modalCount-1);document.body.style.overflow = overflow; document.removeEventListener('keydown', key); previous?.focus(); };
   }, [open]);
   if (!open) return null;
   return <div className="modal-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}><div className="modal game-panel" role="dialog" aria-modal="true" aria-labelledby={id} ref={ref} tabIndex={-1}><GamePanelHeader className="modal-header" title={title} titleId={id} eyebrow="" onClose={onClose} closeLabel={t('إغلاق','Close')}/>{children}</div></div>;

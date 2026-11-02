@@ -1,3 +1,4 @@
+import {floorElevation} from '../../supabase/functions/_shared/world-math';
 import {BUILDING_CATALOG} from '../../supabase/functions/_shared/building-catalog';
 import {useEffect,useMemo} from 'react';
 import {BoxGeometry,BufferGeometry,Matrix4} from 'three';
@@ -31,7 +32,7 @@ export function ArchitecturalDetails({building:b,night,powered}:{building:Buildi
   const windowFrame:Surface=hasWindows&&windows.id!=='glass'?{color:windows.color,roughness:windows.roughness,metalness:windows.metalness}:frame;
   const add=(position:[number,number,number],size:[number,number,number],surface:Surface,turn=0)=>{
    const key=JSON.stringify(surface);let g=groups.get(key);if(!g){g={surface,parts:[]};groups.set(key,g);}
-   const geometry=new BoxGeometry(...size);geometry.applyMatrix4(new Matrix4().makeRotationY(turn));geometry.translate(position[0],position[1]+floor*3,position[2]);g.parts.push(geometry);
+   const geometry=new BoxGeometry(...size);geometry.applyMatrix4(new Matrix4().makeRotationY(turn));geometry.translate(position[0],position[1]+floorElevation(b,floor),position[2]);g.parts.push(geometry);
   };
   const wood={color:accent,roughness:.8,metalness:0},metal={color:VISUAL.steel,roughness:.4,metalness:.45};
   // Four readable elevations: inset glazing, mullions, sills and floor bands.

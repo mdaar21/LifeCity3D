@@ -12,7 +12,7 @@ export function useVisualHour(context:WorldContext,active:boolean){
 export function WorldAtmosphere({hour,weather,profile,center=[0,0,0],span=32}:{hour:number;weather:string;profile:ReturnType<typeof graphicsProfile>;center?:[number,number,number];span?:number}){
  const scene=useThree(s=>s.scene),environment=visualEnvironment(hour,weather),sun=useRef<DirectionalLight>(null),sunTarget=useRef<Object3D>(null),hemisphere=useRef<HemisphereLight>(null),fog=useRef<Fog>(null),direction=useMemo(()=>new Vector3(),[]);
  useEffect(()=>{const original=scene.background;scene.background=new Color(environment.sky);return()=>{scene.background=original;};},[scene,environment.sky]);
- useFrame(({camera})=>{if(!fog.current)return;camera.getWorldDirection(direction);const distance=Math.min(140,Math.max(12,Math.abs(camera.position.y/Math.min(-.1,direction.y))));fog.current.near=weather==='fog'?distance*.8:distance+35;fog.current.far=fog.current.near+Math.min(environment.fog,profile.far);});
+ useFrame(({camera})=>{if(!fog.current)return;camera.getWorldDirection(direction);const distance=Math.min(4000,Math.max(12,Math.abs(camera.position.y/Math.min(-.1,direction.y))));fog.current.near=weather==='fog'?distance*.8:distance+35;fog.current.far=fog.current.near+Math.min(environment.fog,profile.far);});
  useEffect(()=>{if(sun.current&&sunTarget.current)sun.current.target=sunTarget.current;},[]);
  const angle=(hour-6)/12*Math.PI,extent=Math.max(14,Math.min(75,span*1.1));
  useEffect(()=>{sun.current?.shadow.camera.updateProjectionMatrix();},[extent]);

@@ -23,3 +23,15 @@
 .game-window .shop-page{gap:12px}.game-window .shop-page :is(.shop-territory,.game-shop-toolbar,.shop-browse-bar,.shop-category-tabs){margin-block:0}.game-window .showcase-close{display:none}.mission-index{position:sticky;top:0;z-index:3;background:var(--bg);border-bottom:1px solid var(--border)}.mission-group{scroll-margin-block-start:70px}
 @media(max-width:600px){.game-window .shop-showcase:not(.is-expanded){display:none}.game-window .shop-showcase-label .showcase-close{display:grid;place-items:center;min-width:44px;min-height:44px;border:1px solid #7293a2;border-radius:8px;background:#183446;color:#fff8ec}.game-window .shop-category-tabs{padding-bottom:8px}}
 .game-shell .game-window .game-window-scroll .prayers-page .prayer-day-banner :is(p,b,small){color:#d0e0df}
+
+/* Journal sections occupy their own normal flow; never cover scrolled cards. */
+.game-window .mission-index{position:relative;top:auto;z-index:auto;background:#102131;display:flex;gap:8px;flex-wrap:wrap;padding:12px 0;margin:0 0 16px}
+.game-window .mission-index a{min-height:44px;display:flex;align-items:center;padding:10px 16px;border:1px solid #ffffff26;border-radius:12px;background:#1b3445;color:#e8f1ef;text-decoration:none}
+.game-window .approved-progress{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.prayers-embedded .section-title{margin-top:12px}.prayers-embedded .prayer-history{margin-block:16px}
+.game-window-scroll{scroll-padding-block:20px;overscroll-behavior:contain}.game-window-scroll .mission-group{scroll-margin-block-start:16px}
+@media(pointer:fine){.world-joystick{display:none}}
+
+.game-window .prayers-page .notice{background:#183547;color:#d6e6e8;border-color:#44616b}.game-window .prayers-page .notice .text-link{color:#a8efd5}.game-window .prayer-daily-progress a{color:inherit;display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+
+.prayer-bonus-explanation{font-size:12px;line-height:1.9;color:var(--muted);margin-block:12px}

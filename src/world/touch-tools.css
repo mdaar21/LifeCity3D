@@ -16,3 +16,5 @@
 @media(max-width:480px){.finish-studio{bottom:calc(76px + env(safe-area-inset-bottom));padding:10px;max-height:43dvh}.finish-options{gap:6px}.finish-options label{gap:3px}.finish-materials button{min-height:56px}.finish-materials{gap:5px}}
 
 .touch-floor-controls{display:flex;align-items:center;gap:5px;overflow-x:auto;margin-top:8px;border-top:1px solid #bbc9c4;padding-top:8px}.touch-floor-controls>span{font-size:12px;white-space:nowrap;margin-inline-end:auto}.touch-floor-controls>button{flex-shrink:0}.touch-floor-controls>[aria-pressed=true]{background:#244e59;color:#fff8ec}
+
+.visual-location-control{display:grid;gap:8px;margin-block:12px}.visual-location-control small{font-size:12px;color:#bfd1d4}.terrain-brush-controls{display:flex;flex-wrap:wrap;gap:12px}.terrain-brush-controls label{display:grid;gap:5px;min-width:110px;flex:1}.terrain-brush-controls select,.terrain-brush-controls input{min-height:44px;min-width:0;accent-color:#8be1c4}

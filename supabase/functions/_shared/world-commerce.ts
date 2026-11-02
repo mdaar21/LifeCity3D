@@ -12,7 +12,7 @@ export const FURNITURE=[
  {id:'shelf',ar:'رف',en:'Shelf',width:1,depth:.4,price:1200}
 ] as const;
 function furnished(c:WorldContext,p:Record<string,unknown>,f:Furniture,realm:Realm){
- const b=owned(c,p.building_id,'building',realm),floor=integer(p,'floor',-4,11),plan=b.floors.find(v=>v.index===floor),room=plan?.rooms.find(v=>v.id===p.room_id);
+ const b=owned(c,p.building_id,'building',realm),floor=integer(p,'floor',-4,249),plan=b.floors.find(v=>v.index===floor),room=plan?.rooms.find(v=>v.id===p.room_id);
  if(!room||!b.stages.some(s=>s.type==='floor'&&s.floor===floor&&s.paid))return fail('FLOOR_NOT_BUILT');
  const rotation=integer(p,'rotation',0,270);if(rotation%90)return fail('INVALID_ROTATION');const w=rotation%180?f.depth:f.width,d=rotation%180?f.width:f.depth;
  const pos={x:numeric(p,'x',0,b.width),z:numeric(p,'z',0,b.depth),width:w,depth:d};

@@ -1,3 +1,4 @@
+import {pickLegacyLocation} from './world-input';
 import { expect, test, type Page } from '@playwright/test';
 import type { GameSnapshot } from '../../src/lib/types.js';
 import { E2E_OTHER, E2E_OWNER, E2E_PASSWORD } from './accounts.js';
@@ -40,8 +41,7 @@ test('two browser contexts recover the exact purchased home, inventory, balance 
     await pageA.goto('/city');
     await pageA.getByTestId('city-tool-inventory').click();
     await pageA.getByTestId('inventory-house').click();
-    await pageA.getByTestId('placement-x').fill('4');
-    await pageA.getByTestId('placement-z').fill('6');
+    await pickLegacyLocation(pageA,4,6,'main');
     await pageA.getByRole('button', {name: 'Rotate 90 degrees', exact: true}).click();
     await pageA.getByTestId('commit-placement').click();
     await expect.poll(async () => (await snapshot(pageA)).placements.length).toBe(1);

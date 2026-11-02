@@ -1,3 +1,4 @@
+import {dragDraft} from './world-input';
 import {test,expect,type Page} from '@playwright/test';
 import type {CommandResponse,GameSnapshot,CityVisit} from '../../src/lib/types';
 import {E2E_PASSWORD} from './accounts';
@@ -14,12 +15,12 @@ async function command(page:Page,action:string,payload:Record<string,unknown>={}
 
 test('first-city guide leads to manual planting; saved building project funds, completes and refunds honestly',async({page,browser})=>{
  test.setTimeout(90_000);
- const email=await signup(page,'Project builder');
- await expect(page.getByTestId('first-city-guide')).toContainText('Choose a first task');expect((await state(page)).placements).toHaveLength(0);
- await page.getByTestId('first-city-guide').getByRole('link',{name:'Choose a first task'}).click();await page.locator('.task-card').filter({hasText:/Clean (your )?room/}).getByRole('button',{name:'Mark complete',exact:true}).click();await expect(page.getByTestId('wallet-balance')).toHaveText('40');
+ await page.addInitScript(()=>localStorage.removeItem('lifecity-tools-mode'));const email=await signup(page,'Project builder');
+ await expect(page.getByTestId('city-life-tasks')).toBeVisible();expect((await state(page)).placements).toHaveLength(0);
+ await page.getByTestId('city-life-tasks').click();await page.locator('.task-card').filter({hasText:/Clean (your )?room/}).getByRole('button',{name:'Mark complete',exact:true}).click();await expect(page.getByTestId('wallet-balance')).toHaveText('40');
  await page.goto('/dashboard');await page.getByTestId('first-city-guide').getByRole('link',{name:'Choose your tree'}).click();await expect(page).toHaveURL(/item=tree/);await expect(page.locator('.shop-showcase h2')).toHaveText('Tree');await page.getByTestId('purchase-tree').click();await expect(page.getByTestId('wallet-balance')).toHaveText('20');
- await page.goto('/dashboard');await page.getByTestId('first-city-guide').getByRole('link',{name:'Plant it in your city'}).click();await expect(page.getByTestId('placement-controls')).toBeVisible();expect((await state(page)).placements).toHaveLength(0);
- await page.getByTestId('placement-x').fill('1');await page.getByTestId('placement-z').fill('2');await page.getByTestId('commit-placement').click();await expect(page.getByTestId('first-city-guide')).toContainText('Your first story is planted.');
+ await page.goto('/dashboard');await page.getByTestId('first-city-guide').getByRole('link',{name:'Plant it in your city'}).click();await expect(page.getByTestId('touch-edit')).toBeVisible();expect((await state(page)).placements).toHaveLength(0);
+ await dragDraft(page,1,2);await page.getByTestId('touch-review').click();await page.getByTestId('touch-confirm').click();await expect(page.getByRole('dialog')).toHaveCount(0);await page.goto('/dashboard');await expect(page.getByTestId('first-city-guide')).toContainText('Your first story is planted.');
  for(const reward of [500,300]){const created=await command(page,'task_create',{title:`Test activity ${reward}`,reward,category:'custom',daily_limit:1,frequency:'once'});const task=created.state!.tasks.find(v=>v.title===`Test activity ${reward}`)!;await command(page,'task_complete',{task_id:task.id});}
  await page.goto('/dashboard');await expect(page.getByTestId('wallet-balance')).toHaveText('820');await page.getByTestId('project-start').click();await page.getByTestId('project-contribution').fill('40');await page.getByRole('button',{name:'Reserve for project',exact:true}).click();await expect(page.getByTestId('project-funded')).toHaveText('40');await page.reload();await expect(page.getByTestId('project-funded')).toHaveText('40');
  await page.getByTestId('project-contribution').fill('760');await page.getByRole('button',{name:'Reserve for project',exact:true}).click();await expect(page.getByTestId('project-completed')).toBeVisible();

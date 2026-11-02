@@ -308,6 +308,70 @@
       "path": "catalog/world/building-office.png"
     },
     {
+      "id": "tower_glass",
+      "ar": "برج الزجاج",
+      "en": "Crystal tower",
+      "key": "building:tower_glass",
+      "family": "building",
+      "path": "catalog/world/building-tower_glass.png"
+    },
+    {
+      "id": "tower_round",
+      "ar": "برج المدار",
+      "en": "Orbit tower",
+      "key": "building:tower_round",
+      "family": "building",
+      "path": "catalog/world/building-tower_round.png"
+    },
+    {
+      "id": "tower_twist",
+      "ar": "برج الالتفاف",
+      "en": "Helix tower",
+      "key": "building:tower_twist",
+      "family": "building",
+      "path": "catalog/world/building-tower_twist.png"
+    },
+    {
+      "id": "tower_steps",
+      "ar": "برج المصاطب",
+      "en": "Terrace tower",
+      "key": "building:tower_steps",
+      "family": "building",
+      "path": "catalog/world/building-tower_steps.png"
+    },
+    {
+      "id": "tower_twin",
+      "ar": "البرجان التوأمان",
+      "en": "Twin towers",
+      "key": "building:tower_twin",
+      "family": "building",
+      "path": "catalog/world/building-tower_twin.png"
+    },
+    {
+      "id": "tower_spire",
+      "ar": "برج القمة",
+      "en": "Pinnacle tower",
+      "key": "building:tower_spire",
+      "family": "building",
+      "path": "catalog/world/building-tower_spire.png"
+    },
+    {
+      "id": "tower_sail",
+      "ar": "برج الشراع",
+      "en": "Sail tower",
+      "key": "building:tower_sail",
+      "family": "building",
+      "path": "catalog/world/building-tower_sail.png"
+    },
+    {
+      "id": "tower_crown",
+      "ar": "برج التاج",
+      "en": "Crown tower",
+      "key": "building:tower_crown",
+      "family": "building",
+      "path": "catalog/world/building-tower_crown.png"
+    },
+    {
       "id": "date_palm",
       "ar": "نخيل تمر",
       "en": "Date palm",

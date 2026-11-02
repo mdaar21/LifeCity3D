@@ -207,3 +207,17 @@ independent cloud restoration and logout passed. Only the exact diagnostic accou
 was deleted; all related game/session counts0 and prior paid-cost fingerprint
 unchanged. No schema reset or seeded real-city objects. Earlier no-publication
 notes are historical for this released increment. See unified-publication evidence.
+
+
+## Current owner — intuitive living city upgrade (authorized publication)
+Owner explicitly approved all recorded road/PC/avatar/prayer/shop/inventory/
+1000m skyline/coordinate-free/menu fixes and the eight proposed living-city
+improvements. A completed purchased home adds one resident who walks and returns.
+This supersedes the historical resident cancellation. No free purchased assets,
+wallet merges, resets or legacy-cost changes. Keep original16 tasks, self-reported
+prayers, MAIN-only rewards, MAD isolation, dated FX and exact50% paid-cost refunds.
+Continue existing branch and publish on GitHub Pages AFTER all verification.
+No agents requested; work sequentially.
+Latest clarification: towers start38 floors,4m each (152m); each additional floor
+is incrementally priced, up to250 floors/1000m. Never start a purchase at1000m
+unless the player explicitly chooses that floor count.

@@ -24,8 +24,8 @@ function Subject({asset:a}:{asset:AssetArt}){
  if(a.family==='legacy')return <ProceduralModel item={CATALOG.find(v=>v.id===a.id)!} variation={a.key}/>;
  if(a.family==='vegetation')return <BotanicalPlant species={a.id}/>;
  if(a.family==='building'){
-  const profile=BUILDING_CATALOG[a.id as Archetype];const floors=generatePlans({width:profile.width,depth:profile.depth,floors:1,archetype:a.id as Archetype,rooms:defaultRooms(a.id as Archetype),accessible:false,budget:'100000'},{x:0,z:0,width:16,depth:16});
-  const b:Building={...base,kind:'building',name:a.en,width:profile.width,depth:profile.depth,x:0,z:0,y:0,rotation:0,style:'forest',archetype:a.id as Archetype,parcel_id:'art',floors,stages:[{id:'floor:0',type:'floor',floor:0,paid:true,component_ids:[]},...(['frame','roof','finish','opening'] as const).map(type=>({id:type,type,floor:null,paid:true,component_ids:[]}))],contractor:'moss',materials:[],tenants:[],staff:0,capacity:0,hotel:null,last_income_at:now,opened_at:now};
+  const profile=BUILDING_CATALOG[a.id as Archetype];const floors=generatePlans({width:profile.width,depth:profile.depth,floors:a.id.startsWith('tower_')?38:1,archetype:a.id as Archetype,rooms:defaultRooms(a.id as Archetype),accessible:false,budget:'1000000000'},{x:0,z:0,width:16,depth:16});
+  const b:Building={...base,kind:'building',name:a.en,width:profile.width,depth:profile.depth,x:0,z:0,y:0,rotation:0,style:'forest',archetype:a.id as Archetype,parcel_id:'art',floors,stages:[...floors.map(f=>({id:'floor:'+f.index,type:'floor' as const,floor:f.index,paid:true,component_ids:[]})),...(['frame','roof','finish','opening'] as const).map(type=>({id:type,type,floor:null,paid:true,component_ids:[]}))],contractor:'moss',materials:[],tenants:[],staff:0,capacity:0,hotel:null,last_income_at:now,opened_at:now};
   return <MeasuredBuilding building={b} context={c} visualHour={12}/>;
  }
  if(a.family==='furniture'){const f=FURNITURE.find(v=>v.id===a.id)!;return <FurnitureMesh item={{...base,kind:'furniture',type:f.id,width:f.width,depth:f.depth,x:0,z:0,floor:0,building_id:null,room_id:null,rotation:0,material:'wood'}}/>;}
