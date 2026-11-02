@@ -1,0 +1,508 @@
+{
+  "errors": [],
+  "layouts": [
+    {
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "oldBar": false,
+      "floatingShop": false,
+      "populationOverlay": false,
+      "selector": {
+        "x": 170.875,
+        "y": 79,
+        "width": 207.125,
+        "height": 48,
+        "top": 79,
+        "right": 378,
+        "bottom": 127,
+        "left": 170.875
+      },
+      "dock": {
+        "x": 12,
+        "y": 774,
+        "width": 366,
+        "height": 62,
+        "top": 774,
+        "right": 378,
+        "bottom": 836,
+        "left": 12
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "overflow": false,
+      "oldBar": false,
+      "floatingShop": false,
+      "populationOverlay": false,
+      "selector": {
+        "x": 604.109375,
+        "y": 54,
+        "width": 227.890625,
+        "height": 38,
+        "top": 54,
+        "right": 832,
+        "bottom": 92,
+        "left": 604.109375
+      },
+      "dock": {
+        "x": 162,
+        "y": 340,
+        "width": 520,
+        "height": 44,
+        "top": 340,
+        "right": 682,
+        "bottom": 384,
+        "left": 162
+      }
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "overflow": false,
+      "oldBar": false,
+      "floatingShop": false,
+      "populationOverlay": false,
+      "selector": {
+        "x": 133,
+        "y": 79,
+        "width": 175,
+        "height": 48,
+        "top": 79,
+        "right": 308,
+        "bottom": 127,
+        "left": 133
+      },
+      "dock": {
+        "x": 12,
+        "y": 670,
+        "width": 296,
+        "height": 62,
+        "top": 670,
+        "right": 308,
+        "bottom": 732,
+        "left": 12
+      }
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "overflow": false,
+      "oldBar": false,
+      "floatingShop": false,
+      "populationOverlay": false,
+      "selector": {
+        "x": 1182.109375,
+        "y": 74,
+        "width": 245.890625,
+        "height": 48,
+        "top": 74,
+        "right": 1428,
+        "bottom": 122,
+        "left": 1182.109375
+      },
+      "dock": {
+        "x": 465,
+        "y": 826,
+        "width": 510,
+        "height": 66,
+        "top": 826,
+        "right": 975,
+        "bottom": 892,
+        "left": 465
+      }
+    },
+    {
+      "page": "tasks",
+      "width": 390,
+      "height": 844,
+      "overflow": false,
+      "window": {
+        "x": 12,
+        "y": 70,
+        "width": 366,
+        "height": 692,
+        "top": 70,
+        "right": 378,
+        "bottom": 762,
+        "left": 12
+      },
+      "dock": {
+        "x": 12,
+        "y": 774,
+        "width": 366,
+        "height": 62,
+        "top": 774,
+        "right": 378,
+        "bottom": 836,
+        "left": 12
+      },
+      "actions": [
+        {
+          "box": {
+            "x": 42,
+            "y": 588.09375,
+            "width": 303,
+            "height": 46,
+            "top": 588.09375,
+            "right": 345,
+            "bottom": 634.09375,
+            "left": 42
+          },
+          "scroll": 301,
+          "client": 301
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 737.96875,
+            "width": 303,
+            "height": 46,
+            "top": 737.96875,
+            "right": 345,
+            "bottom": 783.96875,
+            "left": 42
+          },
+          "scroll": 301,
+          "client": 301
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 887.84375,
+            "width": 303,
+            "height": 46,
+            "top": 887.84375,
+            "right": 345,
+            "bottom": 933.84375,
+            "left": 42
+          },
+          "scroll": 301,
+          "client": 301
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 1037.71875,
+            "width": 303,
+            "height": 46,
+            "top": 1037.71875,
+            "right": 345,
+            "bottom": 1083.71875,
+            "left": 42
+          },
+          "scroll": 301,
+          "client": 301
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 1187.59375,
+            "width": 303,
+            "height": 46,
+            "top": 1187.59375,
+            "right": 345,
+            "bottom": 1233.59375,
+            "left": 42
+          },
+          "scroll": 301,
+          "client": 301
+        }
+      ]
+    },
+    {
+      "page": "tasks",
+      "width": 844,
+      "height": 390,
+      "overflow": false,
+      "window": {
+        "x": 12,
+        "y": 52,
+        "width": 820,
+        "height": 282,
+        "top": 52,
+        "right": 832,
+        "bottom": 334,
+        "left": 12
+      },
+      "dock": {
+        "x": 162,
+        "y": 340,
+        "width": 520,
+        "height": 44,
+        "top": 340,
+        "right": 682,
+        "bottom": 384,
+        "left": 162
+      },
+      "actions": [
+        {
+          "box": {
+            "x": 44,
+            "y": 470.6875,
+            "width": 180,
+            "height": 46,
+            "top": 470.6875,
+            "right": 224,
+            "bottom": 516.6875,
+            "left": 44
+          },
+          "scroll": 178,
+          "client": 178
+        },
+        {
+          "box": {
+            "x": 44,
+            "y": 558.5625,
+            "width": 180,
+            "height": 46,
+            "top": 558.5625,
+            "right": 224,
+            "bottom": 604.5625,
+            "left": 44
+          },
+          "scroll": 178,
+          "client": 178
+        },
+        {
+          "box": {
+            "x": 44,
+            "y": 646.4375,
+            "width": 180,
+            "height": 46,
+            "top": 646.4375,
+            "right": 224,
+            "bottom": 692.4375,
+            "left": 44
+          },
+          "scroll": 178,
+          "client": 178
+        },
+        {
+          "box": {
+            "x": 44,
+            "y": 734.3125,
+            "width": 180,
+            "height": 46,
+            "top": 734.3125,
+            "right": 224,
+            "bottom": 780.3125,
+            "left": 44
+          },
+          "scroll": 178,
+          "client": 178
+        },
+        {
+          "box": {
+            "x": 44,
+            "y": 822.1875,
+            "width": 180,
+            "height": 46,
+            "top": 822.1875,
+            "right": 224,
+            "bottom": 868.1875,
+            "left": 44
+          },
+          "scroll": 178,
+          "client": 178
+        }
+      ]
+    },
+    {
+      "page": "tasks",
+      "width": 320,
+      "height": 740,
+      "overflow": false,
+      "window": {
+        "x": 12,
+        "y": 70,
+        "width": 296,
+        "height": 588,
+        "top": 70,
+        "right": 308,
+        "bottom": 658,
+        "left": 12
+      },
+      "dock": {
+        "x": 12,
+        "y": 670,
+        "width": 296,
+        "height": 62,
+        "top": 670,
+        "right": 308,
+        "bottom": 732,
+        "left": 12
+      },
+      "actions": [
+        {
+          "box": {
+            "x": 42,
+            "y": 654.25,
+            "width": 233,
+            "height": 46,
+            "top": 654.25,
+            "right": 275,
+            "bottom": 700.25,
+            "left": 42
+          },
+          "scroll": 231,
+          "client": 231
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 804.125,
+            "width": 233,
+            "height": 46,
+            "top": 804.125,
+            "right": 275,
+            "bottom": 850.125,
+            "left": 42
+          },
+          "scroll": 231,
+          "client": 231
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 954,
+            "width": 233,
+            "height": 46,
+            "top": 954,
+            "right": 275,
+            "bottom": 1000,
+            "left": 42
+          },
+          "scroll": 231,
+          "client": 231
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 1103.875,
+            "width": 233,
+            "height": 46,
+            "top": 1103.875,
+            "right": 275,
+            "bottom": 1149.875,
+            "left": 42
+          },
+          "scroll": 231,
+          "client": 231
+        },
+        {
+          "box": {
+            "x": 42,
+            "y": 1253.75,
+            "width": 233,
+            "height": 46,
+            "top": 1253.75,
+            "right": 275,
+            "bottom": 1299.75,
+            "left": 42
+          },
+          "scroll": 231,
+          "client": 231
+        }
+      ]
+    }
+  ],
+  "movement": [
+    {
+      "code": "KeyW",
+      "key": "ص",
+      "before": {
+        "x": 0.5,
+        "z": 0.5,
+        "y": 0,
+        "heading": 0
+      },
+      "after": {
+        "x": 0.5,
+        "z": 2.0717212770684275,
+        "y": 0,
+        "heading": 0
+      }
+    },
+    {
+      "code": "KeyS",
+      "key": "س",
+      "before": {
+        "x": 0.5,
+        "z": 2.0717212770684275,
+        "y": 0,
+        "heading": 0
+      },
+      "after": {
+        "x": 0.5,
+        "z": 0.49137804797658774,
+        "y": 0,
+        "heading": 0
+      }
+    },
+    {
+      "code": "KeyA",
+      "key": "ش",
+      "before": {
+        "x": 0.5,
+        "z": 0.49137804797658774,
+        "y": 0,
+        "heading": 0
+      },
+      "after": {
+        "x": 1.810412008040217,
+        "z": 0.4913780124343283,
+        "y": 0,
+        "heading": 0
+      }
+    },
+    {
+      "code": "KeyD",
+      "key": "ي",
+      "before": {
+        "x": 1.810412008040217,
+        "z": 0.4913780124343283,
+        "y": 0,
+        "heading": 0
+      },
+      "after": {
+        "x": 0.5000000354806485,
+        "z": 0.4913780124343283,
+        "y": 0,
+        "heading": 0
+      }
+    }
+  ],
+  "joystick": {
+    "x": 16,
+    "y": 244,
+    "width": 84,
+    "height": 84
+  },
+  "nativeJoystick": {
+    "before": {
+      "x": 0.5,
+      "z": 0.49,
+      "y": 0,
+      "heading": 0
+    },
+    "after": {
+      "x": 0.4999999999381684,
+      "z": 2.524601880675018,
+      "y": 0,
+      "heading": 0
+    }
+  },
+  "transientRewardMessageGone": true,
+  "inventoryReachedFromShop": true,
+  "populationMovedToCityInformation": true,
+  "playerLevel": "2",
+  "cityPlayerLevel": "مستوى 2",
+  "playerLevelAfterReload": "2",
+  "walletsPreservedOnReload": true,
+  "guardedGuestRewards": {
+    "main": 50,
+    "mad": "0.0000"
+  }
+}

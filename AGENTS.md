@@ -236,3 +236,24 @@ fixed walking instruction box, polish/performance, preservation, comprehensive
 verification, then automatic main/Pages publication. New right-drag/strafe rules
 supersede previous walking mouse/turn behavior. Do not grant free assets or cash,
 reset data, rewrite paid costs, merge wallets or claim unverified completion.
+
+## Latest owner — stop repeated tests and publish immediately: complete
+The owner explicitly stopped further test repetition and requested immediate
+publication. PR12/main2ed754d5 and Pages41423557099 succeeded. Full earlier
+CI41420774088 passed152 tests/46 journeys; final screen-direction fix passed
+focused native/unit checks and build. Final repeated CI was cancelled, not green.
+Both additive migrations and world-command v6 were deployed first; no additional
+hosted/public browser suites ran under the latest instruction. Exact diagnostic
+account deleted, all64 related counts0, prior ledger/paid-basis hashes unchanged.
+See docs/evidence/comprehensive-upgrade/publication. Release is complete; do not
+restart tests or republish unless new work is requested.
+
+## Latest owner — scene-first mobile HUD and physical WASD
+Implement docs/specs/LifeCity-Mobile-HUD-2026-11-02.md, remove the pictured central
+walking/view bar, retain one edge toggle, and fix WASD even with Arabic keyboard
+layout. The owner explicitly requests automatic main/Pages publication. All15 UI
+groups are implemented; compact responsive HUD, inventory in Shop, information and
+advanced tools in More, aligned task/prayer cards, dock-safe panels and joystick.
+No backend/schema/Auth/financial changes. Preserve world-command v6 and all data.
+Lint/types/build and targeted real browser/touch/Arabic-key review passed; do not
+claim the complete long test suite ran. See docs/evidence/mobile-hud.

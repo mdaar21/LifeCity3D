@@ -1,0 +1,12 @@
+{
+  "url": "https://mdaar21.github.io/LifeCity3D/city",
+  "status": 404,
+  "entryScript": "/LifeCity3D/assets/index-DbdU_BH-.js",
+  "receivedAt": "2026-11-02T09:50:05.470Z",
+  "root": {
+    "url": "https://mdaar21.github.io/LifeCity3D/",
+    "status": 200,
+    "entryScript": "/LifeCity3D/assets/index-DbdU_BH-.js"
+  },
+  "cityUsesGitHubSpa404Fallback": true
+}
