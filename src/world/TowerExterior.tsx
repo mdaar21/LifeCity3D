@@ -1,3 +1,4 @@
+import {useRenderData} from './useRenderData';
 import {DistanceLOD} from './DistanceLOD';
 import {useEffect,useMemo} from 'react';
 import {BoxGeometry,BufferGeometry,CylinderGeometry,PlaneGeometry,DoubleSide,Float32BufferAttribute,Color} from 'three';
@@ -34,7 +35,7 @@ export function towerGeometry(kind:string,w:number,d:number,height:number,finish
 export function TowerExterior({building:b,night,ghost=false,powered=true}:{building:Building;night:boolean;ghost?:boolean;powered?:boolean}){
  const paid=b.stages.filter(s=>s.type==='floor'&&s.paid),height=Math.max(0,...paid.map(s=>((s.floor??0)+1)*4)),frame=b.stages.some(s=>s.type==='frame'&&s.paid),modelHeight=Math.max(.3,height);
  const walls=buildingSurface(b,'walls',null),roof=buildingSurface(b,'roof',null),doors=buildingSurface(b,'doors',0);
- const {archetype,width,depth,materials}=b;
+ const {archetype,width,depth}=b,materials=useRenderData(b.materials);
  const geometry=useMemo(()=>{const color=(surface:string,floor:number,fallback:string)=>{const assignment=[...materials].reverse().find(m=>m.surface===surface&&(m.floor===null||m.floor===floor)&&m.room_id===null);return MATERIALS.find(m=>m.id===assignment?.material)?.color??fallback;};const finish={wallAt:(floor:number)=>color('walls',floor,BUILDING_CATALOG[archetype].wall),windowsAt:(floor:number)=>color('windows',floor,floor%7===0?'#e5c68c':'#477287'),roof:roof.color};return {high:towerGeometry(archetype,width,depth,modelHeight,finish),low:towerGeometry(archetype,width,depth,modelHeight,finish,true)};},[archetype,width,depth,modelHeight,materials,roof.color]);
  useEffect(()=>()=>{for(const g of Object.values(geometry)){g.shell.dispose();g.details.dispose();}},[geometry]);
  const model=(g:ReturnType<typeof towerGeometry>)=><><mesh geometry={g.shell} castShadow receiveShadow><meshStandardMaterial vertexColors color={b.opened_at?'#ffffff':'#b7bfc0'} metalness={b.materials.some(m=>m.surface==='walls')?walls.metalness:.25} roughness={b.materials.some(m=>m.surface==='walls')?walls.roughness:.3} transparent={ghost} opacity={ghost?.35:1}/></mesh><mesh geometry={g.details} castShadow><meshStandardMaterial vertexColors side={DoubleSide} emissive={night&&powered&&b.opened_at?'#a3894f':'#000000'} emissiveIntensity={.18} roughness={.4} transparent={ghost} opacity={ghost?.35:1}/></mesh><Box at={[b.width/2,1.4,-.04]} size={[Math.min(3,b.width*.3),2.8,.15]} color={doors.color}/></>;
