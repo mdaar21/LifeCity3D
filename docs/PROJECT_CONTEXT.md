@@ -3,15 +3,19 @@
 ## Current owner — comprehensive twelve-stage upgrade (2026-11-02)
 - Execute docs/specs/LifeCity-Comprehensive-Upgrade-2026-11-02.md in order, announce
   each completed stage in commentary and continue without ending the task.
-- Stages1–10 are complete; stage11 local152 tests/46 browser journeys/PWA pass,
-  exact-source full CI pending. Current ONE shop taxonomy preserves lower Roads and lighting;
+- Published PR12/main2ed754d5, Pages41423557099 succeeded; world-command v6 and
+  both additive migrations deployed. Full prior CI passed152 tests/46 journeys;
+  final direction fix passed focused checks/build. Owner stopped repeated tests
+  and requested immediate publication; repeat CI cancelled, no further hosted or
+  browser suite. All64 disposable-account counts0 and historical hashes unchanged.
+  Current ONE shop taxonomy preserves lower Roads and lighting;
   preserve upper Cars and absorb the old vehicle category. Preserve all products,
   except the explicitly retired lower skyscraper/palace cards, and all owned data.
 - Then common menu grammar, full-catalog base geometry/variants, category-specific
   levels through40 with authoritative guards, measured economic rebalance, MM:SS
   timer, camera-relative A/D strafing and RIGHT-button drag only, remove fixed
   instruction box, polish, preservation audit, full checks and automatic release.
-- Automatic main/GitHub Pages publication remains authorized after all checks.
+- Publication is complete. Preserve all financial/data invariants in later work.
 - Progress: docs/evidence/comprehensive-upgrade/progress.md. No agents requested.
 
 ## Published baseline — living city complete

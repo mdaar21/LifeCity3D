@@ -1,6 +1,6 @@
 # Changelog
 
-## Comprehensive city upgrade — release candidate 2026-11-02
+## Comprehensive city upgrade — published 2026-11-02
 
 - Six coherent shop collections, shared accessible controls, explicit per-product
   unlocks through40, free locked previews, next collection and earned-level notices.
@@ -13,10 +13,13 @@
 - Whole MM:SS focus clock; camera-relative WASD strafing, right-drag only, smooth
   wheel/pinch, optional help and uncluttered walking. Actor interactions follow
   queued autosaves without rebasing financial/placement commands.
-- Populated-v5 migration,152 tests,46 browser journeys and compiled PWA checks
-  verified locally. Full CI and hosted/backend/Pages verification are pending.
-  Two additive migrations and compatible world-command must precede publication.
-  Evidence: docs/evidence/comprehensive-upgrade.
+- Full CI41420774088 passed152 tests/46 browser journeys; the subsequent screen
+  direction fix passed focused checks and build. The owner stopped repeat tests
+  and requested immediate publication: PR12/main2ed754d5, Pages41423557099 succeeded.
+  Two additive migrations and world-command v6 deployed first. No additional hosted
+  or public browser suite was run. Existing ledger/paid-cost fingerprints match;
+  exact diagnostic account deleted, all64 related counts0. Evidence:
+  docs/evidence/comprehensive-upgrade/publication.
 
 ## Living city and intuitive tools — published 2026-11-02
 
