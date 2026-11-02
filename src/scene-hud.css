@@ -1,0 +1,269 @@
+/* One viewport grammar for the scene, navigation, and every on-demand panel. */
+.game-shell.modern-game{
+  --hud-top:max(10px,env(safe-area-inset-top));
+  --hud-height:52px;
+  --hud-bottom:calc(var(--hud-top) + var(--hud-height));
+  --dock-height:66px;
+  --dock-gap:max(8px,env(safe-area-inset-bottom));
+  --dock-clearance:calc(var(--dock-height) + var(--dock-gap));
+  --panel-top:calc(var(--hud-bottom) + 12px);
+  --panel-bottom:calc(var(--dock-clearance) + 12px);
+  --safe-start:env(safe-area-inset-left);--safe-end:env(safe-area-inset-right);
+  height:100dvh;min-height:0;overflow:hidden;
+}
+.game-shell.modern-game:dir(rtl){--safe-start:env(safe-area-inset-right);--safe-end:env(safe-area-inset-left)}
+.modern-game .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.modern-game .mission-feedback .notice{padding:10px 12px;font-size:12px;line-height:1.8;margin:0}
+.modern-game .game-hud{top:var(--hud-top);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));height:var(--hud-height);gap:8px;pointer-events:none;align-items:stretch}
+.modern-game .game-hud>a,.modern-game .game-hud .game-wallet-pair{pointer-events:auto}
+.modern-game .game-wordmark{display:none}
+.modern-game .game-player{min-width:0;height:100%;min-height:0;gap:9px;padding:6px 12px 6px 7px;border-radius:15px;box-shadow:0 4px 18px #0b1c3020}
+.modern-game .game-avatar{width:36px;height:36px;border-radius:11px;font-size:19px;flex-shrink:0}
+.modern-game .game-avatar b{bottom:-3px;min-width:17px;height:17px;font-size:9px}
+.modern-game .game-player-copy{min-width:0;gap:3px}
+.modern-game .game-player-copy strong{font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.modern-game .game-player-copy>span:not(.game-xp){font-size:9px}
+.modern-game .game-resources{margin-inline-start:auto;gap:0;justify-content:flex-end}
+.modern-game .game-wallet-pair{gap:6px;height:100%;min-width:0}
+.modern-game .game-wallet{height:100%;min-height:0;min-width:100px;gap:7px;padding:6px 11px;border-radius:15px;box-shadow:0 4px 18px #0b1c3020}
+.modern-game .game-wallet b{font-size:15px;line-height:1.25;white-space:nowrap;font-variant-numeric:tabular-nums}
+.modern-game .game-wallet small{font-size:8px;line-height:1.4}
+.modern-game .game-coin{width:22px;height:24px}
+.modern-game .game-coin svg,.modern-game .game-yuyi-wallet>svg{width:17px;height:17px}
+.modern-game .game-save-line{top:calc(var(--hud-bottom) + 4px);inset-inline-end:16px;gap:4px;pointer-events:none;max-width:65%;z-index:16}
+.modern-game .game-save,.modern-game .game-mode{font-size:9px;line-height:1.4;padding:3px 6px}
+.modern-game .game-save{animation:save-arrive .15s ease-out}
+@keyframes save-arrive{from{opacity:0}to{opacity:1}}
+.modern-game .game-alerts{top:var(--panel-top);max-height:35dvh;overflow:auto;z-index:61}
+
+/* City selection uses the same account level shown in the avatar badge. */
+.modern-game .city-selector{position:fixed;z-index:17;top:calc(var(--hud-bottom) + 12px);inset-inline-start:max(12px,var(--safe-start));display:flex;align-items:center;gap:7px;max-width:calc(100% - 150px);padding:3px 5px 3px 10px;border:1px solid var(--edge);border-radius:13px;background:var(--chrome);color:var(--ink);box-shadow:0 4px 20px #0b1c3020}
+.modern-game .city-selector>svg{color:var(--mint);flex-shrink:0}
+.modern-game .city-selector label{min-width:0;flex:1}
+.modern-game .city-selector select{width:100%;min-width:0;max-width:165px;min-height:38px;background:transparent;border:0;color:var(--ink);font-size:12px;font-weight:700;padding:5px 1px;cursor:pointer;color-scheme:dark}
+.modern-game .city-player-level{white-space:nowrap;font-size:10px;color:var(--mint)}
+.modern-game .city-selector button{display:grid;place-items:center;width:40px;height:40px;min-width:40px;border-radius:10px;color:var(--sub)}
+.modern-game .city-selector button:hover{background:#ffffff12}
+
+/* The former middle-of-scene Explore / City view bar is removed. */
+.modern-game .touch-mode{top:calc(var(--hud-bottom) + 12px);inset-inline-end:max(12px,var(--safe-end));inset-inline-start:auto;gap:4px;padding:4px;border-radius:14px;max-width:136px;z-index:29}
+.modern-game .touch-mode>button{width:44px;height:44px;min-height:44px;padding:0;border-radius:10px;align-self:center}
+.modern-game .touch-mode>.mode-switch{display:flex;width:auto;max-width:128px;padding:8px 10px;gap:7px;color:var(--ink);font-size:11px;line-height:1.5}
+.modern-game .touch-mode>.mode-switch span{white-space:normal;text-align:start}
+.modern-game .touch-mode .camera-options{inset-inline-end:0;top:calc(100% + 8px);width:min(270px,calc(100vw - 24px));max-height:calc(100dvh - var(--hud-bottom) - var(--dock-clearance) - 165px);overflow:auto;overscroll-behavior:contain;border-radius:14px}
+.modern-game .camera-quality{display:flex;gap:8px;align-items:center;justify-content:space-between;min-width:0}
+.modern-game .camera-quality select{min-width:0;max-width:140px}
+.modern-game .walk-help-trigger{top:auto;bottom:calc(var(--dock-clearance) + 18px);inset-inline-end:max(14px,var(--safe-end));width:44px;height:44px;min-height:44px;z-index:20}
+.modern-game .world-interactions{position:fixed;bottom:calc(var(--dock-clearance) + 70px);inset-inline-end:max(12px,var(--safe-end));display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;max-width:min(420px,calc(100% - 140px));z-index:21;pointer-events:auto}
+.modern-game .world-interactions button{min-height:44px;padding:9px 12px;border:1px solid var(--edge);border-radius:12px;background:var(--chrome);color:var(--ink);font-size:12px;line-height:1.6;white-space:normal}
+.modern-game .world-joystick{left:max(18px,env(safe-area-inset-left));right:auto;top:auto;bottom:calc(var(--dock-clearance) + 18px);width:96px;height:96px;margin:0;z-index:22;touch-action:none;border-color:#bcdfd36b;background:#102b3b7a;box-shadow:inset 0 2px 14px #07182c22}
+.modern-game .world-joystick span{width:38px;height:38px;background:#a6e3ccbb;border-color:#d9f5e9}
+@media(pointer:fine){.modern-game .world-joystick{display:none}}
+@media(pointer:coarse){.modern-game .world-joystick{display:grid}}
+
+/* Navigation is the only permanent route toolbar. */
+.modern-game .game-dock{height:var(--dock-height);min-height:0;bottom:var(--dock-gap);width:min(510px,calc(100% - 24px));max-width:calc(100% - 24px);padding:5px;gap:3px;border-radius:20px;box-shadow:0 8px 28px #07182c24;align-items:stretch;z-index:52}
+.modern-game .game-dock-item{flex:1;min-width:0;min-height:0;max-width:none;padding:5px 6px;gap:4px;border-radius:14px;justify-content:center;transform:none;white-space:nowrap}
+.modern-game .game-dock-item.active{transform:none;background:#8be1c419;color:var(--mint);box-shadow:inset 0 0 0 1px #8be1c41a}
+.modern-game .game-dock-item strong{font-size:11px;line-height:1.4}
+.modern-game .game-dock-item small{display:none}
+.modern-game .game-dock-item svg{width:21px;height:21px}
+.modern-game .game-dock-icon{height:23px}
+.modern-game .game-mission-count{font-size:8px;min-width:15px;height:15px;top:-4px;inset-inline-end:-7px;line-height:12px}
+.modern-game .game-focus-pill{bottom:calc(var(--dock-clearance) + 16px);inset-inline-start:auto;inset-inline-end:max(14px,var(--safe-end));left:auto;transform:none;max-width:140px;min-height:36px;gap:6px;padding:6px 10px;font-size:10px}
+.modern-game:has(.is-exploring) .game-focus-pill{display:none}
+
+/* Panels end above the dock. Their own contents scroll all the way to the end. */
+.game-shell.modern-game .game-window{top:var(--panel-top);bottom:var(--panel-bottom);inset-block-start:var(--panel-top);inset-block-end:var(--panel-bottom);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));width:auto;max-width:1160px;margin-inline:auto;transform:none;max-height:none;min-height:0;border-radius:20px;animation-duration:.15s}
+.modern-game .game-window-bar{min-height:56px;flex-shrink:0;padding:8px 16px}
+.modern-game .game-window-bar h1{font-size:17px}
+.modern-game .game-window-bar small{display:none}
+.modern-game .game-window-scroll{min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:20px 22px 36px;scroll-padding-block:16px 28px;touch-action:pan-y}
+.modern-game .game-window-scroll>.page{padding:0;gap:20px;min-width:0}
+.modern-game .game-window-scroll :is(input,select,textarea){max-width:100%}
+.modern-game .game-window-scroll :is(.form-grid,.shop-grid,.approved-grid,.tasks-grid)>*{min-width:0}
+.game-shell.modern-game .world-studio{top:var(--panel-top);bottom:var(--panel-bottom);inset-block:var(--panel-top) var(--panel-bottom);width:min(560px,calc(100% - max(12px,env(safe-area-inset-left)) - max(12px,env(safe-area-inset-right))));max-height:none;min-height:0;z-index:40}
+.modern-game .studio-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;padding-bottom:30px}
+.modern-game .studio-tabs{flex-shrink:0}
+.game-shell.modern-game .touch-tools .touch-sheet{top:var(--panel-top);bottom:var(--panel-bottom);max-height:none;max-width:720px;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:30px;border-radius:20px;z-index:40}
+.modern-game .touch-help{top:var(--panel-top)!important;bottom:var(--panel-bottom);max-height:none;overflow-y:auto!important;overscroll-behavior:contain;z-index:40}
+.game-shell.modern-game .touch-tools :is(.touch-context,.touch-edit){bottom:var(--panel-bottom);max-height:calc(100dvh - var(--panel-top) - var(--panel-bottom));overflow-y:auto;overscroll-behavior:contain;z-index:40}
+.modern-game .touch-context{max-width:650px}
+.modern-game .touch-edit small{display:none}
+.modern-game .touch-edit [role=toolbar]{flex-wrap:wrap}
+.modern-game .touch-error,.modern-game .studio-toast{top:calc(var(--hud-bottom) + 12px);bottom:auto;max-width:min(360px,calc(100% - 24px));max-height:120px;overflow:auto;z-index:60}
+.modern-game .city-management-summary{position:static;display:grid;gap:12px;padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--surface);color:var(--text);margin-bottom:16px}
+.modern-game .city-management-summary>div{display:flex;gap:9px;align-items:center}
+.modern-game .city-management-summary strong{font-size:28px;color:var(--mint)}
+.modern-game .city-management-summary p{display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.8}
+.modern-game .city-management-summary small{color:var(--muted);line-height:1.7}
+.modern-game .city-management-summary progress{width:100%;height:6px;accent-color:var(--mint)}
+.modern-game .modal-backdrop{padding:var(--panel-top) max(12px,env(safe-area-inset-right)) var(--panel-bottom) max(12px,env(safe-area-inset-left));align-items:center;z-index:70}
+.modern-game .modal{width:min(720px,100%);max-height:calc(100dvh - var(--panel-top) - var(--panel-bottom));min-height:0;overflow:auto;overscroll-behavior:contain;padding:18px;border-radius:20px;scroll-padding-top:66px}
+.modern-game .modal>.game-panel-header{position:sticky;top:-18px;z-index:5;background:var(--bg);padding-block:12px;min-height:58px}
+.modern-game .game-menu-utility{display:flex;margin:8px 0}
+.modern-game .game-menu-utility button{min-height:44px;padding:9px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--border);font-size:13px}
+.modern-game .game-menu-tools{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.modern-game .game-menu-tool{padding:10px;min-height:76px}
+.modern-game .game-menu-grid a{min-width:0;padding:14px 10px}
+.modern-game .game-menu-grid strong,.modern-game .game-menu-grid small{overflow-wrap:anywhere}
+.modern-game[data-game-panel]:not([data-game-panel=world]) .city-selector{visibility:hidden;pointer-events:none}
+.modern-game[data-game-panel]:not([data-game-panel=world]) :is(.world-joystick,.world-interactions,.walk-help-trigger){visibility:hidden;pointer-events:none}
+
+/* Mission cards have explicit space for Arabic titles, rewards, and actions. */
+.modern-game .approved-board{gap:18px;margin-block:0}
+.modern-game .approved-heading{align-items:flex-start;gap:10px}
+.modern-game .approved-heading h2{font-size:21px;line-height:1.7}
+.modern-game .approved-heading .eyebrow{font-size:10px}
+.modern-game .approved-heading .badge{font-size:10px;flex-shrink:0}
+.modern-game .mission-index{position:static;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-inline:contain;gap:6px;margin:0;padding:0 0 8px;scrollbar-width:thin;scroll-snap-type:x proximity;background:transparent}
+.modern-game .mission-index a{flex-shrink:0;scroll-snap-align:start;min-height:44px;padding:9px 15px;font-size:12px;border-radius:12px}
+.modern-game .mission-group{scroll-margin-block-start:16px;min-width:0}
+.modern-game .mission-group>h3,.modern-game .mission-section-title{margin:0 0 14px;font-size:18px;line-height:1.7}
+.modern-game .mission-rules{padding:12px 14px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+.modern-game .mission-rules summary{cursor:pointer;font-size:12px;min-height:24px;color:var(--muted)}
+.modern-game .mission-rules p{margin-top:12px;line-height:1.9;font-size:12px}
+.modern-game .approved-progress{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.modern-game .approved-progress>.panel{display:grid;grid-template-columns:1fr;gap:10px;align-content:start;padding:16px;min-width:0;overflow:visible}
+.modern-game .approved-progress>.panel>*{grid-column:auto;min-width:0}
+.modern-game .approved-progress h3{font-size:12px;line-height:1.7}
+.modern-game .approved-progress strong{font-size:24px;line-height:1.3}
+.modern-game .approved-progress p,.modern-game .approved-progress a{font-size:11px;line-height:1.8}
+.modern-game .approved-progress a{color:var(--mint);min-height:30px;display:flex;align-items:center}
+.modern-game .approved-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px}
+.modern-game .approved-card{display:flex;flex-direction:column;align-items:stretch;gap:12px;padding:18px;border-inline-start-width:3px;border-radius:16px}
+.modern-game .approved-card h4{font-size:16px;line-height:1.9;margin:0;overflow-wrap:anywhere}
+.modern-game .approved-card>.small{font-size:11px;line-height:1.8}
+.modern-game .approved-card>strong{font-size:20px;line-height:1.5}
+.modern-game .approved-card p{line-height:1.9;overflow-wrap:anywhere}
+.modern-game .approved-card .mission-card-action{margin-top:auto;width:100%;min-height:46px;padding:10px 14px;font-size:13px;line-height:1.8;white-space:normal;gap:8px;flex-shrink:0}
+.modern-game .approved-card .mission-card-action>span{min-width:0;overflow-wrap:anywhere}
+.modern-game .prayers-embedded .section-title{display:none}
+.modern-game .prayers-page{display:flex;flex-direction:column;gap:16px}
+.modern-game .prayer-day-banner{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;padding:18px;min-width:0}
+.modern-game .prayer-day-art{width:44px;height:44px}
+.modern-game .prayer-day-art svg{width:32px;height:32px}
+.modern-game .prayer-day-banner h2{font-size:18px;line-height:1.7}
+.modern-game .prayer-day-banner p{font-size:11px;line-height:1.8;overflow-wrap:anywhere}
+.modern-game .prayer-day-count{min-width:0}
+.modern-game .prayer-day-count strong{font-size:25px}
+.modern-game .prayer-day-count>span{font-size:10px}
+.modern-game .prayers-list{display:grid;gap:10px}
+.modern-game .prayer-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto minmax(150px,180px);grid-template-areas:"icon title reward action";gap:14px;align-items:center;padding:16px;border-radius:16px;min-width:0}
+.modern-game .prayer-row-icon{grid-area:icon;width:44px;height:44px;min-width:0;border-radius:13px}
+.modern-game .prayer-row-title{grid-area:title;min-width:0;display:grid;gap:6px}
+.modern-game .prayer-row-title h2{font-size:17px;line-height:1.6;margin:0}
+.modern-game .prayer-status{display:flex;align-items:center;gap:5px;font-size:11px;line-height:1.7;white-space:normal;overflow-wrap:anywhere}
+.modern-game .prayer-reward{grid-area:reward;display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;min-width:0;font-size:17px;line-height:1.5}
+.modern-game .prayer-reward small{flex-basis:100%;font-size:10px;text-align:end}
+.modern-game .prayer-row .prayer-action{grid-area:action;width:100%;min-width:0;min-height:46px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;line-height:1.8;white-space:normal;padding:10px 12px;flex-shrink:0;margin:0}
+.modern-game .prayer-action>span{min-width:0;overflow-wrap:anywhere}
+.modern-game .tasks-grid .task-card{grid-template-columns:48px minmax(0,1fr) auto;grid-template-areas:"art category reward" "art title reward" "action action action";gap:8px 12px;padding:18px}
+.modern-game .task-card h2{font-size:16px;line-height:1.8;overflow-wrap:anywhere}
+.modern-game .task-card-top{gap:10px}
+.modern-game .task-card-top .row{flex-wrap:wrap;gap:3px}
+.modern-game .task-card-top .icon-button{width:32px;height:32px;min-width:32px;min-height:32px}
+.modern-game .task-art{width:44px;height:44px;min-width:44px}
+.modern-game .task-card-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:12px;margin-top:4px;border-top:1px solid var(--border)}
+.modern-game .task-card-bottom .button{min-height:46px;max-width:100%;white-space:normal;line-height:1.8;font-size:13px;padding:10px 14px}
+.modern-game .task-card-reward{align-self:start;padding:0;font-size:17px;gap:5px}
+.modern-game .tasks-page .tab-row{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin}
+.modern-game .tasks-page .tab-row .tab{flex-shrink:0}
+.modern-game .tasks-page .page-footnote{line-height:1.9;padding-bottom:12px}
+
+@media(max-width:760px){
+ .modern-game .approved-progress{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .modern-game .prayer-row{grid-template-columns:40px minmax(0,1fr) auto;grid-template-areas:"icon title reward" "action action action";gap:12px;padding:14px}
+ .modern-game .prayer-action{border-radius:11px}
+ .modern-game .game-window-scroll{padding:16px 14px 32px}
+ .modern-game .prayer-day-banner{grid-template-columns:minmax(0,1fr) auto;padding:14px;gap:10px}
+ .modern-game .prayer-day-art{display:none}
+ .modern-game .prayer-day-banner h2{font-size:16px}
+ .modern-game .game-shop-toolbar{flex-wrap:wrap;gap:10px}
+ .modern-game .shop-primary-nav{width:100%;min-width:0}
+ .modern-game .game-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ .game-shell.modern-game{--hud-height:48px;--dock-height:62px}
+ .modern-game .game-player{padding:5px;width:46px;min-width:46px;min-height:0}
+ .modern-game .game-player-copy{display:none}
+ .modern-game .game-wallet{min-width:0;padding:5px 8px;gap:5px}
+ .modern-game .game-wallet b{font-size:14px}
+ .modern-game .game-yuyi-wallet b{font-size:12px}
+ .modern-game .game-wallet small{font-size:8px}
+ .modern-game .game-save-line{top:calc(var(--hud-bottom) + 3px);inset-inline-end:12px;max-width:65%}
+ .modern-game .city-selector{top:calc(var(--hud-bottom) + 21px);gap:4px;padding-inline-start:8px;max-width:calc(100% - 145px)}
+ .modern-game .city-selector>svg{display:none}
+ .modern-game .city-selector select{font-size:11px;max-width:120px}
+ .modern-game .city-player-level{font-size:9px}
+ .modern-game .touch-mode{top:calc(var(--hud-bottom) + 21px)}
+ .modern-game .game-dock-item strong{font-size:10px}
+ .modern-game .game-window-bar{min-height:50px;padding:6px 12px}
+ .modern-game .game-window-bar h1{font-size:16px}
+ .modern-game .game-window-emblem{width:30px;height:30px}
+ .modern-game .game-window-scroll>.page{gap:18px}
+ .modern-game .game-window-bar .game-close{width:40px;height:40px;min-width:40px;min-height:40px}
+ .modern-game .approved-heading{display:block}
+ .modern-game .approved-heading h2{font-size:19px;margin-block:5px}
+ .modern-game .approved-heading .badge{display:inline-flex;font-size:10px}
+ .modern-game .approved-progress>.panel{padding:13px;gap:9px}
+ .modern-game .approved-progress h3{font-size:11px}
+ .modern-game .approved-progress strong{font-size:22px}
+ .modern-game .approved-progress p{font-size:10px}
+ .modern-game .task-card-bottom .button{width:100%}
+ .modern-game .task-card-reward{font-size:15px}
+ .modern-game .game-window-scroll .section-title{align-items:flex-start;flex-wrap:wrap}
+ .modern-game .form-grid{grid-template-columns:minmax(0,1fr)}
+ .modern-game .modal-backdrop{padding-inline:8px}
+ .modern-game .modal{padding:14px;border-radius:17px}
+ .modern-game .modal>.game-panel-header{top:-14px}
+ .modern-game .world-interactions{max-width:calc(100% - 132px)}
+}
+/* Short landscape gets a different layout, with a single-row compact dock. */
+@media(orientation:landscape) and (max-height:600px){
+ .game-shell.modern-game{--hud-top:max(6px,env(safe-area-inset-top));--hud-height:40px;--dock-height:44px;--dock-gap:max(6px,env(safe-area-inset-bottom));--panel-top:calc(var(--hud-bottom) + 6px);--panel-bottom:calc(var(--dock-clearance) + 6px)}
+ .modern-game .game-hud{left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right))}
+ .modern-game .game-player{padding:3px 7px 3px 4px;border-radius:12px;gap:7px}
+ .modern-game .game-avatar{width:31px;height:31px;font-size:16px}
+ .modern-game .game-player-copy>span{display:none}
+ .modern-game .game-player-copy strong{font-size:11px;max-width:100px}
+ .modern-game .game-wallet{min-height:0;min-width:90px;padding:4px 9px;border-radius:12px}
+ .modern-game .game-wallet b{font-size:13px}
+ .modern-game .game-wallet small{font-size:7px}
+ .modern-game .game-save-line{top:calc(var(--hud-bottom) + 3px);inset-inline-end:160px}
+ .modern-game .game-mode{font-size:8px}
+ .modern-game .city-selector{top:calc(var(--hud-bottom) + 8px);max-width:260px;gap:6px;padding:0 4px 0 8px}
+ .modern-game .city-selector select{min-height:36px;font-size:11px}
+ .modern-game .city-selector button{height:36px;min-height:36px;width:36px;min-width:36px}
+ .modern-game .touch-mode{top:calc(var(--hud-bottom) + 8px);flex-direction:row;max-width:none;padding:2px;border-radius:12px;gap:2px}
+ .modern-game .touch-mode>button{height:40px;min-height:40px;width:40px}
+ .modern-game .touch-mode>.mode-switch{max-width:125px;font-size:10px;padding:6px 9px}
+ .modern-game .touch-mode .camera-options{top:calc(100% + 6px);max-height:calc(100dvh - var(--hud-bottom) - var(--dock-clearance) - 65px)}
+ .modern-game .game-dock{width:min(520px,calc(100% - 160px));padding:3px;border-radius:14px;gap:2px}
+ .modern-game .game-dock-item{flex-direction:row;gap:6px;padding:4px 8px;border-radius:10px;min-height:38px}
+ .modern-game .game-dock-item strong{font-size:10px}
+ .modern-game .game-dock-icon{height:20px}
+ .modern-game .game-dock-item svg{width:18px;height:18px}
+ .modern-game .world-joystick{top:auto;left:max(16px,env(safe-area-inset-left));bottom:calc(var(--dock-clearance) + 12px);width:84px;height:84px}
+ .modern-game .world-joystick span{width:34px;height:34px}
+ .modern-game .world-interactions{bottom:calc(var(--dock-clearance) + 58px);max-width:330px}
+ .modern-game .walk-help-trigger{bottom:calc(var(--dock-clearance) + 10px)}
+ .modern-game .game-window-bar{min-height:44px;padding:4px 12px}
+ .modern-game .game-window-emblem{width:28px;height:28px}
+ .modern-game .game-window-bar h1{font-size:15px}
+ .modern-game .game-window-bar .game-close{height:36px;min-height:36px;width:36px;min-width:36px}
+ .modern-game .game-window-scroll{padding:12px 18px 28px}
+ .modern-game .approved-progress{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .modern-game .approved-heading h2{font-size:18px}
+ .modern-game .approved-progress>.panel{padding:12px;gap:7px}
+ .modern-game .approved-progress strong{font-size:21px}
+ .modern-game .approved-progress h3{font-size:11px}
+ .modern-game .prayer-row{grid-template-columns:40px minmax(0,1fr) auto minmax(140px,180px);grid-template-areas:"icon title reward action";padding:12px}
+ .modern-game .prayer-action{font-size:12px;min-height:44px}
+ .modern-game .game-menu-tools{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .modern-game .game-menu-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .modern-game .game-menu-grid a{padding:10px}
+ .modern-game .modal{padding:14px}
+ .modern-game .modal>.game-panel-header{top:-14px;min-height:44px;padding-block:6px}
+}
+@media(prefers-reduced-motion:reduce){.modern-game .game-save{animation:none}}

@@ -1,5 +1,16 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — mobile HUD and physical WASD
+- Full source: specs/LifeCity-Mobile-HUD-2026-11-02.md. Fifteen UI groups implemented;
+  central bar/floating duplicates removed, single edge mode toggle, inventory in
+  Shop, city information/tools in More, safe portrait/landscape dock/panels/joystick.
+- Keyboard uses physical WASD codes, including Arabic layout; current city badge
+  uses the same player XP as the account. City XP and purchases are untouched.
+- Lint/types/build and targeted real guest browser/touch/reward/reload review pass.
+  Full long suite was not rerun. Existing journeys follow new navigation.
+- Publication is explicitly authorized, pending. No server/schema/Auth changes.
+  Evidence: docs/evidence/mobile-hud.
+
 ## Current owner — comprehensive twelve-stage upgrade (2026-11-02)
 - Execute docs/specs/LifeCity-Comprehensive-Upgrade-2026-11-02.md in order, announce
   each completed stage in commentary and continue without ending the task.

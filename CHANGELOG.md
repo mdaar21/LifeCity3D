@@ -1,5 +1,19 @@
 # Changelog
 
+## Scene-first mobile HUD — 2026-11-02
+
+- Removed permanent floating purchase/inventory/mission/population controls and
+  the central walking/view bar. One edge toggle, compact city selector and wallet
+  HUD; owned inventory stays inside Shop, optional tools/information in More.
+- Physical WASD works with Arabic keyboard layouts; clear-edge sliding, native
+  touch joystick placement and orientation reset preserve movement and driving.
+- One player-XP level for account and city labels; city XP remains stored for
+  collection eligibility. Responsive portrait/landscape dock and safe-area panels,
+  full-content scroll, aligned Arabic task/prayer buttons and temporary feedback.
+- Lint/types/build and targeted320/390/844/1440 browser review passed; long full
+  suite not repeated. No backend, schema, accounts or financial changes.
+  Evidence: docs/evidence/mobile-hud.
+
 ## Comprehensive city upgrade — published 2026-11-02
 
 - Six coherent shop collections, shared accessible controls, explicit per-product
