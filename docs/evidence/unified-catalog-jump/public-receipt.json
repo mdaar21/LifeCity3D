@@ -1,0 +1,18 @@
+{
+  "published": true,
+  "base": "https://mdaar21.github.io/LifeCity3D",
+  "guestOnly": true,
+  "hostedAccountWrites": false,
+  "constructionOneGrid": true,
+  "readyAndStagedCards": 25,
+  "stagedBuildingTypes": 21,
+  "splitFamilyAndSidebarAbsent": true,
+  "nativeSpaceJumpRendered": true,
+  "cameraHeightIncrease": 0.7405068809528346,
+  "landedAtOriginalHeight": true,
+  "walletsUnchanged": true,
+  "errors": [],
+  "entryScripts": [
+    "/LifeCity3D/assets/index-BWO88pl_.js"
+  ]
+}

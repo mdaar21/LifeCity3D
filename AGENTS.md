@@ -292,3 +292,8 @@ server-speed change. Preserve prior camera-return fix and wallets.4 focused unit
 tests,4 unique browser cases and36 catalog render samples verified across runs;
 lint/types/build pass. No backend/schema/Auth changes. Automatic publication remains
 authorized. Evidence: docs/evidence/unified-catalog-jump. Publication pending.
+
+Publication complete: PR15/mainedb15d5a, Pages41526624403 succeeded. Real public
+guest browser verified25 ready/staged cards in one grid, absence of split galleries,
+native Space jump rendered and landed at its original height, unchanged wallets
+and no console errors. No hosted-account writes. Public receipt is in that folder.

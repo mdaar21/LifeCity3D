@@ -10,7 +10,9 @@
   validation remain unchanged. Prior camera-navigation fix preserved.
 -4 unit tests,4 unique focused browser cases across runs,36 rendered category/
   viewport samples; lint/types/build pass. No backend, Auth/schema/financial change.
-  Evidence: docs/evidence/unified-catalog-jump. Authorized publication pending.
+  Published PR15/mainedb15d5a; Pages41526624403 succeeded. Public one-grid25-card
+  catalog and native Space jump/landing verified without cloud-account writes.
+  Evidence: docs/evidence/unified-catalog-jump/public-receipt.json.
 
 ## Current owner — camera stability and complete menu review
 - Reproduced and fixed map/walk camera ownership during route inactivity: walking

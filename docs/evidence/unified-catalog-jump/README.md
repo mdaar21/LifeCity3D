@@ -43,3 +43,9 @@ samples at390/844, one grid in every sample, matching card structure, no duplica
 family/sidebar sections, document overflow, dock overlap or clipped actions, and
 no console errors. See review.json, en/review.json and financial/horticulture.json.
 These are software WebGL browser viewports, not physical-device FPS measurements.
+
+Published PR15/mainedb15d5a; Pages41526624403 succeeded. An independent real public
+guest browser found25 ready/staged cards in one grid and no split galleries,
+performed a native Space jump with0.74m camera rise and returned to its original
+height. Wallets stayed unchanged and no console errors occurred. No hosted-account
+writes. See public-receipt.json, publication.json and published-shop-1440.png.

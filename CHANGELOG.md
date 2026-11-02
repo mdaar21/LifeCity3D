@@ -1,6 +1,6 @@
 # Changelog
 
-## One product grid and walking/running/jumping — 2026-11-02
+## One product grid and walking/running/jumping — published 2026-11-02
 
 - Shared ProductCard and one grid for all Shop categories, including ready-made
   and staged buildings. No separate family catalog or permanent 3D sidebar.
@@ -11,6 +11,8 @@
 - Focused physics/browser/catalog/paid-farming restoration checks and36 viewport
   samples passed; lint/types/build passed. No backend/schema/Auth/financial changes.
   Evidence: docs/evidence/unified-catalog-jump. Full unrelated suite not repeated.
+  PR15/mainedb15d5a and Pages41526624403 succeeded. Public unified catalog and
+  native Space jump/landing verified; wallets unchanged, no cloud-account writes.
 
 ## Stable walking camera and menu organization — published 2026-11-02
 

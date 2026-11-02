@@ -1,0 +1,20 @@
+{
+  "pullRequest":"https://github.com/mdaar21/LifeCity3D/pull/15",
+  "publishedSource":"edb15d5a4c5254d6fde656ff5085c0fea48ada20",
+  "pagesRun":41526624403,
+  "pagesConclusion":"success",
+  "backendChanged":false,
+  "schemaChanged":false,
+  "authChanged":false,
+  "financialRulesChanged":false,
+  "lint":"passed",
+  "typecheck":"passed",
+  "productionBuild":"passed",
+  "unitPhysicsInputTests":4,
+  "uniqueFocusedBrowserJourneysVerifiedAcrossRuns":4,
+  "nativeJumpFinalRerun":"passed",
+  "arabicRenderSamples":24,
+  "englishRenderSamples":12,
+  "renderedErrors":0,
+  "fullUnrelatedSuiteRepeated":false
+}
