@@ -1,5 +1,19 @@
 # Changelog
 
+## Stable walking camera and menu organization — 2026-11-02
+
+- Fixed orthographic map zoom being written into the walking camera while menus
+  were open. Returning preserves the selected perspective, orbit and distance;
+  wheel and native pinch still work after repeated navigation and orientation.
+- More groups city/progress/account destinations without repeated Shop shortcuts.
+  Purchase-city selection, inventory and category controls are compact; upcoming
+  products and extended progress remain available on request.
+- Fixed inherited progress-grid columns, English focus-sidebar wrapping and
+  dashboard headings; reserved status space and unified semantic notice colors.
+- Focused browser regression,192 Arabic/English rendered samples, lint/types and
+  production build passed. No backend/schema/financial changes. Evidence:
+  docs/evidence/camera-menu-review. Full unrelated suite was not repeated.
+
 ## Scene-first mobile HUD — published 2026-11-02
 
 - Removed permanent floating purchase/inventory/mission/population controls and

@@ -261,3 +261,17 @@ claim the complete long test suite ran. See docs/evidence/mobile-hud.
 Publication complete: PR13/main379371d9, Pages41427669708 succeeded. This is a
 frontend-only release; world-command v6, existing schema and all financial rules
 remain unchanged. Public guest delivery receipt is in mobile-hud/public-receipt.json.
+
+## Latest owner — camera return bug and repeated menu review
+The owner reports extreme zoom after returning from any menu to walking and asks
+for a thorough interface review. Reproduced zoom1→16.8103: route inactivity mounted
+MapCamera alongside the walking camera. Camera selection now follows avatar mode;
+inactivity only pauses input. Retain perspective zoom1, custom distance/heading,
+and disable inactive map controls. A focused real browser regression passes all10
+route returns, repeated More, tools, custom orbit/distance, wheel/pinch and rotation.
+More is grouped by city/progress/account; Shop controls compact; daily progress
+grid, timer sidebar, headings, notice palette and panel spacing corrected.192
+rendered samples (Arabic128/English64) show no clipping/dock overlap/overflow or
+console errors. Lint/types/build pass. Full unrelated suite not repeated. No backend,
+Auth/schema/financial changes. Automatic publication authorization persists.
+Evidence: docs/evidence/camera-menu-review. Publication pending.
