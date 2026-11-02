@@ -3,7 +3,8 @@
 ## Current owner — comprehensive twelve-stage upgrade (2026-11-02)
 - Execute docs/specs/LifeCity-Comprehensive-Upgrade-2026-11-02.md in order, announce
   each completed stage in commentary and continue without ending the task.
-- Current stage1: ONE shop taxonomy; preserve lower Roads and absorb lighting;
+- Stages1–10 are complete; stage11 local152 tests/46 browser journeys/PWA pass,
+  exact-source full CI pending. Current ONE shop taxonomy preserves lower Roads and lighting;
   preserve upper Cars and absorb the old vehicle category. Preserve all products,
   except the explicitly retired lower skyscraper/palace cards, and all owned data.
 - Then common menu grammar, full-catalog base geometry/variants, category-specific

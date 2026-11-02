@@ -20,6 +20,7 @@ for (const [email, name, balance] of [[E2E_OWNER, 'Browser owner', 2000], [E2E_O
     await tx.query('INSERT INTO auth.users(id,email,raw_user_meta_data) VALUES($1,$2,$3::jsonb)', [id, email, JSON.stringify({display_name: name})]);
     await tx.query('INSERT INTO local_auth.credentials(user_id,password_hash,password_salt) VALUES($1,$2,$3)', [id, derived.hash, derived.salt]);
     await tx.query("UPDATE public.profiles SET language='en',digits='latin' WHERE id=$1", [id]);
+    if(email==='garden-test@example.test')await tx.query('update public.wallets set city_xp=2025 where user_id=$1',[id]);
     if(email==='timer-comprehensive@example.test')await tx.query("insert into public.study_sessions(user_id,status,started_at,last_tick_at,active_seconds,credited_minutes,bonus_awarded) values($1,'paused',clock_timestamp()-interval '1 hour',clock_timestamp(),3599.125,59,false)",[id]);
     if(email==='progression-low@example.test')await tx.query('update public.wallets set player_xp=20 where user_id=$1',[id]);
     if(email.startsWith('visual-')){await tx.query('update public.yuyi_worlds set city_xp=152100 where user_id=$1',[id]);await tx.query('update public.wallets set city_xp=152100 where user_id=$1',[id]);await tx.query("insert into public.study_sessions(user_id,status,started_at,last_tick_at,active_seconds,credited_minutes,bonus_awarded) values($1,'finished',clock_timestamp()-interval '2 days',clock_timestamp()-interval '2 days',$2,$3,true)",[id,email.includes('skyline')?360000:72000,email.includes('skyline')?6000:1200]);}

@@ -1,3 +1,4 @@
+import {actorCommandPayload} from './actor-command';
 import {createContext,useCallback,useContext,useEffect,useMemo,useRef,useState} from 'react';
 import type {ReactNode} from 'react';
 import {useQuery,useQueryClient} from '@tanstack/react-query';
@@ -28,11 +29,12 @@ export function GameProvider({children}:{children:ReactNode}){
  const mutate=useCallback((action:string,payload:Record<string,unknown>={}):Promise<CommandResponse>=>{
   const execute=async()=>{
    if(!navigator.onLine){setSaveStatus('offline');throw new ApiError('OFFLINE');}const started=generation.current;
-   const fingerprint=action+':'+JSON.stringify(payload);const recordKey='pending:'+cacheKey+':'+fingerprint;
+   const commandPayload=actorCommandPayload(action,payload,queryClient.getQueryData<GameSnapshot>(queryKey)?.world_systems?.revision);
+   const fingerprint=action+':'+JSON.stringify(commandPayload);const recordKey='pending:'+cacheKey+':'+fingerprint;
    const key=pending.current.get(fingerprint)??await readRecord<string>(recordKey).catch(()=>null)??crypto.randomUUID();pending.current.set(fingerprint,key);await writeRecord(recordKey,key);
    setSaveStatus('saving');setCommandError(null);await queryClient.cancelQueries({queryKey});
    try{
-    const response=await api.command(action,payload,key);await queryClient.cancelQueries({queryKey});
+    const response=await api.command(action,commandPayload,key);await queryClient.cancelQueries({queryKey});
     pending.current.delete(fingerprint);await removeRecord(recordKey);
     if(started!==generation.current)return response;
     if(response.state){queryClient.setQueryData(queryKey,response.state);void writeRecord(cacheKey,response.state).catch(()=>{});}

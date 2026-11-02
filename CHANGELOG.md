@@ -1,5 +1,23 @@
 # Changelog
 
+## Comprehensive city upgrade — release candidate 2026-11-02
+
+- Six coherent shop collections, shared accessible controls, explicit per-product
+  unlocks through40, free locked previews, next collection and earned-level notices.
+- Room-bearing architecture, forecourts/pavilions and three geometric styles for13
+  facilities; eight incremental38–250-floor tower forms, five refreshed legacy
+  models,140 cached pictures, distance LOD and stable batched geometry inputs.
+- Audited145/460/750 daily activity scenarios; future car/furniture/villa/tower
+  prices and a25-XP progression curve. Existing XP, wallets, saved contracts,
+  additional-floor tariffs, project targets and historical50% refunds stay intact.
+- Whole MM:SS focus clock; camera-relative WASD strafing, right-drag only, smooth
+  wheel/pinch, optional help and uncluttered walking. Actor interactions follow
+  queued autosaves without rebasing financial/placement commands.
+- Populated-v5 migration,152 tests,46 browser journeys and compiled PWA checks
+  verified locally. Full CI and hosted/backend/Pages verification are pending.
+  Two additive migrations and compatible world-command must precede publication.
+  Evidence: docs/evidence/comprehensive-upgrade.
+
 ## Living city and intuitive tools — published 2026-11-02
 
 - Smooth PC/mouse movement and articulated characters; completed paid homes add

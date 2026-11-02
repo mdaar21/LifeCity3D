@@ -1,0 +1,22 @@
+{
+  "unitIntegration": {
+    "files": 37,
+    "tests": 152,
+    "passed": true
+  },
+  "browser": {
+    "unique": 46,
+    "firstFullPassed": 35,
+    "firstFullFailed": 11,
+    "correctedRegressionPassed": 9,
+    "secondRegressionPassed": 2,
+    "allUniqueVerified": true,
+    "singleGreenFullRun": "pending exact-source CI"
+  },
+  "notes": [
+    "No financial assertions removed. Tests now follow six shop sections and actual room positions/prices.",
+    "Fixed scroll keyboard access and actual actor-mode/autosave revision conflict.",
+    "Preserved explicit garage destination when entering follow mode; distinguish interactive world from read-only preview canvases.",
+    "Scene budgets use Chromium software WebGL, not physical-phone FPS."
+  ]
+}

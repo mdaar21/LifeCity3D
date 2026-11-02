@@ -260,7 +260,7 @@ export function WorldCanvas(props: SceneProps) {
       context?.getExtension('WEBGL_lose_context')?.loseContext()
     } catch { setSupported(false) }
   }, [])
-  return <div className={`world-canvas ${props.className || ''}`} data-testid="city-canvas" role="region" aria-label={props.interior ? t('غرفة ثلاثية الأبعاد قابلة للتأثيث', 'Interactive 3D room') : t('مدينة ثلاثية الأبعاد قابلة للبناء', 'Interactive 3D city')}>
+  return <div className={`world-canvas ${props.className || ''}`} data-testid={props.readOnly?'asset-preview-canvas':'city-canvas'} role="region" aria-label={props.interior ? t('غرفة ثلاثية الأبعاد قابلة للتأثيث', 'Interactive 3D room') : t('مدينة ثلاثية الأبعاد قابلة للبناء', 'Interactive 3D city')}>
     {supported === null ? <div className="world-loading">{t('نجهّز عالمك…', 'Preparing your world…')}</div> : supported ? <CanvasErrorBoundary fallback={<WebGLFallback />}><Canvas shadows={graphics.shadows} frameloop="demand" dpr={graphics.dpr} gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }} fallback={<WebGLFallback />} onCreated={({ gl }) => { gl.setClearColor(SCENE_BACKGROUND); gl.shadowMap.type = PCFSoftShadowMap; gl.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); setSupported(false) }, { once: true }) }}><Suspense fallback={null}><SceneContents {...props} /></Suspense></Canvas></CanvasErrorBoundary> : <WebGLFallback />}
   </div>
 }
