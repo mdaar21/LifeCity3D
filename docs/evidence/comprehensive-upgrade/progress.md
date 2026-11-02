@@ -3,8 +3,8 @@
 Source request: [owner specification](../../specs/LifeCity-Comprehensive-Upgrade-2026-11-02.md).
 Baseline: published43771049, world-command v5,141 tests/39 browser cases.
 
-1. Unified shop taxonomy — **in progress**.
-2. Shared menu/button design — pending.
+1. Unified shop taxonomy — **complete**. Lint/types and rendered shop audit passed; six primary categories, lighting/roads and cars preserved, furniture destination coverage, no wallet/entity/inventory changes. Evidence: stage1-shop-390.png and tests/e2e/comprehensive.spec.ts.
+2. Shared menu/button design — **in progress**.
 3. Distinct base architectural geometry and variants for the full catalog — pending.
 4. Per-category unlocks through40, trusted guards and owned-asset grandfathering — pending.
 5. Measured low/medium/high activity economy and future-price rebalance — pending.

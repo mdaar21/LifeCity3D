@@ -15,5 +15,5 @@ export async function dragDraft(page:Page,x:number,z:number,width=1,depth=1){
  const at=await worldPixel(page,x+width/2,z+depth/2,.01);await page.mouse.move(at.x-3,at.y-3);await page.mouse.down();await page.mouse.move(at.x,at.y,{steps:3});await page.mouse.up();
 }
 export async function shopSection(page:Page,section:string){
- await page.locator('.game-dock a[href="/shop"]').click();await page.getByRole('group',{name:'Shop sections'}).getByRole('button',{name:section,exact:true}).click();
+ await page.locator('.game-dock a[href="/shop"]').click();await page.getByTestId('shop-sections').getByRole('button',{name:section==='Building furniture'?'Furniture':section,exact:true}).click();
 }
