@@ -2,7 +2,7 @@ import {expect,type Page} from '@playwright/test';
 import {Matrix4,Vector3} from 'three';
 /** Project a real world position through the actual rendered camera, then use native input. */
 export async function worldPixel(page:Page,x:number,z:number,y=0,realm:'main'|'yuyi'='main'){
- const canvas=page.locator('[data-testid="city-canvas"] canvas');await expect(canvas).toBeVisible();
+ const canvas=page.locator('[data-testid="city-canvas"] canvas[data-engine]');await expect(canvas).toBeVisible();
  await expect.poll(()=>page.evaluate(()=>!!(window as unknown as {__LIFECITY_RENDER_METRICS__?:{camera?:{projection:number[];inverse:number[]}}}).__LIFECITY_RENDER_METRICS__?.camera?.projection)).toBe(true);
  const c=await page.evaluate(()=>(window as unknown as {__LIFECITY_RENDER_METRICS__?:{camera?:{projection:number[];inverse:number[]}}}).__LIFECITY_RENDER_METRICS__!.camera!),box=(await canvas.boundingBox())!;
  const p=new Vector3((realm==='main'?-17:1)+x,y,-8+z).applyMatrix4(new Matrix4().fromArray(c.inverse)).applyMatrix4(new Matrix4().fromArray(c.projection));

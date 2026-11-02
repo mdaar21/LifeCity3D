@@ -50,11 +50,11 @@ test('two browser contexts recover the exact purchased home, inventory, balance 
     expect(home).toMatchObject({catalog_id: 'house', x: 4, z: 6, rotation: 90, version: 1});
     expect(saved.inventory).toHaveLength(1);
     await pageA.getByTestId('city-tool-objects').click();
-    await expect(pageA.getByTestId(`placement-${home.id}`)).toContainText('4, 6 · 90°');
+    await expect(pageA.getByTestId(`placement-${home.id}`)).toContainText('Rotation 90°');
     await login(pageB, E2E_OWNER);
     await pageB.goto('/city');
     await pageB.getByTestId('city-tool-objects').click();
-    await expect(pageB.getByTestId(`placement-${home.id}`)).toContainText('4, 6 · 90°');
+    await expect(pageB.getByTestId(`placement-${home.id}`)).toContainText('Rotation 90°');
     expect((await snapshot(pageB)).wallet).toEqual(saved.wallet);
     expect((await snapshot(pageB)).inventory).toEqual(saved.inventory);
     expect((await snapshot(pageB)).placements).toEqual(saved.placements);
