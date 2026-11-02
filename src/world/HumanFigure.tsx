@@ -15,7 +15,7 @@ export function HumanFigure({appearance:a,moving=false,live=false,motionSpeed}:{
  const part=(position:[number,number,number],scale:[number,number,number],color:string,round=true)=><mesh geometry={round?capsule:cube} position={position} scale={scale} castShadow><meshStandardMaterial color={color} roughness={.78}/></mesh>;
  const ball=(position:[number,number,number],scale:[number,number,number],color:string)=><mesh geometry={sphere} position={position} scale={scale} castShadow><meshStandardMaterial color={color} roughness={.72}/></mesh>;
  return <group ref={body}>
-  {part([0,1.08,0],[.255,.28,.145],a.top)}{part([0,.82,0],[.22,.12,.135],a.bottom)}
+  {part([0,1.08,0],[.42,.28,.23],a.top)}{part([0,.82,0],[.36,.12,.19],a.bottom)}
   {part([0,1.39,0],[.085,.065,.085],a.skin)}{ball([0,1.62,.015],[.19,.225,.17],a.skin)}
   {[-1,1].map(side=><group key={side}>
    {ball([side*.192,1.61,.008],[.035,.063,.04],a.skin)}{ball([side*.07,1.65,.17],[.021,.025,.012],'#25302d')}
@@ -24,7 +24,7 @@ export function HumanFigure({appearance:a,moving=false,live=false,motionSpeed}:{
     {part([0,-.19,0],[.105,.19,.108],a.bottom)}<group ref={side<0?kneeL:kneeR} position={[0,-.37,0]}>
     {part([0,-.175,0],[.083,.18,.09],a.bottom)}{part([0,-.35,.055],[.19,.09,.31],a.shoes,false)}{part([0,-.395,.055],[.195,.025,.315],'#d0cec2',false)}</group>
    </group>
-   <group ref={side<0?armL:armR} position={[side*.28,1.28,0]}>
+   <group ref={side<0?armL:armR} position={[side*.245,1.28,0]}>
     {part([side*.012,-.15,0],[.095,.16,.1],a.top)}<group position={[side*.015,-.3,0]} rotation={[-.13,0,0]}>
     {part([0,-.12,0],[.065,.13,.067],a.outfit==='formal'?a.top:a.skin)}{ball([0,-.27,.012],[.065,.08,.045],a.skin)}</group>
    </group>
