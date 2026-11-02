@@ -14,6 +14,7 @@ import '../game-shell.css';
 import '../stylized-game.css';
 import '../game-panels.css';
 import '../modern-game.css';
+import './game-controls.css';
 import {useTouchTools} from '../world/useTouchTools';
 import {useWorldUI} from '../world/useWorldUI';
 

@@ -1,0 +1,28 @@
+/* Shared controls for every game panel, drawer, catalog and journal. */
+.modern-game{--control-height:46px;--control-radius:12px;--control-fill:#1b3445;--control-edge:#ffffff29;--control-text:#dfeeea;--control-selected:#8be1c4;--control-ink:#102d32}
+.modern-game .game-panel :is(button,.button,.social-button){min-height:44px;font-family:inherit;font-weight:700;line-height:1.45;touch-action:manipulation;transition:background-color .16s,border-color .16s,box-shadow .16s}
+.modern-game :is(button,a,input,select,textarea):focus-visible{outline:3px solid #e5c77d;outline-offset:3px}
+.modern-game .game-panel :is(.game-tabs,.studio-tabs,.shop-subsections,.finish-surfaces,.timer-targets,.shop-floor-presets,.social-settings-nav){display:flex;align-items:center;gap:8px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin;overscroll-behavior-inline:contain;scroll-padding-inline:8px;scroll-behavior:smooth;padding:8px 2px;max-width:100%;min-width:0}
+.modern-game .game-panel :is(.game-tabs,.studio-tabs,.shop-subsections,.finish-surfaces,.timer-targets,.shop-floor-presets,.social-settings-nav)>:is(button,a){display:inline-flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;min-height:var(--control-height);padding:10px 15px;border:1px solid var(--control-edge);border-radius:var(--control-radius);background:var(--control-fill);color:var(--control-text);font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 2px 5px #051a2315}
+.modern-game .game-panel :is(.game-tabs,.studio-tabs,.shop-subsections,.finish-surfaces,.timer-targets,.shop-floor-presets,.social-settings-nav)>:is([aria-pressed=true],.active){background:var(--control-selected);color:var(--control-ink);border-color:#c4ffe9;box-shadow:0 3px 10px #8be1c41a}
+@media(hover:hover){.modern-game .game-panel :is(.game-tabs,.studio-tabs,.shop-subsections,.finish-surfaces,.timer-targets,.shop-floor-presets,.social-settings-nav)>:is(button,a):not(:disabled):hover{border-color:#9acfb7;background:#315361;color:#f1fff9}}
+.modern-game .game-panel button:disabled{cursor:not-allowed;opacity:.6}
+.modern-game .game-panel :is(input:not([type=range]):not([type=checkbox]),select,textarea){min-height:var(--control-height);border:1px solid var(--control-edge);border-radius:var(--control-radius);padding:10px 12px;background:#0c2432;color:var(--control-text);font:inherit;max-width:100%;min-width:0}
+.modern-game .game-panel input[type=checkbox]{accent-color:var(--control-selected)}
+.modern-game .game-panel input[type=range]{min-height:44px;accent-color:var(--control-selected)}
+.modern-game .game-close{min-width:44px;min-height:44px;border-radius:var(--control-radius);box-shadow:none}
+.modern-game .game-panel-header{gap:14px;padding-block:14px;align-items:center}
+.modern-game .game-panel-header h2{font-size:19px;line-height:1.5;margin:0}
+.modern-game .game-panel-header small{display:block;font-size:10px;letter-spacing:.04em;margin-bottom:3px;opacity:.8}
+.modern-game .shop-primary-nav{width:100%;margin:0;border-block-end:1px solid var(--control-edge);padding-bottom:14px}
+.modern-game .shop-primary-nav>button>svg{width:19px;height:19px;flex-shrink:0}
+.modern-game .shop-room-choice{display:grid;gap:8px;font-size:13px;font-weight:700;max-width:420px;margin-block:12px}
+.modern-game .shop-legacy-collection{margin-block:20px}.modern-game .shop-legacy-collection>h3{font-size:17px;color:#dff4e9;margin-bottom:14px}
+.modern-game .game-window :is(.catalog-card,.building-card,.shop-world-grid>button,.garden-species>button){border-radius:16px;border:1px solid var(--control-edge);background:#183345;overflow:hidden;box-shadow:0 5px 16px #061c2520}
+.modern-game .game-window :is(.building-card,.shop-world-grid>button,.garden-species>button){padding:12px;gap:10px;text-align:start;color:var(--control-text)}
+.modern-game .game-window :is(.building-card,.shop-world-grid>button,.garden-species>button)>strong{font-size:14px;line-height:1.7}
+.modern-game .game-window :is(.building-card,.shop-world-grid>button,.garden-species>button) .asset-photo{width:100%;height:140px;border-radius:10px;background:#d8e5dc}
+.modern-game .game-window :is(.building-card,.shop-world-grid>button,.garden-species>button):focus-visible{outline-offset:2px}
+.modern-game .game-menu-tool,.modern-game .game-menu-grid>a{border-radius:16px;min-height:82px;padding:14px;border:1px solid var(--control-edge)}
+@media(max-width:600px){.modern-game .game-panel-header{padding-block:11px}.modern-game .game-panel-header h2{font-size:17px}.modern-game .game-panel :is(.game-tabs,.studio-tabs,.shop-subsections,.finish-surfaces,.timer-targets,.shop-floor-presets,.social-settings-nav)>:is(button,a){font-size:12px;padding-inline:12px}.modern-game .game-window :is(.building-card,.shop-world-grid>button,.garden-species>button) .asset-photo{height:116px}.modern-game .shop-browse-bar{gap:10px;flex-wrap:wrap}.modern-game .shop-search{flex:1;min-width:180px}}
+@media(prefers-reduced-motion:reduce){.modern-game .game-panel *{scroll-behavior:auto;transition:none!important}}
