@@ -11,7 +11,13 @@
     "correctedRegressionPassed": 9,
     "secondRegressionPassed": 2,
     "allUniqueVerified": true,
-    "singleGreenFullRun": "pending exact-source CI"
+    "singleGreenFullRun": {
+      "run": 41420774088,
+      "head": "2eab60a221b9d1586536d3e305782bf01255a851",
+      "all46Passed": true,
+      "note": "Subsequent camera-right/left correction has four unit checks and actual native browser proof; final-head CI will rerun."
+    },
+    "screenDirectionsVerifiedFromActualViewMatrix": true
   },
   "notes": [
     "No financial assertions removed. Tests now follow six shop sections and actual room positions/prices.",
