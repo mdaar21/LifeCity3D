@@ -62,6 +62,6 @@ export default function Interior() {
       </aside></div>
     {!online && <div className="world-notice" role="status">{t('غير متصل — يتطلب حفظ ترتيب الأثاث اتصالًا.', 'Offline — saving furniture arrangements requires a connection.')}</div>}
     {notice && <div className={`world-notice ${success ? 'success' : 'danger'}`} role="status">{notice}</div>}
-    <section className="world-owned-summary"><h2>{t('قطع في الغرفة', 'Pieces in the room')} <span>{number(furniture.length)}</span></h2><div className="world-object-list">{furniture.map(placed => { const item = catalog.find(entry => entry.id === placed.catalog_id); return <button className={selectedId === placed.id ? 'active' : ''} key={placed.id} onClick={() => { clear(); setSelectedId(placed.id) }}><span>{item ? t(item.name_ar, item.name_en) : placed.catalog_id}</span><small dir="ltr">{placed.x}, {placed.z} · {placed.rotation}°</small></button> })}</div></section>
+    <section className="world-owned-summary"><h2>{t('قطع في الغرفة', 'Pieces in the room')} <span>{number(furniture.length)}</span></h2><div className="world-object-list">{furniture.map(placed => { const item = catalog.find(entry => entry.id === placed.catalog_id); return <button className={selectedId === placed.id ? 'active' : ''} key={placed.id} onClick={() => { clear(); setSelectedId(placed.id) }}><span>{item ? t(item.name_ar, item.name_en) : placed.catalog_id}</span><small>{t('دوران', 'Rotation')} {placed.rotation}°</small></button> })}</div></section>
   </div>
 }
