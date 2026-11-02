@@ -1,6 +1,6 @@
 # Changelog
 
-## Richer world graphics and smooth locomotion — 2026-11-02
+## Richer world graphics and smooth locomotion — published 2026-11-02
 
 - Four explicit Low / Medium / High / Ultra levels in Arabic and English, with
   compatible Auto and device-local persistence. Meaningful material, geometry,
@@ -14,6 +14,8 @@
 - Frontend-only; preserves all tasks, purchases, home residents, saved cities,
   MAIN/MAD wallets, paid finishes and camera return behavior. No new dependencies,
   backend/schema/Auth or economy changes. Evidence: docs/evidence/graphics-motion.
+- PR16/maindc48d665 and Pages41546029125 succeeded. Public guest verified four
+  actual profiles, native jump, Ultra mobile reload and unchanged wallets.
 
 ## One product grid and walking/running/jumping — published 2026-11-02
 

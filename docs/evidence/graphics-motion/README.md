@@ -64,5 +64,14 @@ The native-input case uses960×640 to bound software rendering cost and still te
 390×844 touch. Final art review has8 renders and no runtime/shader console errors.
 These are software Chromium checks, not physical-device frame-rate measurements.
 
-Publication receipt will be recorded after GitHub Pages and the public guest flow
-complete.
+## Published
+
+PR16 merged at runtime `dc48d6655ba35ceeb020191fcf7ec2d0d8ccb491`.
+GitHub Pages41546029125 succeeded. The actual public guest flow through the
+save-preserving update route verified all four rendering profiles, their AO/bloom
+flags and pixel budgets, native Space jump/grounded return, Ultra surviving mobile
+reload, perspective zoom1 and unchanged MAIN/MAD wallets. Runtime/shader errors0;
+no hosted-account writes. See `publication.json` and `public-receipt.json`.
+
+A later documentation-only commit records these receipts; the deployed runtime
+is the merge SHA above.

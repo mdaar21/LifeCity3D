@@ -1,0 +1,75 @@
+{
+  "published": true,
+  "base": "https://mdaar21.github.io/LifeCity3D",
+  "guestOnly": true,
+  "hostedAccountWrites": false,
+  "levels": [
+    {
+      "level": "low",
+      "graphics": {
+        "level": "low",
+        "ao": false,
+        "bloom": false,
+        "materialDetail": 0,
+        "waterDetail": 1
+      },
+      "dpr": 1,
+      "pixels": 614400,
+      "calls": 10,
+      "triangles": 1862
+    },
+    {
+      "level": "medium",
+      "graphics": {
+        "level": "medium",
+        "ao": false,
+        "bloom": false,
+        "materialDetail": 1,
+        "waterDetail": 2
+      },
+      "dpr": 1.25,
+      "pixels": 960000,
+      "calls": 10,
+      "triangles": 1862
+    },
+    {
+      "level": "high",
+      "graphics": {
+        "level": "high",
+        "ao": true,
+        "bloom": false,
+        "materialDetail": 2,
+        "waterDetail": 3
+      },
+      "dpr": 1.5,
+      "pixels": 1382400,
+      "calls": 22,
+      "triangles": 7772
+    },
+    {
+      "level": "ultra",
+      "graphics": {
+        "level": "ultra",
+        "ao": true,
+        "bloom": true,
+        "materialDetail": 3,
+        "waterDetail": 4
+      },
+      "dpr": 2,
+      "pixels": 2457600,
+      "calls": 35,
+      "triangles": 7785
+    }
+  ],
+  "explicitUltraSurvivedMobileReload": true,
+  "nativeSpaceJumpRendered": true,
+  "cameraHeightIncrease": 0.7399723058840015,
+  "landedAtOriginalHeight": true,
+  "walkingCameraZoom": 1,
+  "walletsUnchanged": true,
+  "errors": [],
+  "entryScripts": [
+    "/LifeCity3D/assets/index-me3T_zcc.js"
+  ],
+  "scope": "Public production/PWA guest flow with software Chromium WebGL; not a physical-phone FPS benchmark."
+}

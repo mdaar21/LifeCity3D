@@ -1,0 +1,17 @@
+{
+  "published": true,
+  "sourceCommit": "274d918",
+  "runtimeCommit": "dc48d6655ba35ceeb020191fcf7ec2d0d8ccb491",
+  "pullRequest": 16,
+  "pullRequestUrl": "https://github.com/mdaar21/LifeCity3D/pull/16",
+  "pagesRun": 41546029125,
+  "pagesUrl": "https://github.com/mdaar21/LifeCity3D/actions/runs/41546029125",
+  "pagesConclusion": "success",
+  "verifiedAt": "2026-11-02T23:35:11.488084+00:00",
+  "publicReceipt": "public-receipt.json",
+  "guestOnly": true,
+  "hostedAccountWrites": false,
+  "backend": "world-command v6 unchanged",
+  "schemaAuthFinancialChanges": false,
+  "updateUrl": "https://mdaar21.github.io/LifeCity3D/api/update.html?v=graphics-motion-20261102"
+}

@@ -307,3 +307,10 @@ MAIN/MAD, paid finish colors/costs and camera-return behavior. No free city obje
 dependencies, backend/schema/Auth changes or numerical “10×”/phone-FPS claims.
 Work is on the same branch. Evidence: docs/evidence/graphics-motion. Publication
 is authorized after focused verification; no new permission is needed.
+
+Publication complete: PR16/maindc48d665 and Pages41546029125 succeeded.21 focused
+unit checks,4 unique browser journeys across grouped/isolated runs,8 final art
+renders, lint/types and GitHub production/PWA build passed. The public guest flow
+verified four actual profiles, native Space jump, Ultra mobile reload and zoom1,
+unchanged wallets and no runtime/shader errors. No hosted-account writes or backend
+changes. See graphics-motion/publication.json and public-receipt.json.
