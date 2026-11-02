@@ -1,6 +1,6 @@
 # Changelog
 
-## Living city and intuitive tools — 2026-11-02
+## Living city and intuitive tools — published 2026-11-02
 
 - Smooth PC/mouse movement and articulated characters; completed paid homes add
   residents who walk out and return. Connected-road details and worksite activity.
@@ -11,7 +11,9 @@
 - Eight distinct towers:38–250 floors,4m/floor,152–1000m, frozen incremental prices,
   actual floor navigation and batched full-height geometry. Existing costs retained.
 -114 original asset pictures. Two additive migrations; no dependency/data reset.
-  See docs/evidence/living-city and subsequent publication evidence.
+  PR11/main43771049, Pages41388879374 passed141 tests and39 browser journeys.
+  Real hosted/public PWA, cloud restore, finance and diagnostic cleanup verified.
+  See docs/evidence/living-city and docs/evidence/living-city-publication.
 
 ## Unified menus and logical construction catalog — published 2026-11-01
 

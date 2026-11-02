@@ -1,0 +1,17 @@
+{
+  "source": "5489d15d57224c43664550251ca1f407f41d7993",
+  "browserJourneys": 3,
+  "passed": 3,
+  "checks": [
+    "paid horticulture, source refunds and independent cloud restore",
+    "real terrain brush confirmed bill and persisted state",
+    "exact purchased home, inventory, wallet and rotation across two browsers"
+  ],
+  "priorFullCI": 41387404705,
+  "priorFullResult": {
+    "unitIntegration": 141,
+    "browserPassed": 36,
+    "browserFailed": 3
+  },
+  "correction": "Only test selectors, quote readiness and the intentional coordinate-free label assertion changed. Final full Pages checks gate deployment."
+}

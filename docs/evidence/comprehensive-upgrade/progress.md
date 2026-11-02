@@ -1,0 +1,20 @@
+# Comprehensive upgrade: twelve-stage execution
+
+Source request: [owner specification](../../specs/LifeCity-Comprehensive-Upgrade-2026-11-02.md).
+Baseline: published43771049, world-command v5,141 tests/39 browser cases.
+
+1. Unified shop taxonomy — **in progress**.
+2. Shared menu/button design — pending.
+3. Distinct base architectural geometry and variants for the full catalog — pending.
+4. Per-category unlocks through40, trusted guards and owned-asset grandfathering — pending.
+5. Measured low/medium/high activity economy and future-price rebalance — pending.
+6. MM:SS focus timer, preserved timing/rewards — pending.
+7. Camera-relative strafing, right-button look and damped zoom — pending.
+8. Remove fixed walking instructions, optional small help — pending.
+9. General UX/performance polish — pending.
+10. Preservation audit — continuous; final audit pending.
+11. Full automated/rendered verification and before/after evidence — pending.
+12. Merge, GitHub Pages publication and real public checks — authorized; pending.
+
+Announce completed stages in commentary and continue without ending the task.
+No declaration of full completion until all stages and hosted release checks pass.

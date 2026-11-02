@@ -1,5 +1,29 @@
 # LifeCity3D — focused implementation context
 
+## Current owner — comprehensive twelve-stage upgrade (2026-11-02)
+- Execute docs/specs/LifeCity-Comprehensive-Upgrade-2026-11-02.md in order, announce
+  each completed stage in commentary and continue without ending the task.
+- Current stage1: ONE shop taxonomy; preserve lower Roads and absorb lighting;
+  preserve upper Cars and absorb the old vehicle category. Preserve all products,
+  except the explicitly retired lower skyscraper/palace cards, and all owned data.
+- Then common menu grammar, full-catalog base geometry/variants, category-specific
+  levels through40 with authoritative guards, measured economic rebalance, MM:SS
+  timer, camera-relative A/D strafing and RIGHT-button drag only, remove fixed
+  instruction box, polish, preservation audit, full checks and automatic release.
+- Automatic main/GitHub Pages publication remains authorized after all checks.
+- Progress: docs/evidence/comprehensive-upgrade/progress.md. No agents requested.
+
+## Published baseline — living city complete
+- PR11/main43771049, Pages41388879374/deployment7484444595 succeeded,141 checks/31
+  files and all39 browser journeys, lint/types/build. world-command v5 and additive
+  prayer/envelope migrations deployed first. Eight towers38–250×4m, residents,
+  prayers, inventory/shop and coordinate-free tools verified on the public site.
+- Real cached-old-worker upgrade, independent empty-browser cloud restore/logout,
+ 114 pictures and mobile/RTL cancel passed. Diagnostic account/sessions/game rows
+  are0; local credentials removed. Original ledger/paid-basis fingerprints match.
+- Evidence: docs/evidence/living-city-publication. Historical in-progress statements
+  below describe earlier checkpoints, not the current published baseline.
+
 ## Active owner request — living city (2026-11-02)
 - Authorized implementation and publication after all checks: seamless roads and
   move ghosts, PC/mouse control and modern avatar, prayers plus daily5/5 bonus,
