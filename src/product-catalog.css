@@ -1,0 +1,60 @@
+/* All catalog sources contribute cards to the same grid and card template. */
+.modern-game .unified-product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;width:100%;min-width:0;margin:14px 0 20px;align-items:stretch}
+.modern-game .unified-product-grid>.product-card{display:flex;flex-direction:column;align-items:stretch;gap:0;min-width:0;max-width:none;min-height:0;margin:0;padding:0;overflow:hidden;text-align:start;border:1px solid var(--border);border-radius:16px;background:var(--surface);color:var(--text);box-shadow:none;cursor:default}
+.modern-game .product-card .product-card-image{display:block;width:calc(100% - 20px);min-width:0;min-height:0;height:auto;max-height:none;aspect-ratio:4/3;padding:0;margin:10px;border:0;border-radius:10px;background:#d4e5de;overflow:hidden;cursor:pointer}
+.modern-game .product-card-image .asset-photo{display:block;width:100%;height:100%;max-height:none;aspect-ratio:4/3;object-fit:cover;border-radius:10px;margin:0}
+.modern-game .product-card .product-card-copy{display:flex;flex:1;flex-direction:column;align-items:stretch;min-width:0;padding:4px 14px 14px;gap:9px}
+.modern-game .product-card .product-card-access{display:flex;align-items:center;min-height:30px;text-align:start}
+.modern-game .product-card-access .product-access{display:flex;align-items:center;gap:5px;white-space:normal;font-size:10px;line-height:1.7;margin:0;text-align:start;justify-content:flex-start}
+.modern-game .product-card h3{font-size:15px;line-height:1.7;min-height:27px;margin:0;color:var(--text);text-align:start;overflow-wrap:anywhere}
+.modern-game .product-card .product-card-price{display:block;font-size:19px;line-height:1.6;font-weight:800;color:var(--gold-text);margin:0;text-align:start;overflow-wrap:anywhere}
+.modern-game .product-card-price>span{font-size:inherit;color:inherit}
+.modern-game .product-card .product-card-caption{display:block;min-height:32px;font-size:10px;line-height:1.7;color:var(--muted);margin:0;text-align:start}
+.modern-game .product-card .product-card-description{font-size:11px;line-height:1.8;color:var(--muted)}
+.modern-game .product-card .product-card-meta{display:grid;gap:5px;font-size:10px;line-height:1.7;color:var(--muted);padding:8px 0;border-top:1px solid var(--border);min-height:34px;text-align:start}
+.modern-game .product-card-meta>span{display:block}
+.modern-game .product-card .product-card-action{width:100%;min-width:0;min-height:44px;height:auto;display:flex;align-items:center;justify-content:center;margin: auto 0 0;padding:9px 11px;border:1px solid #8be1c43a;border-radius:10px;background:#8be1c416;color:var(--mint);font-size:11px;font-weight:700;line-height:1.7;white-space:normal;overflow-wrap:anywhere}
+.modern-game .product-card-action:hover:not(:disabled){background:#8be1c429}
+.modern-game .product-card-action:disabled{opacity:.5;cursor:not-allowed}
+.modern-game .product-card[data-locked=true]{border-color:#f4cf832a}
+.modern-game .product-card-image:focus-visible,.modern-game .product-card-action:focus-visible{outline:2px solid var(--mint);outline-offset:-3px}
+.modern-game .shop-world-collection,.modern-game .shop-horticulture{display:block;width:100%;min-width:0;margin:0;padding:0;border:0;box-shadow:none;background:none}
+.modern-game .catalog-empty{display:none;padding:22px;text-align:center;border:1px solid var(--border);border-radius:14px;color:var(--muted);font-size:13px;line-height:1.8}
+.modern-game .shop-page:has(.unified-product-grid:empty) .catalog-empty{display:block}
+.modern-game .shop-configuration,.modern-game .shop-owned-tools,.modern-game .garden-care{border:1px solid var(--border);border-radius:13px;padding:0 13px;margin:12px 0 16px;background:var(--surface)}
+.modern-game :is(.shop-configuration,.shop-owned-tools,.garden-care)>summary{min-height:44px;align-content:center;cursor:pointer;font-size:12px;line-height:1.8;padding-block:10px;color:var(--text)}
+.modern-game :is(.shop-configuration,.shop-owned-tools,.garden-care)[open]{padding-bottom:14px}
+.modern-game .shop-construction-options{display:flex;gap:10px;align-items:start;margin-block:12px}
+.modern-game .shop-construction-options .shop-configuration{flex:1;min-width:0;margin:0}
+.modern-game .shop-project-toggle{min-height:44px;padding:9px 12px;border:1px solid var(--border);border-radius:12px;color:var(--mint);background:var(--surface);font-size:11px;line-height:1.8}
+.modern-game .shop-construction-options:has(details[open]){flex-wrap:wrap}
+.modern-game .shop-construction-options details[open]{flex-basis:100%}
+.modern-game .shop-height-control{margin-block:12px;min-width:0}
+.modern-game .shop-height-control input[type=range]{max-width:100%}
+.modern-game .shop-height-control p,.modern-game .catalog-note{font-size:11px;line-height:1.9;color:var(--muted)}
+.modern-game .product-detail{display:grid;gap:14px}
+.modern-game .product-detail p{font-size:13px;line-height:1.9}
+.modern-game .product-detail>strong{font-size:23px;color:var(--gold-text)}
+.modern-game .product-detail .shop-item-preview{height:240px;min-height:0;border-radius:13px;overflow:hidden}
+.modern-game .owned-world-items{gap:14px}
+.modern-game .owned-world-items>button,.modern-game .touch-cards>button{border-radius:14px;min-width:0;line-height:1.7}
+.modern-game .owned-world-items .asset-photo,.modern-game .touch-cards .asset-photo{aspect-ratio:4/3;width:100%;object-fit:cover;border-radius:10px}
+.modern-game .walk-jump-trigger{position:fixed;bottom:calc(var(--dock-clearance) + 18px);inset-inline:auto;left:auto;right:calc(72px + env(safe-area-inset-right));display:grid;place-items:center;gap:1px;width:50px;height:44px;min-height:44px;padding:4px;border:1px solid var(--edge);border-radius:14px;background:var(--chrome);color:var(--mint);z-index:21;touch-action:manipulation}
+.modern-game .walk-help-trigger{inset-inline:auto;left:auto;right:max(14px,env(safe-area-inset-right))}
+.modern-game .walk-jump-trigger span{font-size:10px}
+.modern-game[data-game-panel]:not([data-game-panel=world]) .walk-jump-trigger{visibility:hidden;pointer-events:none}
+@media(pointer:fine){.modern-game .walk-jump-trigger{display:none}}
+@media(max-width:600px){
+ .modern-game .unified-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .modern-game .product-card .product-card-image{padding:0;margin:7px;width:calc(100% - 14px)}
+ .modern-game .product-card .product-card-copy{padding:3px 10px 10px;gap:7px}
+ .modern-game .product-card h3{font-size:13px}
+ .modern-game .product-card .product-card-price{font-size:15px}
+ .modern-game .product-card .product-card-access{min-height:36px}
+ .modern-game .product-card .product-card-caption{min-height:36px;font-size:9px}
+ .modern-game .product-card-access .product-access{font-size:9px}
+ .modern-game .product-card .product-card-action{font-size:10px;padding:7px 8px}
+ .modern-game .product-card .product-card-meta{font-size:9px}
+}
+@media(max-width:350px){.modern-game .unified-product-grid{grid-template-columns:minmax(0,1fr)}}
+@media(orientation:landscape) and (max-height:600px){.modern-game .unified-product-grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}}

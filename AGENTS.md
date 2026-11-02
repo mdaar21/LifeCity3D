@@ -278,3 +278,17 @@ Evidence: docs/evidence/camera-menu-review. Published PR14/maine8b72761,
 Pages41432629490 succeeded. Real public guest browser verified custom distance and
 zoom after Missions/Focus/Shop, More's3 groups and working wheel zoom-out, with
 unchanged wallets and no console errors. No cloud-account writes for this release.
+
+## Current owner — one product-list design, running and jumping
+The owner clarified that ready-made/staged products and families still looked like
+separate catalogs, in every category. Use one real grid and shared ProductCard for
+all6 Shop categories; retain every SKU, price, unlock gate and command. Large 3D
+preview is on request, no always-visible side showcase. Advanced gardening links
+to Shop for purchases and preserves all paid care/harvest/relocation operations.
+Improve articulated locomotion; physical Left Shift runs and Space jumps in place
+or with every WASD direction. Transient ballistic jump remains above the trusted
+ground/floor pose, with ceiling clearance; no double-jump, paid-floor bypass or
+server-speed change. Preserve prior camera-return fix and wallets.4 focused unit
+tests,4 unique browser cases and36 catalog render samples verified across runs;
+lint/types/build pass. No backend/schema/Auth changes. Automatic publication remains
+authorized. Evidence: docs/evidence/unified-catalog-jump. Publication pending.
