@@ -1,0 +1,9 @@
+{
+  "designs": 8,
+  "minFloors": 38,
+  "floorMeters": 4,
+  "maxFloors": 250,
+  "maxMeters": 1000,
+  "previewsFree": true,
+  "initialOwnedEntities": 0
+}

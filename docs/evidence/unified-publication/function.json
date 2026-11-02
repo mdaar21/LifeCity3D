@@ -1,0 +1,11 @@
+{
+  "version": 4,
+  "status": "ACTIVE",
+  "id": "8458f805-27b7-4166-a67a-252af44893d6",
+  "verify_jwt": false,
+  "authenticationInsideFunction": true,
+  "entrypoint": "world-command/index.ts",
+  "schemaChanged": false,
+  "compatibleWithExistingClients": true,
+  "source": "948e948a8ef24cbed6771c527afb50ed1447ad49"
+}

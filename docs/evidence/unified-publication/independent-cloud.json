@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "actualPublicSite": true,
+  "independentEmptyBrowser": true,
+  "passwordLogin": true,
+  "newCatalog": true,
+  "cloudEntitiesAndComponentsRestored": true,
+  "walletsAndTasksRestored": true,
+  "logout": true,
+  "errors": [],
+  "fixtureCleanupPending": false,
+  "fixtureRemoved": true
+}

@@ -12,7 +12,7 @@ export interface Installments {total:string;paid:string;remaining:string;payment
 export interface Parcel extends BaseEntity {kind:'parcel';polygon:Point[];zone:'mixed'|'residential'|'commercial'|'services';initial:boolean;title_history:{action:string;at:string;parents:string[]}[];factors:LandFactors;financing:Installments|null}
 export interface TerrainOperation {id:string;indices:number[];before:number[];after:number[];component_ids:string[];created_at:string}
 export interface Terrain extends BaseEntity {kind:'terrain';side:number;heights_cm:number[];operations:TerrainOperation[]}
-export type Archetype='house'|'villa'|'restaurant'|'mall'|'hotel'|'resort'|'school'|'university'|'clinic'|'hospital'|'garage'|'museum'|'office';
+export type Archetype='house'|'villa'|'restaurant'|'mall'|'hotel'|'resort'|'school'|'university'|'clinic'|'hospital'|'garage'|'museum'|'office'|'tower_glass'|'tower_round'|'tower_twist'|'tower_steps'|'tower_twin'|'tower_spire'|'tower_sail'|'tower_crown';
 export type RoomUse='bedroom'|'living'|'kitchen'|'bathroom'|'shop'|'dining'|'cinema'|'guest'|'reception'|'classroom'|'waiting'|'treatment'|'parking'|'exhibit'|'office';
 export interface Room extends Rect {id:string;name:string;use:RoomUse;door:Point;material:string;capacity:number}
 export interface FloorPlan {index:number;height:number;rooms:Room[];corridor:Rect;stairs:Rect|null;elevator:Rect|null;entry:Point;area:number}
@@ -20,7 +20,7 @@ export interface BuildStage {id:string;type:'foundation'|'frame'|'floor'|'roof'|
 export interface MaterialAssignment {surface:'walls'|'roof'|'floor'|'stairs'|'doors'|'windows';floor:number|null;room_id:string|null;material:string;quality:number;component_id:string}
 export interface Tenant {id:string;room_id:string;name:string;type:'retail'|'food'|'cinema';rent_per_hour:string}
 export interface Restaurant {menu:{id:string;name:string;category:string;price:string}[];opens:number;closes:number;served:number;satisfaction:number}
-export interface ConstructionPricing {version:2;total:string;raw_total:string;components:Record<string,string>}
+export interface ConstructionPricing {version:2;total:string;tower_floor_price?:string;raw_total:string;components:Record<string,string>}
 export interface Building extends BaseEntity,Rect {kind:'building';style?:'forest'|'desert'|'coastal';pricing?:ConstructionPricing;parcel_id:string;archetype:Archetype;rotation:0|90;y:number;floors:FloorPlan[];stages:BuildStage[];contractor:string;materials:MaterialAssignment[];tenants:Tenant[];staff:number;capacity:number;restaurant?:Restaurant;hotel:{rooms:{room_id:string;type:'standard'|'suite';rate:string}[];occupied:number;arrivals:number;last_tick_at:string}|null;last_income_at:string;opened_at:string|null}
 export type Network='road'|'power'|'water'|'sewage'|'metro';
 export type NodeRole='junction'|'plant'|'solar'|'battery'|'transformer'|'streetlight'|'tank'|'pump'|'treatment'|'bus_stop'|'metro_station'|'depot'|'consumer';

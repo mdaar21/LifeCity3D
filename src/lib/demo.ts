@@ -61,6 +61,8 @@ function perform(record:DemoRecord,action:string,p:Record<string,unknown>,key:st
   let v=s.prayers.find(v=>v.day===day&&v.prayer===prayer);if(!v){v={id:uuid(),day,prayer,status:'pending',updated_at:iso};s.prayers.push(v);}
   const value=(status:PrayerStatus)=>status==='completed'?PRAYER_REWARDS[prayer]:status==='missed'?-100:0;
   if(v.status!==status){if(value(v.status))coins(-value(v.status),'prayer:'+prayer+':correction');const xpkey=day+prayer;const xp=status==='completed'&&!record.prayer_xp.includes(xpkey)?PRAYER_REWARDS[prayer]:0;if(xp)record.prayer_xp.push(xpkey);if(value(status))coins(value(status),'prayer:'+prayer+':'+status,xp);v.status=status;v.updated_at=iso;}
+  const reason='prayer:daily_bonus:'+day,net=s.ledger.filter(e=>e.reason===reason).reduce((n,e)=>n+e.delta,0),eligible=s.prayers.filter(e=>e.day===day&&e.status==='completed').length===5;
+  if((day===(s.approved_tasks?.calendar.day??s.local_day)&&!s.approved_tasks?.calendar.paused)||net!==0){const target=eligible?50:0;if(target!==net)coins(target-net,reason,eligible&&!s.ledger.some(e=>e.reason===reason&&e.delta>0)?50:0);}
  }else if(action==='project_start'){
   s.projects??=[];
   if(s.projects.some(v=>v.status==='saving'))throw new ApiError('PROJECT_ACTIVE');

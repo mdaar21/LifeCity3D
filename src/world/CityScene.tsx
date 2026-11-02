@@ -44,7 +44,7 @@ interface SceneProps {
 }
 
 export interface LifeCityRenderMetrics {
-  camera?: {x:number;y:number;z:number;zoom:number}
+  camera?: {x:number;y:number;z:number;zoom:number;projection:number[];inverse:number[]}
   scene: 'city' | 'interior'
   startedAtMs: number
   lastRenderedAtMs: number | null
@@ -105,7 +105,7 @@ function RendererDiagnostics({ interior,publish=true }: { interior: boolean;publ
         if (metrics.frameGapsMs.length >= 240) metrics.frameGapsMs.shift()
         metrics.frameGapsMs.push(now - metrics.lastRenderedAtMs)
       }
-      metrics.camera={x:camera.position.x,y:camera.position.y,z:camera.position.z,zoom:camera.zoom}
+      metrics.camera={x:camera.position.x,y:camera.position.y,z:camera.position.z,zoom:camera.zoom,projection:camera.projectionMatrix.toArray(),inverse:camera.matrixWorldInverse.toArray()}
       metrics.renderedFrames += frame - previousRendererFrame.current
       gl.domElement.dataset.renderedFrames = String(metrics.renderedFrames)
       previousRendererFrame.current = frame

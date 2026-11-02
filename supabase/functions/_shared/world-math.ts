@@ -23,8 +23,8 @@ export function heightAt(t:Terrain|undefined,x:number,z:number):number{if(!t)ret
 export function flatHeight(c:WorldContext,realm:Realm,r:Rect){const t=terrainAt(c,realm),heights:number[]=[];const xs=[r.x,...Array.from({length:Math.floor(r.width)},(_,i)=>Math.ceil(r.x)+i).filter(x=>x>r.x&&x<r.x+r.width),r.x+r.width],zs=[r.z,...Array.from({length:Math.floor(r.depth)},(_,i)=>Math.ceil(r.z)+i).filter(z=>z>r.z&&z<r.z+r.depth),r.z+r.depth];for(const x of xs)for(const z of zs)heights.push(heightAt(t,x,z));if(Math.max(...heights)-Math.min(...heights)>.12||Math.min(...heights)<-.05)return fail('FOUNDATION_NOT_FLAT');return heights.reduce((a,b)=>a+b,0)/heights.length;}
 export function buildingRect(b:Building):Rect{return {x:b.x,z:b.z,width:b.rotation===90?b.depth:b.width,depth:b.rotation===90?b.width:b.depth};}
 export function pointOnOwnedLand(c:WorldContext,realm:Realm,p:Point):boolean{return c.world.entities.some(e=>e.kind==='parcel'&&e.realm===realm&&e.status==='active'&&contains(bounds(e.polygon),p));}
-export function surfaceBlocked(c:WorldContext,realm:Realm,r:Rect,ignore?:string):boolean{
- if(c.legacy.some(e=>e.realm===realm&&overlap(r,e,.15)))return true;
+export function surfaceBlocked(c:WorldContext,realm:Realm,r:Rect,ignore?:string,legacyPadding=.15):boolean{
+ if(c.legacy.some(e=>e.realm===realm&&overlap(r,e,legacyPadding)))return true;
  for(const e of c.world.entities){if(e.realm!==realm||e.id===ignore||e.status!=='active')continue;if(e.kind==='building'&&overlap(r,buildingRect(e),.15)||e.kind==='decoration'&&overlap(r,e,.1))return true;
   if(e.kind==='node'&&e.y>=heightAt(terrainAt(c,realm),e.x,e.z)-.2&&contains({x:r.x-.4,z:r.z-.4,width:r.width+.8,depth:r.depth+.8},e))return true;
   if(e.kind==='edge'&&e.depth>=0){const a=c.world.entities.find(v=>v.id===e.from),b=c.world.entities.find(v=>v.id===e.to);if(a?.kind==='node'&&b?.kind==='node'&&segmentHitsRect(a,b,r,e.network==='road'?(e.directed?e.lanes*1.6:e.lanes*3)/2:.2))return true;}
@@ -32,3 +32,8 @@ export function surfaceBlocked(c:WorldContext,realm:Realm,r:Rect,ignore?:string)
 }
 export function segmentHitsRect(a:Point,b:Point,r:Rect,padding=0){let low=0,high=1;const dx=b.x-a.x,dz=b.z-a.z;for(const [p,q]of [[-dx,a.x-r.x+padding],[dx,r.x+r.width+padding-a.x],[-dz,a.z-r.z+padding],[dz,r.z+r.depth+padding-a.z]]){if(Math.abs(p)<1e-10){if(q<0)return false;continue;}const t=q/p;if(p<0)low=Math.max(low,t);else high=Math.min(high,t);if(low>high)return false;}return true;}
 export function pointSegmentDistance(p:Point,a:Point,b:Point){const dx=b.x-a.x,dz=b.z-a.z,l=dx*dx+dz*dz,t=l?Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.z-a.z)*dz)/l)):0;return distance(p,{x:a.x+dx*t,z:a.z+dz*t});}
+
+export function floorElevation(b:import('./world-types.ts').Building,index:number):number {
+ if(index<0)return index*3;return b.floors.filter(f=>f.index>=0&&f.index<index).reduce((n,f)=>n+f.height,0);
+}
+export function buildingHeight(b:import('./world-types.ts').Building):number{return b.floors.filter(f=>f.index>=0).reduce((n,f)=>n+f.height,0);}

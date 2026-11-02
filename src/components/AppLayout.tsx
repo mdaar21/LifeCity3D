@@ -1,7 +1,7 @@
-import {closeCityPanels,openCityTool} from '../world/city-tools';
+import {closeCityPanels} from '../world/city-tools';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { Armchair,Car,Building2, Hammer, Route as RoadIcon, Trees, CheckCheck, CloudOff, Coins, Focus, Heart, House, LayoutDashboard, ListChecks, Menu, MoonStar, Settings, ShoppingBag, TrendingUp, X } from 'lucide-react';
+import { Armchair,Car,Building2,  Route as RoadIcon, Trees, CheckCheck, CloudOff, Coins, Focus, Heart, House, LayoutDashboard, ListChecks, Menu, MoonStar, Settings, ShoppingBag, TrendingUp, X } from 'lucide-react';
 import { useGame } from '../lib/game';
 import { useLocale } from '../lib/locale';
 import { levelFromXp } from '../lib/rules';
@@ -55,7 +55,7 @@ export default function AppLayout() {
   const conflict = saveStatus === 'conflict';
   const statusLabel = !online ? t('غير متصل', 'Offline') : conflict ? t('راجع المزامنة', 'Check sync') : saveStatus === 'saving' ? t('جارٍ الحفظ…', 'Saving…') : mode === 'demo' ? t('محفوظ محليًا', 'Saved locally') : t('تم الحفظ', 'Saved');
   useEffect(() => {
-    if (!isCity){heading.current?.focus();closeCityPanels();}
+    if (!isCity){heading.current?.focus();closeCityPanels(location.pathname==='/shop');}
     const close = (event: KeyboardEvent) => {
       // A confirmation dialog owns Escape while it is open.
       if (event.key === 'Escape' && !document.querySelector('[aria-modal="true"]') && !isCity) {
@@ -98,7 +98,7 @@ export default function AppLayout() {
       <button className={`game-dock-item ${menu ? 'active' : ''}`} aria-label={t('قائمة اللعبة', 'Game menu')} aria-haspopup="dialog" onClick={() => {closeCityPanels(true);setMenu(true);}}><span className="game-dock-icon"><Menu size={23}/></span><strong>{t('المزيد', 'More')}</strong><small>{t('مساحاتك', 'YOUR SPACES')}</small></button>
     </nav>
     <Modal open={menu} onClose={() => setMenu(false)} title={t('قائمة اللعبة', 'Game menu')}>
-      <div className="game-menu-tools">      {([{tab:'build',icon:Hammer,ar:'البناء',en:'Build'},{tab:'networks',icon:RoadIcon,ar:'الطرق',en:'Roads'},{tab:'garden',icon:Trees,ar:'الطبيعة',en:'Greenery'},{tab:'furniture',icon:Armchair,ar:'الأثاث',en:'Furniture'},{tab:'cars',icon:Car,ar:'المركبات',en:'Vehicles'}] as const).map(({tab,icon:Icon,ar,en})=><button key={tab} className="game-menu-tool" aria-label={t(ar,en)} onClick={()=>{setMenu(false);if(!useTouchTools.getState().advanced){openCityTool(tab==='build'?'build':tab==='garden'?'nature':tab==='furniture'?'furniture':tab==='cars'?'vehicles':'road');navigate('/city');return;}navigate('/city');useWorldUI.getState().set({open:true,tab:tab==='furniture'?'build':tab,replay:null,...(tab==='networks'?{overlay:'road'}:{})});}}><span className="game-dock-icon"><Icon size={22}/></span><strong>{t(ar,en)}</strong><small>{t('أدوات العالم','WORLD TOOLS')}</small></button>)}
+      <div className="game-menu-tools"><button className="game-menu-tool" onClick={()=>{setMenu(false);navigate('/city');useWorldUI.getState().set({open:true,tab:'residents',ghost:null,replay:null});}}><span className="game-dock-icon"><Building2 size={22}/></span><strong>{t('الأحياء والخدمات','Districts & services')}</strong><small>{t('السكان وتطور مدينتك','PEOPLE & CITY PROGRESS')}</small></button>      {([{tab:'networks',icon:RoadIcon,ar:'الطرق',en:'Roads'},{tab:'garden',icon:Trees,ar:'الطبيعة',en:'Greenery'},{tab:'furniture',icon:Armchair,ar:'الأثاث',en:'Furniture'},{tab:'cars',icon:Car,ar:'المركبات',en:'Vehicles'}] as const).map(({tab,icon:Icon,ar,en})=><button key={tab} className="game-menu-tool" aria-label={t(ar,en)} onClick={()=>{setMenu(false);navigate('/shop?section='+({garden:'plants',furniture:'furniture',cars:'vehicles',networks:'roads'}[tab]));}}><span className="game-dock-icon"><Icon size={22}/></span><strong>{t(ar,en)}</strong><small>{t('أدوات العالم','WORLD TOOLS')}</small></button>)}
       </div>
       <div className="game-menu-grid">{extra.map(({path,icon:Icon,label,hint}) => <Link key={path} to={path} onClick={() => setMenu(false)}><span><Icon size={25}/></span><strong>{label}</strong><small>{hint}</small></Link>)}</div>
       <div className="game-menu-footer">{state?.v6?.fx&&<a className="game-mode" href="https://www.exchangerate-api.com" target="_blank" rel="noreferrer">Rates By Exchange Rate API</a>}<span data-testid="game-release">{t('واجهة اللعب الجديدة · ١٦ مهمة','New game interface · 16 missions')}</span>{import.meta.env.PROD&&<a href={appPath('api/update.html')}>{t('تحميل أحدث نسخة مع حفظ التقدّم','Load latest version & keep progress')}</a>}<button className="language-switch button button-secondary" onClick={() => setLanguage(language === 'ar-SA' ? 'en' : 'ar-SA')}>{language === 'ar-SA' ? 'English' : 'العربية'}</button><Link to="/" onClick={() => setMenu(false)}>{t('الشاشة الرئيسية', 'Title screen')}</Link><span>{mode === 'demo' ? t('تجربة محلية', 'Local demo') : t('LifeCity 3D', 'LifeCity 3D')}</span></div>

@@ -195,3 +195,29 @@ JSONB. Old buildings keep legacy rates and every historical paid component;
 MAIN/MAD, FX, idempotency, refunds and saves must stay intact. No schema migration
 is necessary. Compatible world-command update is required before any FUTURE
 frontend release, but do not deploy it now. See PROJECT_CONTEXT and unified-construction.
+
+
+## Latest owner — publish unified menus/prices: complete
+The owner explicitly approved publication after verification. PR10/mainfc3a913,
+Pages41338417932 and deployment7477529984 succeeded:132 tests,33 browser journeys,
+lint/types/build. Hosted world-command v4 deployed first; legacy rates/refunds,
+new6500 school, price/confirmation guards, idempotency and MAD/real FX passed.
+Real public cached-old-worker upgrade, touch/cancel, Arabic, rendered school/floor,
+independent cloud restoration and logout passed. Only the exact diagnostic account
+was deleted; all related game/session counts0 and prior paid-cost fingerprint
+unchanged. No schema reset or seeded real-city objects. Earlier no-publication
+notes are historical for this released increment. See unified-publication evidence.
+
+
+## Current owner — intuitive living city upgrade (authorized publication)
+Owner explicitly approved all recorded road/PC/avatar/prayer/shop/inventory/
+1000m skyline/coordinate-free/menu fixes and the eight proposed living-city
+improvements. A completed purchased home adds one resident who walks and returns.
+This supersedes the historical resident cancellation. No free purchased assets,
+wallet merges, resets or legacy-cost changes. Keep original16 tasks, self-reported
+prayers, MAIN-only rewards, MAD isolation, dated FX and exact50% paid-cost refunds.
+Continue existing branch and publish on GitHub Pages AFTER all verification.
+No agents requested; work sequentially.
+Latest clarification: towers start38 floors,4m each (152m); each additional floor
+is incrementally priced, up to250 floors/1000m. Never start a purchase at1000m
+unless the player explicitly chooses that floor count.

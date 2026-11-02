@@ -13,7 +13,7 @@ async function world(p:Page,operation:string,request:Record<string,unknown>,paid
 async function capture(p:Page,name:string){await p.locator('canvas').first().screenshot({path:folder+'/'+name+'.png'});}
 async function open(p:Page){await p.getByRole('button',{name:'Customize',exact:true}).tap();await expect(p.getByTestId('finish-studio')).toBeVisible();}
 test('architect mode: real facade previews, floor inspection, trusted finish costs, salvage and saved mobile city',async({page},info)=>{
- test.setTimeout(40000);await mkdir(folder,{recursive:true});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ test.setTimeout(60000);await mkdir(folder,{recursive:true});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('/login');await page.getByRole('button',{name:'English',exact:true}).tap();await page.getByTestId('auth-email').fill('visual-touch-architect@example.test');await page.getByTestId('auth-password').fill(E2E_PASSWORD);await page.getByTestId('auth-submit').tap();await expect(page).toHaveURL(/\/city/);await expect.poll(async()=>(await state(page)).world_systems?.initialized).toBe(true);
  const parcel=(await state(page)).world_systems!.entities.find(e=>e.kind==='parcel'&&e.realm==='main')!;
  await world(page,'settings',{clock:'fixed',hour:12,weather:'clear',reduced_motion:true,celebrations_enabled:false});

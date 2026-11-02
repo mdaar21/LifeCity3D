@@ -49,6 +49,7 @@ export default function Stats() {
     if (reason.startsWith('task:')) return taskNames[reason.split(':')[1]] ?? t('إنجاز مهمة', 'Task completed');
     if (reason === 'study:minutes' || reason === 'study_minutes') return t('دقائق دراسة معتمدة', 'Credited study minutes');
     if (reason === 'study:bonus' || reason === 'study_bonus') return t('مكافأة ساعة الدراسة', 'Study hour bonus');
+    if(reason.startsWith('prayer:daily_bonus:'))return item.delta>0?t('مكافأة إكمال الصلوات الخمس','Five daily prayers bonus'):t('تسوية مكافأة الصلوات الخمس','Daily prayers bonus adjustment');
     if (reason.startsWith('prayer:')) {
       const [, prayer, status] = reason.split(':');
       const prayers: Record<string, string> = { fajr: t('الفجر', 'Fajr'), dhuhr: t('الظهر', 'Dhuhr'), asr: t('العصر', 'Asr'), maghrib: t('المغرب', 'Maghrib'), isha: t('العشاء', 'Isha') };

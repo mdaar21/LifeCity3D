@@ -16,3 +16,13 @@ export function requestFor(d:TouchDraft,game:GameSnapshot,realm:Realm){const req
 export function canRotate(d:TouchDraft){return d.operation.startsWith('legacy_')||d.operation==='furniture_place'||d.operation==='building_start'||d.operation==='building_move';}
 export function targetEntity(game:GameSnapshot,t:Target|null):WorldEntity|undefined{return t?.source==='world'?game.world_systems?.entities.find(e=>e.id===t.id&&e.realm===t.realm&&e.status==='active'):undefined;}
 export function snapPoint(p:Point,step=1):Point{return {x:Math.round(p.x/step)*step,z:Math.round(p.z/step)*step};}
+
+/** Magnetic joins for owned tile roads. Never changes occupancy or paid receipts. */
+export function snapLegacyRoad(game:GameSnapshot,d:TouchDraft,p:Point,realm:Realm):Point {
+ const item=game.catalog.find(i=>i.id===d.catalogId);if(!item||!['road','path'].includes(item.model))return snapPoint(p,1);
+ const list=realm==='main'?game.placements:game.v6?.yuyi_placements??[];
+ let result=snapPoint(p,1),best=.8;
+ for(const v of list){if(v.id===d.request.placement_id)continue;const other=game.catalog.find(i=>i.id===v.catalog_id);if(other?.model!==item.model)continue;const [w,h]=footprint(other,v.rotation);
+ for(const candidate of [{x:v.x+w,z:v.z},{x:v.x-d.width,z:v.z},{x:v.x,z:v.z+h},{x:v.x,z:v.z-d.depth}]){const distance=Math.hypot(candidate.x-p.x,candidate.z-p.z);if(distance<best){best=distance;result=candidate;}}}
+ return result;
+}

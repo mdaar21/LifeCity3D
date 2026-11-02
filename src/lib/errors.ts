@@ -1,5 +1,6 @@
 export class ApiError extends Error {constructor(public code:string){super(code);this.name='ApiError';}}
 const messages:Record<string,[string,string]>={
+ FLOOR_LIMIT:['وصلت إلى حد الطوابق لهذا النوع. الأبراج تصل إلى ٢٥٠ طابقًا و١٠٠٠ متر.','The floor limit for this type has been reached. Towers support 250 floors and 1000m.'],
  NO_ROAD_CHANGE:['هذا المسار موجود بالفعل. ارسم امتدادًا جديدًا.','This route already exists. Draw a new extension.'],
  GARAGE_NOT_NEAR:['قد السيارة إلى مخرج المرآب ثم اضغط اركن.','Drive close to the garage exit, then tap Park.'],
  EXIT_BLOCKED:['المخرج مشغول. أبعد العناصر أو اختر مرآبًا بمخرج خالٍ.','The exit is blocked. Clear nearby objects or choose a garage with a clear exit.'],

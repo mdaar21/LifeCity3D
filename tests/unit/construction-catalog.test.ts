@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {BUILDING_CATALOG} from '../../supabase/functions/_shared/building-catalog';
+import {BUILDING_CATALOG,isTower} from '../../supabase/functions/_shared/building-catalog';
 import {constructionPricing,constructionQuotedTotals,defaultRooms,generatePlans,estimateConstruction} from '../../supabase/functions/_shared/world-planner';
 import {amount,money,priced} from '../../supabase/functions/_shared/world-math';
 import {emptyWorld,worldTransition,previewTransition} from '../../supabase/functions/_shared/world-engine';
@@ -21,15 +21,15 @@ function fixture(realm:'main'|'yuyi'='main'){
 describe('authoritative complete construction catalog',()=>{
  it('prices the small house at800 and every other basic type higher, with exact payable totals',()=>{
   expect(BUILDING_CATALOG.house.price).toBe(800);
-  for(const [id,p] of Object.entries(BUILDING_CATALOG))for(const floors of [1,2,3])for(const contractor of ['moss','dune','sky']){
+  for(const [id,p] of Object.entries(BUILDING_CATALOG))for(const floors of (isTower(id)?[38,39,40]:[1,2,3]))for(const contractor of ['moss','dune','sky']){
    const plans=generatePlans({...p,archetype:id as Archetype,floors,rooms:defaultRooms(id as Archetype),accessible:false,budget:'1000000'},{x:0,z:0,width:64,depth:64}),schedule=constructionPricing(p.width,p.depth,plans,contractor,id as Archetype);
    expect(Object.values(schedule.components).reduce((sum,v)=>sum+amount(v),0n)).toBe(amount(schedule.total));expect(Object.values(schedule.components).every(v=>amount(v)>0n&&amount(v)%100n===0n)).toBe(true);
-   if(contractor==='moss'&&floors===1)expect(schedule.total).toBe(p.price+'.0000');
+   if(contractor==='moss'&&floors===(isTower(id)?38:1))expect(schedule.total).toBe(p.price+'.0000');
    if(id!=='house')expect(p.price).toBeGreaterThan(800);
   }
  });
  it('settles every actual stage at the advertised complete cost, ignores injected prices and refunds exactly50%',()=>{
-  for(const id of Object.keys(BUILDING_CATALOG) as Archetype[]){const f=fixture(),before=f.c.balances.MAIN,b=f.start(id);f.finish(b);expect(amount(before)-amount(f.c.balances.MAIN)).toBe(BigInt(BUILDING_CATALOG[id].price)*10000n);expect(f.get(b).pricing!.total).toBe(BUILDING_CATALOG[id].price+'.0000');const paid=structuredClone(f.c.world.components);const q=f.quote('building_demolish',{building_id:b,destroy_furniture_ids:[],confirm_dependents:true});expect(q.refunds.reduce((n,l)=>n+amount(l.amount),0n)).toBe(BigInt(BUILDING_CATALOG[id].price)*5000n);f.commit(q);for(const part of paid)expect(f.c.world.components.find(c=>c.id===part.id)?.paid).toBe(part.paid);}
+  for(const id of Object.keys(BUILDING_CATALOG).filter(id=>!isTower(id)) as Archetype[]){const f=fixture(),before=f.c.balances.MAIN,b=f.start(id);f.finish(b);expect(amount(before)-amount(f.c.balances.MAIN)).toBe(BigInt(BUILDING_CATALOG[id].price)*10000n);expect(f.get(b).pricing!.total).toBe(BUILDING_CATALOG[id].price+'.0000');const paid=structuredClone(f.c.world.components);const q=f.quote('building_demolish',{building_id:b,destroy_furniture_ids:[],confirm_dependents:true});expect(q.refunds.reduce((n,l)=>n+amount(l.amount),0n)).toBe(BigInt(BUILDING_CATALOG[id].price)*5000n);f.commit(q);for(const part of paid)expect(f.c.world.components.find(c=>c.id===part.id)?.paid).toBe(part.paid);}
  });
  it('keeps existing partially paid buildings on their legacy rates and original cost bases',()=>{
   const f=fixture(),id=f.start('school'),b=f.get(id);delete b.pricing;const original=structuredClone(f.c.world.components),frame=f.quote('building_stage',{building_id:id,stage:'frame'});expect(frame.patch.bill.reduce((n,l)=>n+amount(l.canonical),0n)).toBe(amount(priced(b.width*b.depth,50,100)));f.commit(frame);for(const part of original)expect(f.c.world.components.find(c=>c.id===part.id)).toEqual(part);
@@ -41,6 +41,6 @@ describe('authoritative complete construction catalog',()=>{
   expect(estimateConstruction(12,12,1,'moss',false,undefined,'school')).toBe('6500.0000');expect(estimateConstruction(4,5,1,'moss',false,undefined,'school')).toBe('6500.0000');expect(estimateConstruction(12,12,2,'moss',false,undefined,'school')).toBe('11180.0000');expect(amount(estimateConstruction(14,14,1,'moss',false,undefined,'school'))).toBeGreaterThan(65000000n);expect(estimateConstruction(8,12,1,'dune',false,undefined,'house')).toBe('720.0000');
  });
  it('gives all13 types different geometry, bounded to their architecture and a mobile triangle budget',()=>{
-  const signatures=new Set<string>();for(const id of Object.keys(BUILDING_CATALOG) as Archetype[]){const shapes=identityGeometry(id,10,12,2,'#888888','#cccccc');signatures.add(JSON.stringify([shapes.roof.attributes.position.array,shapes.facade.attributes.position.array]));for(const g of [shapes.roof,shapes.facade]){g.computeBoundingBox();expect([...g.attributes.position.array].every(Number.isFinite)).toBe(true);expect(g.boundingBox!.min.x).toBeGreaterThanOrEqual(-.01);expect(g.boundingBox!.max.x).toBeLessThanOrEqual(10.2);expect(g.boundingBox!.min.z).toBeGreaterThanOrEqual(-.61);expect(g.boundingBox!.max.y).toBeLessThanOrEqual(8);expect(g.attributes.position.count/3).toBeLessThan(4500);g.dispose();}}expect(signatures.size).toBe(13);
+  const signatures=new Set<string>();for(const id of Object.keys(BUILDING_CATALOG).filter(id=>!isTower(id)) as Archetype[]){const shapes=identityGeometry(id,10,12,2,'#888888','#cccccc');signatures.add(JSON.stringify([shapes.roof.attributes.position.array,shapes.facade.attributes.position.array]));for(const g of [shapes.roof,shapes.facade]){g.computeBoundingBox();expect([...g.attributes.position.array].every(Number.isFinite)).toBe(true);expect(g.boundingBox!.min.x).toBeGreaterThanOrEqual(-.01);expect(g.boundingBox!.max.x).toBeLessThanOrEqual(10.2);expect(g.boundingBox!.min.z).toBeGreaterThanOrEqual(-.61);expect(g.boundingBox!.max.y).toBeLessThanOrEqual(8);expect(g.attributes.position.count/3).toBeLessThan(4500);g.dispose();}}expect(signatures.size).toBe(13);
  });
 });
