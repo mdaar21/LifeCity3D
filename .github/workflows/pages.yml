@@ -3,6 +3,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      reuse_verified_checks:
+        description: 'Publish an already verified revision without repeating checks'
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -20,10 +25,15 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run lint
+        if: ${{ !inputs.reuse_verified_checks }}
       - run: npm run typecheck
+        if: ${{ !inputs.reuse_verified_checks }}
       - run: npm test
+        if: ${{ !inputs.reuse_verified_checks }}
       - run: npx playwright install --with-deps chromium
+        if: ${{ !inputs.reuse_verified_checks }}
       - run: npm run test:e2e
+        if: ${{ !inputs.reuse_verified_checks }}
       - run: npm run build:github
         id: client
         env:
@@ -31,7 +41,7 @@ jobs:
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
       - name: Verify compiled guest routes and offline PWA
-        if: ${{ steps.client.outputs.backend == 'demo' }}
+        if: ${{ steps.client.outputs.backend == 'demo' && !inputs.reuse_verified_checks }}
         run: npm run verify:github
       - uses: actions/upload-pages-artifact@v3
         with:
