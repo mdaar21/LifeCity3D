@@ -8,7 +8,7 @@ export function toLocal(b:Building,p:Point):Point{return b.rotation===90?{x:p.z-
 export function toWorld(b:Building,p:Point):Point{return b.rotation===90?{x:b.x+b.depth-p.z,z:b.z+p.x}:{x:b.x+p.x,z:b.z+p.z};}
 export function interiorFree(plan:FloorPlan,width:number,depth:number,p:Point,radius=.24):boolean{
  if(p.x<radius||p.z<radius||p.x>width-radius||p.z>depth-radius)return false;
- for(const room of plan.rooms){const nearX=(Math.abs(p.x-room.x)<radius||Math.abs(p.x-room.x-room.width)<radius)&&p.z>=room.z-radius&&p.z<=room.z+room.depth+radius,nearZ=(Math.abs(p.z-room.z)<radius||Math.abs(p.z-room.z-room.depth)<radius)&&p.x>=room.x-radius&&p.x<=room.x+room.width+radius;const door=Math.abs(p.x-room.door.x)<radius+.05&&Math.abs(p.z-room.door.z)<(room.use==='parking'?.95:.48)-radius/2;if((nearX||nearZ)&&!door)return false;}
+ for(const room of plan.rooms){if(room.use==='parking'&&plan.layout_version===2)continue;const nearX=(Math.abs(p.x-room.x)<radius||Math.abs(p.x-room.x-room.width)<radius)&&p.z>=room.z-radius&&p.z<=room.z+room.depth+radius,nearZ=(Math.abs(p.z-room.z)<radius||Math.abs(p.z-room.z-room.depth)<radius)&&p.x>=room.x-radius&&p.x<=room.x+room.width+radius;const door=Math.abs(p.x-room.door.x)<radius+.05&&Math.abs(p.z-room.door.z)<(room.use==='parking'?.95:.48)-radius/2;if((nearX||nearZ)&&!door)return false;}
  return true;
 }
 export function outdoorFree(c:WorldContext,realm:Realm,p:Point,radius=.24,ignore?:string):boolean{

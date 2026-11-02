@@ -1,3 +1,4 @@
+import {buildingSetbacks} from './building-massing.ts';
 import type {Archetype,Blueprint,Building,ConstructionPricing,FloorPlan,Point,Rect,Room,RoomUse} from './world-types.ts';
 import {amount,contains,converted,distance,fail,money,overlap,priced} from './world-math.ts';
 import {BUILDING_CATALOG,isTower,maxFloors,minFloors,floorStep} from './building-catalog.ts';
@@ -21,7 +22,7 @@ export const MATERIALS=[
 export const ARCHETYPES=Object.keys(BUILDING_CATALOG) as Archetype[];
 export const ROOM_USES:RoomUse[]=['bedroom','living','kitchen','bathroom','shop','dining','cinema','guest','reception','classroom','waiting','treatment','parking','exhibit','office'];
 export interface RoomRequest {name:string;use:RoomUse;area:number}
-export interface PlanRequest {width:number;depth:number;floors:number;rooms:RoomRequest[];accessible:boolean;archetype:Archetype;budget:string}
+export interface PlanRequest {style?:'forest'|'coastal'|'desert';width:number;depth:number;floors:number;rooms:RoomRequest[];accessible:boolean;archetype:Archetype;budget:string}
 export function wallLength(f:FloorPlan,width:number,depth:number):number{return (width+depth)*2+f.rooms.reduce((sum,r)=>sum+r.depth+(r.z>0?r.width:0),0);}
 export function defaultRooms(kind:Archetype):RoomRequest[]{
  const uses:RoomUse[]=kind==='mall'?['shop','shop','dining','bathroom']:['hotel','resort'].includes(kind)?['guest','guest','reception','bathroom']:['school','university'].includes(kind)?['classroom','classroom','office','bathroom']:['clinic','hospital'].includes(kind)?['waiting','treatment','office','bathroom']:kind==='restaurant'?['dining','kitchen','bathroom']:kind==='garage'?['parking','parking']:kind==='museum'?['exhibit','exhibit']:(kind==='office'||isTower(kind))?['office','office','reception']:['living','bedroom','kitchen','bathroom'];
@@ -45,17 +46,18 @@ export function generatePlans(p:PlanRequest,parcel:Rect):FloorPlan[]{
  const plans:FloorPlan[]=[];
  for(let index=0;index<p.floors;index++){
   const corridor={x:wing,z:0,width:corridorWidth,depth:p.depth};
-  const stairs={x:wing+corridorWidth,z:0,width:wing,depth:3.6};
-  const elevator=p.accessible&&p.floors>1?{x:0,z:0,width:wing,depth:p.archetype==='garage'?4:1.6}:null;
+  const reserve=buildingSetbacks(p.archetype,p.depth,p.style),fit=(front:number,back:number,side:number)=>{const requests=p.rooms.filter((_,i)=>i%2===side),total=requests.reduce((n,r)=>n+r.area,0),required=Math.max(total/wing,...requests.map(r=>1.501*total/r.area)),space=Math.max(0,p.depth-(side===1?3.6:p.accessible&&p.floors>1?(p.archetype==='garage'?4:1.6):0)-required-.001),scale=Math.min(1,space/(front+back||1));return {front:front*scale,back:back*scale};},left=fit(reserve.leftFront,reserve.leftBack,0),right=fit(reserve.rightFront,reserve.rightBack,1);
+  const stairs={x:wing+corridorWidth,z:right.front,width:wing,depth:3.6};
+  const elevator=p.accessible&&p.floors>1?{x:0,z:left.front,width:wing,depth:p.archetype==='garage'?4:1.6}:null;
   const rooms:Room[]=[];
   for(const side of [0,1]){
    const requests=p.rooms.filter((_,i)=>i%2===side);if(!requests.length)continue;
-   const offset=side===1?(stairs?.depth??0):(elevator?.depth??0),available=p.depth-offset,total=requests.reduce((s,r)=>s+r.area,0);
+   const setback=side===1?right:left,offset=setback.front+(side===1?(stairs?.depth??0):(elevator?.depth??0)),available=p.depth-offset-setback.back,total=requests.reduce((s,r)=>s+r.area,0);
    if(total>available*wing+.001)return fail('ROOMS_DO_NOT_FIT');
    let z=offset;
    for(const request of requests){const d=available*request.area/total,x=side===0?0:wing+corridorWidth;rooms.push({id:crypto.randomUUID(),x,z,width:wing,depth:d,name:request.name,use:request.use,door:{x:side===0?wing:wing+corridorWidth,z:z+d/2},material:'plaster',capacity:request.use==='parking'?1:Math.max(1,Math.floor(wing*d/(request.use==='guest'?8:4)))});z+=d;}
   }
-  const floor:FloorPlan={index,height:floorStep(p.archetype),rooms,corridor,stairs,elevator,entry:{x:p.width/2,z:0},area:p.width*p.depth};validatePlan(floor,p.width,p.depth);plans.push(floor);
+  const floor:FloorPlan={layout_version:2,index,height:floorStep(p.archetype),rooms,corridor,stairs,elevator,entry:{x:p.width/2,z:0},area:p.width*p.depth};validatePlan(floor,p.width,p.depth);plans.push(floor);
  }
  const estimated=estimateConstruction(p.width,p.depth,p.floors,'moss',p.accessible,plans,p.archetype);if(amount(p.budget)<amount(estimated))return fail('PLAN_EXCEEDS_BUDGET');return plans;
 }

@@ -15,7 +15,7 @@ export interface Terrain extends BaseEntity {kind:'terrain';side:number;heights_
 export type Archetype='house'|'villa'|'restaurant'|'mall'|'hotel'|'resort'|'school'|'university'|'clinic'|'hospital'|'garage'|'museum'|'office'|'tower_glass'|'tower_round'|'tower_twist'|'tower_steps'|'tower_twin'|'tower_spire'|'tower_sail'|'tower_crown';
 export type RoomUse='bedroom'|'living'|'kitchen'|'bathroom'|'shop'|'dining'|'cinema'|'guest'|'reception'|'classroom'|'waiting'|'treatment'|'parking'|'exhibit'|'office';
 export interface Room extends Rect {id:string;name:string;use:RoomUse;door:Point;material:string;capacity:number}
-export interface FloorPlan {index:number;height:number;rooms:Room[];corridor:Rect;stairs:Rect|null;elevator:Rect|null;entry:Point;area:number}
+export interface FloorPlan {layout_version?:2;index:number;height:number;rooms:Room[];corridor:Rect;stairs:Rect|null;elevator:Rect|null;entry:Point;area:number}
 export interface BuildStage {id:string;type:'foundation'|'frame'|'floor'|'roof'|'finish'|'opening';floor:number|null;paid:boolean;component_ids:string[]}
 export interface MaterialAssignment {surface:'walls'|'roof'|'floor'|'stairs'|'doors'|'windows';floor:number|null;room_id:string|null;material:string;quality:number;component_id:string}
 export interface Tenant {id:string;room_id:string;name:string;type:'retail'|'food'|'cinema';rent_per_hour:string}
